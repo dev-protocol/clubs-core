@@ -1,39 +1,56 @@
 {
-	"name": "template-repos-ts",
-	"version": "1.0.0",
-	"description": "Template repository for using TypeScript",
+	"name": "@devprotocol/clubs-core",
+	"version": "0.1.0",
+	"description": "Core library for Clubs",
+	"main": "dist/index.js",
+	"exports": {
+		"import": "./dist/index.mjs",
+		"require": "./dist/index.js"
+	},
+	"types": "./dist/clubs-core.d.ts",
+	"files": [
+		"dist/*.mjs",
+		"dist/*.js",
+		"dist/*.ts",
+		"!**/*.test.*"
+	],
 	"scripts": {
 		"test": "ava",
-		"build": "tsc",
+		"build": "yarn build:ts && yarn build:rollup",
+		"build:ts": "tsc",
+		"build:rollup": "rollup -c",
 		"watch": "tsc -w",
-		"pretest": "yarn build",
+		"pretest": "yarn build:ts",
 		"prebuild": "rimraf dist",
 		"lint": "yarn lint:eslint && yarn lint:format",
 		"lint:eslint": "eslint . --ext .ts,.js --fix",
 		"lint:format": "prettier --write '**/*.{ts,js,json,md,yml}'",
+		"prepack": "yarn test && yarn build",
 		"prepare": "husky install"
 	},
-	"author": "Dev Protocol",
+	"author": "aggre",
 	"license": "MPL-2.0",
 	"dependencies": {
-		"ethereum-waffle": "3.4.4",
-		"ramda": "0.28.0"
+		"@devprotocol/util-ts": "2.2.1",
+		"js-base64": "^3.7.2",
+		"yaml": "^2.1.1"
 	},
 	"devDependencies": {
 		"@ava/typescript": "3.0.1",
-		"@types/dotenv": "8.2.0",
+		"@rollup/plugin-multi-entry": "4.1.0",
+		"@rollup/plugin-typescript": "8.3.4",
 		"@types/node": "16.11.47",
-		"@types/ramda": "0.28.15",
 		"@typescript-eslint/eslint-plugin": "5.33.0",
 		"@typescript-eslint/parser": "5.33.0",
 		"ava": "4.3.1",
-		"dotenv": "16.0.1",
-		"eslint": "7.32.0",
+		"eslint": "8.21.0",
 		"eslint-config-prettier": "8.5.0",
-		"eslint-plugin-functional": "3.7.2",
+		"eslint-plugin-functional": "4.2.2",
 		"husky": "7.0.4",
 		"prettier": "2.7.1",
 		"rimraf": "3.0.2",
+		"rollup": "2.77.2",
+		"rollup-plugin-dts": "4.2.2",
 		"typescript": "4.7.4"
 	},
 	"ava": {
@@ -47,10 +64,13 @@
 			"compile": false
 		}
 	},
-	"repository": "git+https://github.com/dev-protocol/template-repos-ts.git",
-	"bugs": {
-		"url": "https://github.com/dev-protocol/template-repos-ts/issues"
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dev-protocol/clubs-core.git"
 	},
-	"homepage": "https://github.com/dev-protocol/template-repos-ts#readme",
-	"private": true
+	"keywords": [],
+	"bugs": {
+		"url": "https://github.com/dev-protocol/clubs-core/issues"
+	},
+	"homepage": "https://github.com/dev-protocol/clubs-core#readme"
 }
