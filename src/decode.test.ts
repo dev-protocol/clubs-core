@@ -7,7 +7,7 @@ import { decode } from './decode'
 import { ClubsConfiguration } from './types'
 
 // https://stackoverflow.com/a/12101012
-function toBuffer(ab: Uint8Array) {
+function toBuffer(ab: ArrayBuffer) {
 	const buf = Buffer.alloc(ab.byteLength)
 	const view = new Uint8Array(ab)
 	for (let i = 0; i < buf.length; ++i) {
@@ -24,22 +24,18 @@ test('Returns decoded configuration', (t) => {
 				name: 'test-plugin',
 				options: [
 					{ key: 'test:date', value: new Date('2001-12-15T02:59:43') },
-					{ key: 'test:binary', value: new Uint8Array([1, 2, 3]) },
+					{
+						key: 'test:binary',
+						// Instances of Buffer are also instances of Uint8Array in node.js 4.x and higher.
+						// You can also tell by the fact that no type error is thrown.
+						// But `deepEqual` test doesn't allow it, so buffer it here.
+						value: toBuffer(new Uint8Array([1, 2, 3]).buffer),
+					},
 				],
 			},
 		],
 	}
 	const encoded = encode(config)
 	const res = decode(encoded)
-	const bufferified = config.plugins.map((p) => ({
-		...p,
-		options: p.options.map((o) =>
-			o.value instanceof Uint8Array ? { ...o, value: toBuffer(o.value) } : o
-		),
-	}))
-	const expected = {
-		...config,
-		plugins: bufferified,
-	}
-	t.deepEqual(res, expected)
+	t.deepEqual(res, config)
 })
