@@ -25,7 +25,7 @@ test('Returns decoded configuration', (t) => {
 				options: [
 					{ key: 'test:date', value: new Date('2001-12-15T02:59:43Z') },
 					{
-						key: 'test:date',
+						key: 'test:array',
 						value: [true, false, BigInt(Number.MAX_SAFE_INTEGER) * 10n],
 					},
 					{
