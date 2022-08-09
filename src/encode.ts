@@ -7,5 +7,6 @@ export const encode = (config: ClubsConfiguration): string =>
 		stringify(config, {
 			version: '1.2',
 			customTags: ['binary', 'timestamp'],
+			intAsBigInt: true,
 		})
 	)

@@ -6,4 +6,5 @@ export const decode = (config: string): ClubsConfiguration =>
 	parse(_decode(config), {
 		version: '1.2',
 		customTags: ['binary', 'timestamp'],
+		intAsBigInt: true,
 	})

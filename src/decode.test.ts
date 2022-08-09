@@ -23,7 +23,11 @@ test('Returns decoded configuration', (t) => {
 			{
 				name: 'test-plugin',
 				options: [
-					{ key: 'test:date', value: new Date('2001-12-15T02:59:43') },
+					{ key: 'test:date', value: new Date('2001-12-15T02:59:43Z') },
+					{
+						key: 'test:date',
+						value: [true, false, BigInt(Number.MAX_SAFE_INTEGER) * 10n],
+					},
 					{
 						key: 'test:binary',
 						// Instances of Buffer are also instances of Uint8Array in node.js 4.x and higher.

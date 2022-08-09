@@ -1,6 +1,14 @@
+export type ClubsPluginOptionValue =
+	| string
+	| number
+	| boolean
+	| Date
+	| bigint
+	| Uint8Array
+
 export type ClubsPluginOption = {
 	readonly key: string
-	readonly value?: string | number | boolean | Date | Uint8Array
+	readonly value?: ClubsPluginOptionValue | readonly ClubsPluginOptionValue[]
 }
 
 export type ClubsPlugin = {
