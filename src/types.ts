@@ -5,10 +5,14 @@ export type ClubsPluginOptionValue =
 	| Date
 	| bigint
 	| Uint8Array
+	| readonly ClubsPluginOptionValue[]
+	| {
+			readonly [key: string]: ClubsPluginOptionValue
+	  }
 
 export type ClubsPluginOption = {
 	readonly key: string
-	readonly value?: ClubsPluginOptionValue | readonly ClubsPluginOptionValue[]
+	readonly value?: ClubsPluginOptionValue
 }
 
 export type ClubsPlugin = {

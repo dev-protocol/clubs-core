@@ -29,6 +29,11 @@ test('Returns decoded configuration', (t) => {
 						value: [true, false, BigInt(Number.MAX_SAFE_INTEGER) * 10n],
 					},
 					{
+						key: 'test:arrayinarray',
+						value: ['a', ['b', 'c', ['d', 'e']], 'f'],
+					},
+					{ key: 'test:record', value: { a: { b: 'c', d: ['e', 'f'] } } },
+					{
 						key: 'test:binary',
 						// Instances of Buffer are also instances of Uint8Array in node.js 4.x and higher.
 						// You can also tell by the fact that no type error is thrown.
