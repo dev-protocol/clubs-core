@@ -11,6 +11,7 @@
 		"skipLibCheck": true,
 		"declaration": true
 	},
-	"include": ["src"],
+	"types": ["astro/client"],
+	"include": ["src", "example", "env.d.ts", "planned-structure"],
 	"exclude": []
 }

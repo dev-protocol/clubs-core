@@ -1,0 +1,13 @@
+---
+import { pageFactory } from '../src/'
+
+const fetcher = () => Promise.resolve('') // TODO:
+
+export const { getStaticPaths, Content, r404 } = await pageFactory(fetcher)
+
+if (!r404) {
+	return r404
+}
+---
+
+<Content />
