@@ -20,7 +20,7 @@
 		"build:ts": "tsc",
 		"build:rollup": "rollup -c",
 		"watch": "tsc -w",
-		"pretest": "yarn build:ts",
+		"pretest": "yarn prebuild && tsc -p tsconfig.test.json",
 		"prebuild": "rimraf dist",
 		"lint": "yarn lint:eslint && yarn lint:format",
 		"lint:eslint": "eslint . --ext .ts,.js --fix",

@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Default.astro'
+import { pageFactory } from '../../../../src/index.ts'
+
+export const { getStaticPaths } = await pageFactory(
+	() =>
+		Promise.resolve(
+			'aWQ6IHRlc3QKcGx1Z2luczoKICAtIG5hbWU6IGV4YW1wbGUKICAgIHBhdGg6IC4uL2V4YW1wbGUKICAgIG9wdGlvbnM6IFtdCnRoZW1lczoKICAtIG5hbWU6IGV4YW1wbGUKICAgIHBhdGg6IC4uL2V4YW1wbGUKICAgIGVuYWJsZTogdHJ1ZQogICAgb3B0aW9uczogW10K'
+		) // TODO:
+)
+
+const Content = Astro.props.component
+---
+
+<Layout>
+	<Content />
+</Layout>

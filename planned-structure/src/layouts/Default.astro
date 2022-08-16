@@ -1,0 +1,22 @@
+---
+import '../styles/global.css'
+---
+
+<!DOCTYPE html>
+<html class="dark" lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+	</head>
+
+	<body>
+		<script
+			type="module"
+			src="https://cdn.jsdelivr.net/npm/@devprotocol/elements@0.0.5/bundled/dev-connection.mjs"
+		></script>
+		<main>
+			<slot />
+		</main>
+		<dev-connection id="x-dev-connection" />
+	</body>
+</html>

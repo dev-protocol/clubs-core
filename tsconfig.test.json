@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"module": "ESNext",
+		"module": "UMD",
 		"moduleResolution": "Node",
 		"target": "ESNext",
 		"outDir": "dist",
@@ -9,9 +9,6 @@
 		"strict": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"noEmit": true,
 		"declaration": true
 	},
 	"include": ["src", "example", "planned-structure"],

@@ -1,5 +1,3 @@
-import type { GetStaticPathsResult, Params } from 'astro'
-
 export type ClubsPluginOptionValue =
 	| string
 	| number
@@ -30,8 +28,7 @@ export type ClubsConfiguration = Readonly<{
 }>
 
 export type ClubsStaticPath = Readonly<{
-	readonly page: string
-	readonly nest?: string
+	readonly paths: readonly string[]
 	readonly component: unknown
 }>
 
@@ -50,18 +47,18 @@ export type ClubsGetStaticPathsItem = {
 export type ClubsGetStaticPathsResult = readonly ClubsGetStaticPathsItem[]
 
 export type ClubsFunctionFactoryResult = {
-	readonly getStaticPaths: ClubsGetStaticPathsResult
-	readonly r404?: Response
-	readonly Content: unknown
+	readonly getStaticPaths: () => ClubsGetStaticPathsResult
 }
 
 export type ClubsFunctionPageFactory = (
 	fetcher: ClubsFunctionConfigFetcher
 ) => Promise<ClubsFunctionFactoryResult>
 
+export type ClubsFunctionAdminFactory = ClubsFunctionPageFactory
+
 export type ClubsFunctionPlugin = Readonly<{
 	readonly getPagePaths: ClubsFunctionGetPagePaths
 	readonly getAdminPaths: ClubsFunctionGetAdminPaths
 }>
 
-export type ClubsFunctionConfigFetcher = (params: Params) => Promise<string>
+export type ClubsFunctionConfigFetcher = () => Promise<string>
