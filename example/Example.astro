@@ -1,7 +1,6 @@
-<p class="example">Example</p>
+---
+import { Debug } from 'astro/components'
+const { params } = Astro
+---
 
-<style>
-	.example {
-		color: red;
-	}
-</style>
+<Debug {params} />

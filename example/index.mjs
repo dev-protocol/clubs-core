@@ -2,6 +2,7 @@
 import { default as Example } from './Example.astro'
 
 export const getPagePaths = async () => [
+	{ paths: [], component: Example },
 	{ paths: ['example'], component: Example },
 ]
 

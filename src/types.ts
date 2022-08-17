@@ -28,7 +28,7 @@ export type ClubsConfiguration = Readonly<{
 }>
 
 export type ClubsStaticPath = Readonly<{
-	readonly paths: readonly string[]
+	readonly paths: readonly (undefined | string)[]
 	readonly component: unknown
 }>
 
@@ -40,7 +40,7 @@ export type ClubsFunctionGetPagePaths = (
 export type ClubsFunctionGetAdminPaths = ClubsFunctionGetPagePaths
 
 export type ClubsGetStaticPathsItem = {
-	readonly params: { readonly page: string; readonly nest?: string }
+	readonly params: { readonly page: undefined | string }
 	readonly props: { readonly component: unknown }
 }
 
