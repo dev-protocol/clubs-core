@@ -29,7 +29,7 @@
 		"prepare": "husky install"
 	},
 	"author": "aggre",
-	"license": "MPL-2.0",
+	"license": "MIT",
 	"dependencies": {
 		"@devprotocol/util-ts": "2.2.1",
 		"get-installed-path": "^4.0.8",
