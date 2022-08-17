@@ -37,8 +37,6 @@ export type ClubsFunctionGetPagePaths = (
 	config: ClubsConfiguration
 ) => Promise<readonly ClubsStaticPath[]>
 
-export type ClubsFunctionGetAdminPaths = ClubsFunctionGetPagePaths
-
 export type ClubsGetStaticPathsItem = {
 	readonly params: { readonly page: string; readonly nest?: string }
 	readonly props: { readonly component: unknown }
@@ -54,11 +52,8 @@ export type ClubsFunctionPageFactory = (
 	fetcher: ClubsFunctionConfigFetcher
 ) => Promise<ClubsFunctionFactoryResult>
 
-export type ClubsFunctionAdminFactory = ClubsFunctionPageFactory
-
 export type ClubsFunctionPlugin = Readonly<{
 	readonly getPagePaths: ClubsFunctionGetPagePaths
-	readonly getAdminPaths: ClubsFunctionGetAdminPaths
 }>
 
 export type ClubsFunctionConfigFetcher = () => string | Promise<string>

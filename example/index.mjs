@@ -5,9 +5,6 @@ export const getPagePaths = async () => [
 	{ paths: ['example'], component: Example },
 ]
 
-export const getAdminPaths = async () => []
-
 export default {
 	getPagePaths,
-	getAdminPaths,
 }
