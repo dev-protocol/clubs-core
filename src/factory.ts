@@ -1,5 +1,6 @@
 import type {
 	ClubsConfiguration,
+	ClubsFunctionAdminFactory,
 	ClubsFunctionFactoryResult,
 	ClubsFunctionPageFactory,
 	ClubsFunctionPlugin,
@@ -26,15 +27,14 @@ const _listPlugins = async (config: ClubsConfiguration): Promise<Plugins> => {
 }
 
 const _factory: (
-	config: ClubsConfiguration
-) => Promise<ClubsFunctionFactoryResult> = async (config) => {
+	config: ClubsConfiguration,
+	caller: 'getPagePaths' | 'getAdminPaths'
+) => Promise<ClubsFunctionFactoryResult> = async (config, caller) => {
 	const _plugins = await _listPlugins(config)
 
 	const _staticPathsFromPlugins = (
 		await Promise.all(
-			_plugins.map(async (plugin) =>
-				plugin.getPagePaths(plugin.options, config)
-			)
+			_plugins.map(async (plugin) => plugin[caller](plugin.options, config))
 		)
 	).flat()
 
@@ -50,5 +50,12 @@ const _factory: (
 
 export const pageFactory: ClubsFunctionPageFactory = async (configFetcher) => {
 	const config = await getClubsConfig(configFetcher)
-	return _factory(config)
+	return _factory(config, 'getPagePaths')
+}
+
+export const adminFactory: ClubsFunctionAdminFactory = async (
+	configFetcher
+) => {
+	const config = await getClubsConfig(configFetcher)
+	return _factory(config, 'getAdminPaths')
 }
