@@ -1,4 +1,5 @@
 ---
+import { CONNECTION_ID } from '../../../src/index.ts'
 import '../styles/global.css'
 ---
 
@@ -17,6 +18,6 @@ import '../styles/global.css'
 		<main>
 			<slot />
 		</main>
-		<dev-connection id="x-dev-connection" />
+		<dev-connection id={CONNECTION_ID} />
 	</body>
 </html>
