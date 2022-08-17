@@ -40,8 +40,7 @@ const _factory: (
 
 	const _staticPaths = _staticPathsFromPlugins.map((plugin) => ({
 		params: {
-			page: plugin.paths[0],
-			nest: plugin.paths.slice(1, plugin.paths.length).join('/') || undefined,
+			page: plugin.paths.join('/'),
 		},
 		props: { component: plugin.component },
 	}))
