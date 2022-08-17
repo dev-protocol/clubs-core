@@ -61,4 +61,4 @@ export type ClubsFunctionPlugin = Readonly<{
 	readonly getAdminPaths: ClubsFunctionGetAdminPaths
 }>
 
-export type ClubsFunctionConfigFetcher = () => Promise<string>
+export type ClubsFunctionConfigFetcher = () => string | Promise<string>
