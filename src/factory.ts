@@ -9,6 +9,8 @@ import type {
 import { getInstalledPath } from 'get-installed-path'
 import { getClubsConfig } from './getClubsConfig'
 import { always } from 'ramda'
+import { join } from 'path'
+import { cwd } from 'process'
 
 type Plugins = readonly (ClubsPlugin & ClubsFunctionPlugin)[]
 
@@ -16,7 +18,7 @@ const _listPlugins = async (config: ClubsConfiguration): Promise<Plugins> => {
 	const plugins: Plugins = await Promise.all(
 		config.plugins.map(async ({ name, path, enable = true, options }) => {
 			const fn = (await (enable && path
-				? import(path)
+				? import(join(cwd(), path))
 				: enable
 				? import(await getInstalledPath(name))
 				: (undefined as never))) as ClubsFunctionPlugin
