@@ -1,6 +1,10 @@
 ---
 import { Debug } from 'astro/components'
-const { params } = Astro
+const { params, props } = Astro
+
+console.log({ params, props })
 ---
 
 <Debug {params} />
+
+<Debug {props} />

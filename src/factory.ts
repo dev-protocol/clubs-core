@@ -44,7 +44,7 @@ const _factory: (
 		params: {
 			page: plugin.paths.join('/') || undefined,
 		},
-		props: { component: plugin.component },
+		props: { ...plugin.props, component: plugin.component },
 	}))
 
 	return { getStaticPaths: always(_staticPaths) }

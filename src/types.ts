@@ -1,3 +1,5 @@
+import { Props } from 'astro'
+
 export type ClubsPluginOptionValue =
 	| string
 	| number
@@ -35,6 +37,7 @@ export type ClubsConfiguration = Readonly<{
 export type ClubsStaticPath = Readonly<{
 	readonly paths: readonly (undefined | string)[]
 	readonly component: unknown
+	readonly props?: Props
 }>
 
 export type ClubsFunctionGetPagePaths = (
@@ -46,7 +49,7 @@ export type ClubsFunctionGetAdminPaths = ClubsFunctionGetPagePaths
 
 export type ClubsGetStaticPathsItem = {
 	readonly params: { readonly page: undefined | string }
-	readonly props: { readonly component: unknown }
+	readonly props: Props & { readonly component: unknown }
 }
 
 export type ClubsGetStaticPathsResult = readonly ClubsGetStaticPathsItem[]
