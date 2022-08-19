@@ -39,7 +39,7 @@
 	},
 	"devDependencies": {
 		"@ava/typescript": "3.0.1",
-		"@rollup/plugin-commonjs": "^22.0.2",
+		"@rollup/plugin-commonjs": "22.0.2",
 		"@rollup/plugin-multi-entry": "4.1.0",
 		"@rollup/plugin-typescript": "8.3.4",
 		"@types/get-installed-path": "4.0.1",
