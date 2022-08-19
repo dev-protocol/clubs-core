@@ -1,6 +1,7 @@
 import typescript from '@rollup/plugin-typescript'
 import multi from '@rollup/plugin-multi-entry'
 import dts from 'rollup-plugin-dts'
+import commonjs from '@rollup/plugin-commonjs'
 
 export default [
 	{
@@ -15,7 +16,7 @@ export default [
 				format: 'cjs',
 			},
 		],
-		plugins: [multi(), typescript({ module: 'esnext' })],
+		plugins: [multi(), commonjs(), typescript({ module: 'esnext' })],
 	},
 	{
 		input: ['dist/**/*.d.ts', '!**/*.test.d.ts'],
