@@ -31,6 +31,7 @@
 	"author": "aggre",
 	"license": "MIT",
 	"dependencies": {
+		"@aggre/ullr": "3.1.3",
 		"@devprotocol/elements": "0.0.7",
 		"@devprotocol/util-ts": "2.2.1",
 		"get-installed-path": "^4.0.8",
