@@ -31,7 +31,7 @@
 	"author": "aggre",
 	"license": "MIT",
 	"dependencies": {
-		"@devprotocol/elements": "^0.0.6",
+		"@devprotocol/elements": "0.0.7",
 		"@devprotocol/util-ts": "2.2.1",
 		"get-installed-path": "^4.0.8",
 		"js-base64": "^3.7.2",
