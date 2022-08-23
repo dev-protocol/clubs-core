@@ -20,7 +20,7 @@ const _listPlugins = async (config: ClubsConfiguration): Promise<Plugins> => {
 			const fn = (await (enable && path
 				? import(join(cwd(), path))
 				: enable
-				? import(await getInstalledPath(name))
+				? import(await getInstalledPath(name, { local: true, cwd: cwd() }))
 				: (undefined as never))) as ClubsFunctionPlugin
 			return { name, path, enable, options, ...fn }
 		})
