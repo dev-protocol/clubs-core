@@ -89,6 +89,8 @@ typings/
 dist
 ui
 !src/ui
+connection
+!src/connection
 
 # Azure Functions artifacts
 bin

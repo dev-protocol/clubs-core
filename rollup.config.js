@@ -19,6 +19,20 @@ export default [
 		plugins: [multi(), commonjs(), typescript({ module: 'esnext' })],
 	},
 	{
+		input: ['src/connection/index.ts'],
+		output: [
+			{
+				file: 'connection/index.mjs',
+				format: 'es',
+			},
+			{
+				file: 'connection/index.cjs',
+				format: 'cjs',
+			},
+		],
+		plugins: [multi(), commonjs(), typescript({ module: 'esnext' })],
+	},
+	{
 		input: ['dist/**/*.d.ts', '!**/*.test.d.ts'],
 		output: [{ file: 'dist/clubs-core.d.ts', format: 'es' }],
 		plugins: [multi(), dts()],
