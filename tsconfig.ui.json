@@ -1,0 +1,9 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"noEmit": false,
+		"outDir": "ui",
+		"rootDir": "src/ui"
+	},
+	"include": ["src/ui"]
+}

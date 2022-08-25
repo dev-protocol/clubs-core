@@ -17,6 +17,14 @@
 	],
 	"overrides": [
 		{
+			"files": ["src/ui/webcomponents/**/*"],
+			"rules": {
+				"functional/no-class": "off",
+				"functional/functional-parameters": "off",
+				"functional/no-this-expression": "off"
+			}
+		},
+		{
 			"files": ["**/*.test.ts"],
 			"rules": {
 				"functional/no-expression-statement": "off",

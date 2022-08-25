@@ -2,26 +2,53 @@
 	"name": "@devprotocol/clubs-core",
 	"version": "0.5.3",
 	"description": "Core library for Clubs",
-	"main": "dist/index.js",
+	"main": "dist/index.cjs",
 	"exports": {
-		"import": "./dist/index.mjs",
-		"require": "./dist/index.js"
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.cjs"
+		},
+		"./ui/react": {
+			"import": "./ui/react/index.mjs",
+			"require": "./ui/react/index.cjs"
+		},
+		"./ui/svelte": {
+			"import": "./ui/svelte/index.mjs",
+			"require": "./ui/svelte/index.cjs"
+		},
+		"./ui/vue": {
+			"import": "./ui/vue/index.mjs",
+			"require": "./ui/vue/index.cjs"
+		},
+		"./ui/webcomponents": {
+			"import": "./ui/webcomponents/index.mjs",
+			"require": "./ui/webcomponents/index.cjs"
+		}
 	},
 	"types": "./dist/clubs-core.d.ts",
 	"files": [
 		"dist/*.mjs",
-		"dist/*.js",
+		"dist/*.cjs",
 		"dist/*.ts",
+		"ui/**/*.ts",
+		"ui/**/*.mjs",
+		"ui/**/*.cjs",
 		"!**/*.test.*"
 	],
 	"scripts": {
 		"test": "ava",
-		"build": "yarn build:ts && yarn build:rollup",
+		"preview": "run-p preview:tsc preview:rollup preview:astro",
+		"preview:astro": "astro --root ui-preview/ dev",
+		"preview:tsc": "yarn build:ts:ui --watch",
+		"preview:rollup": "yarn build:rollup:ui -w",
+		"build": "yarn build:ts && yarn build:ts:ui && yarn build:rollup:ui && yarn build:rollup",
 		"build:ts": "tsc",
+		"build:ts:ui": "tsc -p tsconfig.ui.json",
 		"build:rollup": "rollup -c",
+		"build:rollup:ui": "rollup -c rollup.config.ui.js",
 		"watch": "tsc -w",
 		"pretest": "yarn prebuild && tsc -p tsconfig.test.json",
-		"prebuild": "rimraf dist",
+		"prebuild": "rimraf dist ui",
 		"lint": "yarn lint:eslint && yarn lint:format",
 		"lint:eslint": "eslint . --ext .ts,.js --fix",
 		"lint:format": "prettier --write '**/*.{ts,js,json,md,yml,astro}'",
@@ -32,11 +59,19 @@
 	"license": "MIT",
 	"dependencies": {
 		"@aggre/ullr": "3.1.3",
+		"@astrojs/lit": "^1.0.0",
+		"@astrojs/react": "^1.0.0",
+		"@astrojs/svelte": "^1.0.0",
+		"@astrojs/tailwind": "^1.0.0",
+		"@astrojs/vue": "^1.0.0",
 		"@devprotocol/elements": "0.0.7",
 		"@devprotocol/util-ts": "2.2.1",
+		"@webcomponents/template-shadowroot": "^0.1.0",
 		"get-installed-path": "^4.0.8",
 		"js-base64": "^3.7.2",
+		"lit": "^2.3.1",
 		"ramda": "^0.28.0",
+		"tailwindcss": "^3.1.8",
 		"yaml": "^2.1.1"
 	},
 	"devDependencies": {
@@ -44,26 +79,47 @@
 		"@rollup/plugin-commonjs": "22.0.2",
 		"@rollup/plugin-multi-entry": "4.1.0",
 		"@rollup/plugin-typescript": "8.4.0",
+		"@rollup/pluginutils": "^4.2.1",
 		"@types/get-installed-path": "4.0.1",
 		"@types/node": "16.11.56",
 		"@types/ramda": "0.28.15",
+		"@types/react": "^18.0.17",
+		"@types/react-dom": "^18.0.6",
 		"@typescript-eslint/eslint-plugin": "5.34.0",
 		"@typescript-eslint/parser": "5.34.0",
 		"astro": "1.0.8",
+		"autoprefixer": "^10.4.8",
 		"ava": "4.3.1",
 		"eslint": "8.22.0",
 		"eslint-config-prettier": "8.5.0",
 		"eslint-plugin-functional": "4.2.2",
+		"glob": "^8.0.3",
 		"husky": "8.0.1",
+		"npm-run-all": "^4.1.5",
+		"postcss": "^8.4.16",
 		"prettier": "2.7.1",
 		"prettier-plugin-astro": "0.5.3",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
 		"rimraf": "3.0.2",
 		"rollup": "2.78.1",
 		"rollup-plugin-dts": "4.2.2",
-		"typescript": "4.7.4"
+		"svelte": "^3.49.0",
+		"typescript": "4.7.4",
+		"vue": "^3.2.37"
 	},
 	"peerDependencies": {
-		"astro": "^1.0.0"
+		"astro": "^1.0.0",
+		"react": "^18.0.0",
+		"react-dom": "^18.0.0",
+		"svelte": "^3.49.0",
+		"vue": "^3.2.0"
+	},
+	"optionalDependencies": {
+		"react": "^18.0.0",
+		"react-dom": "^18.0.0",
+		"svelte": "^3.49.0",
+		"vue": "^3.2.0"
 	},
 	"ava": {
 		"files": [

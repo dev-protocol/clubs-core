@@ -87,6 +87,8 @@ typings/
 *.d.ts
 !env.d.ts
 dist
+ui
+!src/ui
 
 # Azure Functions artifacts
 bin

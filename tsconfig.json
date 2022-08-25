@@ -12,8 +12,10 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
-		"declaration": true
+		"declaration": true,
+		"jsx": "react",
+		"experimentalDecorators": true
 	},
-	"include": ["src", "example", "planned-structure"],
+	"include": ["src", "example", "planned-structure", "ui-preview"],
 	"exclude": []
 }
