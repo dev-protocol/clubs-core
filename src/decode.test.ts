@@ -18,7 +18,6 @@ function toBuffer(ab: ArrayBuffer) {
 
 test('Returns decoded configuration', (t) => {
 	const config: ClubsConfiguration = {
-		id: 'test',
 		name: 'TEST',
 		twitterHandle: '@TEST',
 		description: '',

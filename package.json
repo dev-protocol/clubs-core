@@ -1,6 +1,6 @@
 {
 	"name": "@devprotocol/clubs-core",
-	"version": "0.6.0",
+	"version": "0.6.1-alpha.2",
 	"description": "Core library for Clubs",
 	"main": "dist/index.cjs",
 	"exports": {
@@ -75,7 +75,6 @@
 		"@devprotocol/elements": "0.1.0",
 		"@devprotocol/util-ts": "2.2.1",
 		"@webcomponents/template-shadowroot": "^0.1.0",
-		"get-installed-path": "^4.0.8",
 		"js-base64": "^3.7.2",
 		"lit": "^2.3.1",
 		"ramda": "^0.28.0",

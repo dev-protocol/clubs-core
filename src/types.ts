@@ -19,13 +19,11 @@ export type ClubsPluginOption = Readonly<{
 
 export type ClubsPlugin = Readonly<{
 	readonly name: string
-	readonly path?: string
 	readonly enable?: boolean
 	readonly options: readonly ClubsPluginOption[]
 }>
 
 export type ClubsConfiguration = Readonly<{
-	readonly id: string
 	readonly name: string
 	readonly twitterHandle: string
 	readonly description: string
@@ -56,10 +54,20 @@ export type ClubsGetStaticPathsResult = readonly ClubsGetStaticPathsItem[]
 
 export type ClubsFunctionFactoryResult = {
 	readonly getStaticPaths: () => ClubsGetStaticPathsResult
+	readonly getCurrentConfig: () => ClubsConfiguration
+}
+
+export type ClubsPluginsMap = {
+	readonly [name: string]: ClubsFunctionPlugin
+}
+
+export type ClubsFunctionPageFactoryOptions = {
+	readonly config: ClubsFunctionConfigFetcher
+	readonly plugins: ClubsPluginsMap
 }
 
 export type ClubsFunctionPageFactory = (
-	fetcher: ClubsFunctionConfigFetcher
+	options: ClubsFunctionPageFactoryOptions
 ) => Promise<ClubsFunctionFactoryResult>
 
 export type ClubsFunctionAdminFactory = ClubsFunctionPageFactory
