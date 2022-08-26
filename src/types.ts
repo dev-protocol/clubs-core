@@ -66,6 +66,14 @@ export type ClubsFunctionPageFactoryOptions = {
 	readonly plugins: ClubsPluginsMap
 }
 
+export type ClubsFunctionOnSubmitConfiguration = (
+	encodedConfig: string
+) => Promise<void | Error>
+
+export type ClubsPropsAdmin = {
+	readonly onSubmit: ClubsFunctionOnSubmitConfiguration
+}
+
 export type ClubsFunctionPageFactory = (
 	options: ClubsFunctionPageFactoryOptions
 ) => Promise<ClubsFunctionFactoryResult>
