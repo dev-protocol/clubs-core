@@ -58,8 +58,17 @@ export type ClubsFunctionFactoryResult = {
 	readonly getStaticPaths: () => ClubsGetStaticPathsResult
 }
 
+export type ClubsPluginsMap = {
+	readonly [name: string]: ClubsFunctionPlugin
+}
+
+export type ClubsFunctionPageFactoryOptions = {
+	readonly config: ClubsFunctionConfigFetcher
+	readonly plugins: ClubsPluginsMap
+}
+
 export type ClubsFunctionPageFactory = (
-	fetcher: ClubsFunctionConfigFetcher
+	options: ClubsFunctionPageFactoryOptions
 ) => Promise<ClubsFunctionFactoryResult>
 
 export type ClubsFunctionAdminFactory = ClubsFunctionPageFactory

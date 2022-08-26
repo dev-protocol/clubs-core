@@ -5,23 +5,20 @@ import type {
 	ClubsFunctionPageFactory,
 	ClubsFunctionPlugin,
 	ClubsPlugin,
+	ClubsPluginsMap,
 } from './types'
-import { getInstalledPath } from 'get-installed-path'
 import { getClubsConfig } from './getClubsConfig'
 import { always } from 'ramda'
-import { join } from 'path'
-import { cwd } from 'process'
 
 type Plugins = readonly (ClubsPlugin & ClubsFunctionPlugin)[]
 
-const _listPlugins = async (config: ClubsConfiguration): Promise<Plugins> => {
+const _listPlugins = async (
+	config: ClubsConfiguration,
+	list: ClubsPluginsMap
+): Promise<Plugins> => {
 	const plugins: Plugins = await Promise.all(
 		config.plugins.map(async ({ name, path, enable = true, options }) => {
-			const fn = (await (enable && path
-				? import(join(cwd(), path))
-				: enable
-				? import(await getInstalledPath(name, { local: true, cwd: cwd() }))
-				: (undefined as never))) as ClubsFunctionPlugin
+			const fn = list[name]
 			return { name, path, enable, options, ...fn }
 		})
 	)
@@ -30,9 +27,14 @@ const _listPlugins = async (config: ClubsConfiguration): Promise<Plugins> => {
 
 const _factory: (
 	config: ClubsConfiguration,
+	pluginsMap: ClubsPluginsMap,
 	caller: 'getPagePaths' | 'getAdminPaths'
-) => Promise<ClubsFunctionFactoryResult> = async (config, caller) => {
-	const _plugins = await _listPlugins(config)
+) => Promise<ClubsFunctionFactoryResult> = async (
+	config,
+	pluginsMap,
+	caller
+) => {
+	const _plugins = await _listPlugins(config, pluginsMap)
 
 	const _staticPathsFromPlugins = (
 		await Promise.all(
@@ -50,14 +52,12 @@ const _factory: (
 	return { getStaticPaths: always(_staticPaths) }
 }
 
-export const pageFactory: ClubsFunctionPageFactory = async (configFetcher) => {
-	const config = await getClubsConfig(configFetcher)
-	return _factory(config, 'getPagePaths')
+export const pageFactory: ClubsFunctionPageFactory = async (options) => {
+	const config = await getClubsConfig(options.config)
+	return _factory(config, options.plugins, 'getPagePaths')
 }
 
-export const adminFactory: ClubsFunctionAdminFactory = async (
-	configFetcher
-) => {
-	const config = await getClubsConfig(configFetcher)
-	return _factory(config, 'getAdminPaths')
+export const adminFactory: ClubsFunctionAdminFactory = async (options) => {
+	const config = await getClubsConfig(options.config)
+	return _factory(config, options.plugins, 'getAdminPaths')
 }
