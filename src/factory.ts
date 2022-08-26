@@ -49,7 +49,10 @@ const _factory: (
 		props: { ...plugin.props, component: plugin.component },
 	}))
 
-	return { getStaticPaths: always(_staticPaths) }
+	return {
+		getStaticPaths: always(_staticPaths),
+		getCurrentConfig: always(config),
+	}
 }
 
 export const pageFactory: ClubsFunctionPageFactory = async (options) => {

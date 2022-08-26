@@ -54,6 +54,7 @@ export type ClubsGetStaticPathsResult = readonly ClubsGetStaticPathsItem[]
 
 export type ClubsFunctionFactoryResult = {
 	readonly getStaticPaths: () => ClubsGetStaticPathsResult
+	readonly getCurrentConfig: () => ClubsConfiguration
 }
 
 export type ClubsPluginsMap = {
