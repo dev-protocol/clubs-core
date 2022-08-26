@@ -17,9 +17,9 @@ const _listPlugins = async (
 	list: ClubsPluginsMap
 ): Promise<Plugins> => {
 	const plugins: Plugins = await Promise.all(
-		config.plugins.map(async ({ name, path, enable = true, options }) => {
+		config.plugins.map(async ({ name, enable = true, options }) => {
 			const fn = list[name]
-			return { name, path, enable, options, ...fn }
+			return { name, enable, options, ...fn }
 		})
 	)
 	return plugins

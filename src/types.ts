@@ -19,13 +19,11 @@ export type ClubsPluginOption = Readonly<{
 
 export type ClubsPlugin = Readonly<{
 	readonly name: string
-	readonly path?: string
 	readonly enable?: boolean
 	readonly options: readonly ClubsPluginOption[]
 }>
 
 export type ClubsConfiguration = Readonly<{
-	readonly id: string
 	readonly name: string
 	readonly twitterHandle: string
 	readonly description: string
