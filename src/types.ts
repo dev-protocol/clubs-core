@@ -17,10 +17,12 @@ export type ClubsPluginOption = Readonly<{
 	readonly value?: ClubsPluginOptionValue
 }>
 
+export type ClubsPluginOptions = readonly ClubsPluginOption[]
+
 export type ClubsPlugin = Readonly<{
 	readonly name: string
 	readonly enable?: boolean
-	readonly options: readonly ClubsPluginOption[]
+	readonly options: ClubsPluginOptions
 }>
 
 export type ClubsConfiguration = Readonly<{
@@ -38,10 +40,12 @@ export type ClubsStaticPath = Readonly<{
 	readonly props?: Props
 }>
 
+export type ClubsStaticPaths = readonly ClubsStaticPath[]
+
 export type ClubsFunctionGetPagePaths = (
 	options: readonly ClubsPluginOption[],
 	config: ClubsConfiguration
-) => Promise<readonly ClubsStaticPath[]>
+) => Promise<ClubsStaticPaths>
 
 export type ClubsFunctionGetAdminPaths = ClubsFunctionGetPagePaths
 
@@ -53,8 +57,8 @@ export type ClubsGetStaticPathsItem = {
 export type ClubsGetStaticPathsResult = readonly ClubsGetStaticPathsItem[]
 
 export type ClubsFunctionFactoryResult = {
-	readonly getStaticPaths: () => ClubsGetStaticPathsResult
-	readonly getCurrentConfig: () => ClubsConfiguration
+	readonly getStaticPaths: () => Promise<ClubsGetStaticPathsResult>
+	readonly getCurrentConfig: () => Promise<ClubsConfiguration>
 }
 
 export type ClubsPluginsMap = {
@@ -76,7 +80,7 @@ export type ClubsPropsAdmin = {
 
 export type ClubsFunctionPageFactory = (
 	options: ClubsFunctionPageFactoryOptions
-) => Promise<ClubsFunctionFactoryResult>
+) => ClubsFunctionFactoryResult
 
 export type ClubsFunctionAdminFactory = ClubsFunctionPageFactory
 
@@ -86,3 +90,19 @@ export type ClubsFunctionPlugin = Readonly<{
 }>
 
 export type ClubsFunctionConfigFetcher = () => string | Promise<string>
+
+export type ClubsFunctionPluginOptionSetter = <T extends ClubsPluginOptions>(
+	nextOptions: T
+) => T
+
+export type ClubsFunctionClubsConfigurationSetter = <
+	T extends ClubsConfiguration
+>(
+	nextConfiguration: T
+) => T
+
+export type ClubsPropsAdminPages = Props & {
+	readonly options: ClubsPluginOptions
+	readonly setOptions: ClubsFunctionPluginOptionSetter
+	readonly setConfig: ClubsFunctionClubsConfigurationSetter
+}
