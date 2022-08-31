@@ -5,8 +5,8 @@ import type {
 	ClubsEventsDetailUpdateConfiguration,
 	ClubsEventsDetailUpdatePluginOptions,
 	ClubsEventsSubmitConfiguration,
-	ClubsEventsFinishConfiguration,
 	ClubsPluginOptions,
+	ClubsEventsDetailFinishConfiguration,
 } from './types'
 import { ClubsEvents } from './types'
 
@@ -46,9 +46,9 @@ export const submitConfig = (data: string) => {
 	)
 }
 
-const finish = (results: ClubsEventsFinishConfiguration) => {
+const finish = (results: ClubsEventsDetailFinishConfiguration) => {
 	return document.body.dispatchEvent(
-		new CustomEvent<ClubsEventsFinishConfiguration>(
+		new CustomEvent<ClubsEventsDetailFinishConfiguration>(
 			ClubsEvents.SubmitConfiguration,
 			{
 				detail: results,
