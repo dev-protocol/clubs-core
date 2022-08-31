@@ -1,0 +1,84 @@
+---
+import '../styles/global.css'
+
+const { encodedClubsConfiguration } = Astro.props
+---
+
+<!DOCTYPE html>
+<html class="dark" lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+	</head>
+
+	<body>
+		<main>
+			<slot />
+		</main>
+		<input
+			type="hidden"
+			id="_encoded_clubs_configuration_"
+			value={encodedClubsConfiguration}
+		/>
+		<script>
+			import { decode } from '../../../src'
+			import {
+				ClubsConfiguration,
+				ClubsEvents,
+				ClubsEventsUpdatePluginOptions,
+				ClubsEventsUpdateConfiguration,
+			} from '../../../src/types'
+
+			let currentConfig: ClubsConfiguration = decode(
+				(
+					document.getElementById(
+						'_encoded_clubs_configuration_'
+					) as HTMLInputElement
+				).value
+			)
+
+			document.body.addEventListener(ClubsEvents.UpdatePluginOptions, (ev) => {
+				ev.preventDefault()
+				const {
+					detail: { data, pluginIndex },
+				} = ev as ClubsEventsUpdatePluginOptions
+
+				console.log('Received event', ClubsEvents.UpdatePluginOptions, {
+					data,
+					pluginIndex,
+				})
+
+				const updatedPlugins = [...currentConfig.plugins].map((mplg, i) =>
+					i === pluginIndex ? { ...mplg, options: data } : mplg
+				)
+				const updatedConfig = { ...currentConfig, plugins: updatedPlugins }
+				currentConfig = updatedConfig
+
+				console.log(
+					'Updated ClubsConfiguration',
+					ClubsEvents.UpdatePluginOptions,
+					currentConfig
+				)
+			})
+
+			document.body.addEventListener(ClubsEvents.UpdateConfiguration, (ev) => {
+				ev.preventDefault()
+				const {
+					detail: { data },
+				} = ev as ClubsEventsUpdateConfiguration
+
+				console.log('Received event', ClubsEvents.UpdateConfiguration, {
+					data,
+				})
+
+				currentConfig = data
+
+				console.log(
+					'Updated ClubsConfiguration',
+					ClubsEvents.UpdateConfiguration,
+					currentConfig
+				)
+			})
+		</script>
+	</body>
+</html>

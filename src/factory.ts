@@ -8,18 +8,14 @@ import type {
 	ClubsFunctionPlugin,
 	ClubsGetStaticPathsResult,
 	ClubsPlugin,
-	ClubsPluginOptions,
 	ClubsPluginsMap,
 	ClubsStaticPaths,
+	ClubsPropsAdminPages,
 } from './types'
 import { getClubsConfig } from './getClubsConfig'
-import { BehaviorSubject } from 'rxjs'
 import { Props } from 'astro'
 
 type Plugins = readonly (ClubsPlugin & ClubsFunctionPlugin)[]
-
-const setOfOptionsRx = new Set<BehaviorSubject<ClubsPluginOptions>>()
-const setOfConfigRx = new Set<BehaviorSubject<ClubsConfiguration>>()
 
 const _listPlugins = async (
 	config: ClubsConfiguration,
@@ -39,7 +35,7 @@ const _configFactory: (
 ) => () => Promise<ClubsConfiguration> =
 	// eslint-disable-next-line functional/functional-parameters
 	(configFetcher) => async (): Promise<ClubsConfiguration> => {
-		const config = await getClubsConfig(configFetcher)
+		const [config] = await getClubsConfig(configFetcher)
 		return config
 	}
 
@@ -47,7 +43,7 @@ const _staticPathsFromPlugins =
 	(
 		config: ClubsConfiguration,
 		caller: 'getPagePaths' | 'getAdminPaths',
-		additionalProps?: (plugin: ClubsPlugin) => Props
+		additionalProps?: (i: number) => Props
 	) =>
 	async (plugins: Plugins): Promise<ClubsStaticPaths> =>
 		(
@@ -55,9 +51,9 @@ const _staticPathsFromPlugins =
 				plugins.map(async (plugin) => {
 					const results = await plugin[caller](plugin.options, config)
 					const updated = additionalProps
-						? results.map((res) => ({
+						? results.map((res, i) => ({
 								...res,
-								props: additionalProps(plugin),
+								props: { ...res.props, ...additionalProps(i) },
 						  }))
 						: results
 					return updated
@@ -80,7 +76,7 @@ const _staticPagePathsFactory: (
 	(configFetcher, pluginsMap) =>
 	// eslint-disable-next-line functional/functional-parameters
 	async (): Promise<ClubsGetStaticPathsResult> => {
-		const config = await getClubsConfig(configFetcher)
+		const [config] = await getClubsConfig(configFetcher)
 		const plugins = await _listPlugins(config, pluginsMap)
 		const getResultsOfPlugins = _staticPathsFromPlugins(config, 'getPagePaths')
 		const pluginResults = await getResultsOfPlugins(plugins)
@@ -96,35 +92,18 @@ const _staticAdminPathsFactory: (
 	(configFetcher, pluginsMap) =>
 	// eslint-disable-next-line functional/functional-parameters
 	async (): Promise<ClubsGetStaticPathsResult> => {
-		const config = await getClubsConfig(configFetcher)
+		const [config, encodedClubsConfiguration] = await getClubsConfig(
+			configFetcher
+		)
 		const plugins = await _listPlugins(config, pluginsMap)
-
-		const configRx = new BehaviorSubject(config)
-		setOfConfigRx.add(configRx)
-		const setConfig = configRx.next
-
-		const optionsSetterFactory = (plugin: ClubsPlugin) => {
-			const pluginRx = new BehaviorSubject(plugin.options)
-			setOfOptionsRx.add(pluginRx)
-			pluginRx.subscribe((options) => {
-				const currentConfig = configRx.getValue()
-				const updatedPlugins = [...currentConfig.plugins].map((mplg) =>
-					mplg.name === plugin.name ? { ...mplg, options: options } : mplg
-				)
-				const updatedConfig = { ...currentConfig, plugins: updatedPlugins }
-				setConfig(updatedConfig)
-			})
-			const setOptions = pluginRx.next
-			return {
-				setOptions,
-				setConfig,
-			}
-		}
-
 		const getResultsOfPlugins = _staticPathsFromPlugins(
 			config,
 			'getAdminPaths',
-			optionsSetterFactory
+			(currentPluginIndex) =>
+				({
+					encodedClubsConfiguration,
+					currentPluginIndex,
+				} as ClubsPropsAdminPages)
 		)
 		const pluginResults = await getResultsOfPlugins(plugins)
 		const staticPaths = _compose(pluginResults)

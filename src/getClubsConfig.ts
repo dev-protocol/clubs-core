@@ -3,8 +3,8 @@ import { ClubsConfiguration, ClubsFunctionConfigFetcher } from './types'
 
 export const getClubsConfig: (
 	fetcher: ClubsFunctionConfigFetcher
-) => Promise<ClubsConfiguration> = async (fetcher) => {
+) => Promise<readonly [ClubsConfiguration, string]> = async (fetcher) => {
 	const config = await fetcher()
 	const decoded = decode(config)
-	return decoded
+	return [decoded, config]
 }

@@ -102,7 +102,25 @@ export type ClubsFunctionClubsConfigurationSetter = <
 ) => T
 
 export type ClubsPropsAdminPages = Props & {
-	readonly options: ClubsPluginOptions
-	readonly setOptions: ClubsFunctionPluginOptionSetter
-	readonly setConfig: ClubsFunctionClubsConfigurationSetter
+	readonly currentPluginIndex: number
+	readonly encodedClubsConfiguration: string
 }
+
+export enum ClubsEvents {
+	UpdatePluginOptions = 'updatePluginOptions',
+	UpdateConfiguration = 'updateConfiguration',
+}
+
+export type ClubsEventsDetailUpdatePluginOptions = {
+	readonly data: ClubsPluginOptions
+	readonly pluginIndex: number
+}
+
+export type ClubsEventsDetailUpdateConfiguration = {
+	readonly data: ClubsConfiguration
+}
+
+export type ClubsEventsUpdatePluginOptions =
+	CustomEvent<ClubsEventsDetailUpdatePluginOptions>
+export type ClubsEventsUpdateConfiguration =
+	CustomEvent<ClubsEventsDetailUpdateConfiguration>

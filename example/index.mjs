@@ -1,5 +1,6 @@
 /* eslint-disable functional/functional-parameters */
 import { default as Example } from './Example.astro'
+import { default as Admin } from './Admin.astro'
 
 export const getPagePaths = async () => [
 	{ paths: [], component: Example },
@@ -14,7 +15,13 @@ export const getPagePaths = async () => [
 	},
 ]
 
-export const getAdminPaths = async () => []
+export const getAdminPaths = async (options) => [
+	{
+		paths: ['example'],
+		component: Admin,
+		props: { options },
+	},
+]
 
 export default {
 	getPagePaths,

@@ -1,9 +1,9 @@
 ---
-import Layout from '../layouts/Default.astro'
-import { pageFactory, encode } from '../../../src/'
-import example from '../../../example/index.mjs'
+import Admin from '../../layouts/Admin.astro'
+import { adminFactory, encode } from '../../../../src/'
+import example from '../../../../example/index.mjs'
 
-export const { getStaticPaths } = pageFactory({
+export const { getStaticPaths } = adminFactory({
 	config: () =>
 		encode({
 			name: 'Debug',
@@ -17,8 +17,10 @@ export const { getStaticPaths } = pageFactory({
 })
 
 const Content = Astro.props.component
+
+console.log(Astro.props)
 ---
 
-<Layout>
+<Admin {...Astro.props}>
 	<Content {...Astro.props} />
-</Layout>
+</Admin>

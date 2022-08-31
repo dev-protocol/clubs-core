@@ -5,13 +5,15 @@ import react from '@astrojs/react'
 import svelte from '@astrojs/svelte'
 import vue from '@astrojs/vue'
 
-export const config = (overrides) =>
+export const integrations = [lit(), react(), svelte(), vue()]
+
+export const config = (overrides = {}) =>
 	defineConfig(
 		mergeDeepRight({
 			server: {
 				port: 3000,
 			},
-			integrations: [lit(), react(), svelte(), vue()],
+			integrations,
 			overrides,
 		})
 	)
