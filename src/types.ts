@@ -107,8 +107,10 @@ export type ClubsPropsAdminPages = Props & {
 }
 
 export enum ClubsEvents {
-	UpdatePluginOptions = 'updatePluginOptions',
-	UpdateConfiguration = 'updateConfiguration',
+	UpdatePluginOptions = 'clubs_update_plugin_options',
+	UpdateConfiguration = 'clubs_update_configuration',
+	SubmitConfiguration = 'clubs_submit_configuration',
+	FinishConfiguration = 'clubs_submit_finish_configuration',
 }
 
 export type ClubsEventsDetailUpdatePluginOptions = {
@@ -120,7 +122,20 @@ export type ClubsEventsDetailUpdateConfiguration = {
 	readonly data: ClubsConfiguration
 }
 
+export type ClubsEventsDetailSubmitConfiguration = {
+	readonly data: string
+}
+
+export type ClubsEventsDetailFinishConfiguration = {
+	readonly success: boolean
+	readonly error?: Error
+}
+
 export type ClubsEventsUpdatePluginOptions =
 	CustomEvent<ClubsEventsDetailUpdatePluginOptions>
 export type ClubsEventsUpdateConfiguration =
 	CustomEvent<ClubsEventsDetailUpdateConfiguration>
+export type ClubsEventsSubmitConfiguration =
+	CustomEvent<ClubsEventsDetailSubmitConfiguration>
+export type ClubsEventsFinishConfiguration =
+	CustomEvent<ClubsEventsDetailFinishConfiguration>
