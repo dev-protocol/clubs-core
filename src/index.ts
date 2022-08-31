@@ -1,5 +1,5 @@
 export { decode } from './decode'
 export { encode } from './encode'
-export { getClubsConfig } from './getClubsConfig'
 export { pageFactory, adminFactory } from './factory'
-export { setOptions, setConfig, onSubmitConfig, submitConfig } from './events'
+export { setOptions, setConfig, onSubmitConfig } from './events'
+export { integrations, config } from './astro.config'

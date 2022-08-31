@@ -5,7 +5,7 @@ import commonjs from '@rollup/plugin-commonjs'
 
 export default [
 	{
-		input: ['src/index.ts'],
+		input: 'src/index.ts',
 		output: [
 			{
 				file: 'dist/index.mjs',
@@ -16,10 +16,10 @@ export default [
 				format: 'cjs',
 			},
 		],
-		plugins: [multi(), commonjs(), typescript({ module: 'esnext' })],
+		plugins: [commonjs(), typescript({ module: 'esnext' })],
 	},
 	{
-		input: ['src/connection/index.ts'],
+		input: 'src/connection/index.ts',
 		output: [
 			{
 				file: 'connection/index.mjs',
@@ -30,11 +30,16 @@ export default [
 				format: 'cjs',
 			},
 		],
-		plugins: [multi(), commonjs(), typescript({ module: 'esnext' })],
+		plugins: [commonjs(), typescript({ module: 'esnext' })],
 	},
 	{
-		input: ['dist/**/*.d.ts', '!**/*.test.d.ts'],
+		input: 'dist/src/index.d.ts',
 		output: [{ file: 'dist/clubs-core.d.ts', format: 'es' }],
-		plugins: [multi(), dts()],
+		plugins: [dts()],
 	},
+	{
+		input: 'dist/src/connection/index.d.ts',
+		output: [{ file: 'connection/index.d.ts', format: 'es' }],
+		plugins: [dts()],
+	}
 ]

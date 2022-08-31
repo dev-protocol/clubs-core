@@ -1,9 +1,0 @@
-{
-	"extends": "./tsconfig.json",
-	"compilerOptions": {
-		"noEmit": false,
-		"outDir": "connection",
-		"rootDir": "src/connection"
-	},
-	"include": ["src/connection"]
-}
