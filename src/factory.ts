@@ -22,10 +22,12 @@ const _listPlugins = async (
 	list: ClubsPluginsMap
 ): Promise<Plugins> => {
 	const plugins: Plugins = await Promise.all(
-		config.plugins.map(async ({ name, enable = true, options }) => {
-			const fn = list[name]
-			return { name, enable, options, ...fn }
-		})
+		config.plugins
+			.filter(({ name }) => Object.prototype.hasOwnProperty.call(list, name))
+			.map(async ({ name, enable = true, options }) => {
+				const fn = list[name]
+				return { name, enable, options, ...fn }
+			})
 	)
 	return plugins
 }
