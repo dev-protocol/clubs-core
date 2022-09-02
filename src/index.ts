@@ -1,3 +1,4 @@
+export * from './types'
 export { decode } from './decode'
 export { encode } from './encode'
 export { pageFactory, adminFactory } from './factory'
