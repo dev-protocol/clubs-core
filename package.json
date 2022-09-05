@@ -71,7 +71,7 @@
 		"@astrojs/svelte": "^1.0.0",
 		"@astrojs/tailwind": "^1.0.0",
 		"@astrojs/vue": "^1.0.0",
-		"@devprotocol/elements": "0.1.0",
+		"@devprotocol/elements": "0.1.1",
 		"@devprotocol/util-ts": "2.2.1",
 		"@webcomponents/template-shadowroot": "^0.1.0",
 		"js-base64": "^3.7.2",
