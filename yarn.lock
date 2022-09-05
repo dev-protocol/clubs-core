@@ -38,7 +38,7 @@
     vscode-languageserver-types "^3.17.1"
     vscode-uri "^3.0.3"
 
-"@astrojs/lit@^1.0.0":
+"@astrojs/lit@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@astrojs/lit/-/lit-1.0.0.tgz#fad5afb361fd737a5ac2a932880db1e2ce30962d"
   integrity sha512-2gdjuA4vGe0HF4bbZldQL0yX+JnO0XQ+P+QICKtA/FIvjdYCQkiBSRNEKwKbUZCCi0PQDW337R3F15L9Srr8tw==
@@ -94,7 +94,7 @@
   dependencies:
     prismjs "^1.28.0"
 
-"@astrojs/react@^1.0.0":
+"@astrojs/react@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@astrojs/react/-/react-1.0.0.tgz#44f270e45a1608f623275c89d52fd1617315e2bf"
   integrity sha512-CHJQ1dwjpYOTunioi02yWKdSxN/YeLP1vI70Xq+AqhcTmcmdbCMwbtYOEVwIK1k/AJmLItsJMcrsTfRoQU+Z+Q==
@@ -102,7 +102,7 @@
     "@babel/core" ">=7.0.0-0 <8.0.0"
     "@babel/plugin-transform-react-jsx" "^7.17.12"
 
-"@astrojs/svelte@^1.0.0":
+"@astrojs/svelte@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@astrojs/svelte/-/svelte-1.0.0.tgz#8abd0fcaeb35eca0258dd38d08f8c62c96f4b91d"
   integrity sha512-WmvcEe86j/3wL2xWURo1Kxtgh+s0CVys2j7xQboHr0ZeH9TBlkQuacAT8mWccD1/MikhDVqL/1hnF/n+vRKuGw==
@@ -113,7 +113,7 @@
     svelte2tsx "^0.5.11"
     vite "^3.0.0"
 
-"@astrojs/tailwind@^1.0.0":
+"@astrojs/tailwind@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@astrojs/tailwind/-/tailwind-1.0.0.tgz#05f75c46611d70963c5978126d0924ff781b77e1"
   integrity sha512-hEpvKBJKCStaxRZt3ENDacQlzUTOvW1D7dfIUyTf7jMUK4O+y8Q7gdTjERf1HBEi/YXrYNX1zhAElwp6lvW5oQ==
@@ -137,7 +137,7 @@
     node-fetch "^3.2.5"
     which-pm-runs "^1.1.0"
 
-"@astrojs/vue@^1.0.0":
+"@astrojs/vue@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@astrojs/vue/-/vue-1.0.0.tgz#7ef01d9b4eef99abf9daca376d87b1235de22e88"
   integrity sha512-QRjj4hC+V1uR6fG4sBhniI4GVc4sDAx3D4twRM5y/H/tQMYZe/7awLENCbRRRBJmpqZPrNMnk1WQHS5O9hDmzQ==
@@ -10450,7 +10450,7 @@ synckit@^0.7.0:
     "@pkgr/utils" "^2.3.0"
     tslib "^2.4.0"
 
-tailwindcss@^3.0.24, tailwindcss@^3.1.8:
+tailwindcss@3.1.8, tailwindcss@^3.0.24:
   version "3.1.8"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.1.8.tgz#4f8520550d67a835d32f2f4021580f9fddb7b741"
   integrity sha512-YSneUCZSFDYMwk+TGq8qYFdCA3yfBRdBlS7txSq0LUmzyeqRe3a8fBQzbz9M3WS/iFT4BNf/nmw9mEzrnSaC0g==
