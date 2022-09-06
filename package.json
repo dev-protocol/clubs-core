@@ -28,7 +28,7 @@
 			"import": "./connection/index.mjs",
 			"require": "./connection/index.cjs"
 		},
-		"./layouts": "./layouts/index.ts",
+		"./layouts": "./layouts/index.mjs",
 		"./layouts/*": "./layouts/*"
 	},
 	"types": "./dist/clubs-core.d.ts",
@@ -43,7 +43,8 @@
 		"connection/*.mjs",
 		"connection/*.cjs",
 		"!**/*.test.*",
-		"layouts"
+		"layouts",
+		"src"
 	],
 	"scripts": {
 		"test": "ava",
