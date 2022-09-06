@@ -7,6 +7,7 @@ import type {
 	ClubsEventsSubmitConfiguration,
 	ClubsPluginOptions,
 	ClubsEventsDetailFinishConfiguration,
+	ClubsEventsDetailBuildConfiguration,
 } from './types'
 import { ClubsEvents } from './types'
 
@@ -28,6 +29,18 @@ export const setConfig = (data: ClubsConfiguration) => {
 			ClubsEvents.UpdateConfiguration,
 			{
 				detail: { data },
+				cancelable: true,
+			}
+		)
+	)
+}
+
+// eslint-disable-next-line functional/functional-parameters
+export const buildConfig = () => {
+	return document.body.dispatchEvent(
+		new CustomEvent<ClubsEventsDetailBuildConfiguration>(
+			ClubsEvents.BuildConfiguration,
+			{
 				cancelable: true,
 			}
 		)
