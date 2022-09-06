@@ -29,7 +29,7 @@
 			"require": "./connection/index.cjs"
 		},
 		"./layouts": "./layouts/index.ts",
-    "./layouts/*": "./layouts/*"
+		"./layouts/*": "./layouts/*"
 	},
 	"types": "./dist/clubs-core.d.ts",
 	"files": [
