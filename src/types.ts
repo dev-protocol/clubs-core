@@ -56,6 +56,8 @@ export type ClubsGetStaticPathsItem = {
 
 export type ClubsGetStaticPathsResult = readonly ClubsGetStaticPathsItem[]
 
+export type ClubsPluginMeta = { readonly displayName: string }
+
 export type ClubsFunctionFactoryResult = {
 	readonly getStaticPaths: () => Promise<ClubsGetStaticPathsResult>
 	readonly getCurrentConfig: () => Promise<ClubsConfiguration>
@@ -87,6 +89,7 @@ export type ClubsFunctionAdminFactory = ClubsFunctionPageFactory
 export type ClubsFunctionPlugin = Readonly<{
 	readonly getPagePaths: ClubsFunctionGetPagePaths
 	readonly getAdminPaths: ClubsFunctionGetAdminPaths
+	readonly meta: ClubsPluginMeta
 }>
 
 export type ClubsFunctionConfigFetcher = () => string | Promise<string>
@@ -102,8 +105,14 @@ export type ClubsFunctionClubsConfigurationSetter = <
 ) => T
 
 export type ClubsPropsAdminPages = Props & {
-	readonly currentPluginIndex: number
-	readonly encodedClubsConfiguration: string
+	readonly clubs: {
+		readonly currentPluginIndex: number
+		readonly encodedClubsConfiguration: string
+		readonly plugins: ReadonlyArray<{
+			readonly name: string
+			readonly meta: ClubsPluginMeta
+		}>
+	}
 }
 
 export enum ClubsEvents {

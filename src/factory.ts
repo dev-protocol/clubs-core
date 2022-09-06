@@ -97,14 +97,21 @@ const _staticAdminPathsFactory: (
 		const [config, encodedClubsConfiguration] = await getClubsConfig(
 			configFetcher
 		)
+		const pluginMetas = Object.keys(pluginsMap).map((name) => ({
+			name,
+			meta: pluginsMap[name].meta,
+		}))
 		const plugins = await _listPlugins(config, pluginsMap)
 		const getResultsOfPlugins = _staticPathsFromPlugins(
 			config,
 			'getAdminPaths',
 			(currentPluginIndex) =>
 				({
-					encodedClubsConfiguration,
-					currentPluginIndex,
+					clubs: {
+						encodedClubsConfiguration,
+						currentPluginIndex,
+						plugins: pluginMetas,
+					},
 				} as ClubsPropsAdminPages)
 		)
 		const pluginResults = await getResultsOfPlugins(plugins)
