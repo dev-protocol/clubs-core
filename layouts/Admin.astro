@@ -1,17 +1,9 @@
 ---
-import { CONNECTION_ID } from '../src/connection'
-import { ClubsConfiguration } from '../src/types'
+import { ClubsPropsAdminPages, decode } from '../src'
 
-const { metaTitle, config } = Astro.props as {
-	metaTitle?: string
-	config: ClubsConfiguration
-}
+const { clubs } = Astro.props as ClubsPropsAdminPages
 
-const title = metaTitle
-	? `${await config.name} : ${metaTitle}`
-	: await config.name
-
-const { name, plugins } = await config
+const { name, plugins } = decode(clubs.encodedClubsConfiguration)
 const enabledPlugins = plugins
 	.filter((plugin) => plugin.enable === true)
 	.filter((plugin) => plugin.name.toUpperCase() !== 'ADMIN')
@@ -22,17 +14,12 @@ const enabledPlugins = plugins
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<title>{title}</title>
-		<link rel="icon" type="image/png" href="/favicon.png" />
+		<title>{name} | Admin</title>
 	</head>
 
 	<body
 		class="font-body bg-[#3A4158] text-white min-h-screen container mx-auto px-4"
 	>
-		<script
-			type="module"
-			src="https://cdn.jsdelivr.net/npm/@devprotocol/elements@0.0.5/bundled/dev-connection.mjs"
-		></script>
 		<div class="flex py-8">
 			<header class="flex flex-col pr-16">
 				<h1 class="font-title text-lg font-bold mb-16">{name}</h1>
@@ -52,7 +39,77 @@ const enabledPlugins = plugins
 			<main class="w-full">
 				<slot />
 			</main>
+			<input
+				type="hidden"
+				id="_encoded_clubs_configuration_"
+				value={clubs.encodedClubsConfiguration}
+			/>
+			<script>
+				import { decode } from '../src'
+				import {
+					ClubsConfiguration,
+					ClubsEvents,
+					ClubsEventsUpdatePluginOptions,
+					ClubsEventsUpdateConfiguration,
+				} from '../src/types'
+
+				let currentConfig: ClubsConfiguration = decode(
+					(
+						document.getElementById(
+							'_encoded_clubs_configuration_'
+						) as HTMLInputElement
+					).value
+				)
+
+				document.body.addEventListener(
+					ClubsEvents.UpdatePluginOptions,
+					(ev) => {
+						ev.preventDefault()
+						const {
+							detail: { data, pluginIndex },
+						} = ev as ClubsEventsUpdatePluginOptions
+
+						console.log('Received event', ClubsEvents.UpdatePluginOptions, {
+							data,
+							pluginIndex,
+						})
+
+						const updatedPlugins = [...currentConfig.plugins].map((mplg, i) =>
+							i === pluginIndex ? { ...mplg, options: data } : mplg
+						)
+						const updatedConfig = { ...currentConfig, plugins: updatedPlugins }
+						currentConfig = updatedConfig
+
+						console.log(
+							'Updated ClubsConfiguration',
+							ClubsEvents.UpdatePluginOptions,
+							currentConfig
+						)
+					}
+				)
+
+				document.body.addEventListener(
+					ClubsEvents.UpdateConfiguration,
+					(ev) => {
+						ev.preventDefault()
+						const {
+							detail: { data },
+						} = ev as ClubsEventsUpdateConfiguration
+
+						console.log('Received event', ClubsEvents.UpdateConfiguration, {
+							data,
+						})
+
+						currentConfig = data
+
+						console.log(
+							'Updated ClubsConfiguration',
+							ClubsEvents.UpdateConfiguration,
+							currentConfig
+						)
+					}
+				)
+			</script>
 		</div>
-		<dev-connection id={CONNECTION_ID} />
 	</body>
 </html>
