@@ -5,7 +5,6 @@ import commonjs from '@rollup/plugin-commonjs'
 
 const astro = () => ({
 	name: 'astro',
-	externals: [/^.*\.astro$/],
 	resolveId(source) {
 		if (source.endsWith('.astro')) {
 			return {
