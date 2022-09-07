@@ -85,7 +85,7 @@
 		"@rollup/plugin-typescript": "8.5.0",
 		"@rollup/pluginutils": "4.2.1",
 		"@types/get-installed-path": "4.0.1",
-		"@types/node": "16.11.57",
+		"@types/node": "16.11.58",
 		"@types/ramda": "0.28.15",
 		"@types/react": "18.0.18",
 		"@types/react-dom": "18.0.6",
