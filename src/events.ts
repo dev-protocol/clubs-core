@@ -62,7 +62,7 @@ export const submitConfig = (data: string) => {
 const finish = (results: ClubsEventsDetailFinishConfiguration) => {
 	return document.body.dispatchEvent(
 		new CustomEvent<ClubsEventsDetailFinishConfiguration>(
-			ClubsEvents.SubmitConfiguration,
+			ClubsEvents.FinishConfiguration,
 			{
 				detail: results,
 				cancelable: true,
