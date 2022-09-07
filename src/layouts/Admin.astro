@@ -1,5 +1,8 @@
 ---
 import { ClubsPropsAdminPages, decode } from '../index'
+import Aside from './Aside.vue'
+
+import '../styles/global.scss'
 
 const { clubs } = Astro.props as ClubsPropsAdminPages
 
@@ -36,8 +39,11 @@ const enabledPlugins = plugins
 					}
 				</nav>
 			</header>
-			<main class="w-full">
-				<slot />
+			<main class="w-full grid grid-cols-4 gap-x-6">
+				<div class="col-span-3 break-words">
+					<slot />
+				</div>
+				<Aside class="col-span-1" {...Astro.props} client:load />
 			</main>
 			<input
 				type="hidden"
