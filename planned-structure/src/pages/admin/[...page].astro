@@ -1,6 +1,5 @@
 ---
-import Admin from '../../../../layouts/Admin.astro'
-import { adminFactory, encode } from '../../../../src/'
+import { Admin, adminFactory, encode } from '../../../../src/'
 import example from '../../../../example/index.mjs'
 
 export const { getStaticPaths } = adminFactory({
@@ -24,3 +23,11 @@ console.log(Astro.props)
 <Admin {...Astro.props}>
 	<Content {...Astro.props} />
 </Admin>
+
+<script>
+	import { onSubmitConfig } from '../../../../src'
+
+	onSubmitConfig((data, onFinish) => {
+		console.log('onSubmitConfig', data, onFinish)
+	})
+</script>
