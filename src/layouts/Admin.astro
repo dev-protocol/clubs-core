@@ -45,7 +45,8 @@ const enabledPlugins = plugins
 				value={clubs.encodedClubsConfiguration}
 			/>
 			<script>
-				import { decode } from '../index'
+				import { decode, encode } from '../index'
+				import { submitConfig } from '../events'
 				import type {
 					ClubsConfiguration,
 					ClubsEventsUpdatePluginOptions,
@@ -109,6 +110,18 @@ const enabledPlugins = plugins
 						)
 					}
 				)
+
+				document.body.addEventListener(ClubsEvents.BuildConfiguration, (ev) => {
+					ev.preventDefault()
+
+					console.log('Received event', ClubsEvents.BuildConfiguration)
+
+					const encodedConfig = encode(currentConfig)
+
+					console.log('New configuration', encodedConfig)
+
+					submitConfig(encodedConfig)
+				})
 			</script>
 		</div>
 	</body>
