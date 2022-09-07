@@ -15,6 +15,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import BaseButton from '../components/Primitives/BaseButton.vue'
+import { setConfig } from '../events'
+import { ClubsConfiguration } from '../types'
 
 export default defineComponent({
 	name: 'Aside',
@@ -29,7 +31,16 @@ export default defineComponent({
 	}),
 	methods: {
 		save() {
-			console.log('Save method called. Props to aside included', this.$props)
+			console.log('Save method called. Props to aside:', this.$props)
+			const newConfig = {
+				name: 'Test',
+				description: 'Test description',
+				plugins: [],
+				propertyAddress: '0x00',
+				twitterHandle: '@test',
+				url: 'https://devprotocol.xyz',
+			} as ClubsConfiguration
+			setConfig(newConfig)
 		},
 	},
 })
