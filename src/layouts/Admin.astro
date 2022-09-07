@@ -1,5 +1,5 @@
 ---
-import { ClubsPropsAdminPages, decode } from '../src'
+import { ClubsPropsAdminPages, decode } from '../index'
 
 const { clubs } = Astro.props as ClubsPropsAdminPages
 
@@ -45,13 +45,13 @@ const enabledPlugins = plugins
 				value={clubs.encodedClubsConfiguration}
 			/>
 			<script>
-				import { decode } from '../src'
-				import {
+				import { decode } from '../index'
+				import type {
 					ClubsConfiguration,
-					ClubsEvents,
 					ClubsEventsUpdatePluginOptions,
 					ClubsEventsUpdateConfiguration,
-				} from '../src/types'
+				} from '../types'
+				import { ClubsEvents } from '../types'
 
 				let currentConfig: ClubsConfiguration = decode(
 					(

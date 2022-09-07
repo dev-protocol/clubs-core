@@ -6,7 +6,14 @@ import autoprefixer from 'autoprefixer'
 function transform(purgeFiles) {
 	const plugins = [
 		tailwindcss({
-			config: { content: {files:[...purgeFiles], transform:(content)=>content.replace('static styles = ', 'styles =')}, separator: ':' },
+			config: {
+				content: {
+					files: [...purgeFiles],
+					transform: (content) =>
+						content.replace('static styles = ', 'styles ='),
+				},
+				separator: ':',
+			},
 		}),
 		autoprefixer,
 	]
@@ -34,10 +41,7 @@ export default function litTailwindcss(options = defaultOptions) {
 			if (code.includes(placeholder)) {
 				const result = await transform(Array.from(ids))
 				if (result.css) {
-					return code.replace(
-						placeholder,
-						`${result.css.replace(/:/g, '\\:')}`
-					)
+					return code.replace(placeholder, `${result.css.replace(/:/g, '\\:')}`)
 				}
 				return null
 			}
