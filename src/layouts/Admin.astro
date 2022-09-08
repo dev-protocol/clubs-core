@@ -6,7 +6,9 @@ import '../styles/global.scss'
 
 const { clubs } = Astro.props as ClubsPropsAdminPages
 
-const { name, plugins } = decode(clubs.encodedClubsConfiguration)
+const config = decode(clubs.encodedClubsConfiguration)
+const { name, plugins } = config
+
 const enabledPlugins = plugins
 	.filter((plugin) => plugin.enable === true)
 	.filter((plugin) => plugin.name.toUpperCase() !== 'ADMIN')
@@ -43,7 +45,7 @@ const enabledPlugins = plugins
 				<div class="col-span-3 break-words">
 					<slot />
 				</div>
-				<Aside class="col-span-1" {...Astro.props} client:load />
+				<Aside class="col-span-1" config={config} client:load />
 			</main>
 			<input
 				type="hidden"

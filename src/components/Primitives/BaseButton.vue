@@ -6,19 +6,23 @@
 		<!-- Default Status -->
 		<slot v-if="status === 0" />
 		<!-- Loading Status -->
-		<p v-else-if="status === 1">
-			{{ loadingText }}
-		</p>
+		<div
+			v-else-if="status === 1"
+			class="flex justify-center items-center space-x-2"
+		>
+			<span class="text-sm">{{ loadingText }}</span> <Spinner class="mt-0.5" />
+		</div>
 		<!-- Success Status -->
-		<p v-else-if="status === 2">{{ successText }} &nbsp; &checkmark;</p>
+		<template v-else-if="status === 2">{{ successText }} &checkmark;</template>
 	</button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Spinner from '../Icons/Spinner.vue'
 
 export default defineComponent({
-	name: 'HSButton',
+	name: 'BaseButton',
 	props: {
 		// Status: 0 = Default, 1 = Loading, 2 = Success
 		status: {
@@ -41,6 +45,7 @@ export default defineComponent({
 			2: 'hs-button-success',
 		},
 	}),
+	components: { Spinner },
 })
 </script>
 
