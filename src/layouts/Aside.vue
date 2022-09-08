@@ -1,8 +1,8 @@
 <template>
 	<aside>
-		<BaseButton class="w-11/12">Connect Wallet</BaseButton>
+		<ConnectButton class="w-full" />
 		<BaseButton
-			class="mt-6 w-11/12"
+			class="mt-6 w-full"
 			:status="status.save"
 			successText="Saved"
 			loadingText="Saving"
@@ -14,14 +14,16 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import BaseButton from '../components/Primitives/BaseButton.vue'
 import { setConfig } from '../events'
 import { ClubsConfiguration } from '../types'
+import BaseButton from '../components/Primitives/BaseButton.vue'
+import ConnectButton from '../components/ConnectButton.vue'
 
 export default defineComponent({
 	name: 'Aside',
 	components: {
 		BaseButton,
+		ConnectButton,
 	},
 	props: {
 		config: {

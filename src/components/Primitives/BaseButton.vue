@@ -1,6 +1,6 @@
 <template>
 	<button
-		class="text-sm font-medium px-12 py-4 rounded transition"
+		class="text-sm font-medium px-12 py-4 rounded-lg transition"
 		:class="classByStatus[status]"
 	>
 		<!-- Default Status -->
@@ -8,9 +8,10 @@
 		<!-- Loading Status -->
 		<div
 			v-else-if="status === 1"
-			class="flex justify-center items-center space-x-2"
+			class="flex justify-center items-center space-x-2 rounded-lg"
 		>
-			<span class="text-sm">{{ loadingText }}</span> <Spinner class="mt-0.5" />
+			<span class="text-sm font-medium">{{ loadingText }}</span>
+			<Spinner class="mt-0.5" />
 		</div>
 		<!-- Success Status -->
 		<template v-else-if="status === 2">{{ successText }} &checkmark;</template>
@@ -54,9 +55,9 @@ export default defineComponent({
 	@apply bg-gray-900 hover:bg-gray-800 hover:ring-1 ring-gray-900;
 }
 .hs-button-loading {
-	@apply bg-gray-800 ring-2 ring-gray-900;
+	@apply bg-gray-800 border-2 border-gray-900;
 }
 .hs-button-success {
-	@apply bg-green-600 ring-2 ring-green-700;
+	@apply bg-green-600 border-2 border-green-700;
 }
 </style>

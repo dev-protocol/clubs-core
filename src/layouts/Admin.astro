@@ -45,7 +45,7 @@ const enabledPlugins = plugins
 				<div class="col-span-3 break-words">
 					<slot />
 				</div>
-				<Aside class="col-span-1" config={config} client:load />
+				<Aside class="col-span-1" config={config} client:only />
 			</main>
 			<input
 				type="hidden"
