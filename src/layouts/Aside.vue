@@ -1,13 +1,13 @@
 <template>
 	<aside>
 		<ConnectButton class="w-full" />
-		<BaseButton
+		<ActionButton
 			class="mt-6 w-full"
 			:status="status.save"
 			successText="Saved"
 			loadingText="Saving"
 			@click="save"
-			>Save</BaseButton
+			>Save</ActionButton
 		>
 	</aside>
 </template>
@@ -16,13 +16,13 @@
 import { defineComponent } from 'vue'
 import { buildConfig, setConfig } from '../events'
 import { ClubsConfiguration } from '../types'
-import BaseButton from '../components/Primitives/BaseButton.vue'
+import ActionButton from '../components/Primitives/ActionButton.vue'
 import ConnectButton from '../components/ConnectButton.vue'
 
 export default defineComponent({
 	name: 'Aside',
 	components: {
-		BaseButton,
+		ActionButton,
 		ConnectButton,
 	},
 	props: {

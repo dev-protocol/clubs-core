@@ -52,7 +52,6 @@ import Web3Modal from 'web3modal'
 import { GetModalProvider, ReConnectWallet } from '../fixtures/wallet'
 import truncateEthAddress from 'truncate-eth-address'
 import { connection } from '../connection'
-import BaseButton from './Primitives/BaseButton.vue'
 import { clientsDev } from '@devprotocol/dev-kit/agent'
 import { whenDefined } from '@devprotocol/util-ts'
 import HSButton from './Primitives/Hashi/HSButton.vue'
@@ -67,7 +66,6 @@ type Data = {
 export default defineComponent({
 	name: 'ConnectButton',
 	components: {
-		BaseButton,
 		HSButton,
 	},
 	data(): Data {
