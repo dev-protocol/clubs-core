@@ -59,7 +59,7 @@
 		"preview:astro": "astro --root ui-preview/ dev",
 		"preview:tsc": "yarn build:ts --watch",
 		"preview:rollup": "yarn build:rollup:ui -w",
-		"build": "yarn build:ts && yarn build:ts && yarn build:rollup:ui && yarn build:rollup",
+		"build": "yarn build:ts && yarn build:rollup:ui && yarn build:rollup",
 		"build:ts": "tsc -p tsconfig.build.json",
 		"build:rollup": "rollup -c",
 		"build:rollup:ui": "rollup -c rollup.config.ui.js",
