@@ -18,7 +18,7 @@ export const GetModalProvider = () => {
 }
 
 export const ReConnectWallet = async (modalProvider: Web3Modal) => {
-	const web3ForInjected = await detectEthereumProvider()
+	const web3ForInjected = (await detectEthereumProvider()) as any
 	if (!web3ForInjected) {
 		modalProvider.clearCachedProvider()
 		return { currentAddress: undefined, provider: undefined }
