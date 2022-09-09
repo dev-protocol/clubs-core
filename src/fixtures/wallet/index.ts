@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { providers } from 'ethers'
 import Web3Modal from 'web3modal'
 import detectEthereumProvider from '@metamask/detect-provider'

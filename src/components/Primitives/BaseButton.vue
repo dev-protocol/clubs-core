@@ -41,9 +41,9 @@ export default defineComponent({
 	},
 	data: () => ({
 		classByStatus: {
-			0: 'hs-button',
-			1: 'hs-button-loading',
-			2: 'hs-button-success',
+			0: 'base-button',
+			1: 'base-button-loading',
+			2: 'base-button-success',
 		},
 	}),
 	components: { Spinner },
@@ -51,13 +51,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.hs-button {
+.base-button {
 	@apply bg-gray-900 hover:bg-gray-800 hover:ring-1 ring-gray-900;
 }
-.hs-button-loading {
+.base-button-loading {
 	@apply bg-gray-800 border-2 border-gray-900;
 }
-.hs-button-success {
+.base-button-success {
 	@apply bg-green-600 border-2 border-green-700;
 }
 </style>
