@@ -1,7 +1,7 @@
 import tailwind from './rollup.plugin.tw'
 import glob from 'glob'
 
-const files = glob.sync('ui/**/*.js')
+const files = glob.sync('dist/src/ui/**/*.js')
 
 export const createOptions = (file) => ({
 	input: file,
