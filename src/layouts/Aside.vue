@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { setConfig } from '../events'
+import { buildConfig, setConfig } from '../events'
 import { ClubsConfiguration } from '../types'
 import BaseButton from '../components/Primitives/BaseButton.vue'
 import ConnectButton from '../components/ConnectButton.vue'
@@ -49,13 +49,13 @@ export default defineComponent({
 			// 	url: 'https://devprotocol.xyz',
 			// } as ClubsConfiguration
 
-			const newConfig = this.config
+			// const newConfig = this.config
 
 			try {
 				// Artificial Delay for now
-				await new Promise((res, _) => setTimeout(res, 1500))
+				// await new Promise((res, _) => setTimeout(res, 1500))
 
-				setConfig(newConfig)
+				buildConfig()
 				this.status.save = 2 // Success state
 
 				// Reset save button to default state after showing success for 3 seconds
