@@ -104,7 +104,7 @@
 		"astro": "1.2.1",
 		"autoprefixer": "10.4.9",
 		"ava": "4.3.3",
-		"eslint": "8.23.0",
+		"eslint": "8.23.1",
 		"eslint-config-prettier": "8.5.0",
 		"eslint-plugin-functional": "4.3.0",
 		"glob": "8.0.3",
