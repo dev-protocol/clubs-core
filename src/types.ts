@@ -9,8 +9,8 @@ export type ClubsPluginOptionValue =
 	| Uint8Array
 	| readonly ClubsPluginOptionValue[]
 	| {
-			readonly [key: string]: ClubsPluginOptionValue
-	  }
+		readonly [key: string]: ClubsPluginOptionValue
+	}
 
 export type ClubsPluginOption = Readonly<{
 	readonly key: string
@@ -106,12 +106,7 @@ export type ClubsFunctionClubsConfigurationSetter = <
 
 export type ClubsPropsAdminPages = Props & {
 	readonly clubs: {
-		readonly currentPluginIndex: number
 		readonly encodedClubsConfiguration: string
-		readonly plugins: ReadonlyArray<{
-			readonly name: string
-			readonly meta: ClubsPluginMeta
-		}>
 	}
 }
 
