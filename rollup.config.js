@@ -8,6 +8,7 @@ const majorCoreAPIs = [
 	'dist/src/encode.js',
 	'dist/src/events.js',
 	'dist/src/factory.js',
+	'dist/src/layouts/index.js',
 	'dist/src/connection/index.js',
 ]
 
@@ -16,7 +17,7 @@ const astro = () => ({
 	resolveId(source) {
 		if (source.endsWith('.astro')) {
 			return {
-				id: `../src/layouts${source.replace('./', '/')}`,
+				id: `../../src/layouts${source.replace('./', '/')}`,
 				external: true,
 			}
 		}
@@ -36,7 +37,7 @@ export default [
 				format: 'cjs',
 			},
 		],
-		plugins: [commonjs()],
+		plugins: [commonjs(), astro()],
 	})),
 	{
 		input: 'dist/src/index.js',
@@ -50,11 +51,11 @@ export default [
 				format: 'cjs',
 			},
 		],
-		plugins: [astro(), commonjs()],
+		plugins: [commonjs()],
 	},
 	{
 		input: 'dist/src/index.d.ts',
 		output: [{ file: 'dist/clubs-core.d.ts', format: 'es' }],
-		plugins: [dts(), astro()],
+		plugins: [dts()],
 	},
 ]

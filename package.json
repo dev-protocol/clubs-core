@@ -43,6 +43,10 @@
 		"./factory": {
 			"import": "./dist/src/factory.mjs",
 			"require": "./dist/src/factory.cjs"
+		},
+		"./layouts": {
+			"import": "./dist/src/layouts/index.mjs",
+			"require": "./dist/src/layouts/index.cjs"
 		}
 	},
 	"types": "./dist/clubs-core.d.ts",
