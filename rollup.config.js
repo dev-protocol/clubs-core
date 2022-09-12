@@ -17,7 +17,7 @@ const astro = () => ({
 	resolveId(source) {
 		if (source.endsWith('.astro')) {
 			return {
-				id: `../../src/layouts${source.replace('./', '/')}`,
+				id: `../../../src/layouts${source.replace('./', '/')}`,
 				external: true,
 			}
 		}
