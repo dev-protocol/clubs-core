@@ -9,8 +9,8 @@ export type ClubsPluginOptionValue =
 	| Uint8Array
 	| readonly ClubsPluginOptionValue[]
 	| {
-		readonly [key: string]: ClubsPluginOptionValue
-	}
+			readonly [key: string]: ClubsPluginOptionValue
+	  }
 
 export type ClubsPluginOption = Readonly<{
 	readonly key: string
