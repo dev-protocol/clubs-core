@@ -1,6 +1,6 @@
 {
 	"name": "@devprotocol/clubs-core",
-	"version": "0.6.2-alpha.13",
+	"version": "0.6.2-alpha.17",
 	"description": "Core library for Clubs",
 	"main": "dist/index.cjs",
 	"exports": {
@@ -43,7 +43,12 @@
 		"./factory": {
 			"import": "./dist/src/factory.mjs",
 			"require": "./dist/src/factory.cjs"
-		}
+		},
+		"./layouts": {
+			"import": "./dist/src/layouts/index.mjs",
+			"require": "./dist/src/layouts/index.cjs"
+		},
+		"./admin": "./src/layouts/Admin.astro"
 	},
 	"types": "./dist/clubs-core.d.ts",
 	"files": [
@@ -87,7 +92,7 @@
 		"@astrojs/react": "1.1.2",
 		"@astrojs/svelte": "1.0.0",
 		"@astrojs/tailwind": "1.0.0",
-		"@astrojs/vue": "1.0.1",
+		"@astrojs/vue": "1.0.2",
 		"@ava/typescript": "3.0.1",
 		"@rollup/plugin-commonjs": "22.0.2",
 		"@rollup/plugin-multi-entry": "4.1.0",
@@ -101,10 +106,10 @@
 		"@typescript-eslint/eslint-plugin": "5.36.2",
 		"@typescript-eslint/parser": "5.36.2",
 		"@webcomponents/template-shadowroot": "0.1.0",
-		"astro": "1.2.1",
-		"autoprefixer": "10.4.8",
+		"astro": "1.2.2",
+		"autoprefixer": "10.4.9",
 		"ava": "4.3.3",
-		"eslint": "8.23.0",
+		"eslint": "8.23.1",
 		"eslint-config-prettier": "8.5.0",
 		"eslint-plugin-functional": "4.3.0",
 		"glob": "8.0.3",

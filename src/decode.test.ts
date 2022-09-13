@@ -28,6 +28,8 @@ test('Returns decoded configuration', (t) => {
 				name: 'test-plugin',
 				options: [
 					{ key: 'test:date', value: new Date('2001-12-15T02:59:43Z') },
+					{ key: 'test:number', value: 1 },
+					{ key: 'test:float', value: 0.1 },
 					{
 						key: 'test:array',
 						value: [true, false, BigInt(Number.MAX_SAFE_INTEGER) * 10n],
@@ -51,4 +53,27 @@ test('Returns decoded configuration', (t) => {
 	const encoded = encode(config)
 	const res = decode(encoded)
 	t.deepEqual(res, config)
+})
+
+test('Bigint less than or equal MAX_SAFE_INTEGER is handled as a number', (t) => {
+	const config: ClubsConfiguration = {
+		name: '',
+		twitterHandle: '',
+		description: '',
+		url: '',
+		propertyAddress: '',
+		plugins: [
+			{
+				name: '',
+				options: [
+					{ key: '', value: 1n },
+					{ key: '', value: Number.MAX_SAFE_INTEGER },
+				],
+			},
+		],
+	}
+	const encoded = encode(config)
+	const res = decode(encoded)
+	t.is(res.plugins[0].options[0].value, 1)
+	t.is(res.plugins[0].options[1].value, Number.MAX_SAFE_INTEGER)
 })
