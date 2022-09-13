@@ -1,5 +1,6 @@
 ---
 import { ClubsPropsAdminPages, decode } from '../index'
+import AdminSidebar from './AdminSidebar.astro'
 
 const { clubs } = Astro.props as ClubsPropsAdminPages
 
@@ -22,19 +23,7 @@ const enabledPlugins = plugins
 	>
 		<div class="flex py-8">
 			<header class="flex flex-col pr-16">
-				<h1 class="font-title text-lg font-bold mb-16">{name}</h1>
-				<nav class="flex flex-col">
-					<a class="mb-4 text-sm" href="/admin">Admin</a>
-					<a class="mb-16 text-sm" href="/admin/plugins">Plugins</a>
-
-					{
-						enabledPlugins.map((plugin) => (
-							<a class="mb-4 text-sm capitalize" href={plugin.name}>
-								{plugin.name}
-							</a>
-						))
-					}
-				</nav>
+				<AdminSidebar name={name} enabledPlugins={enabledPlugins} />
 			</header>
 			<main class="w-full">
 				<slot />
