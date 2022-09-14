@@ -14,8 +14,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { buildConfig, setConfig } from '../events'
-import { ClubsConfiguration } from '../types'
+import { buildConfig } from '../events'
+import {
+	ClubsConfiguration,
+	ClubsEvents,
+	ClubsEventsDetailFinishConfiguration,
+} from '../types'
 import ActionButton from '../components/Primitives/ActionButton.vue'
 import ConnectButton from '../components/ConnectButton.vue'
 
@@ -35,34 +39,42 @@ export default defineComponent({
 		status: {
 			save: 0,
 		},
+		timeout: null as ReturnType<typeof setTimeout> | null,
 	}),
+	mounted() {
+		document.body.addEventListener(
+			ClubsEvents.FinishConfiguration,
+			(ev: any) => {
+				this.resetTimeout()
+				let timer = null
+
+				if (typeof ev.detail.success === 'boolean') {
+					if (ev.detail.success) {
+						this.status.save = 2 // Success state
+
+						// Reset save button to default state after showing success for 3 seconds
+						timer = setTimeout(() => (this.status.save = 0), 3000)
+					} else {
+						this.status.save = 3 // Error state
+
+						// Reset save button to default state after showing error for 3 seconds
+						timer = setTimeout(() => (this.status.save = 0), 3000)
+					}
+				}
+
+				if (timer) this.timeout = timer
+			}
+		)
+	},
 	methods: {
 		async save() {
 			this.status.save = 1 // Loading state
-
-			// const newConfig = {
-			// 	name: 'Test',
-			// 	description: 'Test description',
-			// 	plugins: [],
-			// 	propertyAddress: '0x00',
-			// 	twitterHandle: '@test',
-			// 	url: 'https://devprotocol.xyz',
-			// } as ClubsConfiguration
-
-			// const newConfig = this.config
-
-			try {
-				// Artificial Delay for now
-				// await new Promise((res, _) => setTimeout(res, 1500))
-
-				buildConfig()
-				this.status.save = 2 // Success state
-
-				// Reset save button to default state after showing success for 3 seconds
-				setTimeout(() => (this.status.save = 0), 3000)
-			} catch (e) {
-				console.error('Error while saving', e)
-				this.status.save = 0 // Default state
+			buildConfig()
+		},
+		resetTimeout() {
+			if (this.timeout) {
+				clearTimeout(this.timeout)
+				this.timeout = null
 			}
 		},
 	},

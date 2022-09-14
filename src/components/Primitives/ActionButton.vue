@@ -15,6 +15,8 @@
 		</div>
 		<!-- Success Status -->
 		<template v-else-if="status === 2">{{ successText }} &checkmark;</template>
+		<!-- Error Status -->
+		<template v-else-if="status === 3">{{ errorText }} &cross;</template>
 	</button>
 </template>
 
@@ -38,12 +40,17 @@ export default defineComponent({
 			type: String,
 			default: 'Success',
 		},
+		errorText: {
+			type: String,
+			default: 'Error',
+		},
 	},
 	data: () => ({
 		classByStatus: {
-			0: 'base-button',
-			1: 'base-button-loading',
-			2: 'base-button-success',
+			0: 'action-button',
+			1: 'action-button-loading',
+			2: 'action-button-success',
+			3: 'action-button-error',
 		},
 	}),
 	components: { Spinner },
@@ -51,13 +58,16 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.base-button {
+.action-button {
 	@apply bg-gray-900 hover:bg-gray-800 hover:ring-1 ring-gray-900;
 }
-.base-button-loading {
+.action-button-loading {
 	@apply bg-gray-800 border-2 border-gray-900;
 }
-.base-button-success {
+.action-button-success {
 	@apply bg-green-600 border-2 border-green-700;
+}
+.action-button-error {
+	@apply bg-red-600 border-2 border-red-700;
 }
 </style>
