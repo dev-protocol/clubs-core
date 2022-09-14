@@ -1,10 +1,15 @@
 ---
 import { ClubsPropsAdminPages, decode } from '../index'
 import AdminSidebar from './AdminSidebar.astro'
+import Aside from './Aside.vue'
+
+import '../styles/global.scss'
 
 const { clubs } = Astro.props as ClubsPropsAdminPages
 
-const { name, plugins } = decode(clubs.encodedClubsConfiguration)
+const config = decode(clubs.encodedClubsConfiguration)
+const { name, plugins } = config
+
 const enabledPlugins = plugins
 	.filter((plugin) => plugin.enable === true)
 	.filter((plugin) => plugin.name.toUpperCase() !== 'ADMIN')
@@ -25,8 +30,11 @@ const enabledPlugins = plugins
 			<header class="flex flex-col pr-16">
 				<AdminSidebar name={name} enabledPlugins={enabledPlugins} />
 			</header>
-			<main class="w-full">
-				<slot />
+			<main class="w-full grid grid-cols-4 gap-x-6">
+				<div class="col-span-3 break-words">
+					<slot />
+				</div>
+				<Aside class="col-span-1" config={config} client:only />
 			</main>
 			<input
 				type="hidden"
