@@ -28,6 +28,10 @@
 			"import": "./dist/src/connection/index.mjs",
 			"require": "./dist/src/connection/index.cjs"
 		},
+		"./authenticate": {
+			"import": "./dist/src/authenticate.mjs",
+			"require": "./dist/src/authenticate.cjs"
+		},
 		"./decode": {
 			"import": "./dist/src/decode.mjs",
 			"require": "./dist/src/decode.cjs"
