@@ -4,6 +4,7 @@ import dts from 'rollup-plugin-dts'
 import commonjs from '@rollup/plugin-commonjs'
 
 const majorCoreAPIs = [
+	'dist/src/authenticate.js',
 	'dist/src/decode.js',
 	'dist/src/encode.js',
 	'dist/src/events.js',
