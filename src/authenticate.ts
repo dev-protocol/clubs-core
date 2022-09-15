@@ -1,6 +1,6 @@
 import { clientsProperty } from '@devprotocol/dev-kit'
 import { BigNumber, providers, utils } from 'ethers'
-import { decode } from '../decode'
+import { decode } from './decode'
 
 export type ClubsFunctionAuthenticationAdminParams = {
 	readonly signature: string
