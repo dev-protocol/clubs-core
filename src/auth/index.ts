@@ -23,7 +23,7 @@ export const authenticate = async ({
 		provider,
 		previousConfig.propertyAddress
 	)
-	const property = propertyClient[0] // should this be hardcoded?
+	const property = propertyClient[0] ?? propertyClient[1]
 	const totalSupply = BigNumber.from(await property?.totalSupply())
 	const userBalance = BigNumber.from(await property?.balanceOf(address))
 
