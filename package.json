@@ -119,7 +119,7 @@
 		"astro": "1.4.6",
 		"autoprefixer": "10.4.12",
 		"ava": "4.3.3",
-		"eslint": "8.24.0",
+		"eslint": "8.25.0",
 		"eslint-config-prettier": "8.5.0",
 		"eslint-plugin-functional": "4.4.1",
 		"glob": "8.0.3",
