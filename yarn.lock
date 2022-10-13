@@ -1264,11 +1264,12 @@
   resolved "https://registry.yarnpkg.com/@rollup/plugin-virtual/-/plugin-virtual-2.1.0.tgz#a77bfd0dff74f0203401c75287ff4d1a1cfbc816"
   integrity sha512-CPPAtlKT53HFqC8jFHb/V5WErpU8Hrq2TyCR0A7kPQMlF2wNUf0o1xuAc+Qxj8NCZM0Z3Yvl+FbUXfJjVWqDwA==
 
-"@rollup/pluginutils@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-5.0.0.tgz#a9b1a3769a15ba501eff8c9bd8d2cd0767d6a690"
-  integrity sha512-LJAlpJhSH4cAoNrh5G4mQ7VJJgmGVN1A91Skwpd6uMT4CGmDbrZ59RQWwNB08WkLtKOzTHFj6pKgVn18zlDFrQ==
+"@rollup/pluginutils@5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-5.0.1.tgz#63def51f5a76dadd984689d33c7f000164152a97"
+  integrity sha512-4HaCVEXXuObvcPUaUlLt4faHYHCeQOOWNj8NKFGaRSrw3ZLD0TWeAFZicV9vXjnE2nkNuaVTfTuwAnjR+6uc9A==
   dependencies:
+    "@types/estree" "^1.0.0"
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
