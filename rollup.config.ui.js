@@ -1,5 +1,6 @@
 import tailwind from './rollup.plugin.tw'
 import glob from 'glob'
+// import { litScss } from 'rollup-plugin-scss-lit'
 
 const files = glob.sync('dist/src/ui/**/*.js')
 
@@ -20,6 +21,10 @@ export const createOptions = (file) => ({
 		tailwind({
 			include: 'ui/**/*',
 		}),
+		// litScss({
+		// 	minify: process.env.NODE_ENV === 'production',
+		// 	options: { loadPaths: ['node_modules'] }
+		// })
 	],
 })
 
