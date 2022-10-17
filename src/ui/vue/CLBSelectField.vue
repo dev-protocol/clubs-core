@@ -1,0 +1,32 @@
+<template>
+	<label class="hs-select-field">
+		<span class="hs-select-field__label">{{ label }}</span>
+		<select :name="name" :required="isRequired" class="hs-select-field__input">
+			<slot />
+		</select>
+		<span class="hs-select-field__helper">{{ helper }}</span>
+	</label>
+</template>
+
+<script lang="ts">
+export default {
+	name: 'CLBSelectField',
+	props: {
+		label: {
+			type: String,
+			required: true
+		},
+		name: {
+			type: String,
+			required: true
+		},
+		helper: {
+			type: String,
+		},
+		isRequired: {
+			type: Boolean,
+			default: false
+		}
+	}
+}
+</script>

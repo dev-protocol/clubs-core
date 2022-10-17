@@ -1,0 +1,94 @@
+---
+import CLBWrapper from '../../../src/ui/vue/CLBWrapper.vue'
+import CLBButton from '../../../src/ui/vue/CLBButton.vue'
+import CLBFormField from '../../../src/ui/vue/CLBFormField.vue'
+import CLBLink from '../../../src/ui/vue/CLBLink.vue'
+import CLBSelectField from '../../../src/ui/vue/CLBSelectField.vue'
+import CLBTier from '../../../src/ui/vue/CLBTier.vue'
+---
+
+<!doctype html>
+<html lang="en" hashi-theme="dark">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Clubs Core Vue UI Testing</title>
+</head>
+<body>
+<CLBWrapper>
+	<main>
+		<section id="clb-buttons">
+			<h2>CLBButton components</h2>
+			<div class="flex flex-row gap-[0.5rem] mb-[1rem]">
+				<CLBButton>Default</CLBButton>
+				<CLBButton type="outlined">Outlined</CLBButton>
+				<CLBButton type="filled">Filled</CLBButton>
+			</div>
+			<div class="flex flex-row gap-2">
+				<CLBButton is-disabled>Default Disabled</CLBButton>
+				<CLBButton is-disabled type="outlined">Outlined Disabled</CLBButton>
+				<CLBButton is-disabled type="filled">Filled Disabled</CLBButton>
+			</div>
+		</section>
+
+		<section id="clb-links">
+			<h2>CLBLink components</h2>
+			<p class="mb-[0.5rem]">Lorem ipsum <CLBLink link="#">on-page link test</CLBLink> sit amet, consectetur adipisicing elit. Eius ratione voluptates voluptatibus? Alias exercitationem fugiat labore pariatur quia repellat saepe voluptatum? Dolor dolores necessitatibus odio quod <CLBLink link="#">on-page link test</CLBLink>. Dicta, porro, quidem!</p>
+			<p>Lorem ipsum dolor sit amet, <CLBLink link="https://google.com">external link test</CLBLink> adipisicing elit. Beatae dolor ducimus ipsam nulla odit perspiciatis placeat provident quaerat tenetur totam?</p>
+		</section>
+
+		<section id="clb-form-fields">
+			<h2>CLBFormField components</h2>
+			<CLBFormField label="Text Field" type="text" placeholder="Placeholder..." helper="Helper Text" />
+			<CLBFormField label="Text Area Field" type="textarea" placeholder="Placeholder..." helper="Helper Text" />
+			<CLBFormField label="Number Field" type="number" placeholder="1-100..." helper="Select a number" />
+			<CLBFormField label="E-mail Field" type="email" placeholder="Be sure to have a valid e-mail"  />
+			<CLBFormField label="Password Field" type="password" placeholder="Make sure it's not 'password'" />
+		</section>
+
+		<section id="clb-select-fields">
+			<h2>CLBSelectField components</h2>
+			<CLBSelectField label="Test CLBSelectField" helper="Helper Text">
+				<option value="val">Value</option>
+			</CLBSelectField>
+		</section>
+
+		<section id="clb-tiers">
+			<h2>CLBTier components</h2>
+			<CLBTier title="CLBTier" subtitle="500 DEV">
+				<CLBButton type="filled">Select</CLBButton>
+			</CLBTier>
+		</section>
+	</main>
+</CLBWrapper>
+</body>
+</html>
+
+<style lang="scss">
+	main {
+		width: calc(100% - 30px);
+		margin: 0 auto;
+		padding: 15px 30px;
+	}
+
+	section[id^='clb-'] {
+		margin: 3rem 0;
+
+		&:first-of-type {
+			margin: 0 0 0.3rem;
+		}
+
+		&:last-of-type {
+			margin: 0.3rem 0 0;
+		}
+
+		> h2 {
+			margin-bottom: 1rem;
+			border-bottom: 1px solid rgba(#fff, 90%);
+			font-size: 1.25rem;
+			font-weight: 900;
+			line-height: 2;
+		}
+	}
+</style>

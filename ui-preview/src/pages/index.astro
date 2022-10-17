@@ -1,13 +1,56 @@
 ---
-import '../../../ui/webcomponents/index.mjs'
+import CLBWrapper from '../../../src/ui/vue/CLBWrapper.vue'
+import CLBButton from '../../../src/ui/vue/CLBButton.vue'
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width" />
-
+<!doctype html>
+<html lang="en" hashi-theme="dark">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Clubs UI Testing</title>
+</head>
+<body>
+<CLBWrapper>
 	<main>
-		<clb-input />
+		<section id="clb-preview-select">
+			<h2>Select the framework you want to preview...</h2>
+			<CLBButton type="outlined" link="/vue">Vue ver.</CLBButton>
+			<CLBButton type="outlined disabled" link="#">React ver.</CLBButton>
+			<CLBButton type="outlined disabled" link="#">Svelte ver.</CLBButton>
+			<CLBButton type="outlined disabled" link="#">WebComponents ver.</CLBButton>
+		</section>
 	</main>
+</CLBWrapper>
+</body>
 </html>
+
+<style lang="scss">
+	main {
+		width: calc(100% - 30px);
+		margin: 0 auto;
+		padding: 15px 30px;
+	}
+
+	section[id^='clb-'] {
+		margin: 3rem 0;
+
+		&:first-of-type {
+			margin: 0 0 0.3rem;
+		}
+
+		&:last-of-type {
+			margin: 0.3rem 0 0;
+		}
+
+		> h2 {
+			margin-bottom: 1rem;
+			border-bottom: 1px solid rgba(#fff, 90%);
+			font-size: 1.25rem;
+			font-weight: 900;
+			line-height: 2;
+		}
+	}
+</style>

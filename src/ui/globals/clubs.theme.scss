@@ -1,0 +1,46 @@
+@use 'sass:map';
+
+$theme: (
+	primary: 'dp-black',
+	primary-dark: 'dp-black',
+	accent: 'dp-white',
+	accent-dark: 'dp-white',
+	surface: 'dp-black',
+	surface-dark: 'dp-black',
+	background: 'dp-black-600',
+	dark-background: 'dp-black-600',
+);
+
+$button-theme: (
+	width: auto,
+	padding: (
+		'sm',
+		'md',
+	),
+	fill: 'accent-200',
+	fill-hover: 'accent-200',
+	fill-active: 'accent-400',
+);
+
+$form-field-theme: (
+	padding: (
+		'md',
+	),
+);
+
+$link-theme: (
+	ink: 'accent-200',
+);
+
+$select-field-theme: (
+	padding: (
+		'md',
+	),
+);
+
+$wallet-theme: (
+	width: auto,
+	fill: 'accent-200',
+	fill-hover: 'accent-200',
+	fill-active: 'accent-400',
+);
