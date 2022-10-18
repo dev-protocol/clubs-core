@@ -17,6 +17,12 @@
 		"jsx": "react",
 		"experimentalDecorators": true
 	},
-	"include": ["src", "example", "planned-structure", "ui-preview"],
+	"include": [
+		"src",
+		"example",
+		"planned-structure",
+		"ui-preview",
+		"rollup.*.mjs"
+	],
 	"exclude": []
 }
