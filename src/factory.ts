@@ -5,31 +5,31 @@ import type {
 	ClubsFunctionAdminFactory,
 	ClubsFunctionConfigFetcher,
 	ClubsFunctionPageFactory,
-	ClubsFunctionPlugin,
 	ClubsGetStaticPathsResult,
-	ClubsPlugin,
 	ClubsPluginsMap,
 	ClubsStaticPaths,
 	ClubsPropsAdminPages,
+	ClubsPluginDetails,
 } from './types'
 import { getClubsConfig } from './getClubsConfig'
 import { Props } from 'astro'
 
-type Plugins = readonly (ClubsPlugin & ClubsFunctionPlugin)[]
+type Plugins = readonly ClubsPluginDetails[]
 
 const _listPlugins = async (
 	config: ClubsConfiguration,
 	list: ClubsPluginsMap
 ): Promise<Plugins> => {
 	const plugins: Plugins = await Promise.all(
-		config.plugins
-			.filter(({ name }) => Object.prototype.hasOwnProperty.call(list, name))
-			.map(async ({ name, enable = true, options }) => {
-				const fn = list[name]
-				return { name, enable, options, ...fn }
-			})
+		config.plugins.map(async ({ name, enable = true, options }, i: number) => {
+			const fn = list[name] || {}
+			return { name, enable, options, ...fn, pluginIndex: i }
+		})
 	)
-	return plugins
+
+	return plugins.filter(({ name }) =>
+		Object.prototype.hasOwnProperty.call(list, name)
+	)
 }
 
 const _configFactory: (
@@ -47,21 +47,21 @@ const _staticPathsFromPlugins =
 		caller: 'getPagePaths' | 'getAdminPaths',
 		additionalProps?: (i: number) => Props
 	) =>
-	async (plugins: Plugins): Promise<ClubsStaticPaths> =>
-		(
-			await Promise.all(
-				plugins.map(async (plugin) => {
-					const results = await plugin[caller](plugin.options, config)
-					const updated = additionalProps
-						? results.map((res, i) => ({
+		async (plugins: Plugins): Promise<ClubsStaticPaths> =>
+			(
+				await Promise.all(
+					plugins.map(async (plugin) => {
+						const results = await plugin[caller](plugin.options, config)
+						const updated = additionalProps
+							? results.map((res, i) => ({
 								...res,
-								props: { ...res.props, ...additionalProps(i) },
-						  }))
-						: results
-					return updated
-				})
-			)
-		).flat()
+								props: { ...res.props, ...additionalProps(plugin.pluginIndex) },
+							}))
+							: results
+						return updated
+					})
+				)
+			).flat()
 
 const _compose = (pluginResults: ClubsStaticPaths) =>
 	pluginResults.map((res) => ({
@@ -76,36 +76,36 @@ const _staticPagePathsFactory: (
 	pluginsMap: ClubsPluginsMap
 ) => () => Promise<ClubsGetStaticPathsResult> =
 	(configFetcher, pluginsMap) =>
-	// eslint-disable-next-line functional/functional-parameters
-	async (): Promise<ClubsGetStaticPathsResult> => {
-		const [config] = await getClubsConfig(configFetcher)
-		const plugins = await _listPlugins(config, pluginsMap)
-		const getResultsOfPlugins = _staticPathsFromPlugins(config, 'getPagePaths')
-		const pluginResults = await getResultsOfPlugins(plugins)
-		const staticPaths = _compose(pluginResults)
+		// eslint-disable-next-line functional/functional-parameters
+		async (): Promise<ClubsGetStaticPathsResult> => {
+			const [config] = await getClubsConfig(configFetcher)
+			const plugins = await _listPlugins(config, pluginsMap)
+			const getResultsOfPlugins = _staticPathsFromPlugins(config, 'getPagePaths')
+			const pluginResults = await getResultsOfPlugins(plugins)
+			const staticPaths = _compose(pluginResults)
 
-		return staticPaths
-	}
+			return staticPaths
+		}
 
 const _staticAdminPathsFactory: (
 	configFetcher: ClubsFunctionConfigFetcher,
 	pluginsMap: ClubsPluginsMap
 ) => () => Promise<ClubsGetStaticPathsResult> =
 	(configFetcher, pluginsMap) =>
-	// eslint-disable-next-line functional/functional-parameters
-	async (): Promise<ClubsGetStaticPathsResult> => {
-		const [config, encodedClubsConfiguration] = await getClubsConfig(
-			configFetcher
-		)
-		const pluginMetas = Object.keys(pluginsMap).map((name) => ({
-			name,
-			meta: pluginsMap[name].meta,
-		}))
-		const plugins = await _listPlugins(config, pluginsMap)
-		const getResultsOfPlugins = _staticPathsFromPlugins(
-			config,
-			'getAdminPaths',
-			(currentPluginIndex) =>
+		// eslint-disable-next-line functional/functional-parameters
+		async (): Promise<ClubsGetStaticPathsResult> => {
+			const [config, encodedClubsConfiguration] = await getClubsConfig(
+				configFetcher
+			)
+			const pluginMetas = Object.keys(pluginsMap).map((name) => ({
+				name,
+				meta: pluginsMap[name].meta,
+			}))
+			const plugins = await _listPlugins(config, pluginsMap)
+			const getResultsOfPlugins = _staticPathsFromPlugins(
+				config,
+				'getAdminPaths',
+				(currentPluginIndex) =>
 				({
 					clubs: {
 						encodedClubsConfiguration,
@@ -113,12 +113,12 @@ const _staticAdminPathsFactory: (
 						plugins: pluginMetas,
 					},
 				} as ClubsPropsAdminPages)
-		)
-		const pluginResults = await getResultsOfPlugins(plugins)
-		const staticPaths = _compose(pluginResults)
+			)
+			const pluginResults = await getResultsOfPlugins(plugins)
+			const staticPaths = _compose(pluginResults)
 
-		return staticPaths
-	}
+			return staticPaths
+		}
 
 export const pageFactory: ClubsFunctionPageFactory = (options) => {
 	const getStaticPaths = _staticPagePathsFactory(
