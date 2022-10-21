@@ -27,9 +27,6 @@ export default {
 	props: {
 		title: String,
 		subtitle: String,
-		id: String,
-		currency: String,
-		amount: String,
 		media: String,
 	},
 	computed: {
