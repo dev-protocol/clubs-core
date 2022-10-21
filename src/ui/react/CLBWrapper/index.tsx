@@ -5,7 +5,8 @@ interface CLBWrapperProps {
   children: React.ReactNode;
 }
 
-const Index: React.FC<CLBWrapperProps> = ({children}) => {
+// @ts-ignore
+const CLBWrapper: React.FC<CLBWrapperProps> = ({children}) => {
   return (
     <>
 			{children}
@@ -13,4 +14,4 @@ const Index: React.FC<CLBWrapperProps> = ({children}) => {
   );
 };
 
-export default Index;
+export default CLBWrapper;
