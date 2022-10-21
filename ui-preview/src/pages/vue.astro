@@ -43,16 +43,19 @@ import CLBTier from '../../../src/ui/vue/CLBTier.vue'
 
 		<section id="clb-form-fields">
 			<h2>CLBFormField components</h2>
-			<CLBFormField label="Text Field" type="text" placeholder="Placeholder..." helper="Helper Text" />
-			<CLBFormField label="Text Area Field" type="textarea" placeholder="Placeholder..." helper="Helper Text" />
-			<CLBFormField label="Number Field" type="number" placeholder="1-100..." helper="Select a number" />
-			<CLBFormField is-disabled label="E-mail Field" type="email" placeholder="This input is disabled"  />
-			<CLBFormField is-readonly label="Password Field" type="password" placeholder="This input is readonly" />
+			<CLBFormField label="Text Field" input-type="text" placeholder="Placeholder..." helper="Helper Text" />
+			<CLBFormField label="Text Area Field" input-type="textarea" placeholder="Placeholder..." helper="Helper Text" />
+			<CLBFormField label="Number Field" type="danger" input-type="number" placeholder="1-100..." helper="Select a number" />
+			<CLBFormField is-disabled label="E-mail Field" input-type="email" placeholder="This input is disabled"  />
+			<CLBFormField is-readonly label="Password Field" input-type="password" placeholder="This input is readonly" />
 		</section>
 
 		<section id="clb-select-fields">
 			<h2>CLBSelectField components</h2>
 			<CLBSelectField label="Test CLBSelectField" helper="Helper Text">
+				<option value="val">Value</option>
+			</CLBSelectField>
+			<CLBSelectField label="Test CLBSelectField" type="danger" helper="Helper Text">
 				<option value="val">Value</option>
 			</CLBSelectField>
 			<CLBSelectField label="Test CLBSelectField" helper="Helper Text" is-disabled>

@@ -43,16 +43,19 @@ import CLBTier from '../../../src/ui/react/CLBTier'
 
 		<section id="clb-form-fields">
 			<h2>CLBFormField components</h2>
-			<CLBFormField label="Text Field" type="text" placeholder="Placeholder..." helper="Helper Text" />
-			<CLBFormField label="Text Area Field" type="textarea" placeholder="Placeholder..." helper="Helper Text" />
-			<CLBFormField label="Number Field" type="number" placeholder="1-100..." helper="Select a number" />
-			<CLBFormField isDisabled label="E-mail Field" type="email" placeholder="This input is disabled"  />
-			<CLBFormField isReadonly label="Password Field" type="password" placeholder="This input is readonly" />
+			<CLBFormField label="Text Field" inputType="text" placeholder="Placeholder..." helper="Helper Text" />
+			<CLBFormField label="Text Area Field" inputType="textarea" placeholder="Placeholder..." helper="Helper Text" />
+			<CLBFormField label="Number Field" type="danger" inputType="number" placeholder="1-100..." helper="Select a number" />
+			<CLBFormField isDisabled label="E-mail Field" inputType="email" placeholder="This input is disabled"  />
+			<CLBFormField isReadonly label="Password Field" inputType="password" placeholder="This input is readonly" />
 		</section>
 
 		<section id="clb-select-fields">
 			<h2>CLBSelectField components</h2>
 			<CLBSelectField label="Test CLBSelectField" helper="Helper Text">
+				<option value="val">Value</option>
+			</CLBSelectField>
+			<CLBSelectField label="Test CLBSelectField" type="danger" helper="Helper Text">
 				<option value="val">Value</option>
 			</CLBSelectField>
 			<CLBSelectField label="Test CLBSelectField" helper="Helper Text" isDisabled>
