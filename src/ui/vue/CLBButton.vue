@@ -16,6 +16,7 @@
 			v-bind:class="`hs-button${type && ' ' + assertType(type)}`"
 			role="link"
 			:[href]="link"
+			:target="assertTarget(link)"
 	>
 		<i v-if="isIconVisible" class="hs-button__icon"
 		><slot name="icon"></slot
@@ -66,6 +67,10 @@ export default {
 				finalTypes.push('is-' + type)
 			})
 			return finalTypes.join(' ')
+		},
+		assertTarget(link) {
+			const _isExternalLink = (link) => !!(link.startsWith('http://') || link.startsWith('https://'));
+			return _isExternalLink(link) ? '_blank' : '_self';
 		},
 	},
 }
