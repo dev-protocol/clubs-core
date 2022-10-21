@@ -1,4 +1,4 @@
-import tailwind from './rollup.plugin.tw'
+import tailwind from './rollup.plugin.tw.mjs'
 import glob from 'glob'
 // import { litScss } from 'rollup-plugin-scss-lit'
 

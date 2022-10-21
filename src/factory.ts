@@ -5,31 +5,31 @@ import type {
 	ClubsFunctionAdminFactory,
 	ClubsFunctionConfigFetcher,
 	ClubsFunctionPageFactory,
-	ClubsFunctionPlugin,
 	ClubsGetStaticPathsResult,
-	ClubsPlugin,
 	ClubsPluginsMap,
 	ClubsStaticPaths,
 	ClubsPropsAdminPages,
+	ClubsPluginDetails,
 } from './types'
 import { getClubsConfig } from './getClubsConfig'
 import { Props } from 'astro'
 
-type Plugins = readonly (ClubsPlugin & ClubsFunctionPlugin)[]
+type Plugins = readonly ClubsPluginDetails[]
 
 const _listPlugins = async (
 	config: ClubsConfiguration,
 	list: ClubsPluginsMap
 ): Promise<Plugins> => {
 	const plugins: Plugins = await Promise.all(
-		config.plugins
-			.filter(({ name }) => Object.prototype.hasOwnProperty.call(list, name))
-			.map(async ({ name, enable = true, options }) => {
-				const fn = list[name]
-				return { name, enable, options, ...fn }
-			})
+		config.plugins.map(async ({ name, enable = true, options }, i: number) => {
+			const fn = list[name] || {}
+			return { name, enable, options, ...fn, pluginIndex: i }
+		})
 	)
-	return plugins
+
+	return plugins.filter(({ name }) =>
+		Object.prototype.hasOwnProperty.call(list, name)
+	)
 }
 
 const _configFactory: (
@@ -55,7 +55,7 @@ const _staticPathsFromPlugins =
 					const updated = additionalProps
 						? results.map((res, i) => ({
 								...res,
-								props: { ...res.props, ...additionalProps(i) },
+								props: { ...res.props, ...additionalProps(plugin.pluginIndex) },
 						  }))
 						: results
 					return updated

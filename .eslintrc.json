@@ -33,6 +33,14 @@
 				"functional/no-return-void": "off",
 				"@typescript-eslint/prefer-readonly-parameter-types": "off"
 			}
+		},
+		{
+			"files": ["rollup.*.mjs"],
+			"rules": {
+				"functional/no-conditional-statement": "off",
+				"functional/functional-parameters": "off",
+				"functional/no-expression-statement": "off"
+			}
 		}
 	]
 }

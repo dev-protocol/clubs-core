@@ -25,6 +25,12 @@ export type ClubsPlugin = Readonly<{
 	readonly options: ClubsPluginOptions
 }>
 
+export type ClubsPluginDetails = ClubsPlugin &
+	ClubsFunctionPlugin &
+	Readonly<{
+		readonly pluginIndex: number
+	}>
+
 export type ClubsConfiguration = Readonly<{
 	readonly name: string
 	readonly twitterHandle: string
