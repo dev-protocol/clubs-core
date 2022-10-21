@@ -1,4 +1,6 @@
 ---
+import '../styles/main.scss'
+
 import CLBWrapper from '../../../src/ui/vue/CLBWrapper.vue'
 import CLBButton from '../../../src/ui/vue/CLBButton.vue'
 import CLBFormField from '../../../src/ui/vue/CLBFormField.vue'
@@ -18,6 +20,7 @@ import CLBTier from '../../../src/ui/vue/CLBTier.vue'
 <body>
 <CLBWrapper>
 	<main>
+		<div class="mb-4"><CLBButton type="outlined" link="/">Go Back</CLBButton></div>
 		<section id="clb-buttons">
 			<h2>CLBButton components</h2>
 			<div class="flex flex-row gap-[0.5rem] mb-[1rem]">
@@ -43,13 +46,16 @@ import CLBTier from '../../../src/ui/vue/CLBTier.vue'
 			<CLBFormField label="Text Field" type="text" placeholder="Placeholder..." helper="Helper Text" />
 			<CLBFormField label="Text Area Field" type="textarea" placeholder="Placeholder..." helper="Helper Text" />
 			<CLBFormField label="Number Field" type="number" placeholder="1-100..." helper="Select a number" />
-			<CLBFormField label="E-mail Field" type="email" placeholder="Be sure to have a valid e-mail"  />
-			<CLBFormField label="Password Field" type="password" placeholder="Make sure it's not 'password'" />
+			<CLBFormField is-disabled label="E-mail Field" type="email" placeholder="This input is disabled"  />
+			<CLBFormField is-readonly label="Password Field" type="password" placeholder="This input is readonly" />
 		</section>
 
 		<section id="clb-select-fields">
 			<h2>CLBSelectField components</h2>
 			<CLBSelectField label="Test CLBSelectField" helper="Helper Text">
+				<option value="val">Value</option>
+			</CLBSelectField>
+			<CLBSelectField label="Test CLBSelectField" helper="Helper Text" is-disabled>
 				<option value="val">Value</option>
 			</CLBSelectField>
 		</section>
@@ -64,31 +70,3 @@ import CLBTier from '../../../src/ui/vue/CLBTier.vue'
 </CLBWrapper>
 </body>
 </html>
-
-<style lang="scss">
-	main {
-		width: calc(100% - 30px);
-		margin: 0 auto;
-		padding: 15px 30px;
-	}
-
-	section[id^='clb-'] {
-		margin: 3rem 0;
-
-		&:first-of-type {
-			margin: 0 0 0.3rem;
-		}
-
-		&:last-of-type {
-			margin: 0.3rem 0 0;
-		}
-
-		> h2 {
-			margin-bottom: 1rem;
-			border-bottom: 1px solid rgba(#fff, 90%);
-			font-size: 1.25rem;
-			font-weight: 900;
-			line-height: 2;
-		}
-	}
-</style>

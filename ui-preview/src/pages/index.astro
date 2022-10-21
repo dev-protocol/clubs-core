@@ -1,4 +1,6 @@
 ---
+import '../styles/main.scss'
+
 import CLBWrapper from '../../../src/ui/vue/CLBWrapper.vue'
 import CLBButton from '../../../src/ui/vue/CLBButton.vue'
 ---
@@ -26,31 +28,3 @@ import CLBButton from '../../../src/ui/vue/CLBButton.vue'
 </CLBWrapper>
 </body>
 </html>
-
-<style lang="scss">
-	main {
-		width: calc(100% - 30px);
-		margin: 0 auto;
-		padding: 15px 30px;
-	}
-
-	section[id^='clb-'] {
-		margin: 3rem 0;
-
-		&:first-of-type {
-			margin: 0 0 0.3rem;
-		}
-
-		&:last-of-type {
-			margin: 0.3rem 0 0;
-		}
-
-		> h2 {
-			margin-bottom: 1rem;
-			border-bottom: 1px solid rgba(#fff, 90%);
-			font-size: 1.25rem;
-			font-weight: 900;
-			line-height: 2;
-		}
-	}
-</style>
