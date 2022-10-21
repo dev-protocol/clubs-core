@@ -1,7 +1,7 @@
 <template>
-	<label class="hs-form-field is-filled">
+	<label :class="`hs-form-field is-filled${type ? ' ' + assertType(type) : ''}`">
 		<span class="hs-form-field__label">{{ label }}</span>
-		<input v-if="type !== 'textarea'" :required="isRequired" class="hs-form-field__input" :name="name" :type="type" :placeholder="placeholder" :disabled="isDisabled" :readonly="isReadonly" />
+		<input v-if="inputType !== 'textarea'" :required="isRequired" class="hs-form-field__input" :name="name" :type="inputType" :placeholder="placeholder" :disabled="isDisabled" :readonly="isReadonly" />
 		<textarea v-else class="hs-form-field__input" :required="isRequired" :rows="rows" :name="name" :placeholder="placeholder" :disabled="isDisabled" :readonly="isReadonly" />
 	  <span v-if="helper" class="hs-form-field__helper">{{ helper }}</span>
 	</label>
@@ -20,6 +20,9 @@ export default {
 			required: true
 		},
 		type: {
+			type: String,
+		},
+		inputType: {
 			type: String,
 			required: true
 		},
@@ -44,6 +47,15 @@ export default {
 		isReadonly: {
 			type: Boolean,
 			default: false
+		}
+	},
+	methods: {
+		assertType(type: string): string {
+			const finalTypes: string[] = [];
+			type.split(' ').forEach((type) => {
+				finalTypes.push('is-' + type);
+			});
+			return finalTypes.join(' ');
 		}
 	}
 }
