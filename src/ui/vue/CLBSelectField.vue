@@ -1,7 +1,7 @@
 <template>
 	<label class="hs-select-field">
 		<span class="hs-select-field__label">{{ label }}</span>
-		<select :name="name" :required="isRequired" class="hs-select-field__input">
+		<select :name="name" :required="isRequired" class="hs-select-field__input" :disabled="isDisabled">
 			<slot />
 		</select>
 		<span class="hs-select-field__helper">{{ helper }}</span>
@@ -24,6 +24,10 @@ export default {
 			type: String,
 		},
 		isRequired: {
+			type: Boolean,
+			default: false
+		},
+		isDisabled: {
 			type: Boolean,
 			default: false
 		}

@@ -1,8 +1,8 @@
 <template>
 	<label class="hs-form-field is-filled">
 		<span class="hs-form-field__label">{{ label }}</span>
-		<input v-if="type !== 'textarea'" :required="isRequired" class="hs-form-field__input" :name="name" :type="type" :placeholder="placeholder" />
-		<textarea v-else class="hs-form-field__input" :required="isRequired" :rows="rows" :name="name" :placeholder="placeholder" />
+		<input v-if="type !== 'textarea'" :required="isRequired" class="hs-form-field__input" :name="name" :type="type" :placeholder="placeholder" :disabled="isDisabled" :readonly="isReadonly" />
+		<textarea v-else class="hs-form-field__input" :required="isRequired" :rows="rows" :name="name" :placeholder="placeholder" :disabled="isDisabled" :readonly="isReadonly" />
 	  <span v-if="helper" class="hs-form-field__helper">{{ helper }}</span>
 	</label>
 </template>
@@ -34,6 +34,14 @@ export default {
 			default: 5
 		},
 		isRequired: {
+			type: Boolean,
+			default: false
+		},
+		isDisabled: {
+			type: Boolean,
+			default: false
+		},
+		isReadonly: {
 			type: Boolean,
 			default: false
 		}
