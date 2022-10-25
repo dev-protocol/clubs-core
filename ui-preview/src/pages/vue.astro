@@ -3,8 +3,10 @@ import '../styles/main.scss'
 
 import CLBWrapper from '../../../src/ui/vue/CLBWrapper.vue'
 import CLBButton from '../../../src/ui/vue/CLBButton.vue'
+import CLBCheckbox from '../../../src/ui/vue/CLBCheckbox.vue'
 import CLBFormField from '../../../src/ui/vue/CLBFormField.vue'
 import CLBLink from '../../../src/ui/vue/CLBLink.vue'
+import CLBRadio from '../../../src/ui/vue/CLBRadio.vue'
 import CLBSelectField from '../../../src/ui/vue/CLBSelectField.vue'
 import CLBTier from '../../../src/ui/vue/CLBTier.vue'
 ---
@@ -48,6 +50,18 @@ import CLBTier from '../../../src/ui/vue/CLBTier.vue'
 			<CLBFormField label="Number Field" type="danger" input-type="number" placeholder="1-100..." helper="Select a number" />
 			<CLBFormField is-disabled label="E-mail Field" input-type="email" placeholder="This input is disabled"  />
 			<CLBFormField is-readonly label="Password Field" input-type="password" placeholder="This input is readonly" />
+		</section>
+
+		<section id="clb-radios">
+			<h2>CLBRadio components</h2>
+			<CLBRadio label="Hello" helper="Helper Text" name="sampleChoice" value="option1" />
+			<CLBRadio label="Hello" helper="Helper Text" name="sampleChoice" value="option2" />
+		</section>
+
+		<section id="clb-checkboxes">
+			<h2>CLBCheckbox components</h2>
+			<CLBCheckbox label="Hello" helper="Helper Text" name="sampleChoice" value="option1" />
+			<CLBCheckbox label="Hello" helper="Helper Text" name="sampleChoice" value="option2" />
 		</section>
 
 		<section id="clb-select-fields">

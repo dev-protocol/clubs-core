@@ -3,9 +3,11 @@ import '../styles/main.scss'
 
 import CLBWrapper from '../../../src/ui/react/CLBWrapper'
 import CLBButton from '../../../src/ui/react/CLBButton'
+import CLBCheckbox from '../../../src/ui/react/CLBCheckbox'
 import CLBFormField from '../../../src/ui/react/CLBFormField'
 import CLBLink from '../../../src/ui/react/CLBLink'
 import CLBSelectField from '../../../src/ui/react/CLBSelectField'
+import CLBRadio from '../../../src/ui/react/CLBRadio'
 import CLBTier from '../../../src/ui/react/CLBTier'
 ---
 
@@ -48,6 +50,18 @@ import CLBTier from '../../../src/ui/react/CLBTier'
 			<CLBFormField label="Number Field" type="danger" inputType="number" placeholder="1-100..." helper="Select a number" />
 			<CLBFormField isDisabled label="E-mail Field" inputType="email" placeholder="This input is disabled"  />
 			<CLBFormField isReadonly label="Password Field" inputType="password" placeholder="This input is readonly" />
+		</section>
+
+		<section id="clb-radios">
+			<h2>CLBRadio components</h2>
+			<CLBRadio label="Hello" helper="Helper Text" name="sampleChoice" value="option1" />
+			<CLBRadio label="Hello" helper="Helper Text" name="sampleChoice" value="option2" />
+		</section>
+
+		<section id="clb-checkboxes">
+			<h2>CLBCheckbox components</h2>
+			<CLBCheckbox label="Hello" helper="Helper Text" name="sampleChoice" value="option1" />
+			<CLBCheckbox label="Hello" helper="Helper Text" name="sampleChoice" value="option2" />
 		</section>
 
 		<section id="clb-select-fields">
