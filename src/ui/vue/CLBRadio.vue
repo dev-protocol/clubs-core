@@ -4,33 +4,38 @@
 			class="hs-tick-field__input"
 			type="radio"
 			:id="value"
-			name="input"
+			:name="name"
 			:value="value"
-			@change="action"
-			:checked="checked"
+			@change="onChange"
+			:checked="isChecked"
 		/>
 	  <img
+			v-if="media"
 			class="hs-tick-field__sprite"
 			:src="media"
 			width="32"
 			height="32"
 			:alt="mediaAlt"
 	  />
-		<div class="d-flex flow-col items-start">
+		<span style="display: flex; flex-flow: column nowrap; align-items: start;">
 			<span class="hs-tick-field__label">{{ label }}</span>
 			<span class="hs-tick-field__helper">{{ helper }}</span>
-		</div>
+		</span>
 	</label>
 </template>
 
 <script>
 export default {
 	name: 'CLBRadio',
-	props: ['action', 'value', 'label', 'helper', 'media', 'mediaAlt', 'checked'],
+	props: {
+		'name': String,
+		'value': String,
+		'label': String,
+		'helper': String,
+		'media': String,
+		'mediaAlt': String,
+		'isChecked': Boolean,
+		'onChange': Function,
+	},
 }
 </script>
-
-<style lang="scss" scoped>
-@use 'node_modules/@devprotocol/hashi/hs-tick-field';
-@include hs-tick-field.render();
-</style>
