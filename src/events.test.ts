@@ -59,8 +59,8 @@ const pluginsMap = {
 				propertyAddress,
 			}: { readonly name: string; readonly propertyAddress: string }
 		) => [
-				{ paths: ['home'], component: null, props: { name, propertyAddress } },
-			],
+			{ paths: ['home'], component: null, props: { name, propertyAddress } },
+		],
 		getAdminPaths: async (options: readonly ClubsPluginOption[]) => [
 			{
 				paths: ['home'],
@@ -78,8 +78,8 @@ const pluginsMap = {
 				propertyAddress,
 			}: { readonly name: string; readonly propertyAddress: string }
 		) => [
-				{ paths: ['buy'], component: null, props: { name, propertyAddress } },
-			],
+			{ paths: ['buy'], component: null, props: { name, propertyAddress } },
+		],
 		getAdminPaths: async (options: readonly ClubsPluginOption[]) => [
 			{
 				paths: ['buy'],
@@ -97,12 +97,12 @@ const pluginsMap = {
 				propertyAddress,
 			}: { readonly name: string; readonly propertyAddress: string }
 		) => [
-				{
-					paths: ['community'],
-					component: null,
-					props: { name, propertyAddress },
-				},
-			],
+			{
+				paths: ['community'],
+				component: null,
+				props: { name, propertyAddress },
+			},
+		],
 		getAdminPaths: async (options: readonly ClubsPluginOption[]) => [
 			{
 				paths: ['community'],
@@ -120,8 +120,8 @@ const pluginsMap = {
 				propertyAddress,
 			}: { readonly name: string; readonly propertyAddress: string }
 		) => [
-				{ paths: ['nft'], component: null, props: { name, propertyAddress } },
-			],
+			{ paths: ['nft'], component: null, props: { name, propertyAddress } },
+		],
 		getAdminPaths: async (options: readonly ClubsPluginOption[]) => [
 			{
 				paths: ['nft'],
