@@ -38,9 +38,10 @@ $select-field-theme: (
 	),
 );
 
-$wallet-theme: (
-	width: auto,
-	fill: 'accent-200',
-	fill-hover: 'accent-200',
-	fill-active: 'accent-400',
+$tick-field-theme: (
+	padding: (
+		'md',
+		'lg'
+	),
+	gap: 'lg'
 );
