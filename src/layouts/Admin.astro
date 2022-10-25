@@ -50,6 +50,7 @@ const enabledPlugins = plugins
 					ClubsEventsUpdateConfiguration,
 				} from '../types'
 				import { ClubsEvents } from '../types'
+				import { updatePluginOptionsEventListener } from '../fixtures/utils'
 
 				let currentConfig: ClubsConfiguration = decode(
 					(
@@ -61,7 +62,7 @@ const enabledPlugins = plugins
 
 				document.body.addEventListener(
 					ClubsEvents.UpdatePluginOptions,
-					(ev) => {
+					async (ev) => {
 						ev.preventDefault()
 						const {
 							detail: { data, pluginIndex },
@@ -72,10 +73,11 @@ const enabledPlugins = plugins
 							pluginIndex,
 						})
 
-						const updatedPlugins = [...currentConfig.plugins].map((mplg, i) =>
-							i === pluginIndex ? { ...mplg, options: data } : mplg
+						const updatedConfig = await updatePluginOptionsEventListener(
+							{ data, pluginIndex },
+							currentConfig
 						)
-						const updatedConfig = { ...currentConfig, plugins: updatedPlugins }
+
 						currentConfig = updatedConfig
 
 						console.log(
