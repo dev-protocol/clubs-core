@@ -5,7 +5,6 @@ interface CLBWrapperProps {
   children: React.ReactNode;
 }
 
-// @ts-ignore
 const CLBWrapper: React.FC<CLBWrapperProps> = ({children}) => {
   return (
     <>

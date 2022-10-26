@@ -15,7 +15,6 @@ interface CLBFormFieldProps {
 	isReadonly?: boolean;
 }
 
-// @ts-ignore
 const CLBFormField: React.FC<CLBFormFieldProps> = ({label, helper, type, inputType, name, placeholder, rows, isRequired, isDisabled, isReadonly}) => {
 
 	const _assertType = (type: string): string => {
@@ -27,7 +26,6 @@ const CLBFormField: React.FC<CLBFormFieldProps> = ({label, helper, type, inputTy
 	}
 
 	return (
-		// @ts-ignore
 		<label className={`hs-form-field is-filled${type ? ' ' + _assertType(type) : ''}`}>
 			<span className="hs-form-field__label">{label}</span>
 			{inputType !== 'textarea' &&

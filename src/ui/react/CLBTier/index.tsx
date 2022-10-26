@@ -12,10 +12,8 @@ interface CLBTierProps {
 	children?: React.ReactNode|string;
 }
 
-// @ts-ignore
 const CLBTier: React.FC<CLBTierProps> = ({title, subtitle, media, children}) => {
 	return (
-		// @ts-ignore
 		<div className="clb-tier">
 			{media &&
 				<img
@@ -25,10 +23,8 @@ const CLBTier: React.FC<CLBTierProps> = ({title, subtitle, media, children}) => 
 				/>
 			}
 			{!media &&
-				// @ts-ignore
 				<CLBSkeleton />
 			}
-			{/* @ts-ignore */ }
 			<div className="mb-2 grid">
 				<div className="clb-tier__title">{title}</div>
 				<div className="clb-tier__subtitle">{subtitle}</div>

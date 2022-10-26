@@ -5,7 +5,6 @@ interface CLBLinkProps {
   children?: React.ReactNode|string;
 }
 
-// @ts-ignore
 const CLBLink: React.FC<CLBLinkProps> = ({link, children}) => {
 
 	const isLinkExternal: boolean = !!(link.startsWith('http://') || link.startsWith('https://'));

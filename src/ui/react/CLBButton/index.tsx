@@ -14,10 +14,7 @@ interface CLBButtonProps {
 	isDisabled?: boolean;
 }
 
-// @ts-ignore
 const CLBButton: React.FC<CLBButtonProps> = ({icon, type, link, isDisabled, onClick, children }) => {
-
-	// @ts-ignore
 	const ButtonBase: React.ReactNode = (
 		<>
 			{icon && <i className='hs-button__icon'>{icon}</i>}

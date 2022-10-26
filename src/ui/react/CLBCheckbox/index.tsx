@@ -11,10 +11,8 @@ interface CLBCheckboxProps {
 	onChange?: (() => void|any);
 }
 
-// @ts-ignore
 const CLBCheckbox: React.FC<CLBCheckboxProps> = ({value, name, label, helper, media, mediaAlt, isChecked, onChange}) => {
   return (
-		// @ts-ignore
 		<label className="hs-tick-field">
 			<input
 				className="hs-tick-field__input"
@@ -34,7 +32,6 @@ const CLBCheckbox: React.FC<CLBCheckboxProps> = ({value, name, label, helper, me
 					alt={mediaAlt}
 				/>
 			}
-			{/* @ts-ignore */}
 			<div style={{display: 'flex', flexFlow: 'column nowrap', alignItems: 'start'}}>
 				<span className="hs-tick-field__label">{label}</span>
 				{helper && <span className="hs-tick-field__helper">{helper}</span>}
