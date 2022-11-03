@@ -100,7 +100,7 @@
 		"@astrojs/lit": "1.0.1",
 		"@astrojs/react": "1.2.2",
 		"@astrojs/svelte": "1.0.2",
-		"@astrojs/tailwind": "2.1.1",
+		"@astrojs/tailwind": "2.1.2",
 		"@astrojs/vue": "1.2.1",
 		"@ava/typescript": "3.0.1",
 		"@devprotocol/hashi": "1.4.0",
