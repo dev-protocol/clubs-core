@@ -1,3 +1,6 @@
+# workspaces
+.idea/
+
 # Logs
 logs
 *.log
@@ -96,3 +99,6 @@ local.settings.json
 
 # use yarn as a package manager
 package-lock.json
+
+# dump
+dump
