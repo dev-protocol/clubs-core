@@ -38,6 +38,8 @@ export type ClubsConfiguration = Readonly<{
 	readonly url: string
 	readonly propertyAddress: string
 	readonly adminRolePoints: number
+	readonly chainId: number
+	readonly rpcUrl: string
 	readonly options?: ClubsPluginOptions
 	readonly plugins: readonly ClubsPlugin[]
 }>
