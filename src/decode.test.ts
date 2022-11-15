@@ -22,6 +22,8 @@ test('Returns decoded configuration', (t) => {
 		twitterHandle: '@TEST',
 		description: '',
 		url: 'https://example.com',
+		chainId: 1,
+		rpcUrl: '',
 		propertyAddress: '0x541f7914ed2a4a8b477edc711fa349a77983f3ad',
 		adminRolePoints: 0,
 		plugins: [
@@ -64,6 +66,8 @@ test('Bigint less than or equal MAX_SAFE_INTEGER is handled as a number', (t) =>
 		url: '',
 		propertyAddress: '',
 		adminRolePoints: 0,
+		chainId: 1,
+		rpcUrl: '',
 		plugins: [
 			{
 				name: '',
