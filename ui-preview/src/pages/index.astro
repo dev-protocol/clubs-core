@@ -1,15 +1,30 @@
 ---
-import '../../../ui/webcomponents/index.mjs'
+import '../styles/main.scss'
+
+import CLBWrapper from '../../../src/ui/vue/CLBWrapper.vue'
+import CLBButton from '../../../src/ui/vue/CLBButton.vue'
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width" />
-
+<!doctype html>
+<html lang="en" hashi-theme="dark">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Clubs UI Testing</title>
+</head>
+<body>
+<CLBWrapper>
 	<main>
-		<clb-input />
+		<section id="clb-preview-select">
+			<h2>Select the framework you want to preview...</h2>
+			<CLBButton type="outlined" link="/vue">Vue ver.</CLBButton>
+			<CLBButton type="outlined" link="/react">React ver.</CLBButton>
+			<CLBButton type="outlined disabled" link="#">Svelte ver.</CLBButton>
+			<CLBButton type="outlined disabled" link="#">WebComponents ver.</CLBButton>
+		</section>
 	</main>
-
-
+</CLBWrapper>
+</body>
 </html>

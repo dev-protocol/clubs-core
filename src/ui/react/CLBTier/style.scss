@@ -1,0 +1,34 @@
+@use 'node_modules/@devprotocol/hashi' with (
+  $modular-mode: true
+);
+
+.clb-tier {
+	display: grid;
+	justify-items: start;
+	gap: hashi.token-get('padding-sm');
+
+	.clb-tier__media {
+		width: 100%;
+		height: auto;
+		border-radius: hashi.token-get('radius-medium');
+	}
+
+	.clb-tier__title {
+		font-family: hashi.token-get('family-title');
+		font-size: hashi.token-get('size-subtitle');
+		font-weight: hashi.token-get('weight-bold');
+		line-height: hashi.token-get('line-height-condensed');
+	}
+
+	.clb-tier__subtitle {
+		font-family: hashi.token-get('family-subtitle');
+		font-size: hashi.token-get('size-body');
+		font-weight: hashi.token-get('weight-normal');
+		line-height: hashi.token-get('line-height-condensed');
+		text-transform: uppercase;
+	}
+
+	.clb-tier__actions {
+		//
+	}
+}

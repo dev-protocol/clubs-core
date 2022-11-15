@@ -1,0 +1,89 @@
+---
+import '../styles/main.scss'
+
+import CLBWrapper from '../../../src/ui/vue/CLBWrapper.vue'
+import CLBButton from '../../../src/ui/vue/CLBButton.vue'
+import CLBCheckbox from '../../../src/ui/vue/CLBCheckbox.vue'
+import CLBFormField from '../../../src/ui/vue/CLBFormField.vue'
+import CLBLink from '../../../src/ui/vue/CLBLink.vue'
+import CLBRadio from '../../../src/ui/vue/CLBRadio.vue'
+import CLBSelectField from '../../../src/ui/vue/CLBSelectField.vue'
+import CLBTier from '../../../src/ui/vue/CLBTier.vue'
+---
+
+<!doctype html>
+<html lang="en" hashi-theme="dark">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Clubs Core Vue UI Testing</title>
+</head>
+<body>
+<CLBWrapper>
+	<main>
+		<div class="mb-4"><CLBButton type="outlined" link="/">Go Back</CLBButton></div>
+		<section id="clb-buttons">
+			<h2>CLBButton components</h2>
+			<div class="flex flex-row gap-[0.5rem] mb-[1rem]">
+				<CLBButton>Default</CLBButton>
+				<CLBButton type="outlined">Outlined</CLBButton>
+				<CLBButton type="filled">Filled</CLBButton>
+			</div>
+			<div class="flex flex-row gap-2">
+				<CLBButton is-disabled>Default Disabled</CLBButton>
+				<CLBButton is-disabled type="outlined">Outlined Disabled</CLBButton>
+				<CLBButton is-disabled type="filled">Filled Disabled</CLBButton>
+			</div>
+		</section>
+
+		<section id="clb-links">
+			<h2>CLBLink components</h2>
+			<p class="mb-[0.5rem]">Lorem ipsum <CLBLink link="#">on-page link test</CLBLink> sit amet, consectetur adipisicing elit. Eius ratione voluptates voluptatibus? Alias exercitationem fugiat labore pariatur quia repellat saepe voluptatum? Dolor dolores necessitatibus odio quod <CLBLink link="#">on-page link test</CLBLink>. Dicta, porro, quidem!</p>
+			<p>Lorem ipsum dolor sit amet, <CLBLink link="https://google.com">external link test</CLBLink> adipisicing elit. Beatae dolor ducimus ipsam nulla odit perspiciatis placeat provident quaerat tenetur totam?</p>
+		</section>
+
+		<section id="clb-form-fields">
+			<h2>CLBFormField components</h2>
+			<CLBFormField label="Text Field" input-type="text" placeholder="Placeholder..." helper="Helper Text" />
+			<CLBFormField label="Text Area Field" input-type="textarea" placeholder="Placeholder..." helper="Helper Text" />
+			<CLBFormField label="Number Field" type="danger" input-type="number" placeholder="1-100..." helper="Select a number" />
+			<CLBFormField is-disabled label="E-mail Field" input-type="email" placeholder="This input is disabled"  />
+			<CLBFormField is-readonly label="Password Field" input-type="password" placeholder="This input is readonly" />
+		</section>
+
+		<section id="clb-radios">
+			<h2>CLBRadio components</h2>
+			<CLBRadio label="Hello" helper="Helper Text" name="sampleChoice" value="option1" />
+			<CLBRadio label="Hello" helper="Helper Text" name="sampleChoice" value="option2" />
+		</section>
+
+		<section id="clb-checkboxes">
+			<h2>CLBCheckbox components</h2>
+			<CLBCheckbox label="Hello" helper="Helper Text" name="sampleChoice" value="option1" />
+			<CLBCheckbox label="Hello" helper="Helper Text" name="sampleChoice" value="option2" />
+		</section>
+
+		<section id="clb-select-fields">
+			<h2>CLBSelectField components</h2>
+			<CLBSelectField label="Test CLBSelectField" helper="Helper Text">
+				<option value="val">Value</option>
+			</CLBSelectField>
+			<CLBSelectField label="Test CLBSelectField" type="danger" helper="Helper Text">
+				<option value="val">Value</option>
+			</CLBSelectField>
+			<CLBSelectField label="Test CLBSelectField" helper="Helper Text" is-disabled>
+				<option value="val">Value</option>
+			</CLBSelectField>
+		</section>
+
+		<section id="clb-tiers">
+			<h2>CLBTier components</h2>
+			<CLBTier title="CLBTier" subtitle="500 DEV">
+				<CLBButton type="filled">Select</CLBButton>
+			</CLBTier>
+		</section>
+	</main>
+</CLBWrapper>
+</body>
+</html>
