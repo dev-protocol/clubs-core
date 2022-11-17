@@ -52,7 +52,8 @@
 			"import": "./dist/src/layouts/index.mjs",
 			"require": "./dist/src/layouts/index.cjs"
 		},
-		"./admin": "./src/layouts/Admin.astro"
+		"./admin": "./src/layouts/Admin.astro",
+		"./aside": "./src/layouts/Aside.astro"
 	},
 	"types": "./dist/clubs-core.d.ts",
 	"files": [
