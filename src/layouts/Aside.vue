@@ -14,14 +14,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { buildConfig } from '../../events'
+import { buildConfig } from '../events'
 import {
 	ClubsConfiguration,
 	ClubsEvents,
 	ClubsEventsDetailFinishConfiguration,
-} from '../../types'
-import ActionButton from '../../components/Primitives/ActionButton.vue'
-import ConnectButton from '../../components/ConnectButton.vue'
+} from '../types'
+import ActionButton from '../components/Primitives/ActionButton.vue'
+import ConnectButton from '../components/ConnectButton.vue'
 
 export default defineComponent({
 	name: 'Aside',
