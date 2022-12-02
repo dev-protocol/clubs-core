@@ -1,5 +1,15 @@
 ---
-const { name, enabledPlugins } = Astro.props
+import { ClubsPropsClubsPlugin } from '../types'
+
+const { name, enabledPlugins } = Astro.props as {
+	name: string
+	enabledPlugins: ClubsPropsClubsPlugin[]
+}
+
+const cache = new Set<string>()
+const onlyFirstItems = enabledPlugins.filter(({ name }) =>
+	cache.has(name) ? false : cache.add(name)
+)
 ---
 
 <h1 class="font-title text-lg font-bold mb-16">{name}</h1>
@@ -8,9 +18,9 @@ const { name, enabledPlugins } = Astro.props
 	<a class="mb-16 text-sm" href="/admin/plugins">Plugins</a>
 
 	{
-		enabledPlugins.map((plugin: any) => (
-			<a class="mb-4 text-sm capitalize" href={plugin.name}>
-				{plugin.name}
+		onlyFirstItems.map((plugin) => (
+			<a class="mb-4 text-sm capitalize" href={plugin.pathname}>
+				{plugin.meta.displayName}
 			</a>
 		))
 	}

@@ -8,9 +8,9 @@ import '../styles/global.scss'
 const { clubs } = Astro.props as ClubsPropsAdminPages
 
 const config = decode(clubs.encodedClubsConfiguration)
-const { name, plugins } = config
+const { name } = config
 
-const enabledPlugins = plugins
+const enabledPlugins = clubs.plugins
 	.filter((plugin) => plugin.enable === true)
 	.filter((plugin) => plugin.name.toUpperCase() !== 'ADMIN')
 ---
