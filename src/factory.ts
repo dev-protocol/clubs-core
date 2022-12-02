@@ -7,14 +7,17 @@ import type {
 	ClubsFunctionPageFactory,
 	ClubsGetStaticPathsResult,
 	ClubsPluginsMap,
-	ClubsStaticPaths,
 	ClubsPropsAdminPages,
 	ClubsPluginDetails,
+	ClubsStaticPath,
 } from './types'
 import { getClubsConfig } from './getClubsConfig'
 import { Props } from 'astro'
 
 type Plugins = readonly ClubsPluginDetails[]
+type ClubsStaticPathWithDetails<T = Props | undefined> = ClubsStaticPath<T> & {
+	readonly details: ClubsPluginDetails
+}
 
 const _listPlugins = async (
 	config: ClubsConfiguration,
@@ -47,11 +50,13 @@ const _staticPathsFromPlugins =
 		caller: 'getPagePaths' | 'getAdminPaths',
 		additionalProps?: (i: number) => Props
 	) =>
-	async (plugins: Plugins): Promise<ClubsStaticPaths> =>
+	async (plugins: Plugins): Promise<readonly ClubsStaticPathWithDetails[]> =>
 		(
 			await Promise.all(
 				plugins.map(async (plugin) => {
-					const results = await plugin[caller](plugin.options, config)
+					const results = (await plugin[caller](plugin.options, config)).map(
+						(x) => ({ ...x, details: plugin })
+					)
 					const updated = additionalProps
 						? results.map((res, i) => ({
 								...res,
@@ -63,10 +68,13 @@ const _staticPathsFromPlugins =
 			)
 		).flat()
 
-const _compose = (pluginResults: ClubsStaticPaths) =>
+const _pathsToPage = (paths: readonly (string | undefined)[]) =>
+	paths.join('/') || undefined
+
+const _compose = (pluginResults: readonly ClubsStaticPathWithDetails[]) =>
 	pluginResults.map((res) => ({
 		params: {
-			page: res.paths.join('/') || undefined,
+			page: _pathsToPage(res.paths),
 		},
 		props: { ...res.props, component: res.component },
 	}))
@@ -111,13 +119,19 @@ const _staticAdminPathsFactory: (
 		)
 		const pluginResults = (await getResultsOfPlugins(
 			plugins
-		)) as ClubsStaticPaths<ClubsPropsAdminPages>
-		const pluginsWithPaths = plugins.map(
-			({ getPagePaths, getAdminPaths, ...plg }, i) => ({
+		)) as readonly ClubsStaticPathWithDetails<ClubsPropsAdminPages>[]
+		const pluginsWithPaths = pluginResults.map((result) => {
+			const {
+				details: { getPagePaths, getAdminPaths, ...plg },
+			} = result
+			const page = _pathsToPage(result.paths)
+			return {
 				...plg,
-				paths: pluginResults[i].paths,
-			})
-		)
+				paths: result.paths,
+				pathname: page ? `/admin/${page}` : `/admin`,
+				page,
+			}
+		})
 
 		const injected = pluginResults.map((plg) => ({
 			...plg,

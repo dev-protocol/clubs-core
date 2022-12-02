@@ -115,15 +115,20 @@ export type ClubsFunctionClubsConfigurationSetter = <
 	nextConfiguration: T
 ) => T
 
+export type ClubsPropsClubsPlugin = Omit<
+	ClubsPluginDetails,
+	'getPagePaths' | 'getAdminPaths'
+> & {
+	readonly paths: ClubsStaticPaths
+	readonly page: string
+	readonly pathname: string
+}
+
 export type ClubsPropsAdminPages = Props & {
 	readonly clubs: {
 		readonly currentPluginIndex: number
 		readonly encodedClubsConfiguration: string
-		readonly plugins: ReadonlyArray<
-			Omit<ClubsPluginDetails, 'getPagePaths' | 'getAdminPaths'> & {
-				readonly paths: ClubsStaticPaths
-			}
-		>
+		readonly plugins: ReadonlyArray<ClubsPropsClubsPlugin>
 	}
 }
 
