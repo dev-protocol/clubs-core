@@ -97,10 +97,6 @@ const _staticAdminPathsFactory: (
 		const [config, encodedClubsConfiguration] = await getClubsConfig(
 			configFetcher
 		)
-		const pluginMetas = Object.keys(pluginsMap).map((name) => ({
-			name,
-			meta: pluginsMap[name].meta,
-		}))
 		const plugins = await _listPlugins(config, pluginsMap)
 		const getResultsOfPlugins = _staticPathsFromPlugins(
 			config,
@@ -110,12 +106,30 @@ const _staticAdminPathsFactory: (
 					clubs: {
 						encodedClubsConfiguration,
 						currentPluginIndex,
-						plugins: pluginMetas,
 					},
-				} as ClubsPropsAdminPages)
+				} as Omit<ClubsPropsAdminPages, 'plugins'>)
 		)
-		const pluginResults = await getResultsOfPlugins(plugins)
-		const staticPaths = _compose(pluginResults)
+		const pluginResults = (await getResultsOfPlugins(
+			plugins
+		)) as ClubsStaticPaths<ClubsPropsAdminPages>
+		const pluginsWithPaths = plugins.map(
+			({ getPagePaths, getAdminPaths, ...plg }, i) => ({
+				...plg,
+				paths: pluginResults[i].paths,
+			})
+		)
+
+		const injected = pluginResults.map((plg) => ({
+			...plg,
+			props: {
+				...plg.props,
+				clubs: {
+					...plg.props.clubs,
+					plugins: pluginsWithPaths,
+				},
+			},
+		}))
+		const staticPaths = _compose(injected)
 
 		return staticPaths
 	}
