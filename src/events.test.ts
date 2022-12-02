@@ -48,6 +48,8 @@ const singleOptionPluginConfig: ClubsConfiguration = {
 			enable: true,
 		},
 	],
+	chainId: 0,
+	rpcUrl: '',
 }
 
 const pluginsMap = {
