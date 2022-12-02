@@ -44,13 +44,14 @@ export type ClubsConfiguration = Readonly<{
 	readonly plugins: readonly ClubsPlugin[]
 }>
 
-export type ClubsStaticPath = Readonly<{
+export type ClubsStaticPath<P = Props | undefined> = Readonly<{
 	readonly paths: readonly (undefined | string)[]
 	readonly component: unknown
-	readonly props?: Props
+	readonly props: P
 }>
 
-export type ClubsStaticPaths = readonly ClubsStaticPath[]
+export type ClubsStaticPaths<P = Props | undefined> =
+	readonly ClubsStaticPath<P>[]
 
 export type ClubsFunctionGetPagePaths = (
 	options: readonly ClubsPluginOption[],
@@ -118,10 +119,11 @@ export type ClubsPropsAdminPages = Props & {
 	readonly clubs: {
 		readonly currentPluginIndex: number
 		readonly encodedClubsConfiguration: string
-		readonly plugins: ReadonlyArray<{
-			readonly name: string
-			readonly meta: ClubsPluginMeta
-		}>
+		readonly plugins: ReadonlyArray<
+			Omit<ClubsPluginDetails, 'getPagePaths' | 'getAdminPaths'> & {
+				readonly paths: ClubsStaticPaths
+			}
+		>
 	}
 }
 
