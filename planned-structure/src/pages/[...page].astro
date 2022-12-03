@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Default.astro'
 import { pageFactory, encode } from '../../../src/'
-import example from '../../../example/index.mjs'
+import * as example from '../../../example/index.mjs'
 
 export const { getStaticPaths } = pageFactory({
 	config: () =>
@@ -11,6 +11,10 @@ export const { getStaticPaths } = pageFactory({
 			description: '',
 			url: '',
 			propertyAddress: '',
+			chainId: 167,
+			rpcUrl: '',
+			adminRolePoints: 0,
+			options: [],
 			plugins: [{ name: 'example', options: [] }],
 		}),
 	plugins: { example },

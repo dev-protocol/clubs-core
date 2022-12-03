@@ -15,7 +15,7 @@ import { getClubsConfig } from './getClubsConfig'
 import { Props } from 'astro'
 
 type Plugins = readonly ClubsPluginDetails[]
-type ClubsStaticPathWithDetails<T = Props | undefined> = ClubsStaticPath<T> & {
+type ClubsStaticPathWithDetails = ClubsStaticPath & {
 	readonly details: ClubsPluginDetails
 }
 
@@ -119,7 +119,7 @@ const _staticAdminPathsFactory: (
 		)
 		const pluginResults = (await getResultsOfPlugins(
 			plugins
-		)) as readonly ClubsStaticPathWithDetails<ClubsPropsAdminPages>[]
+		)) as readonly ClubsStaticPathWithDetails[]
 		const pluginsWithPaths = pluginResults.map((result) => {
 			const {
 				details: { getPagePaths, getAdminPaths, ...plg },
@@ -138,7 +138,7 @@ const _staticAdminPathsFactory: (
 			props: {
 				...plg.props,
 				clubs: {
-					...plg.props.clubs,
+					...(plg.props as ClubsPropsAdminPages).clubs,
 					plugins: pluginsWithPaths,
 				},
 			},
