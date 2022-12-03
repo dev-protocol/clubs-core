@@ -27,4 +27,4 @@ export const meta = {
 	displayName: 'Example',
 }
 
-export { getPagePaths, getAdminPaths, meta }
+export default { getPagePaths, getAdminPaths, meta }

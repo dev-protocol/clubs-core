@@ -2,7 +2,7 @@
 	<aside>
 		<ConnectButton class="w-full" />
 		<ActionButton
-			class="mt-6 w-full"
+			class="mt-8 w-full"
 			:status="status.save"
 			successText="Saved"
 			loadingText="Saving"
