@@ -1,5 +1,6 @@
 ---
 import { ClubsPropsClubsPlugin } from '../types'
+import AdminSidebarGroup from './AdminSidebarGroup.astro'
 
 const { name, enabledPlugins } = Astro.props as {
 	name: string
@@ -12,16 +13,20 @@ const onlyFirstItems = enabledPlugins.filter(({ name }) =>
 )
 ---
 
-<h1 class="font-title text-lg font-bold mb-16">{name}</h1>
-<nav class="flex flex-col">
-	<a class="mb-4 text-sm" href="/admin">Admin</a>
-	<a class="mb-16 text-sm" href="/admin/plugins">Plugins</a>
+<h1 class="font-title text-lg font-bold">{name}</h1>
+<nav class="grid gap-16">
+	<AdminSidebarGroup>
+		<a class="text-sm" href="/admin">Admin</a>
+		<a class="text-sm" href="/admin/plugins">Plugins</a>
+	</AdminSidebarGroup>
 
-	{
-		onlyFirstItems.map((plugin) => (
-			<a class="mb-4 text-sm capitalize" href={plugin.pathname}>
-				{plugin.meta.displayName}
-			</a>
-		))
-	}
+	<AdminSidebarGroup>
+		{
+			onlyFirstItems.map((plugin) => (
+				<a class="text-sm capitalize" href={plugin.pathname}>
+					{plugin.meta.displayName}
+				</a>
+			))
+		}
+	</AdminSidebarGroup>
 </nav>

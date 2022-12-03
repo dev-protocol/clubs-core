@@ -23,19 +23,23 @@ const enabledPlugins = clubs.plugins
 		<title>{name} | Admin</title>
 	</head>
 
-	<body
-		class="font-body bg-[#3A4158] text-white min-h-screen container mx-auto px-4"
-	>
-		<div class="flex py-8">
-			<header class="flex flex-col pr-16">
+	<body class="font-body bg-[#222B3D] text-white min-h-screen">
+		<div
+			class="grid grid-flow-col auto-cols-[18rem_minmax(auto,_1fr)_12rem] gap-20 mr-20"
+		>
+			<header
+				class="bg-[#111827] grid gap-16 content-start py-16 px-8 min-h-screen"
+			>
 				<AdminSidebar name={name} enabledPlugins={enabledPlugins} />
 			</header>
-			<main class="w-full grid grid-cols-4 gap-x-6">
-				<div class="col-span-3 break-words">
+			<main class="container mx-auto py-16">
+				<div class="break-words">
 					<slot />
 				</div>
-				<Aside class="col-span-1" config={config} client:only />
 			</main>
+			<div class="py-16">
+				<Aside config={config} client:only />
+			</div>
 			<input
 				type="hidden"
 				id="_encoded_clubs_configuration_"
