@@ -20,17 +20,27 @@ const enabledPlugins = clubs.plugins
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" /><link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin
+		/><link
+			href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Poppins:wght@700&family=Syne:wght@700&display=swap"
+			rel="stylesheet"
+		/>
 		<title>{name} | Admin</title>
 	</head>
 
-	<body class="font-body bg-[#222B3D] text-white min-h-screen">
+	<body class="font-['DM_Sans'] bg-[#222B3D] text-white min-h-screen">
 		<div
 			class="grid grid-flow-col auto-cols-[18rem_minmax(auto,_1fr)_12rem] gap-20 mr-20"
 		>
 			<header
 				class="bg-[#111827] grid gap-16 content-start py-16 px-8 min-h-screen"
 			>
-				<AdminSidebar name={name} enabledPlugins={enabledPlugins} />
+				<AdminSidebar name={name} enabledPlugins={enabledPlugins}>
+					<slot name="sidebar:before-title" slot="before-title" />
+				</AdminSidebar>
 			</header>
 			<main class="container mx-auto py-16">
 				<div class="break-words">

@@ -1,7 +1,13 @@
 ---
 import { ClubsPropsClubsPlugin } from '../types'
 import AdminSidebarGroup from './AdminSidebarGroup.astro'
+import AdminSidebarMainItem from './AdminSidebarMainItem.astro'
+import IconDesktop from './icons/computer-desktop.astro'
+import IconGlobe from './icons/globe-europe-africa.astro'
+import IconGroup from './icons/rectangle-group.astro'
+import IconSquareSmall from './icons/square-small.astro'
 
+const { page } = Astro.props
 const { name, enabledPlugins } = Astro.props as {
 	name: string
 	enabledPlugins: ClubsPropsClubsPlugin[]
@@ -11,22 +17,117 @@ const cache = new Set<string>()
 const onlyFirstItems = enabledPlugins.filter(({ name }) =>
 	cache.has(name) ? false : cache.add(name)
 )
+
+// const catMonetization=onlyFirstItems.filter(item=>item.meta.category==='monetization')
+// const catGrowth=onlyFirstItems.filter(item=>item.meta.category==='growth')
+// const catGovernance=onlyFirstItems.filter(item=>item.meta.category==='governance')
+// const catOther=onlyFirstItems.filter(item=>item.meta.category==='other')
+const catOther = onlyFirstItems.filter((item) => item.meta)
 ---
 
-<h1 class="font-title text-lg font-bold">{name}</h1>
+<a class="flex gap-2 items-center" href="#">
+	<svg
+		width="18"
+		height="18"
+		viewBox="0 0 18 18"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path
+			d="M14 11V17M11 14H17"
+			stroke="#FF3815"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"></path>
+		<path
+			d="M1 3C1 1.89543 1.89543 1 3 1H5C6.10457 1 7 1.89543 7 3V5C7 6.10457 6.10457 7 5 7H3C1.89543 7 1 6.10457 1 5V3Z"
+			stroke="#D500E6"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"></path>
+		<path
+			d="M11 3C11 1.89543 11.8954 1 13 1H15C16.1046 1 17 1.89543 17 3V5C17 6.10457 16.1046 7 15 7H13C11.8954 7 11 6.10457 11 5V3Z"
+			stroke="#00D0FD"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"></path>
+		<path
+			d="M1 13C1 11.8954 1.89543 11 3 11H5C6.10457 11 7 11.8954 7 13V15C7 16.1046 6.10457 17 5 17H3C1.89543 17 1 16.1046 1 15V13Z"
+			stroke="#5B8BF5"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"></path>
+	</svg>
+	<span class="font-['Poppins']">Clubs</span>
+</a>
+<div class="grid gap-4">
+	<slot name="before-title" />
+	<h1 class="font-['Syne'] text-lg font-bold">{name}</h1>
+</div>
 <nav class="grid gap-16">
-	<AdminSidebarGroup>
-		<a class="text-sm" href="/admin">Admin</a>
-		<a class="text-sm" href="/admin/plugins">Plugins</a>
-	</AdminSidebarGroup>
+	<ul class="grid gap-1">
+		<AdminSidebarMainItem href="/admin" active={page === undefined}
+			><span class="text-[#88AEFF]"
+				><IconGroup />
+			</span>Overview</AdminSidebarMainItem
+		>
+		<AdminSidebarMainItem
+			href="/admin/marketplace"
+			active={page === 'marketplace'}
+			><span class="text-[#D500E6]"
+				><IconGlobe />
+			</span>Marketplace</AdminSidebarMainItem
+		>
+		<AdminSidebarMainItem href="/admin/theme" active={page === 'theme'}
+			><span class="text-[#51E0FF]"
+				><IconDesktop />
+			</span>Theme</AdminSidebarMainItem
+		>
+	</ul>
 
-	<AdminSidebarGroup>
-		{
-			onlyFirstItems.map((plugin) => (
-				<a class="text-sm capitalize" href={plugin.pathname}>
-					{plugin.meta.displayName}
-				</a>
-			))
-		}
-	</AdminSidebarGroup>
+	<ul>
+		<AdminSidebarGroup>
+			<h2 class="flex gap-2">
+				<span class="text-[#D500E6]"><IconSquareSmall /></span>Monetization
+			</h2>
+		</AdminSidebarGroup>
+	</ul>
+
+	<ul>
+		<AdminSidebarGroup>
+			<h2 class="flex gap-2">
+				<span class="text-[#00D0FD]"><IconSquareSmall /></span>Growth
+			</h2>
+		</AdminSidebarGroup>
+	</ul>
+
+	<ul>
+		<AdminSidebarGroup>
+			<h2 class="flex gap-2">
+				<span class="text-[#FF3815]"><IconSquareSmall /></span>Governance
+			</h2>
+		</AdminSidebarGroup>
+	</ul>
+
+	<ul>
+		<AdminSidebarGroup>
+			<h2 class="flex gap-2">
+				<span class="text-[#5B8BF5]"><IconSquareSmall /></span>Other
+			</h2>
+			{
+				catOther.map((plugin) => (
+					<li>
+						<a class="capitalize" href={plugin.pathname}>
+							{plugin.meta.displayName}
+						</a>
+					</li>
+				))
+			}
+		</AdminSidebarGroup>
+	</ul>
+
+	<ul class="grid gap-4">
+		<li><a class="text-[#88AEFF]" href="/admin/general">General</a></li>
+		<li><a class="text-[#88AEFF]" href="/admin/plugins">Plugins</a></li>
+	</ul>
 </nav>
