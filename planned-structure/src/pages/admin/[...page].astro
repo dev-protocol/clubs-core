@@ -1,5 +1,6 @@
 ---
-import { Admin, adminFactory, encode } from '../../../../src/'
+import { Admin } from '../../../../src/layouts'
+import { adminFactory, encode } from '../../../../src/'
 import example from '../../../../example/index.mjs'
 
 export const { getStaticPaths } = adminFactory({
@@ -10,6 +11,10 @@ export const { getStaticPaths } = adminFactory({
 			description: '',
 			url: '',
 			propertyAddress: '',
+			chainId: 167,
+			rpcUrl: '',
+			adminRolePoints: 0,
+			options: [],
 			plugins: [{ name: 'example', options: [] }],
 		}),
 	plugins: { example },
