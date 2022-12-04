@@ -169,3 +169,5 @@ export type ClubsEventsSubmitConfiguration =
 	CustomEvent<ClubsEventsDetailSubmitConfiguration>
 export type ClubsEventsFinishConfiguration =
 	CustomEvent<ClubsEventsDetailFinishConfiguration>
+
+export type ClubsAstroIntegrationOptions = undefined

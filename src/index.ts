@@ -1,4 +1,7 @@
+import { astro } from './integrations'
+
 export * from './types'
+export default astro
 export { decode } from './decode'
 export { encode } from './encode'
 export { pageFactory, adminFactory } from './factory'
