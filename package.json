@@ -98,7 +98,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"@devprotocol/dev-kit": "6.10.0",
-		"@devprotocol/elements": "0.2.1",
+		"@devprotocol/elements": "0.2.2",
 		"@devprotocol/util-ts": "2.2.1",
 		"@metamask/detect-provider": "^2.0.0",
 		"ethers": "^5.7.0",
