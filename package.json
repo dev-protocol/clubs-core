@@ -6,51 +6,63 @@
 	"exports": {
 		".": {
 			"import": "./dist/index.mjs",
-			"require": "./dist/index.cjs"
+			"require": "./dist/index.cjs",
+			"types": "./dist/clubs-core.d.ts"
 		},
 		"./ui/react": {
 			"import": "./dist/src/ui/react/index.mjs",
-			"require": "./dist/src/ui/react/index.cjs"
+			"require": "./dist/src/ui/react/index.cjs",
+			"types": "./dist/src/ui/react/index.d.ts"
 		},
 		"./ui/svelte": {
 			"import": "./dist/src/ui/svelte/index.mjs",
-			"require": "./dist/src/ui/svelte/index.cjs"
+			"require": "./dist/src/ui/svelte/index.cjs",
+			"types": "./dist/src/ui/svelte/index.d.ts"
 		},
 		"./ui/vue": {
 			"import": "./dist/src/ui/vue/index.mjs",
-			"require": "./dist/src/ui/vue/index.cjs"
+			"require": "./dist/src/ui/vue/index.cjs",
+			"types": "./dist/src/ui/vue/index.d.ts"
 		},
 		"./ui/webcomponents": {
 			"import": "./dist/src/ui/webcomponents/index.mjs",
-			"require": "./dist/src/ui/webcomponents/index.cjs"
+			"require": "./dist/src/ui/webcomponents/index.cjs",
+			"types": "./dist/src/ui/webcomponents/index.d.ts"
 		},
 		"./connection": {
 			"import": "./dist/src/connection/index.mjs",
-			"require": "./dist/src/connection/index.cjs"
+			"require": "./dist/src/connection/index.cjs",
+			"types": "./dist/src/connection/index.d.ts"
 		},
 		"./authenticate": {
 			"import": "./dist/src/authenticate.mjs",
-			"require": "./dist/src/authenticate.cjs"
+			"require": "./dist/src/authenticate.cjs",
+			"types": "./dist/src/authenticate.d.ts"
 		},
 		"./decode": {
 			"import": "./dist/src/decode.mjs",
-			"require": "./dist/src/decode.cjs"
+			"require": "./dist/src/decode.cjs",
+			"types": "./dist/src/decode.d.ts"
 		},
 		"./encode": {
 			"import": "./dist/src/encode.mjs",
-			"require": "./dist/src/encode.cjs"
+			"require": "./dist/src/encode.cjs",
+			"types": "./dist/src/encode.d.ts"
 		},
 		"./events": {
 			"import": "./dist/src/events.mjs",
-			"require": "./dist/src/events.cjs"
+			"require": "./dist/src/events.cjs",
+			"types": "./dist/src/events.d.ts"
 		},
 		"./factory": {
 			"import": "./dist/src/factory.mjs",
-			"require": "./dist/src/factory.cjs"
+			"require": "./dist/src/factory.cjs",
+			"types": "./dist/src/factory.d.ts"
 		},
 		"./layouts": {
 			"import": "./dist/src/layouts/index.mjs",
-			"require": "./dist/src/layouts/index.cjs"
+			"require": "./dist/src/layouts/index.cjs",
+			"types": "./dist/src/layouts/index.d.ts"
 		},
 		"./admin": "./src/layouts/Admin.astro",
 		"./aside": "./src/layouts/Aside.vue"
