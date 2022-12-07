@@ -522,10 +522,10 @@
     js-base64 "^3.7.2"
     ramda "^0.28.0"
 
-"@devprotocol/elements@0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@devprotocol/elements/-/elements-0.1.1.tgz#303a9afb23c154efc7f792891673cfbef497ec30"
-  integrity sha512-rozYrfPo+/bKp+QtXdGVZQGkXhOirhsDSrPmue0AOeg+OLBaOpjUNmZQf+P4kC6LOEiGUUguHP3AD+gy+8EXmg==
+"@devprotocol/elements@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@devprotocol/elements/-/elements-0.2.0.tgz#3baccd8b5534126c8d50a06cbfec0622274853de"
+  integrity sha512-JB9SntSv0x8YpJmVdtchiiVuFa9mOI14Ew5DkhT1BphiLy1NNSBehQIyROM4Df7Au3l5V6SORHx/1WK29J2QEw==
 
 "@devprotocol/hashi@1.4.0":
   version "1.4.0"
