@@ -22,7 +22,7 @@
 		"example",
 		"planned-structure",
 		"ui-preview",
-		"rollup.*.mjs"
+		"rollup.*.js"
 	],
 	"exclude": []
 }

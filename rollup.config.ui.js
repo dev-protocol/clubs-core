@@ -1,4 +1,4 @@
-import tailwind from './rollup.plugin.tw.mjs'
+import tailwind from './rollup.plugin.tw.js'
 import glob from 'glob'
 // import { litScss } from 'rollup-plugin-scss-lit'
 
@@ -9,12 +9,8 @@ export const createOptions = (file) => ({
 	external: file.includes('/index.js') ? [/.*/] : [/.*webcomponents.*/],
 	output: [
 		{
-			file: file.replace('.js', '.mjs'),
+			file,
 			format: 'es',
-		},
-		{
-			file: file.replace('.js', '.cjs'),
-			format: 'cjs',
 		},
 	],
 	plugins: [

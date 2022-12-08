@@ -2,66 +2,56 @@
 	"name": "@devprotocol/clubs-core",
 	"version": "0.9.4",
 	"description": "Core library for Clubs",
-	"main": "dist/index.cjs",
+	"main": "dist/index.js",
+	"module": "dist/index.js",
+	"type": "module",
 	"exports": {
 		".": {
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.cjs",
+			"default": "./dist/index.js",
 			"types": "./dist/clubs-core.d.ts"
 		},
 		"./ui/react": {
-			"import": "./dist/src/ui/react/index.mjs",
-			"require": "./dist/src/ui/react/index.cjs",
+			"default": "./dist/src/ui/react/index.js",
 			"types": "./dist/src/ui/react/index.d.ts"
 		},
 		"./ui/svelte": {
-			"import": "./dist/src/ui/svelte/index.mjs",
-			"require": "./dist/src/ui/svelte/index.cjs",
+			"default": "./dist/src/ui/svelte/index.js",
 			"types": "./dist/src/ui/svelte/index.d.ts"
 		},
 		"./ui/vue": {
-			"import": "./dist/src/ui/vue/index.mjs",
-			"require": "./dist/src/ui/vue/index.cjs",
+			"default": "./dist/src/ui/vue/index.js",
 			"types": "./dist/src/ui/vue/index.d.ts"
 		},
 		"./ui/webcomponents": {
-			"import": "./dist/src/ui/webcomponents/index.mjs",
-			"require": "./dist/src/ui/webcomponents/index.cjs",
+			"default": "./dist/src/ui/webcomponents/index.js",
 			"types": "./dist/src/ui/webcomponents/index.d.ts"
 		},
 		"./connection": {
-			"import": "./dist/src/connection/index.mjs",
-			"require": "./dist/src/connection/index.cjs",
+			"default": "./dist/src/connection/index.js",
 			"types": "./dist/src/connection/index.d.ts"
 		},
 		"./authenticate": {
-			"import": "./dist/src/authenticate.mjs",
-			"require": "./dist/src/authenticate.cjs",
+			"default": "./dist/src/authenticate.js",
 			"types": "./dist/src/authenticate.d.ts"
 		},
 		"./decode": {
-			"import": "./dist/src/decode.mjs",
-			"require": "./dist/src/decode.cjs",
+			"default": "./dist/src/decode.js",
 			"types": "./dist/src/decode.d.ts"
 		},
 		"./encode": {
-			"import": "./dist/src/encode.mjs",
-			"require": "./dist/src/encode.cjs",
+			"default": "./dist/src/encode.js",
 			"types": "./dist/src/encode.d.ts"
 		},
 		"./events": {
-			"import": "./dist/src/events.mjs",
-			"require": "./dist/src/events.cjs",
+			"default": "./dist/src/events.js",
 			"types": "./dist/src/events.d.ts"
 		},
 		"./factory": {
-			"import": "./dist/src/factory.mjs",
-			"require": "./dist/src/factory.cjs",
+			"default": "./dist/src/factory.js",
 			"types": "./dist/src/factory.d.ts"
 		},
 		"./layouts": {
-			"import": "./dist/src/layouts/index.mjs",
-			"require": "./dist/src/layouts/index.cjs",
+			"default": "./dist/src/layouts/index.js",
 			"types": "./dist/src/layouts/index.d.ts"
 		},
 		"./admin": "./src/layouts/Admin.astro",
@@ -70,8 +60,7 @@
 	"types": "./dist/clubs-core.d.ts",
 	"files": [
 		"dist/**/*.d.ts",
-		"dist/**/*.mjs",
-		"dist/**/*.cjs",
+		"dist/**/*.js",
 		"!**/*.test.*",
 		"src"
 	],
@@ -84,12 +73,12 @@
 		"build": "yarn build:ts && yarn build:rollup:ui && yarn build:rollup",
 		"build:ts": "tsc -p tsconfig.build.json",
 		"build:rollup": "rollup -c",
-		"build:rollup:ui": "rollup -c rollup.config.ui.mjs",
+		"build:rollup:ui": "rollup -c rollup.config.ui.js",
 		"watch": "tsc -w",
 		"pretest": "yarn prebuild && tsc -p tsconfig.test.json",
 		"prebuild": "rimraf dist",
 		"lint": "yarn lint:eslint && yarn lint:format",
-		"lint:eslint": "eslint . --ext .ts,.js,.mjs --fix",
+		"lint:eslint": "eslint . --ext .ts,.js,.js --fix",
 		"lint:format": "prettier --write '**/*.{ts,mts,js,mjs,json,md,yml,astro}'",
 		"prepack": "yarn test && yarn build",
 		"prepare": "husky install"

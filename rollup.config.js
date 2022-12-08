@@ -30,12 +30,8 @@ export default [
 		input,
 		output: [
 			{
-				file: input.replace('.js', '.mjs'),
+				file: input,
 				format: 'es',
-			},
-			{
-				file: input.replace('.js', '.cjs'),
-				format: 'cjs',
 			},
 		],
 		plugins: [commonjs(), astro()],
@@ -44,12 +40,8 @@ export default [
 		input: 'dist/src/index.js',
 		output: [
 			{
-				file: 'dist/index.mjs',
+				file: 'dist/index.js',
 				format: 'es',
-			},
-			{
-				file: 'dist/index.cjs',
-				format: 'cjs',
 			},
 		],
 		plugins: [commonjs()],
