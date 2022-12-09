@@ -1,6 +1,6 @@
 {
 	"name": "@devprotocol/clubs-core",
-	"version": "0.9.4",
+	"version": "0.9.5-0",
 	"description": "Core library for Clubs",
 	"main": "dist/index.cjs",
 	"exports": {
@@ -72,6 +72,13 @@
 		"dist/**/*.d.ts",
 		"dist/**/*.mjs",
 		"dist/**/*.cjs",
+		"authenticate.d.ts",
+		"connection.d.ts",
+		"decode.d.ts",
+		"encode.d.ts",
+		"events.d.ts",
+		"factory.d.ts",
+		"layouts.d.ts",
 		"!**/*.test.*",
 		"src"
 	],
