@@ -72,6 +72,13 @@
 		"dist/**/*.d.ts",
 		"dist/**/*.mjs",
 		"dist/**/*.cjs",
+		"authenticate.d.ts",
+		"connection.d.ts",
+		"decode.d.ts",
+		"encode.d.ts",
+		"events.d.ts",
+		"factory.d.ts",
+		"layouts.d.ts",
 		"!**/*.test.*",
 		"src"
 	],
