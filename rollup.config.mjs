@@ -2,6 +2,8 @@ import typescript from '@rollup/plugin-typescript'
 import multi from '@rollup/plugin-multi-entry'
 import dts from 'rollup-plugin-dts'
 import commonjs from '@rollup/plugin-commonjs'
+import { dirname, relative, resolve } from 'path'
+import { cwd } from 'process'
 
 const majorCoreAPIs = [
 	'dist/src/authenticate.js',
@@ -13,12 +15,18 @@ const majorCoreAPIs = [
 	'dist/src/connection/index.js',
 ]
 
-const astro = () => ({
+const astro = ({ out } = {}) => ({
 	name: 'astro',
-	resolveId(source) {
+	resolveId(source, importer) {
 		if (source.endsWith('.astro')) {
+			const here = cwd()
+			const from = out ?? dirname(importer)
+			const originalImporter = importer.replace(`${here}/dist`, here)
+			const originalImporterDir = dirname(originalImporter)
+			const original = resolve(originalImporterDir, source)
+			const relativePath = relative(from, original)
 			return {
-				id: `../../../src/layouts${source.replace('./', '/')}`,
+				id: relativePath,
 				external: true,
 			}
 		}
@@ -59,4 +67,17 @@ export default [
 		output: [{ file: 'dist/clubs-core.d.ts', format: 'es' }],
 		plugins: [dts()],
 	},
+	...majorCoreAPIs.map((input) => ({
+		input: input.replace('.js', '.d.ts'),
+		output: [
+			{
+				file: input
+					.replace('.js', '.d.ts')
+					.replace('dist/src/', '')
+					.replace('/index', ''),
+				format: 'es',
+			},
+		],
+		plugins: [dts(), astro({ out: cwd() })],
+	})),
 ]
