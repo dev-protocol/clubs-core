@@ -151,7 +151,7 @@
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"rimraf": "3.0.2",
-		"rollup": "3.7.1",
+		"rollup": "3.7.2",
 		"rollup-plugin-dts": "5.0.0",
 		"sass": "1.56.2",
 		"svelte": "3.54.0",
