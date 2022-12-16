@@ -5,6 +5,7 @@ import { adminFactory } from './factory'
 import {
 	ClubsConfiguration,
 	ClubsEventsDetailUpdatePluginOptions,
+	ClubsPluginCategory,
 	ClubsPluginOption,
 } from './types'
 import { updatePluginOptionsEventListener } from './fixtures/utils'
@@ -70,7 +71,7 @@ const pluginsMap = {
 				props: { options },
 			},
 		],
-		meta: { displayName: 'Home' },
+		meta: { displayName: 'Home', category: ClubsPluginCategory.Uncategorized },
 	},
 	buy: {
 		getPagePaths: async (
@@ -89,7 +90,7 @@ const pluginsMap = {
 				props: { options },
 			},
 		],
-		meta: { displayName: 'Buy' },
+		meta: { displayName: 'Buy', category: ClubsPluginCategory.Uncategorized },
 	},
 	community: {
 		getPagePaths: async (
@@ -112,7 +113,10 @@ const pluginsMap = {
 				props: { options },
 			},
 		],
-		meta: { displayName: 'Community' },
+		meta: {
+			displayName: 'Community',
+			category: ClubsPluginCategory.Uncategorized,
+		},
 	},
 	nft: {
 		getPagePaths: async (
@@ -131,7 +135,7 @@ const pluginsMap = {
 				props: { options },
 			},
 		],
-		meta: { displayName: 'NFT' },
+		meta: { displayName: 'NFT', category: ClubsPluginCategory.Uncategorized },
 	},
 }
 
