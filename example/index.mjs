@@ -25,6 +25,7 @@ export const getAdminPaths = async (options) => [
 
 export const meta = {
 	displayName: 'Example',
+	category: 'uncategorized',
 }
 
 export default { getPagePaths, getAdminPaths, meta }

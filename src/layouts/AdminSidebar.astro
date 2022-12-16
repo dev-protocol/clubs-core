@@ -1,5 +1,5 @@
 ---
-import { ClubsPropsClubsPlugin } from '../types'
+import { ClubsPluginCategory, ClubsPropsClubsPlugin } from '../types'
 import AdminSidebarGroup from './AdminSidebarGroup.astro'
 import AdminSidebarMainItem from './AdminSidebarMainItem.astro'
 import IconDesktop from './icons/computer-desktop.astro'
@@ -18,11 +18,18 @@ const onlyFirstItems = enabledPlugins.filter(({ name }) =>
 	cache.has(name) ? false : cache.add(name)
 )
 
-// const catMonetization=onlyFirstItems.filter(item=>item.meta.category==='monetization')
-// const catGrowth=onlyFirstItems.filter(item=>item.meta.category==='growth')
-// const catGovernance=onlyFirstItems.filter(item=>item.meta.category==='governance')
-// const catOther=onlyFirstItems.filter(item=>item.meta.category==='other')
-const catOther = onlyFirstItems.filter((item) => item.meta)
+const catMonetization = onlyFirstItems.filter(
+	(item) => item.meta.category === ClubsPluginCategory.Monetization
+)
+const catGrowth = onlyFirstItems.filter(
+	(item) => item.meta.category === ClubsPluginCategory.Growth
+)
+const catGovernance = onlyFirstItems.filter(
+	(item) => item.meta.category === ClubsPluginCategory.Governance
+)
+const catOther = onlyFirstItems.filter(
+	(item) => item.meta.category === ClubsPluginCategory.Uncategorized
+)
 ---
 
 <a class="flex gap-2 items-center" href="#">
@@ -90,6 +97,15 @@ const catOther = onlyFirstItems.filter((item) => item.meta)
 			<h2 class="flex gap-2">
 				<span class="text-[#D500E6]"><IconSquareSmall /></span>Monetization
 			</h2>
+			{
+				catMonetization.map((plugin) => (
+					<li>
+						<a class="capitalize" href={plugin.pathname}>
+							{plugin.meta.displayName}
+						</a>
+					</li>
+				))
+			}
 		</AdminSidebarGroup>
 	</ul>
 
@@ -98,6 +114,15 @@ const catOther = onlyFirstItems.filter((item) => item.meta)
 			<h2 class="flex gap-2">
 				<span class="text-[#00D0FD]"><IconSquareSmall /></span>Growth
 			</h2>
+			{
+				catGrowth.map((plugin) => (
+					<li>
+						<a class="capitalize" href={plugin.pathname}>
+							{plugin.meta.displayName}
+						</a>
+					</li>
+				))
+			}
 		</AdminSidebarGroup>
 	</ul>
 
@@ -106,6 +131,15 @@ const catOther = onlyFirstItems.filter((item) => item.meta)
 			<h2 class="flex gap-2">
 				<span class="text-[#FF3815]"><IconSquareSmall /></span>Governance
 			</h2>
+			{
+				catGovernance.map((plugin) => (
+					<li>
+						<a class="capitalize" href={plugin.pathname}>
+							{plugin.meta.displayName}
+						</a>
+					</li>
+				))
+			}
 		</AdminSidebarGroup>
 	</ul>
 
