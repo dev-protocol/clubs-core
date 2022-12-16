@@ -26,6 +26,7 @@ console.log(Astro.props)
 ---
 
 <Admin {...Astro.props}>
+	<div slot="sidebar:before-title"><p>Injected contents</p></div>
 	<Content {...Astro.props} />
 </Admin>
 

@@ -66,7 +66,18 @@ export type ClubsGetStaticPathsItem = {
 
 export type ClubsGetStaticPathsResult = readonly ClubsGetStaticPathsItem[]
 
-export type ClubsPluginMeta = { readonly displayName: string }
+export enum ClubsPluginCategory {
+	Monetization = 'monetization',
+	Growth = 'growth',
+	Governance = 'governance',
+	Uncategorized = 'uncategorized',
+	Theme = 'theme',
+}
+
+export type ClubsPluginMeta = {
+	readonly displayName: string
+	readonly category: ClubsPluginCategory
+}
 
 export type ClubsFunctionFactoryResult = {
 	readonly getStaticPaths: () => Promise<ClubsGetStaticPathsResult>
