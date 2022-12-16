@@ -1,6 +1,6 @@
 {
 	"name": "@devprotocol/clubs-core",
-	"version": "0.9.5",
+	"version": "0.10.0",
 	"description": "Core library for Clubs",
 	"main": "dist/index.cjs",
 	"exports": {
