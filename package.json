@@ -124,7 +124,7 @@
 		"@astrojs/vue": "1.2.2",
 		"@ava/typescript": "3.0.1",
 		"@devprotocol/hashi": "1.4.0",
-		"@rollup/plugin-commonjs": "23.0.7",
+		"@rollup/plugin-commonjs": "24.0.0",
 		"@rollup/plugin-multi-entry": "6.0.0",
 		"@rollup/plugin-typescript": "10.0.1",
 		"@rollup/pluginutils": "5.0.2",
