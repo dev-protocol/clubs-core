@@ -62,7 +62,12 @@
 		"./layouts": {
 			"import": "./dist/src/layouts/index.mjs",
 			"require": "./dist/src/layouts/index.cjs",
-			"types": "./dist/src/layouts/index.d.ts"
+			"types": "./layouts.d.ts"
+		},
+		"./styles": {
+			"import": "./dist/src/styles/index.mjs",
+			"require": "./dist/src/styles/index.cjs",
+			"types": "./styles.d.ts"
 		},
 		"./admin": "./src/layouts/Admin.astro",
 		"./aside": "./src/layouts/Aside.vue"
@@ -79,6 +84,7 @@
 		"events.d.ts",
 		"factory.d.ts",
 		"layouts.d.ts",
+		"styles.d.ts",
 		"!**/*.test.*",
 		"src"
 	],
@@ -94,7 +100,7 @@
 		"build:rollup:ui": "rollup -c rollup.config.ui.mjs",
 		"watch": "tsc -w",
 		"pretest": "yarn prebuild && tsc -p tsconfig.test.json",
-		"prebuild": "rimraf dist",
+		"prebuild": "rimraf dist ./*.d.ts",
 		"lint": "yarn lint:eslint && yarn lint:format",
 		"lint:eslint": "eslint . --ext .ts,.js,.mjs --fix",
 		"lint:format": "prettier --write '**/*.{ts,mts,js,mjs,json,md,yml,astro,scss}'",

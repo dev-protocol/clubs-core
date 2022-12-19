@@ -1,3 +1,4 @@
+/* eslint-disable functional/prefer-tacit */
 import typescript from '@rollup/plugin-typescript'
 import multi from '@rollup/plugin-multi-entry'
 import dts from 'rollup-plugin-dts'
@@ -13,12 +14,13 @@ const majorCoreAPIs = [
 	'dist/src/factory.js',
 	'dist/src/layouts/index.js',
 	'dist/src/connection/index.js',
+	'dist/src/styles/index.js',
 ]
 
-const astro = ({ out } = {}) => ({
+const useSrc = ({ out, ext } = {}) => ({
 	name: 'astro',
 	resolveId(source, importer) {
-		if (source.endsWith('.astro')) {
+		if (ext.some((e) => source.endsWith(e))) {
 			const here = cwd()
 			const from = out ?? dirname(importer)
 			const originalImporter = importer.replace(`${here}/dist`, here)
@@ -46,7 +48,7 @@ export default [
 				format: 'cjs',
 			},
 		],
-		plugins: [commonjs(), astro()],
+		plugins: [commonjs(), useSrc({ ext: ['.astro', '.scss'] })],
 	})),
 	{
 		input: 'dist/src/index.js',
@@ -78,6 +80,6 @@ export default [
 				format: 'es',
 			},
 		],
-		plugins: [dts(), astro({ out: cwd() })],
+		plugins: [dts(), useSrc({ out: cwd(), ext: ['.astro', '.scss'] })],
 	})),
 ]
