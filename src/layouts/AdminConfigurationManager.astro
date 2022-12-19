@@ -1,0 +1,90 @@
+---
+import type { ClubsPropsAdminPages } from '../index'
+
+const { clubs } = Astro.props as ClubsPropsAdminPages
+---
+
+<input
+	type="hidden"
+	id="_encoded_clubs_configuration_"
+	value={clubs.encodedClubsConfiguration}
+/>
+
+<script>
+	import { decode, encode } from '../index'
+	import { submitConfig } from '../events'
+	import type {
+		ClubsConfiguration,
+		ClubsEventsUpdatePluginOptions,
+		ClubsEventsUpdateConfiguration,
+	} from '../types'
+	import { ClubsEvents } from '../types'
+	import { updatePluginOptionsEventListener } from '../fixtures/utils'
+
+	let currentConfig: ClubsConfiguration = decode(
+		(
+			document.getElementById(
+				'_encoded_clubs_configuration_'
+			) as HTMLInputElement
+		).value
+	)
+
+	document.body.addEventListener(
+		ClubsEvents.UpdatePluginOptions,
+		async (ev) => {
+			ev.preventDefault()
+			const {
+				detail: { data, pluginIndex },
+			} = ev as ClubsEventsUpdatePluginOptions
+
+			console.log('Received event', ClubsEvents.UpdatePluginOptions, {
+				data,
+				pluginIndex,
+			})
+
+			const updatedConfig = await updatePluginOptionsEventListener(
+				{ data, pluginIndex },
+				currentConfig
+			)
+
+			currentConfig = updatedConfig
+
+			console.log(
+				'Updated ClubsConfiguration',
+				ClubsEvents.UpdatePluginOptions,
+				currentConfig
+			)
+		}
+	)
+
+	document.body.addEventListener(ClubsEvents.UpdateConfiguration, (ev) => {
+		ev.preventDefault()
+		const {
+			detail: { data },
+		} = ev as ClubsEventsUpdateConfiguration
+
+		console.log('Received event', ClubsEvents.UpdateConfiguration, {
+			data,
+		})
+
+		currentConfig = data
+
+		console.log(
+			'Updated ClubsConfiguration',
+			ClubsEvents.UpdateConfiguration,
+			currentConfig
+		)
+	})
+
+	document.body.addEventListener(ClubsEvents.BuildConfiguration, (ev) => {
+		ev.preventDefault()
+
+		console.log('Received event', ClubsEvents.BuildConfiguration)
+
+		const encodedConfig = encode(currentConfig)
+
+		console.log('New configuration', encodedConfig)
+
+		submitConfig(encodedConfig)
+	})
+</script>

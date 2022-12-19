@@ -7,7 +7,7 @@ export default (props) => {
 	console.log({ props })
 
 	setTimeout(() => {
-		setOptions([{ key: 'k', value: 1 }], props.currentPluginIndex)
+		setOptions([{ key: 'k', value: 1 }], props.clubs.currentPluginIndex)
 	}, 1000)
 
 	setTimeout(() => {
