@@ -71,12 +71,14 @@ const _staticPathsFromPlugins =
 const _pathsToPage = (paths: readonly (string | undefined)[]) =>
 	paths.join('/') || undefined
 
-const _compose = (pluginResults: readonly ClubsStaticPathWithDetails[]) =>
+const _compose = <P extends Props>(
+	pluginResults: readonly ClubsStaticPathWithDetails[]
+) =>
 	pluginResults.map((res) => ({
 		params: {
 			page: _pathsToPage(res.paths),
 		},
-		props: { ...res.props, component: res.component },
+		props: { ...(res.props as P), component: res.component },
 	}))
 
 const _staticPagePathsFactory: (
@@ -98,10 +100,10 @@ const _staticPagePathsFactory: (
 const _staticAdminPathsFactory: (
 	configFetcher: ClubsFunctionConfigFetcher,
 	pluginsMap: ClubsPluginsMap
-) => () => Promise<ClubsGetStaticPathsResult> =
+) => () => Promise<ClubsGetStaticPathsResult<ClubsPropsAdminPages>> =
 	(configFetcher, pluginsMap) =>
 	// eslint-disable-next-line functional/functional-parameters
-	async (): Promise<ClubsGetStaticPathsResult> => {
+	async (): Promise<ClubsGetStaticPathsResult<ClubsPropsAdminPages>> => {
 		const [config, encodedClubsConfiguration] = await getClubsConfig(
 			configFetcher
 		)
@@ -143,7 +145,7 @@ const _staticAdminPathsFactory: (
 				},
 			},
 		}))
-		const staticPaths = _compose(injected)
+		const staticPaths = _compose<ClubsPropsAdminPages>(injected)
 
 		return staticPaths
 	}

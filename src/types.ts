@@ -44,13 +44,13 @@ export type ClubsConfiguration = Readonly<{
 	readonly plugins: readonly ClubsPlugin[]
 }>
 
-export type ClubsStaticPath = Readonly<{
+export type ClubsStaticPath<P = Props> = Readonly<{
 	readonly paths: readonly (undefined | string)[]
 	readonly component: unknown
-	readonly props?: Props
+	readonly props?: P
 }>
 
-export type ClubsStaticPaths = readonly ClubsStaticPath[]
+export type ClubsStaticPaths<P = Props> = readonly ClubsStaticPath<P>[]
 
 export type ClubsFunctionGetPagePaths = (
 	options: readonly ClubsPluginOption[],
@@ -59,12 +59,13 @@ export type ClubsFunctionGetPagePaths = (
 
 export type ClubsFunctionGetAdminPaths = ClubsFunctionGetPagePaths
 
-export type ClubsGetStaticPathsItem = {
+export type ClubsGetStaticPathsItem<P = Props> = {
 	readonly params: { readonly page: undefined | string }
-	readonly props: Props & { readonly component: unknown }
+	readonly props: P & { readonly component: unknown }
 }
 
-export type ClubsGetStaticPathsResult = readonly ClubsGetStaticPathsItem[]
+export type ClubsGetStaticPathsResult<P = Props> =
+	readonly ClubsGetStaticPathsItem<P>[]
 
 export enum ClubsPluginCategory {
 	Monetization = 'monetization',
@@ -74,13 +75,18 @@ export enum ClubsPluginCategory {
 	Theme = 'theme',
 }
 
+export type ClubsPluginMetaTheme = {
+	readonly previewImage: string
+}
+
 export type ClubsPluginMeta = {
 	readonly displayName: string
 	readonly category: ClubsPluginCategory
+	readonly theme?: ClubsPluginMetaTheme
 }
 
-export type ClubsFunctionFactoryResult = {
-	readonly getStaticPaths: () => Promise<ClubsGetStaticPathsResult>
+export type ClubsFunctionFactoryResult<P = Props> = {
+	readonly getStaticPaths: () => Promise<ClubsGetStaticPathsResult<P>>
 	readonly getCurrentConfig: () => Promise<ClubsConfiguration>
 }
 
@@ -97,11 +103,12 @@ export type ClubsFunctionOnSubmitConfiguration = (
 	encodedConfig: string
 ) => Promise<void | Error>
 
-export type ClubsFunctionPageFactory = (
+export type ClubsFunctionPageFactory<P = Props> = (
 	options: ClubsFunctionPageFactoryOptions
-) => ClubsFunctionFactoryResult
+) => ClubsFunctionFactoryResult<P>
 
-export type ClubsFunctionAdminFactory = ClubsFunctionPageFactory
+export type ClubsFunctionAdminFactory =
+	ClubsFunctionPageFactory<ClubsPropsAdminPages>
 
 export type ClubsFunctionPlugin = Readonly<{
 	readonly getPagePaths: ClubsFunctionGetPagePaths
