@@ -25,8 +25,10 @@ export type ClubsPlugin = Readonly<{
 	readonly options: ClubsPluginOptions
 }>
 
-export type ClubsPluginDetails = ClubsPlugin &
-	ClubsFunctionPlugin &
+export type ClubsPluginDetails<
+	P extends ClubsFunctionPlugin = ClubsFunctionPlugin
+> = ClubsPlugin &
+	P &
 	Readonly<{
 		readonly pluginIndex: number
 	}>
@@ -44,27 +46,42 @@ export type ClubsConfiguration = Readonly<{
 	readonly plugins: readonly ClubsPlugin[]
 }>
 
-export type ClubsStaticPath = Readonly<{
-	readonly paths: readonly (undefined | string)[]
-	readonly component: unknown
-	readonly props?: Props
+export type ClubsBaseStaticPath<P = Props> = Readonly<{
+	readonly layout?: unknown
+	readonly props?: P
 }>
 
-export type ClubsStaticPaths = readonly ClubsStaticPath[]
+export type ClubsStaticPath<P = Props> = ClubsBaseStaticPath<P> &
+	Readonly<{
+		readonly paths: readonly (undefined | string)[]
+		readonly component: unknown
+	}>
 
-export type ClubsFunctionGetPagePaths = (
+export type ClubsStaticPaths<P = Props> = readonly ClubsStaticPath<P>[]
+
+export type ClubsFunctionGetPagePaths<P = ClubsStaticPaths> = (
 	options: readonly ClubsPluginOption[],
 	config: ClubsConfiguration
-) => Promise<ClubsStaticPaths>
+) => Promise<P>
 
 export type ClubsFunctionGetAdminPaths = ClubsFunctionGetPagePaths
 
-export type ClubsGetStaticPathsItem = {
+export type ClubsFunctionGetLayout = ClubsFunctionGetPagePaths<
+	ClubsBaseStaticPath & {
+		readonly layout: unknown
+	}
+>
+
+export type ClubsGetStaticPathsItem<P = Props> = {
 	readonly params: { readonly page: undefined | string }
-	readonly props: Props & { readonly component: unknown }
+	readonly props: P & {
+		readonly component: unknown
+		readonly layout: unknown
+	}
 }
 
-export type ClubsGetStaticPathsResult = readonly ClubsGetStaticPathsItem[]
+export type ClubsGetStaticPathsResult<P = Props> =
+	readonly ClubsGetStaticPathsItem<P>[]
 
 export enum ClubsPluginCategory {
 	Monetization = 'monetization',
@@ -79,8 +96,14 @@ export type ClubsPluginMeta = {
 	readonly category: ClubsPluginCategory
 }
 
-export type ClubsFunctionFactoryResult = {
-	readonly getStaticPaths: () => Promise<ClubsGetStaticPathsResult>
+export type ClubsThemePluginMeta = ClubsPluginMeta & {
+	readonly theme: {
+		readonly previewImage: string
+	}
+}
+
+export type ClubsFunctionFactoryResult<P = Props> = {
+	readonly getStaticPaths: () => Promise<ClubsGetStaticPathsResult<P>>
 	readonly getCurrentConfig: () => Promise<ClubsConfiguration>
 }
 
@@ -97,21 +120,29 @@ export type ClubsFunctionOnSubmitConfiguration = (
 	encodedConfig: string
 ) => Promise<void | Error>
 
-export type ClubsPropsAdmin = {
-	readonly onSubmit: ClubsFunctionOnSubmitConfiguration
-}
-
-export type ClubsFunctionPageFactory = (
+export type ClubsFunctionPageFactory<P = Props> = (
 	options: ClubsFunctionPageFactoryOptions
-) => ClubsFunctionFactoryResult
+) => ClubsFunctionFactoryResult<P>
 
-export type ClubsFunctionAdminFactory = ClubsFunctionPageFactory
+export type ClubsFunctionAdminFactory =
+	ClubsFunctionPageFactory<ClubsPropsAdminPages>
 
-export type ClubsFunctionPlugin = Readonly<{
+export type ClubsFunctionStandardPlugin = Readonly<{
 	readonly getPagePaths: ClubsFunctionGetPagePaths
 	readonly getAdminPaths: ClubsFunctionGetAdminPaths
 	readonly meta: ClubsPluginMeta
 }>
+
+export type ClubsFunctionThemePlugin = Readonly<{
+	readonly getPagePaths: ClubsFunctionGetPagePaths
+	readonly getAdminPaths: ClubsFunctionGetAdminPaths
+	readonly getLayout: ClubsFunctionGetLayout
+	readonly meta: ClubsThemePluginMeta
+}>
+
+export type ClubsFunctionPlugin =
+	| ClubsFunctionStandardPlugin
+	| ClubsFunctionThemePlugin
 
 export type ClubsFunctionConfigFetcher = () => string | Promise<string>
 
