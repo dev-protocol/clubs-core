@@ -2,10 +2,12 @@
 import { ClubsPropsAdminPages, decode } from '../index'
 import AdminSidebar from './AdminSidebar.astro'
 import AdminConfigurationManager from './AdminConfigurationManager.astro'
+import AdminThemeCard from './AdminThemeCard.astro'
 import Aside from './Aside.vue'
 
 import '../styles'
 
+const { page } = Astro.params
 const { clubs } = Astro.props as ClubsPropsAdminPages
 
 const config = decode(clubs.encodedClubsConfiguration)
@@ -14,6 +16,11 @@ const { name } = config
 const enabledPlugins = clubs.plugins
 	.filter((plugin) => plugin.enable === true)
 	.filter((plugin) => plugin.name.toUpperCase() !== 'ADMIN')
+const currentTheme = clubs.plugins
+	.filter((plugin) => plugin.enable === true)
+	.find((plugin) => plugin.meta.category === 'theme')
+
+const theme = page && page.startsWith('theme')
 ---
 
 <!DOCTYPE html>
@@ -45,7 +52,22 @@ const enabledPlugins = clubs.plugins
 			</header>
 			<main class="container mx-auto py-16">
 				<div class="break-words">
-					<slot />
+					{
+						theme ? (
+							<div class="grid gap-16">
+								<section class="grid gap-16">
+									<h2 class="font-['Syne'] text-2xl font-bold">Theme</h2>
+									<AdminThemeCard meta={currentTheme.meta} />
+								</section>
+								<h2 class="font-['Syne'] text-2xl font-bold">
+									Theme Configuration
+								</h2>
+								<slot />
+							</div>
+						) : (
+							<slot />
+						)
+					}
 				</div>
 			</main>
 			<div class="py-16">

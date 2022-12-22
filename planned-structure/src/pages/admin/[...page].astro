@@ -2,6 +2,7 @@
 import { Admin } from '../../../../src/layouts'
 import { adminFactory, encode } from '../../../../src/'
 import example from '../../../../example/index.mjs'
+import theme from '../../../../example/theme.mjs'
 
 export const { getStaticPaths } = adminFactory({
 	config: () =>
@@ -15,9 +16,9 @@ export const { getStaticPaths } = adminFactory({
 			rpcUrl: '',
 			adminRolePoints: 0,
 			options: [],
-			plugins: [{ name: 'example', options: [] }],
+			plugins: [{ name: 'theme' }, { name: 'example', options: [] }],
 		}),
-	plugins: { example },
+	plugins: { theme, example },
 })
 
 const Content = Astro.props.component
