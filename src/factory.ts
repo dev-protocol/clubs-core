@@ -28,10 +28,12 @@ const _listPlugins = async (
 	list: ClubsPluginsMap
 ): Promise<Plugins> => {
 	const plugins: Plugins = await Promise.all(
-		config.plugins.map(async ({ name, enable = true, options }, i: number) => {
-			const fn = list[name] || {}
-			return { name, enable, options, ...fn, pluginIndex: i }
-		})
+		config.plugins.map(
+			async ({ name, enable = true, options = [] }, i: number) => {
+				const fn = list[name] || {}
+				return { name, enable, options, ...fn, pluginIndex: i }
+			}
+		)
 	)
 
 	return plugins.filter(({ name }) =>
