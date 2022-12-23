@@ -50,7 +50,6 @@ import { defineComponent } from 'vue'
 import { providers, utils } from 'ethers'
 import Web3Modal from 'web3modal'
 import { GetModalProvider, ReConnectWallet } from '../fixtures/wallet'
-import truncateEthAddress from 'truncate-eth-address'
 import { connection } from '../connection'
 import { clientsDev } from '@devprotocol/dev-kit/agent'
 import { whenDefined } from '@devprotocol/util-ts'
@@ -82,7 +81,7 @@ export default defineComponent({
 			this.modalProvider as Web3Modal
 		)
 		if (currentAddress) {
-			this.truncateWalletAddress = truncateEthAddress(currentAddress)
+			this.truncateWalletAddress = this.truncateEthAddress(currentAddress)
 		}
 		if (provider) {
 			this.setSigner(provider)
@@ -105,7 +104,7 @@ export default defineComponent({
 
 			const currentAddress = await newProvider?.getSigner().getAddress()
 			if (currentAddress) {
-				this.truncateWalletAddress = truncateEthAddress(currentAddress)
+				this.truncateWalletAddress = this.truncateEthAddress(currentAddress)
 			}
 			if (currentAddress && newProvider) {
 				this.fetchUserBalance(currentAddress, newProvider)
@@ -121,6 +120,13 @@ export default defineComponent({
 			const formatted = utils.formatUnits(balance ?? 0)
 			const rounded = Math.round((+formatted + Number.EPSILON) * 100) / 100
 			this.formattedUserBalance = rounded.toLocaleString()
+		},
+		truncateEthAddress(address: string) {
+			const match = address.match(
+				/^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/
+			)
+			if (!match) return address
+			return `${match[1]}\u2026${match[2]}`
 		},
 	},
 })
