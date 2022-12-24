@@ -29,7 +29,12 @@
 		>
 			Unsupported Network
 		</HSButton>
-		<HSButton type="filled" v-else v-on:click="connect">
+		<HSButton
+			type="filled"
+			v-else
+			v-on:click="connect"
+			:loading="connection === undefined || modalProvider === undefined"
+		>
 			Connect Wallet
 		</HSButton>
 		<ul
@@ -48,18 +53,18 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { providers, utils } from 'ethers'
-import Web3Modal from 'web3modal'
-import { GetModalProvider, ReConnectWallet } from '../fixtures/wallet'
-import { connection } from '../connection'
+import type Web3Modal from 'web3modal'
+import type { connection as Connection } from '../connection'
 import { clientsDev } from '@devprotocol/dev-kit/agent'
 import { whenDefined } from '@devprotocol/util-ts'
 import HSButton from './Primitives/Hashi/HSButton.vue'
 
 type Data = {
-	modalProvider: Web3Modal
+	modalProvider?: Web3Modal
 	truncateWalletAddress: String
 	formattedUserBalance: String
 	supportedNetwork: boolean
+	connection?: typeof Connection
 }
 
 export default defineComponent({
@@ -68,15 +73,19 @@ export default defineComponent({
 		HSButton,
 	},
 	data(): Data {
-		const modalProvider = GetModalProvider()
 		return {
-			modalProvider,
+			modalProvider: undefined,
 			truncateWalletAddress: '',
 			formattedUserBalance: '',
 			supportedNetwork: false,
+			connection: undefined,
 		}
 	},
 	async mounted() {
+		const [{ connection }, { GetModalProvider, ReConnectWallet }] =
+			await Promise.all([import('../connection'), import('../fixtures/wallet')])
+		this.connection = connection
+		this.modalProvider = GetModalProvider()
 		const { currentAddress, provider } = await ReConnectWallet(
 			this.modalProvider as Web3Modal
 		)
@@ -92,10 +101,10 @@ export default defineComponent({
 	},
 	methods: {
 		setSigner(provider: providers.Web3Provider) {
-			connection().signer.next(provider.getSigner())
+			this.connection!().signer.next(provider.getSigner())
 		},
 		async connect() {
-			const connectedProvider = await this.modalProvider.connect()
+			const connectedProvider = await this.modalProvider!.connect()
 			const newProvider = whenDefined(connectedProvider, (p) => {
 				const provider = new providers.Web3Provider(p)
 				this.setSigner(provider)
