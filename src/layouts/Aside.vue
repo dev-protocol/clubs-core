@@ -1,5 +1,5 @@
 <template>
-	<aside>
+	<aside class="sticky top-8">
 		<ConnectButton class="w-full" />
 		<ActionButton
 			class="mt-8 w-full"
