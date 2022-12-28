@@ -69,6 +69,11 @@
 			"require": "./dist/src/styles/index.cjs",
 			"types": "./styles.d.ts"
 		},
+		"./tailwind": {
+			"import": "./dist/src/tailwind/index.mjs",
+			"require": "./dist/src/tailwind/index.cjs",
+			"types": "./dist/src/tailwind/index.d.ts"
+		},
 		"./admin": "./src/layouts/Admin.astro",
 		"./aside": "./src/layouts/Aside.vue"
 	},
@@ -85,6 +90,7 @@
 		"factory.d.ts",
 		"layouts.d.ts",
 		"styles.d.ts",
+		"tailwind.d.ts",
 		"!**/*.test.*",
 		"src"
 	],
