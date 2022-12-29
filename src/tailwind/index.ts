@@ -1,4 +1,4 @@
-import { theme } from '@devprotocol/hashi/tailwind'
+import hashi from '@devprotocol/hashi/tailwind'
 
 export const clubs = {
 	content: [
@@ -6,9 +6,9 @@ export const clubs = {
 	],
 	theme: {
 		extend: {
-			screens: theme.screens,
-			colors: theme.colors,
-			fontFamily: theme.fontFamily,
+			screens: hashi.theme.screens,
+			colors: hashi.theme.colors,
+			fontFamily: hashi.theme.fontFamily,
 		},
 	},
 }
