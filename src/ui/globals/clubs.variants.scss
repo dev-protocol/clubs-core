@@ -1,0 +1,17 @@
+@use 'node_modules/@devprotocol/hashi/hs-button';
+
+@mixin render() {
+	@include hs-button.extend('small') {
+		@include hs-button.shape((
+			padding: ('xs', 'sm'),
+		));
+		@include hs-button.typography((
+			size: 14px,
+		));
+	}
+	@include hs-button.extend('large') {
+		@include hs-button.shape((
+			padding: ('sm', 'lg'),
+		));
+	}
+}
