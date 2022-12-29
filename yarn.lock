@@ -527,12 +527,12 @@
   resolved "https://registry.yarnpkg.com/@devprotocol/elements/-/elements-0.2.2.tgz#7325fb3354f2fb77c08f91634656a9e87ce0fa80"
   integrity sha512-8Kj3hw84GVAIrQnX5gFE0iZSMvzbKqga5Kdo7rHI7ZS6lUBgG1EwxYv78iIz9SwdBki9zyGxfrQb4j3dI4Sv9w==
 
-"@devprotocol/hashi@1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@devprotocol/hashi/-/hashi-1.4.0.tgz#1d3203fcea260c23483e8b7aab58b9e377b1eae5"
-  integrity sha512-N5krU/oIFylZd1crhMEXc3DZjWPtWHV6eM8eO0r8QERm9AaOuZs9aRhxE7/yPYBNmrHcs+y6xsDG5FL3rwYP4w==
+"@devprotocol/hashi@1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@devprotocol/hashi/-/hashi-1.5.0.tgz#d622c863c2d84cea988b06fda18d8589e56da24d"
+  integrity sha512-DVm+AI05GIVtIaYBwrcYNoKdx7+r244MS2wMgEgQGimMK7XQtdFe+3WEGzIFMU1izFQQbMhy8ZwJiOPYfh6AAQ==
   dependencies:
-    "@matteusan/sentro" "0.1.23"
+    "@matteusan/sentro" "0.1.25"
 
 "@devprotocol/util-ts@2.2.1", "@devprotocol/util-ts@^2.2.1":
   version "2.2.1"
@@ -1136,10 +1136,10 @@
   resolved "https://registry.yarnpkg.com/@ljharb/has-package-exports-patterns/-/has-package-exports-patterns-0.0.2.tgz#c1718939b65efa1f45f53686c2fcfa992b9fb68f"
   integrity sha512-4/RWEeXDO6bocPONheFe6gX/oQdP/bEpv0oL4HqjPP5DCenBSt0mHgahppY49N0CpsaqffdwPq+TlX9CYOq2Dw==
 
-"@matteusan/sentro@0.1.23":
-  version "0.1.23"
-  resolved "https://registry.yarnpkg.com/@matteusan/sentro/-/sentro-0.1.23.tgz#9554653f6d7eba7a6358c4dabb21b320b5bd4547"
-  integrity sha512-lVnDTSy/xjn7KHPkAXEGMCOHKSEY3OBMtbhfXxZu9ZcDWWbU57pttojVV/XMW7Wkr7BGOlM1hbBggzV22adTnA==
+"@matteusan/sentro@0.1.25":
+  version "0.1.25"
+  resolved "https://registry.yarnpkg.com/@matteusan/sentro/-/sentro-0.1.25.tgz#626f8795ada5f31a746acad80c4c49cc6134d879"
+  integrity sha512-WADroUoOEnbGBij9ZSJkGbYp2yiNVi6UJZymJsSVyo1zuekM1pIzKF8+nI31SGt5wS3ChmOOR5+w1Z7c6jg9TQ==
 
 "@metamask/detect-provider@^2.0.0":
   version "2.0.0"
