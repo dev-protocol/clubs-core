@@ -13,6 +13,7 @@
 	$theme: clubs.$wallet-theme
 );
 @use 'node_modules/@devprotocol/hashi/hs-utils';
+@use 'clubs.variants' as clb-variants;
 
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz@6..96&family=DM+Sans:wght@400;700&family=Syne:wght@500;700;800&display=swap');
 
@@ -113,11 +114,15 @@
 	}
 
 	@include hs-wallet.render();
+
+	@include clb-variants.render();
+
 	@include hs-utils.typography(
 		$include: (
 			'preset',
 			'family',
 		)
 	);
+
 	@tailwind utilities;
 }
