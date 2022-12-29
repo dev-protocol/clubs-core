@@ -116,6 +116,13 @@
 	"author": "aggre",
 	"license": "MIT",
 	"dependencies": {
+		"@astrojs/lit": "1.0.1",
+		"@astrojs/prefetch": "^0.1.1",
+		"@astrojs/react": "1.2.2",
+		"@astrojs/svelte": "1.0.2",
+		"@astrojs/tailwind": "2.1.3",
+		"@astrojs/vue": "1.2.2",
+		"@astropub/md": "^0.1.4",
 		"@devprotocol/dev-kit": "6.10.0",
 		"@devprotocol/elements": "0.2.2",
 		"@devprotocol/hashi": "1.5.0",
@@ -129,11 +136,6 @@
 		"yaml": "2.1.1"
 	},
 	"devDependencies": {
-		"@astrojs/lit": "1.0.1",
-		"@astrojs/react": "1.2.2",
-		"@astrojs/svelte": "1.0.2",
-		"@astrojs/tailwind": "2.1.3",
-		"@astrojs/vue": "1.2.2",
 		"@ava/typescript": "3.0.1",
 		"@rollup/plugin-commonjs": "24.0.0",
 		"@rollup/plugin-multi-entry": "6.0.0",
@@ -171,11 +173,6 @@
 		"vue": "3.2.45"
 	},
 	"peerDependencies": {
-		"@astrojs/lit": "^1.0.1",
-		"@astrojs/react": "^1.2.2",
-		"@astrojs/svelte": "^1.0.2",
-		"@astrojs/tailwind": "^2.1.3",
-		"@astrojs/vue": "^1.2.2",
 		"astro": "^1.0.0",
 		"lit": "^2.3.1",
 		"react": "^18.0.0",

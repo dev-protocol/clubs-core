@@ -90,6 +90,13 @@
     uvu "^0.5.0"
     vfile-message "^3.0.0"
 
+"@astrojs/prefetch@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@astrojs/prefetch/-/prefetch-0.1.1.tgz#3e61a8d1cd918744e6adbff648c00c4b9631a23a"
+  integrity sha512-+XZcjivPHTo9thQshDWKnnORHJ1dE6odIzhmKHac2ptwla092eohkiJw7Y31+PYmuJkc3Jp+3AawuCvfqCnQ2Q==
+  dependencies:
+    throttles "^1.0.1"
+
 "@astrojs/prism@^1.0.0":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@astrojs/prism/-/prism-1.0.2.tgz#f01cad9007a46dc006d129d99653bd1652657ecf"
@@ -155,6 +162,11 @@
   dependencies:
     global-agent "^3.0.0"
     node-fetch "^3.2.5"
+
+"@astropub/md@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@astropub/md/-/md-0.1.4.tgz#c6eb93ee6d5fa0081429d194f3f35431ce7dc7ca"
+  integrity sha512-SXl4wKbpcq++AEdh2Q7dz+YhjwiqXnzpfWM0P1lWMSbsmBIg4HR1A7UMPCe4gUvHCfOL+tGS76dAe4HLkz8G/g==
 
 "@ava/typescript@3.0.1":
   version "3.0.1"
@@ -10785,6 +10797,11 @@ text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==
+
+throttles@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/throttles/-/throttles-1.0.1.tgz#3abdcde28df88d5eddf7e57cad8da35bd403ddd0"
+  integrity sha512-fab7Xg+zELr9KOv4fkaBoe/b3L0GMGLd0IBSCn16GoE/Qx6/OfCr1eGNyEcDU2pUA79qQfZ8kPQWlRuok4YwTw==
 
 through2@^2.0.3:
   version "2.0.5"
