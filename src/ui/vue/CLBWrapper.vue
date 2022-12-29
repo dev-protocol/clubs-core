@@ -26,7 +26,9 @@ export default {
 
 <style lang="scss">
 @use '../globals/clubs.theme' as clubs;
-@use 'node_modules/@devprotocol/hashi' with ($theme: clubs.$theme);
+@use 'node_modules/@devprotocol/hashi' with (
+	$theme: clubs.$theme,
+);
 @use 'node_modules/@devprotocol/hashi/hs-button' with ($theme: clubs.$button-theme);
 @use 'node_modules/@devprotocol/hashi/hs-form-field' with ($theme: clubs.$form-field-theme);
 @use 'node_modules/@devprotocol/hashi/hs-link' with ($theme: clubs.$link-theme);
@@ -35,6 +37,19 @@ export default {
 
 @include hashi.init() {
 	@include hs-button.render();
+	@include hs-button.extend('small') {
+		@include hs-button.shape((
+			padding: ('xs', 'sm'),
+		));
+		@include hs-button.typography((
+			size: 14px,
+		));
+	}
+	@include hs-button.extend('large') {
+		@include hs-button.shape((
+			padding: ('sm', 'lg'),
+		));
+	}
 	@include hs-form-field.render();
 	@include hs-link.render();
 	@include hs-select-field.render();
