@@ -12,7 +12,7 @@ import CLBTier from '../../../src/ui/vue/CLBTier.vue'
 ---
 
 <!DOCTYPE html>
-<html lang="en" hashi-theme="dark">
+<html lang="en" hashi-theme="light">
 	<head>
 		<meta charset="UTF-8" />
 		<meta
@@ -31,9 +31,19 @@ import CLBTier from '../../../src/ui/vue/CLBTier.vue'
 				<section id="clb-buttons">
 					<h2>CLBButton components</h2>
 					<div class="flex flex-row gap-[0.5rem] mb-[1rem]">
+						<CLBButton type="small">Default</CLBButton>
+						<CLBButton type="small outlined">Outlined</CLBButton>
+						<CLBButton type="small filled">Filled</CLBButton>
+					</div>
+					<div class="flex flex-row gap-[0.5rem] mb-[1rem]">
 						<CLBButton>Default</CLBButton>
 						<CLBButton type="outlined">Outlined</CLBButton>
 						<CLBButton type="filled">Filled</CLBButton>
+					</div>
+					<div class="flex flex-row gap-[0.5rem] mb-[1rem]">
+						<CLBButton type="large">Default</CLBButton>
+						<CLBButton type="large outlined">Outlined</CLBButton>
+						<CLBButton type="large filled">Filled</CLBButton>
 					</div>
 					<div class="flex flex-row gap-2">
 						<CLBButton is-disabled>Default Disabled</CLBButton>
