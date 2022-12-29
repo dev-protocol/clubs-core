@@ -71,7 +71,7 @@ const theme = page && page.startsWith('theme')
 				</div>
 			</main>
 			<div class="py-16">
-				<Aside config={config} client:only />
+				<Aside config={config} client:load />
 			</div>
 			<AdminConfigurationManager {clubs} />
 		</div>
