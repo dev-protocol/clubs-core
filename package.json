@@ -151,7 +151,7 @@
 		"autoprefixer": "10.4.13",
 		"ava": "5.1.0",
 		"eslint": "8.31.0",
-		"eslint-config-prettier": "8.5.0",
+		"eslint-config-prettier": "8.6.0",
 		"eslint-plugin-functional": "4.4.1",
 		"glob": "8.0.3",
 		"husky": "8.0.2",
