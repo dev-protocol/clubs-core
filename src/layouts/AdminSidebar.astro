@@ -40,23 +40,18 @@ const catOther = onlyFirstItems.filter(
 </div>
 <nav class="grid gap-16">
 	<ul class="grid gap-1">
-		<AdminSidebarMainItem href="/admin" active={page === undefined}
-			><span class="text-[#88AEFF]"
-				><IconGroup />
-			</span>Overview</AdminSidebarMainItem
-		>
+		<AdminSidebarMainItem href="/admin" active={page === undefined}>
+			<span class="text-[#88AEFF]"><IconGroup /></span>Overview
+		</AdminSidebarMainItem>
 		<AdminSidebarMainItem
 			href="/admin/marketplace"
 			active={page === 'marketplace'}
-			><span class="text-[#D500E6]"
-				><IconGlobe />
-			</span>Marketplace</AdminSidebarMainItem
 		>
-		<AdminSidebarMainItem href="/admin/theme" active={page === 'theme'}
-			><span class="text-[#51E0FF]"
-				><IconDesktop />
-			</span>Theme</AdminSidebarMainItem
-		>
+			<span class="text-[#D500E6]"><IconGlobe /></span>Marketplace
+		</AdminSidebarMainItem>
+		<AdminSidebarMainItem href="/admin/theme" active={page === 'theme'}>
+			<span class="text-[#51E0FF]"><IconDesktop /></span>Theme
+		</AdminSidebarMainItem>
 	</ul>
 
 	<ul>

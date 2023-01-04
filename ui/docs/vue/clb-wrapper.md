@@ -1,4 +1,5 @@
 # CLBWrapper
+
 This component initializes the entire Clubs UI theme for the project. This component should be instantiated at the root
 of the Vue application.
 
@@ -12,7 +13,7 @@ of the Vue application.
 </template>
 
 <script>
-import { CLBWrapper } from '@devprotocol/clubs-core/ui/vue';
+import { CLBWrapper } from '@devprotocol/clubs-core/ui/vue'
 
 export default {
 	components: {

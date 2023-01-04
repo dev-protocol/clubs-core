@@ -15,8 +15,8 @@ $theme: (
 			sm: 0.5rem,
 			md: 0.7rem,
 			lg: 1rem,
-			xl: 1.2rem
-		)
+			xl: 1.2rem,
+		),
 	),
 );
 
@@ -34,7 +34,7 @@ $button-theme: (
 $form-field-theme: (
 	padding: (
 		'lg',
-		'xl'
+		'xl',
 	),
 );
 
@@ -45,7 +45,7 @@ $link-theme: (
 $select-field-theme: (
 	padding: (
 		'lg',
-		'xl'
+		'xl',
 	),
 );
 
