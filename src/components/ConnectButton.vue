@@ -10,7 +10,7 @@
 		class="w-full"
 	>
 		<HSButton
-			type="filled"
+			type="filled large"
 			v-if="
 				truncateWalletAddress &&
 				formattedUserBalance.length > 0 &&
@@ -20,7 +20,7 @@
 			{{ truncateWalletAddress }}
 		</HSButton>
 		<HSButton
-			type="filled"
+			type="filled large"
 			v-else-if="
 				truncateWalletAddress &&
 				formattedUserBalance.length > 0 &&
@@ -30,7 +30,7 @@
 			Unsupported Network
 		</HSButton>
 		<HSButton
-			type="filled"
+			type="filled large"
 			v-else
 			v-on:click="connect"
 			:loading="connection === undefined || modalProvider === undefined"

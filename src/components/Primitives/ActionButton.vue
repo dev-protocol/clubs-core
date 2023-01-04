@@ -1,6 +1,6 @@
 <template>
 	<button
-		class="text-sm font-medium px-12 py-4 rounded-lg transition"
+		class="hs-button is-large is-filled transition"
 		:class="classByStatus[status]"
 	>
 		<!-- Default Status -->
