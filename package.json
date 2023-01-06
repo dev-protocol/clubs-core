@@ -137,7 +137,7 @@
 		"@ava/typescript": "3.0.1",
 		"@rollup/plugin-commonjs": "24.0.0",
 		"@rollup/plugin-multi-entry": "6.0.0",
-		"@rollup/plugin-typescript": "10.0.1",
+		"@rollup/plugin-typescript": "11.0.0",
 		"@rollup/pluginutils": "5.0.2",
 		"@types/get-installed-path": "4.0.1",
 		"@types/node": "18.11.18",
