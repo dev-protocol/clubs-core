@@ -38,12 +38,13 @@
     vscode-languageserver-types "^3.17.1"
     vscode-uri "^3.0.3"
 
-"@astrojs/lit@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@astrojs/lit/-/lit-1.0.1.tgz#0bb6a5e231ec41a22f42346b5be8ff1ad2d66b1f"
-  integrity sha512-9KPhXzWr8ZQxQ690kiHJV4XgxOf9hjQY+wnfyrajgI3ZqapBtEecoce6jQLFzvi2QC5Rp92v9ntqIFn8qKcILA==
+"@astrojs/lit@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@astrojs/lit/-/lit-1.0.2.tgz#28e3df5f1e9c8928b3cdcb8c830bbe5b136c2f38"
+  integrity sha512-Z9+PmYSIHmSQDwAFXBJ2BeE0YfQ+NwfJJji3fAWt/HgwfVgCRqsuQZ6G/7EXngkwSgXXL15UyVQZ5aYQY4UTJQ==
   dependencies:
     "@lit-labs/ssr" "^2.2.0"
+    parse5 "^7.1.2"
 
 "@astrojs/markdown-remark@^1.2.0":
   version "1.2.0"
@@ -5001,7 +5002,7 @@ parse5@^6.0.0:
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-6.0.1.tgz#e1a1c085c569b3dc08321184f19a39cc27f7c30b"
   integrity sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==
 
-parse5@^7.0.0, parse5@^7.1.1:
+parse5@^7.0.0, parse5@^7.1.1, parse5@^7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-7.1.2.tgz#0736bebbfd77793823240a23b7fc5e010b7f8e32"
   integrity sha512-Czj1WaSVpaoj0wbhMzLmWD69anp2WH7FXMB9n1Sy8/ZFF9jolSQVMu1Ij5WIyGmcBmhk7EOndpO4mIpihVqAXw==
