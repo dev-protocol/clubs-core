@@ -15,7 +15,10 @@ export const { getStaticPaths } = pageFactory({
 			rpcUrl: '',
 			adminRolePoints: 0,
 			options: [],
-			plugins: [{ name: 'theme' }, { name: 'example', options: [] }],
+			plugins: [
+				{ name: 'theme', options: [] },
+				{ name: 'example', options: [] },
+			],
 		}),
 	plugins: { theme, example },
 })

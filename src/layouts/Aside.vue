@@ -9,6 +9,7 @@
 			@click="save"
 			>Save</ActionButton
 		>
+		<slot></slot>
 	</aside>
 </template>
 

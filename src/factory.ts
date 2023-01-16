@@ -12,6 +12,7 @@ import type {
 	ClubsStaticPath,
 	ClubsFunctionThemePlugin,
 	ClubsFunctionPlugin,
+	ClubsAdminSlots,
 } from './types'
 import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
@@ -121,7 +122,7 @@ const _staticPagePathsFactory: (
 			layout: res.layout ?? defaultLayout.layout,
 			props: { ...res.props, ...defaultLayout.props },
 		}))
-		const staticPaths = _compose(themeInjected)
+		const staticPaths = _compose(themeInjected) as ClubsGetStaticPathsResult
 
 		return staticPaths
 	}
@@ -146,11 +147,13 @@ const _staticAdminPathsFactory: (
 						encodedClubsConfiguration,
 						currentPluginIndex,
 					},
-				} as Omit<ClubsPropsAdminPages, 'plugins'>)
+				} as Omit<ClubsPropsAdminPages, 'plugins' | 'slots'>)
 		)
 		const pluginResults = (await getResultsOfPlugins(
 			plugins
-		)) as readonly ClubsStaticPathWithDetails[]
+		)) as readonly (ClubsStaticPathWithDetails & {
+			readonly slots?: ClubsAdminSlots
+		})[]
 		const pluginsWithPaths = pluginResults.map((result) => {
 			const {
 				details: { getPagePaths, getAdminPaths, ...plg },
@@ -171,10 +174,13 @@ const _staticAdminPathsFactory: (
 				clubs: {
 					...(plg.props as ClubsPropsAdminPages).clubs,
 					plugins: pluginsWithPaths,
+					slots: plg.slots,
 				},
 			},
 		}))
-		const staticPaths = _compose<ClubsPropsAdminPages>(injected)
+		const staticPaths = _compose<ClubsPropsAdminPages>(
+			injected
+		) as ClubsGetStaticPathsResult<ClubsPropsAdminPages>
 
 		return staticPaths
 	}

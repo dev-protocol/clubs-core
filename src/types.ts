@@ -1,4 +1,5 @@
-import { Props } from 'astro'
+import type { Props } from 'astro'
+import type { AstroComponentFactory } from 'astro/dist/runtime/server'
 
 export type ClubsPluginOptionValue =
 	| string
@@ -47,15 +48,20 @@ export type ClubsConfiguration = Readonly<{
 }>
 
 export type ClubsBaseStaticPath<P = Props> = Readonly<{
-	readonly layout?: unknown
+	readonly layout?: AstroComponentFactory
 	readonly props?: P
 }>
 
 export type ClubsStaticPath<P = Props> = ClubsBaseStaticPath<P> &
 	Readonly<{
 		readonly paths: readonly (undefined | string)[]
-		readonly component: unknown
+		readonly component: AstroComponentFactory
 	}>
+
+export type ClubsAdminSlots = {
+	readonly 'sidebar:before-title'?: AstroComponentFactory
+	readonly 'aside:after-built-in-buttons'?: AstroComponentFactory
+}
 
 export type ClubsStaticPaths<P = Props> = readonly ClubsStaticPath<P>[]
 
@@ -64,19 +70,21 @@ export type ClubsFunctionGetPagePaths<P = ClubsStaticPaths> = (
 	config: ClubsConfiguration
 ) => Promise<P>
 
-export type ClubsFunctionGetAdminPaths = ClubsFunctionGetPagePaths
+export type ClubsFunctionGetAdminPaths = ClubsFunctionGetPagePaths<
+	ReadonlyArray<ClubsStaticPath & { readonly slots?: ClubsAdminSlots }>
+>
 
 export type ClubsFunctionGetLayout = ClubsFunctionGetPagePaths<
 	ClubsBaseStaticPath & {
-		readonly layout: unknown
+		readonly layout: AstroComponentFactory
 	}
 >
 
 export type ClubsGetStaticPathsItem<P = Props> = {
 	readonly params: { readonly page: undefined | string }
 	readonly props: P & {
-		readonly component: unknown
-		readonly layout: unknown
+		readonly component: AstroComponentFactory
+		readonly layout: AstroComponentFactory
 	}
 }
 
@@ -93,7 +101,7 @@ export enum ClubsPluginCategory {
 
 export type ClubsPluginMeta = {
 	readonly displayName: string
-	readonly category: ClubsPluginCategory
+	readonly category: ClubsPluginCategory | string
 }
 
 export type ClubsThemePluginMeta = ClubsPluginMeta & {
@@ -170,6 +178,7 @@ export type ClubsPropsAdminPages = Props & {
 		readonly currentPluginIndex: number
 		readonly encodedClubsConfiguration: string
 		readonly plugins: ReadonlyArray<ClubsPropsClubsPlugin>
+		readonly slots?: ClubsAdminSlots
 	}
 }
 

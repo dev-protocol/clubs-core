@@ -24,6 +24,11 @@ const currentTheme = clubs.plugins
 	.find((plugin) => plugin.meta.category === 'theme')
 
 const theme = page && page.startsWith('theme')
+
+const SlotsSidebarBeforeTitle =
+	clubs.slots && clubs.slots['sidebar:before-title']
+const SlotsAsideAfterBuiltInButtons =
+	clubs.slots && clubs.slots['aside:after-built-in-buttons']
 ---
 
 <!DOCTYPE html>
@@ -51,7 +56,13 @@ const theme = page && page.startsWith('theme')
 				class="hidden z-50 fixed w-full lg:relative grid lg:grid bg-dp-blue-grey-400 gap-16 content-start py-16 px-8 overflow-y-scroll lg:overflow-y-auto max-h-screen lg:max-h-fit min-h-screen"
 			>
 				<AdminSidebar name={name} enabledPlugins={enabledPlugins}>
-					<slot name="sidebar:before-title" slot="before-title" />
+					{
+						SlotsSidebarBeforeTitle ? (
+							<SlotsSidebarBeforeTitle {...Astro.props} />
+						) : (
+							<slot name="sidebar:before-title" slot="before-title" />
+						)
+					}
 				</AdminSidebar>
 				<button
 					id="__clubs:sidebar-close__"
@@ -80,7 +91,15 @@ const theme = page && page.startsWith('theme')
 				</div>
 			</main>
 			<div class="container mx-auto px-2 lg:px-0 py-8 lg:py-16">
-				<Aside config={config} client:load />
+				<Aside config={config} client:load>
+					{
+						SlotsAsideAfterBuiltInButtons ? (
+							<SlotsAsideAfterBuiltInButtons {...Astro.props} />
+						) : (
+							<slot name="aside:after-built-in-buttons" />
+						)
+					}
+				</Aside>
 			</div>
 
 			<!-- Navigation bar for mobile -->
