@@ -1,8 +1,8 @@
 <template>
-	<aside class="sticky top-8">
+	<aside class="grid gap-8 sticky top-8">
 		<ConnectButton class="w-full" />
 		<ActionButton
-			class="mt-8 w-full"
+			class="w-full"
 			:status="status.save"
 			successText="Saved"
 			loadingText="Saving"
