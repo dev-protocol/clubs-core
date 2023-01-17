@@ -1,20 +1,20 @@
 @use '../../globals/clubs.theme' as clubs;
-@use 'node_modules/@devprotocol/hashi' with (
+@use '@devprotocol/hashi' with (
 	$theme: clubs.$theme
 );
-@use 'node_modules/@devprotocol/hashi/hs-button' with (
+@use '@devprotocol/hashi/hs-button' with (
 	$theme: clubs.$button-theme
 );
-@use 'node_modules/@devprotocol/hashi/hs-form-field' with (
+@use '@devprotocol/hashi/hs-form-field' with (
 	$theme: clubs.$form-field-theme
 );
-@use 'node_modules/@devprotocol/hashi/hs-link' with (
+@use '@devprotocol/hashi/hs-link' with (
 	$theme: clubs.$link-theme
 );
-@use 'node_modules/@devprotocol/hashi/hs-select-field' with (
+@use '@devprotocol/hashi/hs-select-field' with (
 	$theme: clubs.$select-field-theme
 );
-@use 'node_modules/@devprotocol/hashi/hs-tick-field' with (
+@use '@devprotocol/hashi/hs-tick-field' with (
 	$theme: clubs.$tick-field-theme
 );
 

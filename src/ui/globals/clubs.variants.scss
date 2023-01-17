@@ -1,4 +1,4 @@
-@use 'node_modules/@devprotocol/hashi/hs-button';
+@use '@devprotocol/hashi/hs-button';
 
 @mixin render() {
 	@include hs-button.extend('small') {

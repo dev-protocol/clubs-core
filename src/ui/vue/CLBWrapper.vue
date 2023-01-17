@@ -1,5 +1,5 @@
 <template>
-<slot />
+	<slot />
 </template>
 
 <script lang="ts">
@@ -26,29 +26,51 @@ export default {
 
 <style lang="scss">
 @use '../globals/clubs.theme' as clubs;
-@use 'node_modules/@devprotocol/hashi' with (
-	$theme: clubs.$theme,
+@use '@devprotocol/hashi' with (
+	$theme: clubs.$theme
 );
-@use 'node_modules/@devprotocol/hashi/hs-button' with ($theme: clubs.$button-theme);
-@use 'node_modules/@devprotocol/hashi/hs-form-field' with ($theme: clubs.$form-field-theme);
-@use 'node_modules/@devprotocol/hashi/hs-link' with ($theme: clubs.$link-theme);
-@use 'node_modules/@devprotocol/hashi/hs-select-field' with ($theme: clubs.$select-field-theme);
-@use 'node_modules/@devprotocol/hashi/hs-tick-field' with ($theme: clubs.$tick-field-theme);
+@use '@devprotocol/hashi/hs-button' with (
+	$theme: clubs.$button-theme
+);
+@use '@devprotocol/hashi/hs-form-field' with (
+	$theme: clubs.$form-field-theme
+);
+@use '@devprotocol/hashi/hs-link' with (
+	$theme: clubs.$link-theme
+);
+@use '@devprotocol/hashi/hs-select-field' with (
+	$theme: clubs.$select-field-theme
+);
+@use '@devprotocol/hashi/hs-tick-field' with (
+	$theme: clubs.$tick-field-theme
+);
 
 @include hashi.init() {
 	@include hs-button.render();
 	@include hs-button.extend('small') {
-		@include hs-button.shape((
-			padding: ('xs', 'sm'),
-		));
-		@include hs-button.typography((
-			size: 14px,
-		));
+		@include hs-button.shape(
+			(
+				padding: (
+					'xs',
+					'sm',
+				),
+			)
+		);
+		@include hs-button.typography(
+			(
+				size: 14px,
+			)
+		);
 	}
 	@include hs-button.extend('large') {
-		@include hs-button.shape((
-			padding: ('sm', 'lg'),
-		));
+		@include hs-button.shape(
+			(
+				padding: (
+					'sm',
+					'lg',
+				),
+			)
+		);
 	}
 	@include hs-form-field.render();
 	@include hs-link.render();
