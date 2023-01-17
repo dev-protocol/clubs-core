@@ -8,6 +8,9 @@
 @use '@devprotocol/hashi/hs-form-field' with (
 	$theme: clubs.$form-field-theme
 );
+@use '@devprotocol/hashi/hs-select-field' with (
+	$theme: clubs.$select-field-theme
+);
 @use '@devprotocol/hashi/hs-card';
 @use '@devprotocol/hashi/hs-link' with (
 	$theme: clubs.$link-theme
@@ -135,6 +138,8 @@
 			)
 		);
 	}
+
+	@include hs-select-field.render();
 
 	@tailwind utilities;
 }

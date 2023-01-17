@@ -43,6 +43,7 @@ $form-field-theme: (
 		'xl',
 	),
 	ink: 'surface-600',
+	label-ink: 'surface-600',
 	border-width: 'stroke',
 	border-focus: 'stroke-set-accent-dark',
 	fill: 'accent-600',
@@ -58,6 +59,12 @@ $select-field-theme: (
 		'lg',
 		'xl',
 	),
+	ink: 'surface-600',
+	label-ink: 'surface-600',
+	border-width: 'stroke',
+	border-focus: 'stroke-set-accent-dark',
+	fill: 'accent-600',
+	fill-disabled: 'accent-300',
 );
 
 $tick-field-theme: (
