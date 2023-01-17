@@ -1,21 +1,21 @@
 @use 'clubs.theme' as clubs;
-@use 'node_modules/@devprotocol/hashi' with (
+@use '@devprotocol/hashi' with (
 	$theme: clubs.$theme
 );
-@use 'node_modules/@devprotocol/hashi/hs-button' with (
+@use '@devprotocol/hashi/hs-button' with (
 	$theme: clubs.$button-theme
 );
-@use 'node_modules/@devprotocol/hashi/hs-form-field' with (
+@use '@devprotocol/hashi/hs-form-field' with (
 	$theme: clubs.$form-field-theme
 );
-@use 'node_modules/@devprotocol/hashi/hs-card';
-@use 'node_modules/@devprotocol/hashi/hs-link' with (
+@use '@devprotocol/hashi/hs-card';
+@use '@devprotocol/hashi/hs-link' with (
 	$theme: clubs.$link-theme
 );
-@use 'node_modules/@devprotocol/hashi/hs-wallet' with (
+@use '@devprotocol/hashi/hs-wallet' with (
 	$theme: clubs.$wallet-theme
 );
-@use 'node_modules/@devprotocol/hashi/hs-utils';
+@use '@devprotocol/hashi/hs-utils';
 @use 'clubs.variants' as clb-variants;
 
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz@6..96&family=DM+Sans:wght@400;700&family=Syne:wght@500;700;800&display=swap');

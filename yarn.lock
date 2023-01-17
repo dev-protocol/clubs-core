@@ -445,10 +445,10 @@
   resolved "https://registry.yarnpkg.com/@devprotocol/elements/-/elements-0.2.2.tgz#7325fb3354f2fb77c08f91634656a9e87ce0fa80"
   integrity sha512-8Kj3hw84GVAIrQnX5gFE0iZSMvzbKqga5Kdo7rHI7ZS6lUBgG1EwxYv78iIz9SwdBki9zyGxfrQb4j3dI4Sv9w==
 
-"@devprotocol/hashi@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@devprotocol/hashi/-/hashi-1.6.0.tgz#9bed2117f5de8fe37d71131e516ba49ad59370ec"
-  integrity sha512-6RmrlhB1ZMfYnaqggNZeL2ociD+nYRIh9gn0GWyQsllr+IONJB07jxdZZ7+HKm+51EDfBYBiJD5goUQrevoMEg==
+"@devprotocol/hashi@1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@devprotocol/hashi/-/hashi-1.6.1.tgz#a872e538d1d19df14b4a0824588c59ba13f619f2"
+  integrity sha512-8QzYvWwPjm1gGjCjNFO5Ae+EkcaW66mqOaZ7CBIJHfAuIuKN3uWSSIwOScDy4FxoEt9A778iV1ZeAs7k9gLnvQ==
   dependencies:
     "@matteusan/sentro" "0.1.25"
 
