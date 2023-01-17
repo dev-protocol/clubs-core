@@ -55,7 +55,7 @@ const SlotsAsideAfterBuiltInButtons =
 				id="__clubs:header__"
 				class="hidden z-50 fixed w-full lg:relative grid lg:grid bg-dp-blue-grey-400 gap-16 content-start py-16 px-8 overflow-y-scroll lg:overflow-y-auto max-h-screen lg:max-h-fit min-h-screen"
 			>
-				<AdminSidebar name={name} enabledPlugins={enabledPlugins}>
+				<AdminSidebar page={page} name={name} enabledPlugins={enabledPlugins}>
 					{
 						SlotsSidebarBeforeTitle ? (
 							<SlotsSidebarBeforeTitle {...Astro.props} />

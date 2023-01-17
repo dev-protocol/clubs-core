@@ -8,8 +8,8 @@ import IconGlobe from './icons/globe-europe-africa.astro'
 import IconGroup from './icons/rectangle-group.astro'
 import IconSquareSmall from './icons/square-small.astro'
 
-const { page } = Astro.props
-const { name, enabledPlugins } = Astro.props as {
+const { page, name, enabledPlugins } = Astro.props as {
+	page?: string
 	name: string
 	enabledPlugins: ClubsPropsClubsPlugin[]
 }
@@ -31,6 +31,13 @@ const catGovernance = onlyFirstItems.filter(
 const catOther = onlyFirstItems.filter(
 	(item) => item.meta.category === ClubsPluginCategory.Uncategorized
 )
+
+const hereIs = (slug: string) => page?.startsWith(slug)
+
+const navItemPlugin =
+	'capitalize block px-3 py-1 -mx-2 rounded transition-colors'
+const navItemPluginActive = 'bg-native-blue-400 hover:bg-native-blue-300'
+const navItemPluginInactive = 'hover:bg-dp-blue-grey-300'
 ---
 
 <Clubs />
@@ -40,16 +47,16 @@ const catOther = onlyFirstItems.filter(
 </div>
 <nav class="grid gap-16">
 	<ul class="grid gap-1">
-		<AdminSidebarMainItem href="/admin" active={page === undefined}>
+		<AdminSidebarMainItem href="/admin" active={hereIs('overview')}>
 			<span class="text-[#88AEFF]"><IconGroup /></span>Overview
 		</AdminSidebarMainItem>
 		<AdminSidebarMainItem
 			href="/admin/marketplace"
-			active={page === 'marketplace'}
+			active={hereIs('marketplace')}
 		>
 			<span class="text-[#D500E6]"><IconGlobe /></span>Marketplace
 		</AdminSidebarMainItem>
-		<AdminSidebarMainItem href="/admin/theme" active={page === 'theme'}>
+		<AdminSidebarMainItem href="/admin/theme" active={hereIs('theme')}>
 			<span class="text-[#51E0FF]"><IconDesktop /></span>Theme
 		</AdminSidebarMainItem>
 	</ul>
@@ -62,7 +69,14 @@ const catOther = onlyFirstItems.filter(
 			{
 				catMonetization.map((plugin) => (
 					<li>
-						<a class="capitalize" href={plugin.pathname}>
+						<a
+							class={`${navItemPlugin} ${
+								hereIs(plugin.page)
+									? navItemPluginActive
+									: navItemPluginInactive
+							}`}
+							href={plugin.pathname}
+						>
 							{plugin.meta.displayName}
 						</a>
 					</li>
@@ -79,7 +93,14 @@ const catOther = onlyFirstItems.filter(
 			{
 				catGrowth.map((plugin) => (
 					<li>
-						<a class="capitalize" href={plugin.pathname}>
+						<a
+							class={`${navItemPlugin} ${
+								hereIs(plugin.page)
+									? navItemPluginActive
+									: navItemPluginInactive
+							}`}
+							href={plugin.pathname}
+						>
 							{plugin.meta.displayName}
 						</a>
 					</li>
@@ -96,7 +117,14 @@ const catOther = onlyFirstItems.filter(
 			{
 				catGovernance.map((plugin) => (
 					<li>
-						<a class="capitalize" href={plugin.pathname}>
+						<a
+							class={`${navItemPlugin} ${
+								hereIs(plugin.page)
+									? navItemPluginActive
+									: navItemPluginInactive
+							}`}
+							href={plugin.pathname}
+						>
 							{plugin.meta.displayName}
 						</a>
 					</li>
@@ -113,7 +141,14 @@ const catOther = onlyFirstItems.filter(
 			{
 				catOther.map((plugin) => (
 					<li>
-						<a class="capitalize" href={plugin.pathname}>
+						<a
+							class={`${navItemPlugin} ${
+								hereIs(plugin.page)
+									? navItemPluginActive
+									: navItemPluginInactive
+							}`}
+							href={plugin.pathname}
+						>
 							{plugin.meta.displayName}
 						</a>
 					</li>
