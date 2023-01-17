@@ -5,9 +5,6 @@
 @use 'node_modules/@devprotocol/hashi/hs-button' with (
 	$theme: clubs.$button-theme
 );
-@use 'node_modules/@devprotocol/hashi/hs-form-field' with (
-	$theme: clubs.$form-field-theme
-);
 @use 'node_modules/@devprotocol/hashi/hs-card';
 @use 'node_modules/@devprotocol/hashi/hs-link' with (
 	$theme: clubs.$link-theme
@@ -126,15 +123,6 @@
 			'family',
 		)
 	);
-
-	@include hs-form-field.render();
-	@include hs-form-field.extend(filled) {
-		@include hs-form-field.color(
-			(
-				border: 'dp-black-600',
-			)
-		);
-	}
 
 	@tailwind utilities;
 }
