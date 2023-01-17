@@ -3,7 +3,7 @@
 $theme: (
 	primary: 'dp-white',
 	primary-dark: 'dp-black',
-	accent: 'dp-black',
+	accent: 'dp-blue-grey',
 	accent-dark: 'dp-white',
 	surface: 'dp-white',
 	surface-dark: 'dp-black',
@@ -18,6 +18,8 @@ $theme: (
 			xl: 1.2rem,
 		),
 	),
+	stroke: 3px,
+	stroke-set-accent-dark: 3px white,
 );
 
 $button-theme: (
@@ -26,9 +28,13 @@ $button-theme: (
 		'xs',
 		'md',
 	),
-	fill: 'accent-400',
-	fill-hover: 'accent-400',
+	ink: 'surface-600',
+	border-width: 'stroke',
+	border-focus: 'stroke-set-accent-dark',
+	fill: 'accent-600',
+	fill-hover: 'accent-200',
 	fill-active: 'accent-200',
+	fill-disabled: 'accent-300',
 );
 
 $form-field-theme: (
@@ -36,6 +42,11 @@ $form-field-theme: (
 		'lg',
 		'xl',
 	),
+	ink: 'surface-600',
+	border-width: 'stroke',
+	border-focus: 'stroke-set-accent-dark',
+	fill: 'accent-600',
+	fill-disabled: 'accent-300',
 );
 
 $link-theme: (
