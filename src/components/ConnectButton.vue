@@ -58,6 +58,7 @@ import type { connection as Connection } from '../connection'
 import { clientsDev } from '@devprotocol/dev-kit/agent'
 import { whenDefined } from '@devprotocol/util-ts'
 import HSButton from './Primitives/Hashi/HSButton.vue'
+import { onMountClient } from '../events'
 
 type Data = {
 	modalProvider?: Web3Modal
@@ -82,22 +83,27 @@ export default defineComponent({
 		}
 	},
 	async mounted() {
-		const [{ connection }, { GetModalProvider, ReConnectWallet }] =
-			await Promise.all([import('../connection'), import('../fixtures/wallet')])
-		this.connection = connection
-		this.modalProvider = GetModalProvider()
-		const { currentAddress, provider } = await ReConnectWallet(
-			this.modalProvider as Web3Modal
-		)
-		if (currentAddress) {
-			this.truncateWalletAddress = this.truncateEthAddress(currentAddress)
-		}
-		if (provider) {
-			this.setSigner(provider)
-		}
-		if (currentAddress && provider) {
-			this.fetchUserBalance(currentAddress, provider)
-		}
+		onMountClient(async () => {
+			const [{ connection }, { GetModalProvider, ReConnectWallet }] =
+				await Promise.all([
+					import('../connection'),
+					import('../fixtures/wallet'),
+				])
+			this.connection = connection
+			this.modalProvider = GetModalProvider()
+			const { currentAddress, provider } = await ReConnectWallet(
+				this.modalProvider as Web3Modal
+			)
+			if (currentAddress) {
+				this.truncateWalletAddress = this.truncateEthAddress(currentAddress)
+			}
+			if (provider) {
+				this.setSigner(provider)
+			}
+			if (currentAddress && provider) {
+				this.fetchUserBalance(currentAddress, provider)
+			}
+		})
 	},
 	methods: {
 		setSigner(provider: providers.Web3Provider) {

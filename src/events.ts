@@ -8,6 +8,7 @@ import type {
 	ClubsPluginOptions,
 	ClubsEventsDetailFinishConfiguration,
 	ClubsEventsDetailBuildConfiguration,
+	ClubsEventsFinishConfiguration,
 } from './types'
 import { ClubsEvents } from './types'
 
@@ -77,3 +78,13 @@ export const onSubmitConfig = (
 	document.body.addEventListener(ClubsEvents.SubmitConfiguration, (ev) =>
 		handler((ev as ClubsEventsSubmitConfiguration).detail.data, finish)
 	)
+
+export const onFinishConfig = (
+	handler: (data: CustomEvent<ClubsEventsDetailFinishConfiguration>) => void
+) =>
+	document.body.addEventListener(ClubsEvents.FinishConfiguration, (ev) =>
+		handler(ev as CustomEvent<ClubsEventsDetailFinishConfiguration>)
+	)
+
+export const onMountClient = (handler: (data: Event) => void) =>
+	document.addEventListener('DOMContentLoaded', handler)
