@@ -1,6 +1,10 @@
 <template>
 	<aside class="grid gap-8 sticky top-8">
-		<ConnectButton class="w-full" />
+		<ConnectButton
+			id="clubs_connect_button"
+			v-if="showConnectButton"
+			class="w-full"
+		/>
 		<ActionButton
 			class="w-full"
 			:status="status.save"
@@ -34,6 +38,10 @@ export default defineComponent({
 		config: {
 			type: Object as () => ClubsConfiguration,
 			required: true,
+		},
+		showConnectButton: {
+			type: Boolean,
+			default: true,
 		},
 	},
 	data: () => ({
