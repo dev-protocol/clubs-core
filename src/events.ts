@@ -103,32 +103,46 @@ const finish = (results: ClubsEventsDetailFinishConfiguration) => {
 }
 
 export const onSubmitConfig = (
-	handler: (data: string, onFinish: typeof finish) => void
+	handler: (data: string, onFinish: typeof finish) => void,
+	options?: AddEventListenerOptions
 ) =>
-	document.body.addEventListener(ClubsEvents.SubmitConfiguration, (ev) =>
-		handler((ev as ClubsEventsSubmitConfiguration).detail.data, finish)
+	document.body.addEventListener(
+		ClubsEvents.SubmitConfiguration,
+		(ev) => handler((ev as ClubsEventsSubmitConfiguration).detail.data, finish),
+		options
 	)
 
 export const onUpdatedPluginOptions = (
-	handler: (data: CustomEvent<ClubsEventsDetailUpdatedPluginOptions>) => void
+	handler: (data: CustomEvent<ClubsEventsDetailUpdatedPluginOptions>) => void,
+	options?: AddEventListenerOptions
 ) =>
-	document.body.addEventListener(ClubsEvents.UpdatedPluginOptions, (ev) =>
-		handler(ev as CustomEvent<ClubsEventsDetailUpdatedPluginOptions>)
+	document.body.addEventListener(
+		ClubsEvents.UpdatedPluginOptions,
+		(ev) => handler(ev as CustomEvent<ClubsEventsDetailUpdatedPluginOptions>),
+		options
 	)
 
 export const onUpdatedConfiguration = (
-	handler: (data: CustomEvent<ClubsEventsDetailUpdatedConfiguration>) => void
+	handler: (data: CustomEvent<ClubsEventsDetailUpdatedConfiguration>) => void,
+	options?: AddEventListenerOptions
 ) =>
-	document.body.addEventListener(ClubsEvents.UpdatedConfiguration, (ev) =>
-		handler(ev as CustomEvent<ClubsEventsDetailUpdatedConfiguration>)
+	document.body.addEventListener(
+		ClubsEvents.UpdatedConfiguration,
+		(ev) => handler(ev as CustomEvent<ClubsEventsDetailUpdatedConfiguration>),
+		options
 	)
 
 export const onFinishConfig = (
-	handler: (data: CustomEvent<ClubsEventsDetailFinishConfiguration>) => void
+	handler: (data: CustomEvent<ClubsEventsDetailFinishConfiguration>) => void,
+	options?: AddEventListenerOptions
 ) =>
-	document.body.addEventListener(ClubsEvents.FinishConfiguration, (ev) =>
-		handler(ev as CustomEvent<ClubsEventsDetailFinishConfiguration>)
+	document.body.addEventListener(
+		ClubsEvents.FinishConfiguration,
+		(ev) => handler(ev as CustomEvent<ClubsEventsDetailFinishConfiguration>),
+		options
 	)
 
-export const onMountClient = (handler: (data: Event) => void) =>
-	document.addEventListener('DOMContentLoaded', handler)
+export const onMountClient = (
+	handler: (data: Event) => void,
+	options?: AddEventListenerOptions
+) => document.addEventListener('DOMContentLoaded', handler, options)
