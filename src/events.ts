@@ -9,6 +9,8 @@ import type {
 	ClubsEventsDetailFinishConfiguration,
 	ClubsEventsDetailBuildConfiguration,
 	ClubsEventsFinishConfiguration,
+	ClubsEventsDetailUpdatedPluginOptions,
+	ClubsEventsDetailUpdatedConfiguration,
 } from './types'
 import { ClubsEvents } from './types'
 
@@ -24,12 +26,40 @@ export const setOptions = (data: ClubsPluginOptions, pluginIndex: number) => {
 	)
 }
 
+export const updatedOptions = (
+	results: ClubsEventsDetailUpdatedPluginOptions
+) => {
+	return document.body.dispatchEvent(
+		new CustomEvent<ClubsEventsDetailUpdatedPluginOptions>(
+			ClubsEvents.UpdatedPluginOptions,
+			{
+				detail: results,
+				cancelable: true,
+			}
+		)
+	)
+}
+
 export const setConfig = (data: ClubsConfiguration) => {
 	return document.body.dispatchEvent(
 		new CustomEvent<ClubsEventsDetailUpdateConfiguration>(
 			ClubsEvents.UpdateConfiguration,
 			{
 				detail: { data },
+				cancelable: true,
+			}
+		)
+	)
+}
+
+export const updatedConfig = (
+	results: ClubsEventsDetailUpdatedConfiguration
+) => {
+	return document.body.dispatchEvent(
+		new CustomEvent<ClubsEventsDetailUpdatedConfiguration>(
+			ClubsEvents.UpdatedConfiguration,
+			{
+				detail: results,
 				cancelable: true,
 			}
 		)
@@ -77,6 +107,20 @@ export const onSubmitConfig = (
 ) =>
 	document.body.addEventListener(ClubsEvents.SubmitConfiguration, (ev) =>
 		handler((ev as ClubsEventsSubmitConfiguration).detail.data, finish)
+	)
+
+export const onUpdatedPluginOptions = (
+	handler: (data: CustomEvent<ClubsEventsDetailUpdatedPluginOptions>) => void
+) =>
+	document.body.addEventListener(ClubsEvents.UpdatedPluginOptions, (ev) =>
+		handler(ev as CustomEvent<ClubsEventsDetailUpdatedPluginOptions>)
+	)
+
+export const onUpdatedConfiguration = (
+	handler: (data: CustomEvent<ClubsEventsDetailUpdatedConfiguration>) => void
+) =>
+	document.body.addEventListener(ClubsEvents.UpdatedConfiguration, (ev) =>
+		handler(ev as CustomEvent<ClubsEventsDetailUpdatedConfiguration>)
 	)
 
 export const onFinishConfig = (
