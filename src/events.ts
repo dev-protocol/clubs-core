@@ -1,3 +1,4 @@
+/* eslint-disable functional/no-expression-statement */
 /* eslint-disable functional/no-return-void */
 import type {
 	ClubsConfiguration,
@@ -142,18 +143,27 @@ export const onFinishConfig = (
 		options
 	)
 
+const handlerStore = new WeakSet<(data?: Event) => void>()
 export const onMountClient = (
 	handler: (data?: Event) => void,
 	options?: AddEventListenerOptions
 ) => {
-	// eslint-disable-next-line functional/no-expression-statement
-	document.addEventListener('DOMContentLoaded', handler, options)
+	handlerStore.add(handler)
+	document.addEventListener(
+		'DOMContentLoaded',
+		// eslint-disable-next-line functional/functional-parameters
+		() => {
+			handlerStore.has(handler) && handler()
+			handlerStore.delete(handler)
+		},
+		options
+	)
 	// eslint-disable-next-line functional/no-conditional-statement
 	if (
 		document.readyState === 'complete' ||
 		document.readyState === 'interactive'
 	) {
-		// eslint-disable-next-line functional/no-expression-statement
-		handler()
+		handlerStore.has(handler) && handler()
+		handlerStore.delete(handler)
 	}
 }
