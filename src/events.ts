@@ -1,3 +1,4 @@
+/* eslint-disable functional/no-expression-statement */
 /* eslint-disable functional/no-return-void */
 import type {
 	ClubsConfiguration,
@@ -8,6 +9,9 @@ import type {
 	ClubsPluginOptions,
 	ClubsEventsDetailFinishConfiguration,
 	ClubsEventsDetailBuildConfiguration,
+	ClubsEventsFinishConfiguration,
+	ClubsEventsDetailUpdatedPluginOptions,
+	ClubsEventsDetailUpdatedConfiguration,
 } from './types'
 import { ClubsEvents } from './types'
 
@@ -23,12 +27,40 @@ export const setOptions = (data: ClubsPluginOptions, pluginIndex: number) => {
 	)
 }
 
+export const updatedOptions = (
+	results: ClubsEventsDetailUpdatedPluginOptions
+) => {
+	return document.body.dispatchEvent(
+		new CustomEvent<ClubsEventsDetailUpdatedPluginOptions>(
+			ClubsEvents.UpdatedPluginOptions,
+			{
+				detail: results,
+				cancelable: true,
+			}
+		)
+	)
+}
+
 export const setConfig = (data: ClubsConfiguration) => {
 	return document.body.dispatchEvent(
 		new CustomEvent<ClubsEventsDetailUpdateConfiguration>(
 			ClubsEvents.UpdateConfiguration,
 			{
 				detail: { data },
+				cancelable: true,
+			}
+		)
+	)
+}
+
+export const updatedConfig = (
+	results: ClubsEventsDetailUpdatedConfiguration
+) => {
+	return document.body.dispatchEvent(
+		new CustomEvent<ClubsEventsDetailUpdatedConfiguration>(
+			ClubsEvents.UpdatedConfiguration,
+			{
+				detail: results,
 				cancelable: true,
 			}
 		)
@@ -72,8 +104,66 @@ const finish = (results: ClubsEventsDetailFinishConfiguration) => {
 }
 
 export const onSubmitConfig = (
-	handler: (data: string, onFinish: typeof finish) => void
+	handler: (data: string, onFinish: typeof finish) => void,
+	options?: AddEventListenerOptions
 ) =>
-	document.body.addEventListener(ClubsEvents.SubmitConfiguration, (ev) =>
-		handler((ev as ClubsEventsSubmitConfiguration).detail.data, finish)
+	document.body.addEventListener(
+		ClubsEvents.SubmitConfiguration,
+		(ev) => handler((ev as ClubsEventsSubmitConfiguration).detail.data, finish),
+		options
 	)
+
+export const onUpdatedPluginOptions = (
+	handler: (data: CustomEvent<ClubsEventsDetailUpdatedPluginOptions>) => void,
+	options?: AddEventListenerOptions
+) =>
+	document.body.addEventListener(
+		ClubsEvents.UpdatedPluginOptions,
+		(ev) => handler(ev as CustomEvent<ClubsEventsDetailUpdatedPluginOptions>),
+		options
+	)
+
+export const onUpdatedConfiguration = (
+	handler: (data: CustomEvent<ClubsEventsDetailUpdatedConfiguration>) => void,
+	options?: AddEventListenerOptions
+) =>
+	document.body.addEventListener(
+		ClubsEvents.UpdatedConfiguration,
+		(ev) => handler(ev as CustomEvent<ClubsEventsDetailUpdatedConfiguration>),
+		options
+	)
+
+export const onFinishConfig = (
+	handler: (data: CustomEvent<ClubsEventsDetailFinishConfiguration>) => void,
+	options?: AddEventListenerOptions
+) =>
+	document.body.addEventListener(
+		ClubsEvents.FinishConfiguration,
+		(ev) => handler(ev as CustomEvent<ClubsEventsDetailFinishConfiguration>),
+		options
+	)
+
+const handlerStore = new WeakSet<(data?: Event) => void>()
+export const onMountClient = (
+	handler: (data?: Event) => void,
+	options?: AddEventListenerOptions
+) => {
+	handlerStore.add(handler)
+	document.addEventListener(
+		'DOMContentLoaded',
+		// eslint-disable-next-line functional/functional-parameters
+		() => {
+			handlerStore.has(handler) && handler()
+			handlerStore.delete(handler)
+		},
+		options
+	)
+	// eslint-disable-next-line functional/no-conditional-statement
+	if (
+		document.readyState === 'complete' ||
+		document.readyState === 'interactive'
+	) {
+		handlerStore.has(handler) && handler()
+		handlerStore.delete(handler)
+	}
+}

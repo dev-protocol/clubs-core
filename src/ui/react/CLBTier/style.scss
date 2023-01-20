@@ -1,5 +1,5 @@
-@use 'node_modules/@devprotocol/hashi' with (
-  $modular-mode: true
+@use '@devprotocol/hashi' with (
+	$modular-mode: true
 );
 
 .clb-tier {

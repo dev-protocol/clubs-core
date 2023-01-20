@@ -1,7 +1,7 @@
 ---
-import Layout from '../layouts/Default.astro'
 import { pageFactory, encode } from '../../../src/'
 import example from '../../../example/index.mjs'
+import theme from '../../../example/theme.mjs'
 
 export const { getStaticPaths } = pageFactory({
 	config: () =>
@@ -15,11 +15,15 @@ export const { getStaticPaths } = pageFactory({
 			rpcUrl: '',
 			adminRolePoints: 0,
 			options: [],
-			plugins: [{ name: 'example', options: [] }],
+			plugins: [
+				{ name: 'theme', options: [] },
+				{ name: 'example', options: [] },
+			],
 		}),
-	plugins: { example },
+	plugins: { theme, example },
 })
 
+const Layout = Astro.props.layout
 const Content = Astro.props.component
 ---
 

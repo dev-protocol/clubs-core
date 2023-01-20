@@ -1,4 +1,5 @@
-import { Props } from 'astro'
+import type { Props } from 'astro'
+import type { AstroComponentFactory } from 'astro/dist/runtime/server'
 
 export type ClubsPluginOptionValue =
 	| string
@@ -25,8 +26,10 @@ export type ClubsPlugin = Readonly<{
 	readonly options: ClubsPluginOptions
 }>
 
-export type ClubsPluginDetails = ClubsPlugin &
-	ClubsFunctionPlugin &
+export type ClubsPluginDetails<
+	P extends ClubsFunctionPlugin = ClubsFunctionPlugin
+> = ClubsPlugin &
+	P &
 	Readonly<{
 		readonly pluginIndex: number
 	}>
@@ -44,32 +47,71 @@ export type ClubsConfiguration = Readonly<{
 	readonly plugins: readonly ClubsPlugin[]
 }>
 
-export type ClubsStaticPath = Readonly<{
-	readonly paths: readonly (undefined | string)[]
-	readonly component: unknown
-	readonly props?: Props
+export type ClubsBaseStaticPath<P = Props> = Readonly<{
+	readonly layout?: AstroComponentFactory
+	readonly props?: P
 }>
 
-export type ClubsStaticPaths = readonly ClubsStaticPath[]
+export type ClubsStaticPath<P = Props> = ClubsBaseStaticPath<P> &
+	Readonly<{
+		readonly paths: readonly (undefined | string)[]
+		readonly component: AstroComponentFactory
+	}>
 
-export type ClubsFunctionGetPagePaths = (
-	options: readonly ClubsPluginOption[],
-	config: ClubsConfiguration
-) => Promise<ClubsStaticPaths>
-
-export type ClubsFunctionGetAdminPaths = ClubsFunctionGetPagePaths
-
-export type ClubsGetStaticPathsItem = {
-	readonly params: { readonly page: undefined | string }
-	readonly props: Props & { readonly component: unknown }
+export type ClubsAdminSlots = {
+	readonly 'sidebar:before-title'?: AstroComponentFactory
+	readonly 'aside:after-built-in-buttons'?: AstroComponentFactory
 }
 
-export type ClubsGetStaticPathsResult = readonly ClubsGetStaticPathsItem[]
+export type ClubsStaticPaths<P = Props> = readonly ClubsStaticPath<P>[]
 
-export type ClubsPluginMeta = { readonly displayName: string }
+export type ClubsFunctionGetPagePaths<P = ClubsStaticPaths> = (
+	options: readonly ClubsPluginOption[],
+	config: ClubsConfiguration
+) => Promise<P>
 
-export type ClubsFunctionFactoryResult = {
-	readonly getStaticPaths: () => Promise<ClubsGetStaticPathsResult>
+export type ClubsFunctionGetAdminPaths = ClubsFunctionGetPagePaths<
+	ReadonlyArray<ClubsStaticPath & { readonly slots?: ClubsAdminSlots }>
+>
+
+export type ClubsFunctionGetLayout = ClubsFunctionGetPagePaths<
+	ClubsBaseStaticPath & {
+		readonly layout: AstroComponentFactory
+	}
+>
+
+export type ClubsGetStaticPathsItem<P = Props> = {
+	readonly params: { readonly page: undefined | string }
+	readonly props: P & {
+		readonly component: AstroComponentFactory
+		readonly layout: AstroComponentFactory
+	}
+}
+
+export type ClubsGetStaticPathsResult<P = Props> =
+	readonly ClubsGetStaticPathsItem<P>[]
+
+export enum ClubsPluginCategory {
+	Monetization = 'monetization',
+	Growth = 'growth',
+	Governance = 'governance',
+	Uncategorized = 'uncategorized',
+	Theme = 'theme',
+}
+
+export type ClubsPluginMeta = {
+	readonly displayName: string
+	readonly category: ClubsPluginCategory | string
+}
+
+export type ClubsThemePluginMeta = ClubsPluginMeta & {
+	readonly theme: {
+		readonly previewImage: string
+	}
+}
+
+export type ClubsFunctionFactoryResult<P = Props> = {
+	readonly getStaticPaths: () => Promise<ClubsGetStaticPathsResult<P>>
 	readonly getCurrentConfig: () => Promise<ClubsConfiguration>
 }
 
@@ -86,21 +128,29 @@ export type ClubsFunctionOnSubmitConfiguration = (
 	encodedConfig: string
 ) => Promise<void | Error>
 
-export type ClubsPropsAdmin = {
-	readonly onSubmit: ClubsFunctionOnSubmitConfiguration
-}
-
-export type ClubsFunctionPageFactory = (
+export type ClubsFunctionPageFactory<P = Props> = (
 	options: ClubsFunctionPageFactoryOptions
-) => ClubsFunctionFactoryResult
+) => ClubsFunctionFactoryResult<P>
 
-export type ClubsFunctionAdminFactory = ClubsFunctionPageFactory
+export type ClubsFunctionAdminFactory =
+	ClubsFunctionPageFactory<ClubsPropsAdminPages>
 
-export type ClubsFunctionPlugin = Readonly<{
+export type ClubsFunctionStandardPlugin = Readonly<{
 	readonly getPagePaths: ClubsFunctionGetPagePaths
 	readonly getAdminPaths: ClubsFunctionGetAdminPaths
 	readonly meta: ClubsPluginMeta
 }>
+
+export type ClubsFunctionThemePlugin = Readonly<{
+	readonly getPagePaths: ClubsFunctionGetPagePaths
+	readonly getAdminPaths: ClubsFunctionGetAdminPaths
+	readonly getLayout: ClubsFunctionGetLayout
+	readonly meta: ClubsThemePluginMeta
+}>
+
+export type ClubsFunctionPlugin =
+	| ClubsFunctionStandardPlugin
+	| ClubsFunctionThemePlugin
 
 export type ClubsFunctionConfigFetcher = () => string | Promise<string>
 
@@ -128,12 +178,15 @@ export type ClubsPropsAdminPages = Props & {
 		readonly currentPluginIndex: number
 		readonly encodedClubsConfiguration: string
 		readonly plugins: ReadonlyArray<ClubsPropsClubsPlugin>
+		readonly slots?: ClubsAdminSlots
 	}
 }
 
 export enum ClubsEvents {
 	UpdatePluginOptions = 'clubs:update_plugin_options',
+	UpdatedPluginOptions = 'clubs:updated_plugin_options',
 	UpdateConfiguration = 'clubs:update_configuration',
+	UpdatedConfiguration = 'clubs:updated_configuration',
 	BuildConfiguration = 'clubs:build_configuration',
 	SubmitConfiguration = 'clubs:submit_configuration',
 	FinishConfiguration = 'clubs:submit_finish_configuration',
@@ -144,8 +197,19 @@ export type ClubsEventsDetailUpdatePluginOptions = {
 	readonly pluginIndex: number
 }
 
+export type ClubsEventsDetailUpdatedPluginOptions = {
+	readonly pluginIndex?: number
+	readonly success: boolean
+	readonly error?: Error
+}
+
 export type ClubsEventsDetailUpdateConfiguration = {
 	readonly data: ClubsConfiguration
+}
+
+export type ClubsEventsDetailUpdatedConfiguration = {
+	readonly success: boolean
+	readonly error?: Error
 }
 
 export type ClubsEventsDetailBuildConfiguration = undefined
@@ -161,8 +225,12 @@ export type ClubsEventsDetailFinishConfiguration = {
 
 export type ClubsEventsUpdatePluginOptions =
 	CustomEvent<ClubsEventsDetailUpdatePluginOptions>
+export type ClubsEventsUpdatedPluginOptions =
+	CustomEvent<ClubsEventsDetailUpdatedPluginOptions>
 export type ClubsEventsUpdateConfiguration =
 	CustomEvent<ClubsEventsDetailUpdateConfiguration>
+export type ClubsEventsUpdatedConfiguration =
+	CustomEvent<ClubsEventsDetailUpdatedConfiguration>
 export type ClubsEventsBuildConfiguration =
 	CustomEvent<ClubsEventsDetailBuildConfiguration>
 export type ClubsEventsSubmitConfiguration =

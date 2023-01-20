@@ -1,8 +1,15 @@
 ---
-import { ClubsPropsClubsPlugin } from '../types'
+import { ClubsPluginCategory, ClubsPropsClubsPlugin } from '../types'
+import Clubs from './primitives/Clubs.astro'
 import AdminSidebarGroup from './AdminSidebarGroup.astro'
+import AdminSidebarMainItem from './AdminSidebarMainItem.astro'
+import IconDesktop from './icons/computer-desktop.astro'
+import IconGlobe from './icons/globe-europe-africa.astro'
+import IconGroup from './icons/rectangle-group.astro'
+import IconSquareSmall from './icons/square-small.astro'
 
-const { name, enabledPlugins } = Astro.props as {
+const { page, name, enabledPlugins } = Astro.props as {
+	page?: string
 	name: string
 	enabledPlugins: ClubsPropsClubsPlugin[]
 }
@@ -11,22 +18,147 @@ const cache = new Set<string>()
 const onlyFirstItems = enabledPlugins.filter(({ name }) =>
 	cache.has(name) ? false : cache.add(name)
 )
+
+const catMonetization = onlyFirstItems.filter(
+	(item) => item.meta.category === ClubsPluginCategory.Monetization
+)
+const catGrowth = onlyFirstItems.filter(
+	(item) => item.meta.category === ClubsPluginCategory.Growth
+)
+const catGovernance = onlyFirstItems.filter(
+	(item) => item.meta.category === ClubsPluginCategory.Governance
+)
+const catOther = onlyFirstItems.filter(
+	(item) => item.meta.category === ClubsPluginCategory.Uncategorized
+)
+
+const hereIs = (slug: string) => page?.startsWith(slug)
+
+const navItemPlugin =
+	'capitalize block px-3 py-1 -mx-2 rounded transition-colors'
+const navItemPluginActive = 'bg-native-blue-400 hover:bg-native-blue-300'
+const navItemPluginInactive = 'hover:bg-dp-blue-grey-300'
 ---
 
-<h1 class="font-title text-lg font-bold">{name}</h1>
+<Clubs />
+<div class="grid gap-4">
+	<slot name="before-title" />
+	<h1 class="font-title text-lg font-bold">{name}</h1>
+</div>
 <nav class="grid gap-16">
-	<AdminSidebarGroup>
-		<a class="text-sm" href="/admin">Admin</a>
-		<a class="text-sm" href="/admin/plugins">Plugins</a>
-	</AdminSidebarGroup>
+	<ul class="grid gap-1">
+		<AdminSidebarMainItem href="/admin" active={hereIs('overview')}>
+			<span class="text-[#88AEFF]"><IconGroup /></span>Overview
+		</AdminSidebarMainItem>
+		<AdminSidebarMainItem
+			href="/admin/marketplace"
+			active={hereIs('marketplace')}
+		>
+			<span class="text-[#D500E6]"><IconGlobe /></span>Marketplace
+		</AdminSidebarMainItem>
+		<AdminSidebarMainItem href="/admin/theme" active={hereIs('theme')}>
+			<span class="text-[#51E0FF]"><IconDesktop /></span>Theme
+		</AdminSidebarMainItem>
+	</ul>
 
-	<AdminSidebarGroup>
-		{
-			onlyFirstItems.map((plugin) => (
-				<a class="text-sm capitalize" href={plugin.pathname}>
-					{plugin.meta.displayName}
-				</a>
-			))
-		}
-	</AdminSidebarGroup>
+	<ul>
+		<AdminSidebarGroup>
+			<h2 class="flex gap-2">
+				<span class="text-[#D500E6]"><IconSquareSmall /></span>Monetization
+			</h2>
+			{
+				catMonetization.map((plugin) => (
+					<li>
+						<a
+							class={`${navItemPlugin} ${
+								hereIs(plugin.page)
+									? navItemPluginActive
+									: navItemPluginInactive
+							}`}
+							href={plugin.pathname}
+						>
+							{plugin.meta.displayName}
+						</a>
+					</li>
+				))
+			}
+		</AdminSidebarGroup>
+	</ul>
+
+	<ul>
+		<AdminSidebarGroup>
+			<h2 class="flex gap-2">
+				<span class="text-[#00D0FD]"><IconSquareSmall /></span>Growth
+			</h2>
+			{
+				catGrowth.map((plugin) => (
+					<li>
+						<a
+							class={`${navItemPlugin} ${
+								hereIs(plugin.page)
+									? navItemPluginActive
+									: navItemPluginInactive
+							}`}
+							href={plugin.pathname}
+						>
+							{plugin.meta.displayName}
+						</a>
+					</li>
+				))
+			}
+		</AdminSidebarGroup>
+	</ul>
+
+	<ul>
+		<AdminSidebarGroup>
+			<h2 class="flex gap-2">
+				<span class="text-[#FF3815]"><IconSquareSmall /></span>Governance
+			</h2>
+			{
+				catGovernance.map((plugin) => (
+					<li>
+						<a
+							class={`${navItemPlugin} ${
+								hereIs(plugin.page)
+									? navItemPluginActive
+									: navItemPluginInactive
+							}`}
+							href={plugin.pathname}
+						>
+							{plugin.meta.displayName}
+						</a>
+					</li>
+				))
+			}
+		</AdminSidebarGroup>
+	</ul>
+
+	<ul>
+		<AdminSidebarGroup>
+			<h2 class="flex gap-2">
+				<span class="text-[#5B8BF5]"><IconSquareSmall /></span>Other
+			</h2>
+			{
+				catOther.map((plugin) => (
+					<li>
+						<a
+							class={`${navItemPlugin} ${
+								hereIs(plugin.page)
+									? navItemPluginActive
+									: navItemPluginInactive
+							}`}
+							href={plugin.pathname}
+						>
+							{plugin.meta.displayName}
+						</a>
+					</li>
+				))
+			}
+		</AdminSidebarGroup>
+	</ul>
+
+	<ul class="grid gap-4">
+		<li><a class="text-[#88AEFF]" href="/admin/general">General</a></li>
+		<li><a class="text-[#88AEFF]" href="/admin/plugins">Plugins</a></li>
+	</ul>
 </nav>

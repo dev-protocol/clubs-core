@@ -1,14 +1,19 @@
 <template>
-	<aside>
-		<ConnectButton class="w-full" />
+	<aside class="grid gap-8 sticky top-8">
+		<ConnectButton
+			id="clubs_connect_button"
+			v-if="showConnectButton"
+			class="w-full"
+		/>
 		<ActionButton
-			class="mt-8 w-full"
+			class="w-full"
 			:status="status.save"
 			successText="Saved"
 			loadingText="Saving"
 			@click="save"
 			>Save</ActionButton
 		>
+		<slot></slot>
 	</aside>
 </template>
 
@@ -33,6 +38,10 @@ export default defineComponent({
 		config: {
 			type: Object as () => ClubsConfiguration,
 			required: true,
+		},
+		showConnectButton: {
+			type: Boolean,
+			default: true,
 		},
 	},
 	data: () => ({

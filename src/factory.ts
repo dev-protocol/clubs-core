@@ -10,11 +10,16 @@ import type {
 	ClubsPropsAdminPages,
 	ClubsPluginDetails,
 	ClubsStaticPath,
+	ClubsFunctionThemePlugin,
+	ClubsFunctionPlugin,
+	ClubsAdminSlots,
 } from './types'
+import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
 import { Props } from 'astro'
 
-type Plugins = readonly ClubsPluginDetails[]
+type Plugins<P extends ClubsFunctionPlugin = ClubsFunctionPlugin> =
+	readonly ClubsPluginDetails<P>[]
 type ClubsStaticPathWithDetails = ClubsStaticPath & {
 	readonly details: ClubsPluginDetails
 }
@@ -24,15 +29,29 @@ const _listPlugins = async (
 	list: ClubsPluginsMap
 ): Promise<Plugins> => {
 	const plugins: Plugins = await Promise.all(
-		config.plugins.map(async ({ name, enable = true, options }, i: number) => {
-			const fn = list[name] || {}
-			return { name, enable, options, ...fn, pluginIndex: i }
-		})
+		config.plugins.map(
+			async ({ name, enable = true, options = [] }, i: number) => {
+				const fn = list[name] || {}
+				return { name, enable, options, ...fn, pluginIndex: i }
+			}
+		)
 	)
 
 	return plugins.filter(({ name }) =>
 		Object.prototype.hasOwnProperty.call(list, name)
 	)
+}
+
+const _findCurrentTheme = (
+	plugins: Plugins
+): ClubsPluginDetails<ClubsFunctionThemePlugin> => {
+	return plugins.find(
+		(plugin) =>
+			(plugin.enable === true || typeof plugin.enable === 'undefined') &&
+			plugin.meta.category === ClubsPluginCategory.Theme &&
+			Object.prototype.hasOwnProperty.call(plugin, 'getLayout') &&
+			Object.prototype.hasOwnProperty.call(plugin.meta, 'theme')
+	) as ClubsPluginDetails<ClubsFunctionThemePlugin>
 }
 
 const _configFactory: (
@@ -71,12 +90,18 @@ const _staticPathsFromPlugins =
 const _pathsToPage = (paths: readonly (string | undefined)[]) =>
 	paths.join('/') || undefined
 
-const _compose = (pluginResults: readonly ClubsStaticPathWithDetails[]) =>
+const _compose = <P extends Props>(
+	pluginResults: readonly ClubsStaticPathWithDetails[]
+) =>
 	pluginResults.map((res) => ({
 		params: {
 			page: _pathsToPage(res.paths),
 		},
-		props: { ...res.props, component: res.component },
+		props: {
+			...(res.props as P),
+			component: res.component,
+			layout: res.layout,
+		},
 	}))
 
 const _staticPagePathsFactory: (
@@ -90,7 +115,14 @@ const _staticPagePathsFactory: (
 		const plugins = await _listPlugins(config, pluginsMap)
 		const getResultsOfPlugins = _staticPathsFromPlugins(config, 'getPagePaths')
 		const pluginResults = await getResultsOfPlugins(plugins)
-		const staticPaths = _compose(pluginResults)
+		const theme = _findCurrentTheme(plugins)
+		const defaultLayout = await theme.getLayout(theme.options, config)
+		const themeInjected = pluginResults.map((res) => ({
+			...res,
+			layout: res.layout ?? defaultLayout.layout,
+			props: { ...res.props, ...defaultLayout.props },
+		}))
+		const staticPaths = _compose(themeInjected) as ClubsGetStaticPathsResult
 
 		return staticPaths
 	}
@@ -98,10 +130,10 @@ const _staticPagePathsFactory: (
 const _staticAdminPathsFactory: (
 	configFetcher: ClubsFunctionConfigFetcher,
 	pluginsMap: ClubsPluginsMap
-) => () => Promise<ClubsGetStaticPathsResult> =
+) => () => Promise<ClubsGetStaticPathsResult<ClubsPropsAdminPages>> =
 	(configFetcher, pluginsMap) =>
 	// eslint-disable-next-line functional/functional-parameters
-	async (): Promise<ClubsGetStaticPathsResult> => {
+	async (): Promise<ClubsGetStaticPathsResult<ClubsPropsAdminPages>> => {
 		const [config, encodedClubsConfiguration] = await getClubsConfig(
 			configFetcher
 		)
@@ -115,11 +147,13 @@ const _staticAdminPathsFactory: (
 						encodedClubsConfiguration,
 						currentPluginIndex,
 					},
-				} as Omit<ClubsPropsAdminPages, 'plugins'>)
+				} as Omit<ClubsPropsAdminPages, 'plugins' | 'slots'>)
 		)
 		const pluginResults = (await getResultsOfPlugins(
 			plugins
-		)) as readonly ClubsStaticPathWithDetails[]
+		)) as readonly (ClubsStaticPathWithDetails & {
+			readonly slots?: ClubsAdminSlots
+		})[]
 		const pluginsWithPaths = pluginResults.map((result) => {
 			const {
 				details: { getPagePaths, getAdminPaths, ...plg },
@@ -140,10 +174,13 @@ const _staticAdminPathsFactory: (
 				clubs: {
 					...(plg.props as ClubsPropsAdminPages).clubs,
 					plugins: pluginsWithPaths,
+					slots: plg.slots,
 				},
 			},
 		}))
-		const staticPaths = _compose(injected)
+		const staticPaths = _compose<ClubsPropsAdminPages>(
+			injected
+		) as ClubsGetStaticPathsResult<ClubsPropsAdminPages>
 
 		return staticPaths
 	}

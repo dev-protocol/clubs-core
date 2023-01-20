@@ -1,10 +1,10 @@
 <template>
 	<div class="clb-tier">
 		<img
-				v-if="media"
-				:src="media"
-				class="clb-tier__media"
-				:alt="`Media file of the ${title} badge.`"
+			v-if="media"
+			:src="media"
+			class="clb-tier__media"
+			:alt="`Media file of the ${title} badge.`"
 		/>
 		<CLBSkeleton v-if="!media" class="min-h-[16rem] w-full" />
 		<div class="mb-2 grid">
@@ -41,8 +41,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use 'node_modules/@devprotocol/hashi' with (
-  $vue-mode: true
+@use '@devprotocol/hashi' with (
+	$vue-mode: true
 );
 
 .clb-tier {

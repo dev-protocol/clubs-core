@@ -10,7 +10,7 @@
 		class="w-full"
 	>
 		<HSButton
-			type="filled"
+			type="filled large"
 			v-if="
 				truncateWalletAddress &&
 				formattedUserBalance.length > 0 &&
@@ -20,7 +20,7 @@
 			{{ truncateWalletAddress }}
 		</HSButton>
 		<HSButton
-			type="filled"
+			type="filled large"
 			v-else-if="
 				truncateWalletAddress &&
 				formattedUserBalance.length > 0 &&
@@ -29,7 +29,12 @@
 		>
 			Unsupported Network
 		</HSButton>
-		<HSButton type="filled" v-else v-on:click="connect">
+		<HSButton
+			type="filled large"
+			v-else
+			v-on:click="connect"
+			:loading="connection === undefined || modalProvider === undefined"
+		>
 			Connect Wallet
 		</HSButton>
 		<ul
@@ -48,19 +53,19 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { providers, utils } from 'ethers'
-import Web3Modal from 'web3modal'
-import { GetModalProvider, ReConnectWallet } from '../fixtures/wallet'
-import truncateEthAddress from 'truncate-eth-address'
-import { connection } from '../connection'
+import type Web3Modal from 'web3modal'
+import type { connection as Connection } from '../connection'
 import { clientsDev } from '@devprotocol/dev-kit/agent'
 import { whenDefined } from '@devprotocol/util-ts'
 import HSButton from './Primitives/Hashi/HSButton.vue'
+import { onMountClient } from '../events'
 
 type Data = {
-	modalProvider: Web3Modal
+	modalProvider?: Web3Modal
 	truncateWalletAddress: String
 	formattedUserBalance: String
 	supportedNetwork: boolean
+	connection?: typeof Connection
 }
 
 export default defineComponent({
@@ -69,34 +74,43 @@ export default defineComponent({
 		HSButton,
 	},
 	data(): Data {
-		const modalProvider = GetModalProvider()
 		return {
-			modalProvider,
+			modalProvider: undefined,
 			truncateWalletAddress: '',
 			formattedUserBalance: '',
 			supportedNetwork: false,
+			connection: undefined,
 		}
 	},
 	async mounted() {
-		const { currentAddress, provider } = await ReConnectWallet(
-			this.modalProvider as Web3Modal
-		)
-		if (currentAddress) {
-			this.truncateWalletAddress = truncateEthAddress(currentAddress)
-		}
-		if (provider) {
-			this.setSigner(provider)
-		}
-		if (currentAddress && provider) {
-			this.fetchUserBalance(currentAddress, provider)
-		}
+		onMountClient(async () => {
+			const [{ connection }, { GetModalProvider, ReConnectWallet }] =
+				await Promise.all([
+					import('../connection'),
+					import('../fixtures/wallet'),
+				])
+			this.connection = connection
+			this.modalProvider = GetModalProvider()
+			const { currentAddress, provider } = await ReConnectWallet(
+				this.modalProvider as Web3Modal
+			)
+			if (currentAddress) {
+				this.truncateWalletAddress = this.truncateEthAddress(currentAddress)
+			}
+			if (provider) {
+				this.setSigner(provider)
+			}
+			if (currentAddress && provider) {
+				this.fetchUserBalance(currentAddress, provider)
+			}
+		})
 	},
 	methods: {
 		setSigner(provider: providers.Web3Provider) {
-			connection().signer.next(provider.getSigner())
+			this.connection!().signer.next(provider.getSigner())
 		},
 		async connect() {
-			const connectedProvider = await this.modalProvider.connect()
+			const connectedProvider = await this.modalProvider!.connect()
 			const newProvider = whenDefined(connectedProvider, (p) => {
 				const provider = new providers.Web3Provider(p)
 				this.setSigner(provider)
@@ -105,7 +119,7 @@ export default defineComponent({
 
 			const currentAddress = await newProvider?.getSigner().getAddress()
 			if (currentAddress) {
-				this.truncateWalletAddress = truncateEthAddress(currentAddress)
+				this.truncateWalletAddress = this.truncateEthAddress(currentAddress)
 			}
 			if (currentAddress && newProvider) {
 				this.fetchUserBalance(currentAddress, newProvider)
@@ -121,6 +135,13 @@ export default defineComponent({
 			const formatted = utils.formatUnits(balance ?? 0)
 			const rounded = Math.round((+formatted + Number.EPSILON) * 100) / 100
 			this.formattedUserBalance = rounded.toLocaleString()
+		},
+		truncateEthAddress(address: string) {
+			const match = address.match(
+				/^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/
+			)
+			if (!match) return address
+			return `${match[1]}\u2026${match[2]}`
 		},
 	},
 })
