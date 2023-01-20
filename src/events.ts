@@ -143,6 +143,17 @@ export const onFinishConfig = (
 	)
 
 export const onMountClient = (
-	handler: (data: Event) => void,
+	handler: (data?: Event) => void,
 	options?: AddEventListenerOptions
-) => document.addEventListener('DOMContentLoaded', handler, options)
+) => {
+	// eslint-disable-next-line functional/no-expression-statement
+	document.addEventListener('DOMContentLoaded', handler, options)
+	// eslint-disable-next-line functional/no-conditional-statement
+	if (
+		document.readyState === 'complete' ||
+		document.readyState === 'interactive'
+	) {
+		// eslint-disable-next-line functional/no-expression-statement
+		handler()
+	}
+}
