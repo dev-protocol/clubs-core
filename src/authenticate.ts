@@ -23,6 +23,12 @@ export const authenticate = async ({
 		provider,
 		previousConfig.propertyAddress
 	)
+
+	// eslint-disable-next-line functional/no-conditional-statement
+	if (!propertyClient || propertyClient.length <= 0) {
+		return false
+	}
+
 	const property = propertyClient[0] ?? propertyClient[1]
 	const totalSupply = BigNumber.from(await property?.totalSupply())
 	const userBalance = BigNumber.from(await property?.balanceOf(address))
