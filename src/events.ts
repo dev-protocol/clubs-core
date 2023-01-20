@@ -145,25 +145,19 @@ export const onFinishConfig = (
 
 const handlerStore = new WeakSet<(data?: Event) => void>()
 export const onMountClient = (
-	handler: (data?: Event) => void,
+	_handler: (data?: Event) => void,
 	options?: AddEventListenerOptions
 ) => {
-	handlerStore.add(handler)
-	document.addEventListener(
-		'DOMContentLoaded',
-		// eslint-disable-next-line functional/functional-parameters
-		() => {
-			handlerStore.has(handler) && handler()
-			handlerStore.delete(handler)
-		},
-		options
-	)
-	// eslint-disable-next-line functional/no-conditional-statement
-	if (
-		document.readyState === 'complete' ||
-		document.readyState === 'interactive'
-	) {
-		handlerStore.has(handler) && handler()
-		handlerStore.delete(handler)
+	handlerStore.add(_handler)
+	const handler = (data?: Event) => {
+		// eslint-disable-next-line functional/no-conditional-statement
+		if (((data?.target as Document) ?? document).readyState === 'complete') {
+			handlerStore.has(_handler) && _handler(data)
+			handlerStore.delete(_handler)
+			document.removeEventListener('readystatechange', handler)
+		}
 	}
+	document.addEventListener('readystatechange', handler, options)
+
+	handler()
 }
