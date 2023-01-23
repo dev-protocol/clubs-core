@@ -1,0 +1,12 @@
+---
+import Aside from './Aside.vue'
+import { ClubsConfiguration } from '../types'
+
+const { config } = Astro.props as {
+	config: ClubsConfiguration
+}
+---
+
+<Aside config={config} client:only="vue">
+	<slot />
+</Aside>
