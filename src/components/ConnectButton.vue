@@ -51,14 +51,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { providers, utils } from 'ethers'
 import type Web3Modal from 'web3modal'
 import type { connection as Connection } from '../connection'
+import { defineComponent } from 'vue'
+import { providers, utils } from 'ethers'
 import { clientsDev } from '@devprotocol/dev-kit/agent'
 import { whenDefined } from '@devprotocol/util-ts'
-import HSButton from './Primitives/Hashi/HSButton.vue'
 import { onMountClient } from '../events'
+import HSButton from './Primitives/Hashi/HSButton.vue'
 
 type Data = {
 	modalProvider?: Web3Modal

@@ -17,8 +17,8 @@ export const GetModalProvider = () => {
 	return modalProvider
 }
 
-export const ReConnectWallet = async (modalProvider: Web3Modal) => {
-	const web3ForInjected = (await detectEthereumProvider()) as any
+export const ReConnectWallet = async (modalProvider: any) => {
+	const web3ForInjected = await detectEthereumProvider()
 	if (!web3ForInjected) {
 		modalProvider.clearCachedProvider()
 		return { currentAddress: undefined, provider: undefined }
@@ -28,17 +28,21 @@ export const ReConnectWallet = async (modalProvider: Web3Modal) => {
 		modalProvider.cachedProvider === 'injected' &&
 		web3ForInjected.selectedAddress
 	) {
-		const connectedProvider = await modalProvider.connect()
-		const newProvider = whenDefined(
-			connectedProvider,
-			(p) => new providers.Web3Provider(p)
-		)
-
-		const currentAddress = await newProvider?.getSigner().getAddress()
-		return { currentAddress, provider: newProvider }
+		return EthersProviderFrom(modalProvider)
 	}
 
 	return { currentAddress: undefined, provider: undefined }
+}
+
+export const EthersProviderFrom = async (modalProvider: any) => {
+	const connectedProvider = await modalProvider.connect()
+	const newProvider = whenDefined(
+		connectedProvider,
+		(p) => new providers.Web3Provider(p)
+	)
+
+	const currentAddress = await newProvider?.getSigner().getAddress()
+	return { currentAddress, provider: newProvider }
 }
 
 export const Disconnect = (modalProvider: any) => {
