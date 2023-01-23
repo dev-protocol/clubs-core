@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { buildConfig } from '../events'
+import { buildConfig, onMountClient } from '../events'
 import {
 	ClubsConfiguration,
 	ClubsEvents,
@@ -51,29 +51,31 @@ export default defineComponent({
 		timeout: null as ReturnType<typeof setTimeout> | null,
 	}),
 	mounted() {
-		document.body.addEventListener(
-			ClubsEvents.FinishConfiguration,
-			(ev: any) => {
-				this.resetTimeout()
-				let timer = null
+		onMountClient(() => {
+			document.body.addEventListener(
+				ClubsEvents.FinishConfiguration,
+				(ev: any) => {
+					this.resetTimeout()
+					let timer = null
 
-				if (typeof ev.detail.success === 'boolean') {
-					if (ev.detail.success) {
-						this.status.save = 2 // Success state
+					if (typeof ev.detail.success === 'boolean') {
+						if (ev.detail.success) {
+							this.status.save = 2 // Success state
 
-						// Reset save button to default state after showing success for 3 seconds
-						timer = setTimeout(() => (this.status.save = 0), 3000)
-					} else {
-						this.status.save = 3 // Error state
+							// Reset save button to default state after showing success for 3 seconds
+							timer = setTimeout(() => (this.status.save = 0), 3000)
+						} else {
+							this.status.save = 3 // Error state
 
-						// Reset save button to default state after showing error for 3 seconds
-						timer = setTimeout(() => (this.status.save = 0), 3000)
+							// Reset save button to default state after showing error for 3 seconds
+							timer = setTimeout(() => (this.status.save = 0), 3000)
+						}
 					}
-				}
 
-				if (timer) this.timeout = timer
-			}
-		)
+					if (timer) this.timeout = timer
+				}
+			)
+		})
 	},
 	methods: {
 		async save() {
