@@ -13,6 +13,7 @@ import type {
 	ClubsFunctionThemePlugin,
 	ClubsFunctionPlugin,
 	ClubsAdminSlots,
+	ClubsPlugin,
 } from './types'
 import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
@@ -63,6 +64,20 @@ const _configFactory: (
 		return config
 	}
 
+const getPluginConfigByIdFactory =
+	(config: ClubsConfiguration, plugins: Plugins) =>
+	(id: string): ClubsPlugin | undefined => {
+		const plugin = plugins.find(({ meta }) => meta.id === id)
+		const res: ClubsPlugin | undefined = plugin
+			? {
+					name: plugin.name,
+					options: plugin.options,
+					enable: plugin.enable,
+			  }
+			: undefined
+		return res
+	}
+
 const _staticPathsFromPlugins =
 	(
 		config: ClubsConfiguration,
@@ -73,9 +88,11 @@ const _staticPathsFromPlugins =
 		(
 			await Promise.all(
 				plugins.map(async (plugin) => {
-					const results = (await plugin[caller](plugin.options, config)).map(
-						(x) => ({ ...x, details: plugin })
-					)
+					const results = (
+						await plugin[caller](plugin.options, config, {
+							getPluginConfigById: getPluginConfigByIdFactory(config, plugins),
+						})
+					).map((x) => ({ ...x, details: plugin }))
 					const updated = additionalProps
 						? results.map((res, i) => ({
 								...res,
@@ -116,7 +133,9 @@ const _staticPagePathsFactory: (
 		const getResultsOfPlugins = _staticPathsFromPlugins(config, 'getPagePaths')
 		const pluginResults = await getResultsOfPlugins(plugins)
 		const theme = _findCurrentTheme(plugins)
-		const defaultLayout = await theme.getLayout(theme.options, config)
+		const defaultLayout = await theme.getLayout(theme.options, config, {
+			getPluginConfigById: getPluginConfigByIdFactory(config, plugins),
+		})
 		const themeInjected = pluginResults.map((res) => ({
 			...res,
 			layout: res.layout ?? defaultLayout.layout,

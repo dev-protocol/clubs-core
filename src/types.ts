@@ -65,9 +65,18 @@ export type ClubsAdminSlots = {
 
 export type ClubsStaticPaths<P = Props> = readonly ClubsStaticPath<P>[]
 
+export type ClubsFunctionGetPluginConfigById = (
+	id: string
+) => ClubsPlugin | undefined
+
+export type ClubsFactoryUtils = {
+	readonly getPluginConfigById: ClubsFunctionGetPluginConfigById
+}
+
 export type ClubsFunctionGetPagePaths<P = ClubsStaticPaths> = (
 	options: readonly ClubsPluginOption[],
-	config: ClubsConfiguration
+	config: ClubsConfiguration,
+	utils: ClubsFactoryUtils
 ) => Promise<P>
 
 export type ClubsFunctionGetAdminPaths = ClubsFunctionGetPagePaths<
@@ -100,6 +109,7 @@ export enum ClubsPluginCategory {
 }
 
 export type ClubsPluginMeta = {
+	readonly id?: string
 	readonly displayName: string
 	readonly category: ClubsPluginCategory | string
 }
