@@ -73,7 +73,13 @@ export type ClubsFactoryUtils = {
 	readonly getPluginConfigById: ClubsFunctionGetPluginConfigById
 }
 
-export type ClubsFunctionGetPagePaths<P = ClubsStaticPaths> = (
+export type ClubsFunctionGetPagePaths<
+	P = ClubsStaticPaths<
+		Props & {
+			readonly signals?: readonly (ClubsPluginSignal | string)[]
+		}
+	>
+> = (
 	options: readonly ClubsPluginOption[],
 	config: ClubsConfiguration,
 	utils: ClubsFactoryUtils
@@ -106,6 +112,12 @@ export enum ClubsPluginCategory {
 	Governance = 'governance',
 	Uncategorized = 'uncategorized',
 	Theme = 'theme',
+}
+
+export enum ClubsPluginSignal {
+	DisplayWideWidth = 'display:wide-width',
+	DisplayFullWidth = 'display:full-width',
+	DisplayFullPage = 'display:full-page',
 }
 
 export type ClubsPluginMeta = {
