@@ -130,7 +130,7 @@
 	},
 	"devDependencies": {
 		"@astrojs/lit": "1.1.1",
-		"@astrojs/react": "2.0.1",
+		"@astrojs/react": "2.0.2",
 		"@astrojs/svelte": "2.0.0",
 		"@astrojs/tailwind": "3.0.0",
 		"@astrojs/vue": "2.0.0",
