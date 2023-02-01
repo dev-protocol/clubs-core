@@ -11,7 +11,8 @@ import Bars3BottomLeft from './icons/bars-3-bottom-left.astro'
 import '../styles'
 
 const { page } = Astro.params
-const { clubs } = Astro.props as ClubsPropsAdminPages
+const { clubs, showConnectButton, showAside } =
+	Astro.props as ClubsPropsAdminPages
 
 const config = decode(clubs.encodedClubsConfiguration)
 const { name } = config
@@ -90,17 +91,19 @@ const SlotsAsideAfterBuiltInButtons =
 					}
 				</div>
 			</main>
-			<div class="container mx-auto px-2 lg:px-0 py-8 lg:py-16">
-				<Aside config={config} showConnectButton={true}>
-					{
-						SlotsAsideAfterBuiltInButtons ? (
-							<SlotsAsideAfterBuiltInButtons {...Astro.props} />
-						) : (
-							<slot name="aside:after-built-in-buttons" />
-						)
-					}
-				</Aside>
-			</div>
+			{
+				showAside && (
+					<div class="container mx-auto px-2 lg:px-0 py-8 lg:py-16">
+						<Aside config={config} showConnectButton={showConnectButton}>
+							{SlotsAsideAfterBuiltInButtons ? (
+								<SlotsAsideAfterBuiltInButtons {...Astro.props} />
+							) : (
+								<slot name="aside:after-built-in-buttons" />
+							)}
+						</Aside>
+					</div>
+				)
+			}
 
 			<!-- Navigation bar for mobile -->
 			<div
