@@ -196,6 +196,8 @@ export type ClubsPropsClubsPlugin = Omit<
 }
 
 export type ClubsPropsAdminPages = Props & {
+	readonly showConnectButton?: boolean
+	readonly showAside?: boolean
 	readonly clubs: {
 		readonly currentPluginIndex: number
 		readonly encodedClubsConfiguration: string
