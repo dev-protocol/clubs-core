@@ -1,5 +1,5 @@
 import { clientsProperty } from '@devprotocol/dev-kit'
-import { BigNumber, providers, utils } from 'ethers'
+import { BigNumber, constants, providers, utils } from 'ethers'
 import { decode } from './decode'
 
 export type ClubsFunctionAuthenticationAdminParams = {
@@ -33,6 +33,13 @@ export const authenticate = async ({
 	const totalSupply = BigNumber.from(await property?.totalSupply())
 	const userBalance = BigNumber.from(await property?.balanceOf(address))
 
-	const userShare = userBalance.div(totalSupply).toNumber()
+	const userShare = Number(
+		// Parsing (balance * 1e18 / supply) with 1e16
+		utils.formatUnits(
+			userBalance.mul(constants.WeiPerEther).div(totalSupply),
+			16
+		)
+	)
+
 	return userShare >= previousConfig.adminRolePoints
 }
