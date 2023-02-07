@@ -67,7 +67,7 @@ export type ClubsStaticPaths<P = Props> = readonly ClubsStaticPath<P>[]
 
 export type ClubsFunctionGetPluginConfigById = (
 	id: string
-) => ClubsPlugin | undefined
+) => readonly [ClubsPlugin, number] | readonly [undefined, undefined]
 
 export type ClubsFactoryUtils = {
 	readonly getPluginConfigById: ClubsFunctionGetPluginConfigById

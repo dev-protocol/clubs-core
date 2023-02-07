@@ -14,6 +14,7 @@ import type {
 	ClubsFunctionPlugin,
 	ClubsAdminSlots,
 	ClubsPlugin,
+	ClubsFunctionGetPluginConfigById,
 } from './types'
 import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
@@ -65,16 +66,26 @@ const _configFactory: (
 	}
 
 const getPluginConfigByIdFactory =
-	(config: ClubsConfiguration, plugins: Plugins) =>
-	(id: string): ClubsPlugin | undefined => {
+	(
+		config: ClubsConfiguration,
+		plugins: Plugins
+	): ClubsFunctionGetPluginConfigById =>
+	(
+		id: string
+	): readonly [ClubsPlugin, number] | readonly [undefined, undefined] => {
 		const plugin = plugins.find(({ meta }) => meta.id === id)
-		const res: ClubsPlugin | undefined = plugin
-			? {
-					name: plugin.name,
-					options: plugin.options,
-					enable: plugin.enable,
-			  }
-			: undefined
+		const res:
+			| readonly [ClubsPlugin, number]
+			| readonly [undefined, undefined] = plugin
+			? [
+					{
+						name: plugin.name,
+						options: plugin.options,
+						enable: plugin.enable,
+					},
+					plugin.pluginIndex,
+			  ]
+			: [undefined, undefined]
 		return res
 	}
 
