@@ -1,0 +1,18 @@
+---
+import type { ClubsPropsAdminPages } from '../types'
+import ModalManager from './ModalManager.svelte'
+
+const { clubs } = Astro.props as ClubsPropsAdminPages
+
+const SlotsModalContent = clubs.slots && clubs.slots['modal:content']
+---
+
+<ModalManager client:load>
+	{
+		SlotsModalContent ? (
+			<SlotsModalContent {...Astro.props} />
+		) : (
+			<slot name="modal:inner" />
+		)
+	}
+</ModalManager>

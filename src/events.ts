@@ -12,6 +12,7 @@ import type {
 	ClubsEventsFinishConfiguration,
 	ClubsEventsDetailUpdatedPluginOptions,
 	ClubsEventsDetailUpdatedConfiguration,
+	ClubsEventsDetailControlModal,
 } from './types'
 import { ClubsEvents } from './types'
 
@@ -142,6 +143,15 @@ export const onFinishConfig = (
 		(ev) => handler(ev as CustomEvent<ClubsEventsDetailFinishConfiguration>),
 		options
 	)
+
+export const controlModal = (data: ClubsEventsDetailControlModal) => {
+	return document.body.dispatchEvent(
+		new CustomEvent<ClubsEventsDetailControlModal>(ClubsEvents.ControlModal, {
+			detail: data,
+			cancelable: true,
+		})
+	)
+}
 
 const handlerStore = new WeakSet<(data?: Event) => void>()
 export const onMountClient = (

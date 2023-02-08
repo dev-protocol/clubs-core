@@ -7,6 +7,7 @@ import Aside from './Aside.astro'
 import Clubs from './primitives/Clubs.astro'
 import XMark from './icons/x-mark.astro'
 import Bars3BottomLeft from './icons/bars-3-bottom-left.astro'
+import Modal from './Modal.astro'
 
 import '../styles'
 
@@ -120,6 +121,7 @@ const SlotsAsideAfterBuiltInButtons =
 			</div>
 			<AdminConfigurationManager {clubs} />
 		</div>
+		<Modal {...Astro.props} />
 	</body>
 
 	<script>

@@ -3,3 +3,25 @@ import Admin from './Admin.jsx'
 ---
 
 <Admin client:only="react" {...Astro.props} />
+
+<script>
+	import { onMountClient } from '../src/events'
+	import { controlModal } from '../src/events'
+
+	onMountClient(() => {
+		setTimeout(() => {
+			controlModal({
+				open: true,
+				blocks: true,
+				state: 'loading',
+				closeButton: { label: 'Close' },
+			})
+		}, 1000)
+
+		setTimeout(() => {
+			controlModal({
+				open: false,
+			})
+		}, 5000)
+	})
+</script>

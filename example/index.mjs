@@ -1,6 +1,7 @@
 /* eslint-disable functional/functional-parameters */
 import { default as Example } from './Example.astro'
 import { default as Admin } from './Admin.astro'
+import { default as Modal } from './Modal.astro'
 
 export const getPagePaths = async () => [
 	{ paths: [], component: Example },
@@ -20,6 +21,7 @@ export const getAdminPaths = async (options) => [
 		paths: ['example'],
 		component: Admin,
 		props: { options },
+		slots: { 'modal:content': Modal },
 	},
 ]
 

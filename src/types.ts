@@ -61,6 +61,7 @@ export type ClubsStaticPath<P = Props> = ClubsBaseStaticPath<P> &
 export type ClubsAdminSlots = {
 	readonly 'sidebar:before-title'?: AstroComponentFactory
 	readonly 'aside:after-built-in-buttons'?: AstroComponentFactory
+	readonly 'modal:content'?: AstroComponentFactory
 }
 
 export type ClubsStaticPaths<P = Props> = readonly ClubsStaticPath<P>[]
@@ -212,6 +213,7 @@ export enum ClubsEvents {
 	BuildConfiguration = 'clubs:build_configuration',
 	SubmitConfiguration = 'clubs:submit_configuration',
 	FinishConfiguration = 'clubs:submit_finish_configuration',
+	ControlModal = 'clubs:control_modal',
 }
 
 export type ClubsEventsDetailUpdatePluginOptions = {
@@ -245,6 +247,15 @@ export type ClubsEventsDetailFinishConfiguration = {
 	readonly error?: Error
 }
 
+export type ClubsEventsDetailControlModal = {
+	readonly open: boolean
+	readonly state?: 'loading' | 'alert'
+	readonly blocks?: boolean
+	readonly closeButton?: {
+		readonly label: string
+	}
+}
+
 export type ClubsEventsUpdatePluginOptions =
 	CustomEvent<ClubsEventsDetailUpdatePluginOptions>
 export type ClubsEventsUpdatedPluginOptions =
@@ -259,5 +270,6 @@ export type ClubsEventsSubmitConfiguration =
 	CustomEvent<ClubsEventsDetailSubmitConfiguration>
 export type ClubsEventsFinishConfiguration =
 	CustomEvent<ClubsEventsDetailFinishConfiguration>
+export type ClubsEventsControlModal = CustomEvent<ClubsEventsDetailControlModal>
 
 export type ClubsAstroIntegrationOptions = undefined
