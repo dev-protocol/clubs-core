@@ -9,7 +9,7 @@
 	onMount(()=>{
 		window.addEventListener('beforeunload', (ev) => {
 			ev.preventDefault()
-			if (data.blocks) {
+			if (data.blocks && data.open) {
 				ev.returnValue = confirmExit
 				return confirmExit
 			}
