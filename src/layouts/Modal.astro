@@ -12,7 +12,7 @@ const SlotsModalContent = clubs.slots && clubs.slots['modal:content']
 		SlotsModalContent ? (
 			<SlotsModalContent {...Astro.props} />
 		) : (
-			<slot name="modal:inner" />
+			<slot name="modal:content" />
 		)
 	}
 </ModalManager>
