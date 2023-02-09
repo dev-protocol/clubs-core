@@ -1,6 +1,6 @@
 <template>
 	<a :href="link" class="hs-link" :target="assertTarget(link)">
-		<slot/>
+		<slot />
 	</a>
 </template>
 
@@ -10,14 +10,15 @@ export default {
 	props: {
 		link: {
 			type: String,
-			required: true
-		}
+			required: true,
+		},
 	},
 	methods: {
 		assertTarget(link: string): string {
-			const _isExternalLink = (link: string): boolean => !!(link.startsWith('http://') || link.startsWith('https://'));
-			return _isExternalLink(link) ? '_blank' : '_self';
-		}
-	}
+			const _isExternalLink = (link: string): boolean =>
+				!!(link.startsWith('http://') || link.startsWith('https://'))
+			return _isExternalLink(link) ? '_blank' : '_self'
+		},
+	},
 }
 </script>

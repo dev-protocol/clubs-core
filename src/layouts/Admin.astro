@@ -48,13 +48,13 @@ const SlotsAsideAfterBuiltInButtons =
 		<title>{name} | Admin</title>
 	</head>
 
-	<body class="font-body bg-dp-blue-grey-300 text-white min-h-screen">
+	<body class="font-body bg-dp-blue-grey-300 min-h-screen text-white">
 		<div
-			class="grid lg:grid-flow-col lg:auto-cols-[18rem_minmax(auto,_1fr)_12rem] gap-20 lg:mr-20"
+			class="grid gap-20 lg:mr-20 lg:auto-cols-[18rem_minmax(auto,_1fr)_12rem] lg:grid-flow-col"
 		>
 			<header
 				id="__clubs:header__"
-				class="hidden z-50 fixed w-full lg:relative grid lg:grid bg-dp-blue-grey-400 gap-16 content-start py-16 px-8 overflow-y-scroll lg:overflow-y-auto max-h-screen lg:max-h-fit min-h-screen"
+				class="bg-dp-blue-grey-400 fixed z-50 grid hidden max-h-screen min-h-screen w-full content-start gap-16 overflow-y-scroll py-16 px-8 lg:relative lg:grid lg:max-h-fit lg:overflow-y-auto"
 			>
 				<AdminSidebar page={page} name={name} enabledPlugins={enabledPlugins}>
 					{
@@ -67,11 +67,11 @@ const SlotsAsideAfterBuiltInButtons =
 				</AdminSidebar>
 				<button
 					id="__clubs:sidebar-close__"
-					class="lg:hidden rounded-full fixed -translate-x-1/2 left-1/2 bottom-[3rem] shadow-2xl aspect-square w-14 flex justify-center items-center bg-white text-dp-white-ink"
+					class="text-dp-white-ink fixed left-1/2 bottom-[3rem] flex aspect-square w-14 -translate-x-1/2 items-center justify-center rounded-full bg-white shadow-2xl lg:hidden"
 					><XMark />
 				</button>
 			</header>
-			<main class="container mx-auto px-2 lg:px-0 py-8 lg:py-16">
+			<main class="container mx-auto px-2 py-8 lg:px-0 lg:py-16">
 				<div class="break-words">
 					{
 						theme ? (
@@ -91,7 +91,7 @@ const SlotsAsideAfterBuiltInButtons =
 					}
 				</div>
 			</main>
-			<div class="container mx-auto px-2 lg:px-0 py-8 lg:py-16">
+			<div class="container mx-auto px-2 py-8 lg:px-0 lg:py-16">
 				<Aside config={config} showConnectButton={true}>
 					{
 						SlotsAsideAfterBuiltInButtons ? (
@@ -106,16 +106,16 @@ const SlotsAsideAfterBuiltInButtons =
 			<!-- Navigation bar for mobile -->
 			<div
 				id="__clubs:nav-mobile__"
-				class="transition-all duration-300 ease-in-out fixed bottom-[3rem] -translate-x-1/2 left-1/2 lg:hidden flex items-stretch gap-6"
+				class="fixed bottom-[3rem] left-1/2 flex -translate-x-1/2 items-stretch gap-6 transition-all duration-300 ease-in-out lg:hidden"
 			>
 				<div
-					class="py-4 px-6 rounded-full bg-white shadow-2xl text-dp-white-ink flex items-stretch gap-2"
+					class="text-dp-white-ink flex items-stretch gap-2 rounded-full bg-white py-4 px-6 shadow-2xl"
 				>
 					<Clubs />
 				</div>
 				<button
 					id="__clubs:sidebar-open__"
-					class="rounded-full aspect-square w-14 flex shadow-2xl justify-center items-center bg-white text-dp-white-ink"
+					class="text-dp-white-ink flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-2xl"
 					><Bars3BottomLeft />
 				</button>
 			</div>

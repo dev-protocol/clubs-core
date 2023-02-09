@@ -109,7 +109,7 @@
 		"prebuild": "rimraf dist ./*.d.ts",
 		"lint": "yarn lint:eslint && yarn lint:format",
 		"lint:eslint": "eslint . --ext .ts,.js,.mjs --fix",
-		"lint:format": "prettier --write '**/*.{ts,mts,js,mjs,json,md,yml,astro,scss}'",
+		"lint:format": "prettier --write '**/*.{ts,mts,js,mjs,json,md,yml,astro,scss,svelte,vue}'",
 		"prepack": "yarn test && yarn build",
 		"prepare": "husky install"
 	},

@@ -1,5 +1,5 @@
 <template>
-	<aside class="grid gap-8 sticky top-8">
+	<aside class="sticky top-8 grid gap-8">
 		<ConnectButton
 			id="clubs_connect_button"
 			v-if="showConnectButton"

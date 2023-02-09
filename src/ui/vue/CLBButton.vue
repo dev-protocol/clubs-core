@@ -1,25 +1,25 @@
 <template>
 	<button
-			v-if="!link"
-			v-bind:class="`hs-button${type && ' ' + assertType(type)}`"
-			role="button"
-			:disabled="isDisabled"
+		v-if="!link"
+		v-bind:class="`hs-button${type && ' ' + assertType(type)}`"
+		role="button"
+		:disabled="isDisabled"
 	>
 		<i v-if="isIconVisible" class="hs-button__icon"
-		><slot name="icon"></slot
+			><slot name="icon"></slot
 		></i>
 		<span v-if="isLabelVisible" class="hs-button__label"><slot></slot></span>
 	</button>
 
 	<a
-			v-else
-			v-bind:class="`hs-button${type && ' ' + assertType(type)}`"
-			role="link"
-			:[href]="link"
-			:target="assertTarget(link)"
+		v-else
+		v-bind:class="`hs-button${type && ' ' + assertType(type)}`"
+		role="link"
+		:[href]="link"
+		:target="assertTarget(link)"
 	>
 		<i v-if="isIconVisible" class="hs-button__icon"
-		><slot name="icon"></slot
+			><slot name="icon"></slot
 		></i>
 		<span v-if="isLabelVisible" class="hs-button__label"><slot></slot></span>
 	</a>
@@ -69,8 +69,9 @@ export default {
 			return finalTypes.join(' ')
 		},
 		assertTarget(link) {
-			const _isExternalLink = (link) => !!(link.startsWith('http://') || link.startsWith('https://'));
-			return _isExternalLink(link) ? '_blank' : '_self';
+			const _isExternalLink = (link) =>
+				!!(link.startsWith('http://') || link.startsWith('https://'))
+			return _isExternalLink(link) ? '_blank' : '_self'
 		},
 	},
 }

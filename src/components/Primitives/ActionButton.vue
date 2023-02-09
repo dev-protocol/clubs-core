@@ -8,7 +8,7 @@
 		<!-- Loading Status -->
 		<div
 			v-else-if="status === 1"
-			class="flex justify-center items-center space-x-2 rounded-lg"
+			class="flex items-center justify-center space-x-2 rounded-lg"
 		>
 			<span class="text-sm font-medium">{{ loadingText }}</span>
 			<Spinner class="mt-0.5" />
@@ -59,15 +59,15 @@ export default defineComponent({
 
 <style scoped>
 .action-button {
-	@apply bg-gray-900 hover:bg-gray-800 hover:ring-1 ring-gray-900;
+	@apply bg-gray-900 ring-gray-900 hover:bg-gray-800 hover:ring-1;
 }
 .action-button-loading {
-	@apply bg-gray-800 border-2 border-gray-900;
+	@apply border-2 border-gray-900 bg-gray-800;
 }
 .action-button-success {
-	@apply bg-green-600 border-2 border-green-700;
+	@apply border-2 border-green-700 bg-green-600;
 }
 .action-button-error {
-	@apply bg-red-600 border-2 border-red-700;
+	@apply border-2 border-red-700 bg-red-600;
 }
 </style>

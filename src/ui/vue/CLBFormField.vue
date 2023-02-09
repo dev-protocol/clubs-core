@@ -1,9 +1,29 @@
 <template>
-	<label :class="`hs-form-field is-filled${type ? ' ' + assertType(type) : ''}`">
+	<label
+		:class="`hs-form-field is-filled${type ? ' ' + assertType(type) : ''}`"
+	>
 		<span class="hs-form-field__label">{{ label }}</span>
-		<input v-if="inputType !== 'textarea'" :required="isRequired" class="hs-form-field__input" :name="name" :type="inputType" :placeholder="placeholder" :disabled="isDisabled" :readonly="isReadonly" />
-		<textarea v-else class="hs-form-field__input" :required="isRequired" :rows="rows" :name="name" :placeholder="placeholder" :disabled="isDisabled" :readonly="isReadonly" />
-	  <span v-if="helper" class="hs-form-field__helper">{{ helper }}</span>
+		<input
+			v-if="inputType !== 'textarea'"
+			:required="isRequired"
+			class="hs-form-field__input"
+			:name="name"
+			:type="inputType"
+			:placeholder="placeholder"
+			:disabled="isDisabled"
+			:readonly="isReadonly"
+		/>
+		<textarea
+			v-else
+			class="hs-form-field__input"
+			:required="isRequired"
+			:rows="rows"
+			:name="name"
+			:placeholder="placeholder"
+			:disabled="isDisabled"
+			:readonly="isReadonly"
+		/>
+		<span v-if="helper" class="hs-form-field__helper">{{ helper }}</span>
 	</label>
 </template>
 
@@ -13,18 +33,18 @@ export default {
 	props: {
 		label: {
 			type: String,
-			required: true
+			required: true,
 		},
 		name: {
 			type: String,
-			required: true
+			required: true,
 		},
 		type: {
 			type: String,
 		},
 		inputType: {
 			type: String,
-			required: true
+			required: true,
 		},
 		helper: {
 			type: String,
@@ -34,29 +54,29 @@ export default {
 		},
 		rows: {
 			type: Number,
-			default: 5
+			default: 5,
 		},
 		isRequired: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		isDisabled: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 		isReadonly: {
 			type: Boolean,
-			default: false
-		}
+			default: false,
+		},
 	},
 	methods: {
 		assertType(type: string): string {
-			const finalTypes: string[] = [];
+			const finalTypes: string[] = []
 			type.split(' ').forEach((type) => {
-				finalTypes.push('is-' + type);
-			});
-			return finalTypes.join(' ');
-		}
-	}
+				finalTypes.push('is-' + type)
+			})
+			return finalTypes.join(' ')
+		},
+	},
 }
 </script>
