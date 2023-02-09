@@ -7,25 +7,32 @@
 	import { ClubsEvents } from '../types'
 
 	let data: ClubsEventsDetailControlModal = { open: false }
-	const confirmExit = `You have attempted to leave this page. Your changes will be lost. Are you sure you want to exit this page?`
+
+	const unloadHandler = (ev: BeforeUnloadEvent) => {
+		ev.preventDefault()
+		return (ev.returnValue = `You have attempted to leave this page. Your changes will be lost. Are you sure you want to exit this page?`)
+	}
+
+	const manageListener = (add: boolean) => {
+		if (add) {
+			window.addEventListener('beforeunload', unloadHandler)
+		} else {
+			window.removeEventListener('beforeunload', unloadHandler)
+		}
+	}
 
 	onMount(() => {
-		window.addEventListener('beforeunload', (ev) => {
-			ev.preventDefault()
-			if (data.blocks && data.open) {
-				ev.returnValue = confirmExit
-				return confirmExit
-			}
-		})
-
 		document.body.addEventListener(ClubsEvents.ControlModal, async (ev) => {
 			const { detail } = ev as ClubsEventsControlModal
 
 			data = detail
+
+			manageListener(Boolean(data.blocks && data.open))
 		})
 	})
 
 	const close = () => {
+		manageListener(false)
 		data = {
 			...data,
 			open: false,
