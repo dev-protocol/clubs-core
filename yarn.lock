@@ -1641,10 +1641,10 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.45.tgz#a3fffa7489eafff38d984e23d0236e230c818bc2"
   integrity sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==
 
-"@webcomponents/template-shadowroot@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@webcomponents/template-shadowroot/-/template-shadowroot-0.1.0.tgz#adb3438d0d9a18e8fced08abc253f56b7eadab00"
-  integrity sha512-ry84Vft6xtRBbd4M/ptRodbOLodV5AD15TYhyRghCRgIcJJKmYmJ2v2BaaWxygENwh6Uq3zTfGPmlckKT/GXsQ==
+"@webcomponents/template-shadowroot@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@webcomponents/template-shadowroot/-/template-shadowroot-0.2.0.tgz#eb9f561c091b27c5edcd26208f23e0121e18bd89"
+  integrity sha512-Lg46altFAPMv1N+sPzAojPtnbndeV3qPifvfV7wgB7Bwk5iIhOM7+jwdH7EE/chEd65vsGel0543egxlxgI/MQ==
 
 acorn-jsx@^5.3.2:
   version "5.3.2"
