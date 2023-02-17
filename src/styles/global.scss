@@ -29,7 +29,7 @@
 		scrollbar-color: rgba(255 255 255 / 50%) rgba(0 0 0 / 30%) !important;
 	}
 	@include hs-button.render();
-	@include hs-button.extend('filled.is-plox') {
+	@include hs-button.extend('filled.plox') {
 		@include hs-button.color(
 			(
 				fill: 'plox-400',
@@ -131,7 +131,7 @@
 	);
 
 	@include hs-form-field.render();
-	@include hs-form-field.extend(filled) {
+	@include hs-form-field.extend('filled') {
 		@include hs-form-field.color(
 			(
 				border: 'dp-black-600',
