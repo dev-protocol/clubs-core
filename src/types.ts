@@ -58,11 +58,24 @@ export type ClubsStaticPath<P = Props> = ClubsBaseStaticPath<P> &
 		readonly component: AstroComponentFactory
 	}>
 
-export type ClubsAdminSlots = {
-	readonly 'sidebar:before-title'?: AstroComponentFactory
-	readonly 'aside:after-built-in-buttons'?: AstroComponentFactory
-	readonly 'modal:content'?: AstroComponentFactory
+export type ClubsSlot = {
+	readonly component: AstroComponentFactory
+	readonly order?: number
+	readonly props?: Props
 }
+
+export type ClubsSlots = readonly ClubsSlot[]
+
+export type ClubsFunctionGetSlotsResults = {
+	readonly 'admin:sidebar:before-title'?: ClubsSlots
+	readonly 'admin:aside:after-built-in-buttons'?: ClubsSlots
+	readonly 'admin:modal:content'?: ClubsSlots
+}
+
+export type ClubsSlotsResults = Record<
+	keyof ClubsFunctionGetSlotsResults,
+	ClubsSlots
+>
 
 export type ClubsStaticPaths<P = Props> = readonly ClubsStaticPath<P>[]
 
@@ -87,7 +100,7 @@ export type ClubsFunctionGetPagePaths<
 ) => Promise<P>
 
 export type ClubsFunctionGetAdminPaths = ClubsFunctionGetPagePaths<
-	ReadonlyArray<ClubsStaticPath & { readonly slots?: ClubsAdminSlots }>
+	ReadonlyArray<ClubsStaticPath>
 >
 
 export type ClubsFunctionGetLayout = ClubsFunctionGetPagePaths<
@@ -95,6 +108,13 @@ export type ClubsFunctionGetLayout = ClubsFunctionGetPagePaths<
 		readonly layout: AstroComponentFactory
 	}
 >
+
+export type ClubsFunctionGetSlots = (
+	options: readonly ClubsPluginOption[],
+	config: ClubsConfiguration,
+	utils: ClubsFactoryUtils,
+	paths: readonly (undefined | string)[]
+) => Promise<ClubsFunctionGetSlotsResults>
 
 export type ClubsGetStaticPathsItem<P = Props> = {
 	readonly params: { readonly page: undefined | string }
@@ -161,6 +181,7 @@ export type ClubsFunctionAdminFactory =
 export type ClubsFunctionStandardPlugin = Readonly<{
 	readonly getPagePaths: ClubsFunctionGetPagePaths
 	readonly getAdminPaths: ClubsFunctionGetAdminPaths
+	readonly getSlots?: ClubsFunctionGetSlots
 	readonly meta: ClubsPluginMeta
 }>
 
@@ -168,6 +189,7 @@ export type ClubsFunctionThemePlugin = Readonly<{
 	readonly getPagePaths: ClubsFunctionGetPagePaths
 	readonly getAdminPaths: ClubsFunctionGetAdminPaths
 	readonly getLayout: ClubsFunctionGetLayout
+	readonly getSlots?: ClubsFunctionGetSlots
 	readonly meta: ClubsThemePluginMeta
 }>
 
@@ -196,12 +218,18 @@ export type ClubsPropsClubsPlugin = Omit<
 	readonly pathname: string
 }
 
+export type ClubsPropsPages = Props & {
+	readonly clubs: {
+		readonly slots: ClubsSlotsResults
+	}
+}
+
 export type ClubsPropsAdminPages = Props & {
 	readonly clubs: {
 		readonly currentPluginIndex: number
 		readonly encodedClubsConfiguration: string
 		readonly plugins: ReadonlyArray<ClubsPropsClubsPlugin>
-		readonly slots?: ClubsAdminSlots
+		readonly slots: ClubsSlotsResults
 	}
 }
 

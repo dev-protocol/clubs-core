@@ -10,6 +10,17 @@ export const getAdminPaths = async () => [
 
 export const getLayout = async () => ({ layout: Layout })
 
+export const getSlots = async (options, _, __, paths) => {
+	return {
+		'admin:sidebar:before-title': [
+			{
+				component: Admin,
+				props: 456,
+			},
+		],
+	}
+}
+
 export const meta = {
 	displayName: 'Example',
 	category: 'theme',
@@ -18,4 +29,4 @@ export const meta = {
 	},
 }
 
-export default { getPagePaths, getAdminPaths, getLayout, meta }
+export default { getPagePaths, getAdminPaths, getLayout, getSlots, meta }

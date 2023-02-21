@@ -21,13 +21,26 @@ export const getAdminPaths = async (options) => [
 		paths: ['example'],
 		component: Admin,
 		props: { options },
-		slots: { 'modal:content': Modal },
 	},
 ]
+
+export const getSlots = async (options) => ({
+	'admin:sidebar:before-title': [
+		{
+			component: Admin,
+			props: 1,
+			order: 0,
+		},
+		{
+			component: Admin,
+			props: 123,
+		},
+	],
+})
 
 export const meta = {
 	displayName: 'Example',
 	category: 'uncategorized',
 }
 
-export default { getPagePaths, getAdminPaths, meta }
+export default { getPagePaths, getAdminPaths, getSlots, meta }

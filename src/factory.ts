@@ -12,13 +12,17 @@ import type {
 	ClubsStaticPath,
 	ClubsFunctionThemePlugin,
 	ClubsFunctionPlugin,
-	ClubsAdminSlots,
 	ClubsPlugin,
 	ClubsFunctionGetPluginConfigById,
+	ClubsPropsPages,
+	ClubsFunctionGetSlotsResults,
+	ClubsSlotsResults,
+	ClubsSlot,
 } from './types'
 import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
 import { Props } from 'astro'
+import { concat, mergeWith } from 'ramda'
 
 type Plugins<P extends ClubsFunctionPlugin = ClubsFunctionPlugin> =
 	readonly ClubsPluginDetails<P>[]
@@ -115,6 +119,54 @@ const _staticPathsFromPlugins =
 			)
 		).flat()
 
+const _sort = (a: ClubsSlot, b: ClubsSlot) => {
+	return (a.order ?? Infinity) - (b.order ?? Infinity)
+}
+const _slotsFromPlugins =
+	(config: ClubsConfiguration) =>
+	async (
+		plugins: Plugins,
+		paths: readonly (undefined | string)[]
+	): Promise<ClubsSlotsResults> => {
+		const results = await Promise.all(
+			plugins.map(async (plugin) => {
+				const results = plugin.getSlots
+					? await plugin.getSlots(
+							plugin.options,
+							config,
+							{
+								getPluginConfigById: getPluginConfigByIdFactory(
+									config,
+									plugins
+								),
+							},
+							paths
+					  )
+					: {}
+				return results
+			})
+		)
+		const res = mergeWith(
+			concat,
+			...(results as unknown as readonly [])
+		) as ClubsFunctionGetSlotsResults
+
+		const sorted = Object.keys(res).reduce(
+			(ac: Readonly<ClubsSlotsResults>, item) => {
+				const sortedItem = [
+					...(res[item as keyof ClubsFunctionGetSlotsResults] ?? []),
+				].sort(_sort)
+				return {
+					...ac,
+					[item]: sortedItem,
+				}
+			},
+			Object.create(null) as ClubsSlotsResults
+		) as ClubsSlotsResults
+
+		return sorted
+	}
+
 const _pathsToPage = (paths: readonly (string | undefined)[]) =>
 	paths.join('/') || undefined
 
@@ -152,7 +204,21 @@ const _staticPagePathsFactory: (
 			layout: res.layout ?? defaultLayout.layout,
 			props: { ...res.props, ...defaultLayout.props },
 		}))
-		const staticPaths = _compose(themeInjected) as ClubsGetStaticPathsResult
+		const getResultsOfGetSlots = _slotsFromPlugins(config)
+		const slotsInjected = await Promise.all(
+			themeInjected.map(async (res) => ({
+				...res,
+				props: {
+					...res.props,
+					clubs: {
+						slots: await getResultsOfGetSlots(plugins, res.paths),
+					},
+				},
+			}))
+		)
+		const staticPaths = _compose<ClubsPropsPages>(
+			slotsInjected
+		) as ClubsGetStaticPathsResult<ClubsPropsPages>
 
 		return staticPaths
 	}
@@ -181,9 +247,7 @@ const _staticAdminPathsFactory: (
 		)
 		const pluginResults = (await getResultsOfPlugins(
 			plugins
-		)) as readonly (ClubsStaticPathWithDetails & {
-			readonly slots?: ClubsAdminSlots
-		})[]
+		)) as readonly ClubsStaticPathWithDetails[]
 		const pluginsWithPaths = pluginResults.map((result) => {
 			const {
 				details: { getPagePaths, getAdminPaths, ...plg },
@@ -204,12 +268,26 @@ const _staticAdminPathsFactory: (
 				clubs: {
 					...(plg.props as ClubsPropsAdminPages).clubs,
 					plugins: pluginsWithPaths,
-					slots: plg.slots,
 				},
 			},
 		}))
+
+		const getResultsOfGetSlots = _slotsFromPlugins(config)
+		const slotsInjected = await Promise.all(
+			injected.map(async (res) => ({
+				...res,
+				props: {
+					...res.props,
+					clubs: {
+						...res.props.clubs,
+						slots: await getResultsOfGetSlots(plugins, res.paths),
+					},
+				},
+			}))
+		)
+
 		const staticPaths = _compose<ClubsPropsAdminPages>(
-			injected
+			slotsInjected
 		) as ClubsGetStaticPathsResult<ClubsPropsAdminPages>
 
 		return staticPaths
