@@ -24,6 +24,8 @@ export const { getStaticPaths } = adminFactory({
 const Content = Astro.props.component
 
 console.log(Astro.props)
+
+console.log('props.slots', Astro.props.clubs.slots)
 ---
 
 <Admin {...Astro.props}>
