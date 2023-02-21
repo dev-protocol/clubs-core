@@ -153,12 +153,12 @@ const _slotsFromPlugins =
 
 		const sorted = Object.keys(res).reduce(
 			(ac: Readonly<ClubsSlotsResults>, item) => {
-				const sorted = [
+				const sortedItem = [
 					...(res[item as keyof ClubsFunctionGetSlotsResults] ?? []),
 				].sort(_sort)
 				return {
 					...ac,
-					[item]: sorted,
+					[item]: sortedItem,
 				}
 			},
 			Object.create(null) as ClubsSlotsResults
