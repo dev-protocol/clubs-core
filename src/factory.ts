@@ -119,6 +119,11 @@ const _staticPathsFromPlugins =
 			)
 		).flat()
 
+const slotNames: readonly (keyof ClubsFunctionGetSlotsResults)[] = [
+	'admin:aside:after-built-in-buttons',
+	'admin:modal:content',
+	'admin:sidebar:before-title',
+]
 const _sort = (a: ClubsSlot, b: ClubsSlot) => {
 	return (a.order ?? Infinity) - (b.order ?? Infinity)
 }
@@ -151,18 +156,15 @@ const _slotsFromPlugins =
 			...(results as unknown as readonly [])
 		) as ClubsFunctionGetSlotsResults
 
-		const sorted = Object.keys(res).reduce(
-			(ac: Readonly<ClubsSlotsResults>, item) => {
-				const sortedItem = [
-					...(res[item as keyof ClubsFunctionGetSlotsResults] ?? []),
-				].sort(_sort)
-				return {
-					...ac,
-					[item]: sortedItem,
-				}
-			},
-			Object.create(null) as ClubsSlotsResults
-		) as ClubsSlotsResults
+		const sorted = slotNames.reduce((ac: Readonly<ClubsSlotsResults>, item) => {
+			const sortedItem = [
+				...(res[item as keyof ClubsFunctionGetSlotsResults] ?? []),
+			].sort(_sort)
+			return {
+				...ac,
+				[item]: sortedItem,
+			}
+		}, Object.create(null) as ClubsSlotsResults) as ClubsSlotsResults
 
 		return sorted
 	}

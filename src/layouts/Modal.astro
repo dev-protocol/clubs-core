@@ -4,15 +4,10 @@ import ModalManager from './ModalManager.svelte'
 
 const { clubs } = Astro.props as ClubsPropsAdminPages
 
-const SlotsModalContent = clubs.slots && clubs.slots['admin:modal:content']
+const SlotsModalContent = clubs.slots['admin:modal:content']
 ---
 
 <ModalManager client:load>
-	{
-		SlotsModalContent ? (
-			SlotsModalContent.map((Slot) => <Slot.component {...Slot.props} />)
-		) : (
-			<slot name="modal:content" />
-		)
-	}
+	<slot name="modal:content" />
+	{SlotsModalContent.map((Slot) => <Slot.component {...Slot.props} />)}
 </ModalManager>

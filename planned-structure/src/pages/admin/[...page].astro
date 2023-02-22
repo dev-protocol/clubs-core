@@ -29,7 +29,7 @@ console.log('props.slots', Astro.props.clubs.slots)
 ---
 
 <Admin {...Astro.props}>
-	<div slot="sidebar:before-title"><p>Injected contents</p></div>
+	<div slot="admin:sidebar:before-title"><p>Injected contents</p></div>
 	<Content {...Astro.props} />
 </Admin>
 

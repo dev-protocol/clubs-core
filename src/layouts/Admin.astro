@@ -26,10 +26,9 @@ const currentTheme = clubs.plugins
 
 const theme = page && page.startsWith('theme')
 
-const SlotsSidebarBeforeTitle =
-	clubs.slots && clubs.slots['admin:sidebar:before-title']
+const SlotsSidebarBeforeTitle = clubs.slots['admin:sidebar:before-title']
 const SlotsAsideAfterBuiltInButtons =
-	clubs.slots && clubs.slots['admin:aside:after-built-in-buttons']
+	clubs.slots['admin:aside:after-built-in-buttons']
 ---
 
 <!DOCTYPE html>
@@ -57,14 +56,11 @@ const SlotsAsideAfterBuiltInButtons =
 				class="bg-dp-blue-grey-400 fixed z-50 grid hidden max-h-screen min-h-screen w-full content-start gap-16 overflow-y-scroll py-16 px-8 lg:relative lg:grid lg:max-h-fit lg:overflow-y-auto"
 			>
 				<AdminSidebar page={page} name={name} enabledPlugins={enabledPlugins}>
+					<slot name="admin:sidebar:before-title" slot="before-title" />
 					{
-						SlotsSidebarBeforeTitle ? (
-							SlotsSidebarBeforeTitle.map((Slot) => (
-								<Slot.component {...Slot.props} />
-							))
-						) : (
-							<slot name="sidebar:before-title" slot="before-title" />
-						)
+						SlotsSidebarBeforeTitle.map((Slot) => (
+							<Slot.component {...Slot.props} slot="before-title" />
+						))
 					}
 				</AdminSidebar>
 				<button
@@ -95,14 +91,11 @@ const SlotsAsideAfterBuiltInButtons =
 			</main>
 			<div class="container mx-auto px-2 py-8 lg:px-0 lg:py-16">
 				<Aside config={config} showConnectButton={true}>
+					<slot name="admin:aside:after-built-in-buttons" />
 					{
-						SlotsAsideAfterBuiltInButtons ? (
-							SlotsAsideAfterBuiltInButtons.map((Slot) => (
-								<Slot.component {...Slot.props} />
-							))
-						) : (
-							<slot name="aside:after-built-in-buttons" />
-						)
+						SlotsAsideAfterBuiltInButtons.map((Slot) => (
+							<Slot.component {...Slot.props} />
+						))
 					}
 				</Aside>
 			</div>
