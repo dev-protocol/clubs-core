@@ -130,7 +130,8 @@ const _slotsFromPlugins =
 	(config: ClubsConfiguration, factory: 'page' | 'admin') =>
 	async (
 		plugins: Plugins,
-		paths: readonly (undefined | string)[]
+		paths: readonly (undefined | string)[],
+		additionalProps?: Props
 	): Promise<ClubsSlotsResults> => {
 		const results = await Promise.all(
 			plugins.map(async (plugin) => {
@@ -148,9 +149,13 @@ const _slotsFromPlugins =
 		const res = slotNames.reduce((ac: Readonly<ClubsSlotsResults>, item) => {
 			const items = results.map((r) => r[item] ?? []).flat()
 			const sortedItems = [...items].sort(_sort)
+			const propsInjected = sortedItems.map((slot) => ({
+				...slot,
+				props: { ...slot.props, ...additionalProps },
+			}))
 			return {
 				...ac,
-				[item]: sortedItems,
+				[item]: propsInjected,
 			}
 		}, Object.create(null) as ClubsSlotsResults) as ClubsSlotsResults
 
@@ -270,7 +275,9 @@ const _staticAdminPathsFactory: (
 					...res.props,
 					clubs: {
 						...res.props.clubs,
-						slots: await getResultsOfGetSlots(plugins, res.paths),
+						slots: await getResultsOfGetSlots(plugins, res.paths, {
+							clubs: res.props.clubs,
+						}),
 					},
 				},
 			}))
