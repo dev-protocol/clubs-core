@@ -22,7 +22,6 @@ import type {
 import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
 import { Props } from 'astro'
-import { concat, mergeWith } from 'ramda'
 
 type Plugins<P extends ClubsFunctionPlugin = ClubsFunctionPlugin> =
 	readonly ClubsPluginDetails<P>[]
@@ -151,22 +150,17 @@ const _slotsFromPlugins =
 				return results
 			})
 		)
-		const res = mergeWith(
-			concat,
-			...(results as unknown as readonly [])
-		) as ClubsFunctionGetSlotsResults
 
-		const sorted = slotNames.reduce((ac: Readonly<ClubsSlotsResults>, item) => {
-			const sortedItem = [
-				...(res[item as keyof ClubsFunctionGetSlotsResults] ?? []),
-			].sort(_sort)
+		const res = slotNames.reduce((ac: Readonly<ClubsSlotsResults>, item) => {
+			const items = results.map((r) => r[item] ?? []).flat()
+			const sortedItems = [...items].sort(_sort)
 			return {
 				...ac,
-				[item]: sortedItem,
+				[item]: sortedItems,
 			}
 		}, Object.create(null) as ClubsSlotsResults) as ClubsSlotsResults
 
-		return sorted
+		return res
 	}
 
 const _pathsToPage = (paths: readonly (string | undefined)[]) =>
