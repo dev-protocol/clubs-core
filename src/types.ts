@@ -87,6 +87,11 @@ export type ClubsFactoryUtils = {
 	readonly getPluginConfigById: ClubsFunctionGetPluginConfigById
 }
 
+export type ClubsSlotsFactoryUtils = ClubsFactoryUtils & {
+	readonly paths: readonly (undefined | string)[]
+	readonly factory: 'page' | 'admin'
+}
+
 export type ClubsFunctionGetPagePaths<
 	P = ClubsStaticPaths<
 		Props & {
@@ -112,8 +117,7 @@ export type ClubsFunctionGetLayout = ClubsFunctionGetPagePaths<
 export type ClubsFunctionGetSlots = (
 	options: readonly ClubsPluginOption[],
 	config: ClubsConfiguration,
-	utils: ClubsFactoryUtils,
-	paths: readonly (undefined | string)[]
+	utils: ClubsSlotsFactoryUtils
 ) => Promise<ClubsFunctionGetSlotsResults>
 
 export type ClubsGetStaticPathsItem<P = Props> = {

@@ -127,7 +127,7 @@ const _sort = (a: ClubsSlot, b: ClubsSlot) => {
 	return (a.order ?? Infinity) - (b.order ?? Infinity)
 }
 const _slotsFromPlugins =
-	(config: ClubsConfiguration) =>
+	(config: ClubsConfiguration, factory: 'page' | 'admin') =>
 	async (
 		plugins: Plugins,
 		paths: readonly (undefined | string)[]
@@ -135,17 +135,11 @@ const _slotsFromPlugins =
 		const results = await Promise.all(
 			plugins.map(async (plugin) => {
 				const results = plugin.getSlots
-					? await plugin.getSlots(
-							plugin.options,
-							config,
-							{
-								getPluginConfigById: getPluginConfigByIdFactory(
-									config,
-									plugins
-								),
-							},
-							paths
-					  )
+					? await plugin.getSlots(plugin.options, config, {
+							getPluginConfigById: getPluginConfigByIdFactory(config, plugins),
+							paths,
+							factory,
+					  })
 					: {}
 				return results
 			})
@@ -200,7 +194,7 @@ const _staticPagePathsFactory: (
 			layout: res.layout ?? defaultLayout.layout,
 			props: { ...res.props, ...defaultLayout.props },
 		}))
-		const getResultsOfGetSlots = _slotsFromPlugins(config)
+		const getResultsOfGetSlots = _slotsFromPlugins(config, 'page')
 		const slotsInjected = await Promise.all(
 			themeInjected.map(async (res) => ({
 				...res,
@@ -268,7 +262,7 @@ const _staticAdminPathsFactory: (
 			},
 		}))
 
-		const getResultsOfGetSlots = _slotsFromPlugins(config)
+		const getResultsOfGetSlots = _slotsFromPlugins(config, 'admin')
 		const slotsInjected = await Promise.all(
 			injected.map(async (res) => ({
 				...res,
