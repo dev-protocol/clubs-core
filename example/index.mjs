@@ -25,14 +25,14 @@ export const getAdminPaths = async (options) => [
 ]
 
 export const getSlots = async (options) => ({
-	'admin:sidebar:before-title': [
+	'admin:modal:content': [
 		{
-			component: Admin,
+			component: Modal,
 			props: 1,
 			order: 0,
 		},
 		{
-			component: Admin,
+			component: Modal,
 			props: 123,
 		},
 	],

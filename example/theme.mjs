@@ -1,6 +1,7 @@
 /* eslint-disable functional/functional-parameters */
 import { default as Layout } from './Layout.astro'
 import { default as Admin } from './Admin.astro'
+import { default as Modal } from './Modal.astro'
 
 export const getPagePaths = async () => []
 
@@ -12,9 +13,9 @@ export const getLayout = async () => ({ layout: Layout })
 
 export const getSlots = async (options, _, __, paths) => {
 	return {
-		'admin:sidebar:before-title': [
+		'admin:modal:content': [
 			{
-				component: Admin,
+				component: Modal,
 				props: 456,
 			},
 		],
