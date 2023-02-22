@@ -3,13 +3,12 @@
 $theme: (
 	primary: 'dp-white',
 	primary-dark: 'dp-black',
-	accent: 'dp-blue-grey',
+	accent: 'dp-black',
 	accent-dark: 'dp-white',
 	surface: 'dp-white',
 	surface-dark: 'dp-black',
 	background: 'dp-white-200',
 	dark-background: 'dp-black-600',
-	dark-mode: 'media',
 	extend: (
 		padding: (
 			xs: 0.3rem,
@@ -17,10 +16,6 @@ $theme: (
 			md: 0.7rem,
 			lg: 1rem,
 			xl: 1.2rem,
-		),
-		stroke: (
-			default: 3px,
-			set-accent-dark: 3,
 		),
 	),
 );
@@ -31,9 +26,8 @@ $button-theme: (
 		'xs',
 		'md',
 	),
-	border-width: 'stroke',
-	fill: 'accent-600',
-	fill-hover: 'accent-200',
+	fill: 'accent-400',
+	fill-hover: 'accent-400',
 	fill-active: 'accent-200',
 );
 
@@ -42,7 +36,6 @@ $form-field-theme: (
 		'lg',
 		'xl',
 	),
-	border-width: 'stroke',
 );
 
 $link-theme: (
@@ -54,22 +47,13 @@ $select-field-theme: (
 		'lg',
 		'xl',
 	),
-	border-width: 'stroke',
 );
 
 $tick-field-theme: (
 	radius: 'medium',
-	border-width: 'stroke',
 	padding: (
 		'lg',
 		'xl',
 	),
 	gap: 'lg',
-);
-
-$wallet-theme: (
-	width: auto,
-	fill: 'accent-200',
-	fill-hover: 'accent-200',
-	fill-active: 'accent-400',
 );
