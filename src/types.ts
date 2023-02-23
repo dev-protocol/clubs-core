@@ -58,7 +58,14 @@ export type ClubsStaticPath<P = Props> = ClubsBaseStaticPath<P> &
 		readonly component: AstroComponentFactory
 	}>
 
+export enum ClubsSlotName {
+	AdminSidebarBeforeTitle = 'admin:sidebar:before-title',
+	AdminAsideAfterBuiltInButtons = 'admin:aside:after-built-in-buttons',
+	AdminModalCcontent = 'admin:modal:content',
+}
+
 export type ClubsSlot = {
+	readonly slot: ClubsSlotName | string
 	readonly component: AstroComponentFactory
 	readonly order?: number
 	readonly props?: Props
@@ -66,16 +73,7 @@ export type ClubsSlot = {
 
 export type ClubsSlots = readonly ClubsSlot[]
 
-export type ClubsFunctionGetSlotsResults = {
-	readonly 'admin:sidebar:before-title'?: ClubsSlots
-	readonly 'admin:aside:after-built-in-buttons'?: ClubsSlots
-	readonly 'admin:modal:content'?: ClubsSlots
-}
-
-export type ClubsSlotsResults = Record<
-	keyof ClubsFunctionGetSlotsResults,
-	ClubsSlots
->
+export type ClubsFunctionGetSlotsResults = ClubsSlots
 
 export type ClubsStaticPaths<P = Props> = readonly ClubsStaticPath<P>[]
 
@@ -224,7 +222,7 @@ export type ClubsPropsClubsPlugin = Omit<
 
 export type ClubsPropsPages = Props & {
 	readonly clubs: {
-		readonly slots: ClubsSlotsResults
+		readonly slots: ClubsFunctionGetSlotsResults
 	}
 }
 
@@ -233,7 +231,7 @@ export type ClubsPropsAdminPages = Props & {
 		readonly currentPluginIndex: number
 		readonly encodedClubsConfiguration: string
 		readonly plugins: ReadonlyArray<ClubsPropsClubsPlugin>
-		readonly slots: ClubsSlotsResults
+		readonly slots: ClubsFunctionGetSlotsResults
 	}
 }
 

@@ -16,7 +16,6 @@ import type {
 	ClubsFunctionGetPluginConfigById,
 	ClubsPropsPages,
 	ClubsFunctionGetSlotsResults,
-	ClubsSlotsResults,
 	ClubsSlot,
 } from './types'
 import { ClubsPluginCategory } from './types'
@@ -118,11 +117,6 @@ const _staticPathsFromPlugins =
 			)
 		).flat()
 
-const slotNames: readonly (keyof ClubsFunctionGetSlotsResults)[] = [
-	'admin:aside:after-built-in-buttons',
-	'admin:modal:content',
-	'admin:sidebar:before-title',
-]
 const _sort = (a: ClubsSlot, b: ClubsSlot) => {
 	return (a.order ?? Infinity) - (b.order ?? Infinity)
 }
@@ -132,7 +126,7 @@ const _slotsFromPlugins =
 		plugins: Plugins,
 		paths: readonly (undefined | string)[],
 		additionalProps?: Props
-	): Promise<ClubsSlotsResults> => {
+	): Promise<ClubsFunctionGetSlotsResults> => {
 		const results = await Promise.all(
 			plugins.map(async (plugin) => {
 				const results = plugin.getSlots
@@ -141,24 +135,17 @@ const _slotsFromPlugins =
 							paths,
 							factory,
 					  })
-					: {}
+					: []
 				return results
 			})
 		)
 
-		const res = slotNames.reduce((ac: Readonly<ClubsSlotsResults>, item) => {
-			const items = results.map((r) => r[item] ?? []).flat()
-			const sortedItems = [...items].sort(_sort)
-			const propsInjected = sortedItems.map((slot) => ({
-				...slot,
-				props: { ...slot.props, ...additionalProps },
-			}))
-			return {
-				...ac,
-				[item]: propsInjected,
-			}
-		}, Object.create(null) as ClubsSlotsResults) as ClubsSlotsResults
+		const propsInjected = results.flat().map((slot) => ({
+			...slot,
+			props: { ...slot.props, ...additionalProps },
+		}))
 
+		const res = [...propsInjected].sort(_sort)
 		return res
 	}
 

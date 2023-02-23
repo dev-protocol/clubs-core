@@ -26,9 +26,12 @@ const currentTheme = clubs.plugins
 
 const theme = page && page.startsWith('theme')
 
-const SlotsSidebarBeforeTitle = clubs.slots['admin:sidebar:before-title']
-const SlotsAsideAfterBuiltInButtons =
-	clubs.slots['admin:aside:after-built-in-buttons']
+const SlotsSidebarBeforeTitle = clubs.slots.filter(
+	(slot) => slot.slot === 'admin:sidebar:before-title'
+)
+const SlotsAsideAfterBuiltInButtons = clubs.slots.filter(
+	(slot) => slot.slot === 'admin:aside:after-built-in-buttons'
+)
 ---
 
 <!DOCTYPE html>
