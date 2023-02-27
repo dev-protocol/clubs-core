@@ -43,10 +43,10 @@
     vscode-languageserver-types "^3.17.1"
     vscode-uri "^3.0.3"
 
-"@astrojs/lit@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@astrojs/lit/-/lit-1.2.0.tgz#db7507fe562edfef460dab6cd2185868bdf421b3"
-  integrity sha512-YbtoThiNg0O6C/k//BcEn2Z18B9jGHSHspuz8dzdlt+YN3+NpvaCFWRrIUmA/QkX+shURSHd3tAElmbcYD2kkQ==
+"@astrojs/lit@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@astrojs/lit/-/lit-1.2.1.tgz#e689f76941847f6bd5dcd6cf3e0221f8985c1cc5"
+  integrity sha512-pgHAvHGnhKnyZpaBXCQND2tJ5Ce+yxTaa5OqneQPFfifVzAkbzz6qgkG+p7p7rWmSZD5HAX5reizbf+7VijM4A==
   dependencies:
     "@lit-labs/ssr" "^2.2.0"
     parse5 "^7.1.2"
