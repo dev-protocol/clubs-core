@@ -1,8 +1,8 @@
 import tailwind from './rollup.plugin.tw.mjs'
-import glob from 'glob'
+import { globSync } from 'glob'
 // import { litScss } from 'rollup-plugin-scss-lit'
 
-const files = glob.sync('dist/src/ui/**/*.js')
+const files = globSync('dist/src/ui/**/*.js')
 
 export const createOptions = (file) => ({
 	input: file,

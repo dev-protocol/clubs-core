@@ -2,8 +2,14 @@
 import { default as Example } from './Example.astro'
 import { default as Admin } from './Admin.astro'
 import { default as Modal } from './Modal.astro'
+import {
+	ClubsFunctionGetPagePaths,
+	ClubsFunctionGetAdminPaths,
+	ClubsFunctionGetSlots,
+	ClubsSlotName,
+} from '../src'
 
-export const getPagePaths = async () => [
+export const getPagePaths: ClubsFunctionGetPagePaths = async () => [
 	{ paths: [], component: Example },
 	{
 		paths: ['example'],
@@ -11,12 +17,12 @@ export const getPagePaths = async () => [
 		props: {
 			hello: 'World',
 			complexData: new Uint8Array([1, 2, 3]),
-			someMethod: (i) => i,
+			someMethod: (i: unknown) => i,
 		},
 	},
 ]
 
-export const getAdminPaths = async (options) => [
+export const getAdminPaths: ClubsFunctionGetAdminPaths = async (options) => [
 	{
 		paths: ['example'],
 		component: Admin,
@@ -24,19 +30,19 @@ export const getAdminPaths = async (options) => [
 	},
 ]
 
-export const getSlots = async (options) => ({
-	'admin:modal:content': [
-		{
-			component: Modal,
-			props: 1,
-			order: 0,
-		},
-		{
-			component: Modal,
-			props: 123,
-		},
-	],
-})
+export const getSlots: ClubsFunctionGetSlots = async (options) => [
+	{
+		slot: ClubsSlotName.AdminModalCcontent,
+		component: Modal,
+		props: { x: 1 },
+		order: 0,
+	},
+	{
+		slot: ClubsSlotName.AdminModalCcontent,
+		component: Modal,
+		props: { x: 123 },
+	},
+]
 
 export const meta = {
 	displayName: 'Example',

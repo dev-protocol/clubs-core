@@ -47,18 +47,15 @@ const navItemPluginInactive = 'hover:bg-dp-blue-grey-300'
 </div>
 <nav class="grid gap-16">
 	<ul class="grid gap-1">
+		<slot name="before-overview-link" />
 		<AdminSidebarMainItem href="/admin/overview" active={hereIs('overview')}>
 			<span class="text-[#88AEFF]"><IconGroup /></span>Overview
 		</AdminSidebarMainItem>
-		<AdminSidebarMainItem
-			href="/admin/marketplace"
-			active={hereIs('marketplace')}
-		>
-			<span class="text-[#D500E6]"><IconGlobe /></span>Marketplace
-		</AdminSidebarMainItem>
+		<slot name="before-theme-link" />
 		<AdminSidebarMainItem href="/admin/theme" active={hereIs('theme')}>
 			<span class="text-[#51E0FF]"><IconDesktop /></span>Theme
 		</AdminSidebarMainItem>
+		<slot name="after-built-in-primary-links" />
 	</ul>
 
 	<ul>

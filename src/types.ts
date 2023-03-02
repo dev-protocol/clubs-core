@@ -62,6 +62,13 @@ export enum ClubsSlotName {
 	AdminSidebarBeforeTitle = 'admin:sidebar:before-title',
 	AdminAsideAfterBuiltInButtons = 'admin:aside:after-built-in-buttons',
 	AdminModalCcontent = 'admin:modal:content',
+	AdminSidebarBeforeOverviewLink = 'admin:sidebar:before-overview-link',
+	AdminSidebarBeforeThemeLink = 'admin:sidebar:before-theme-link',
+	AdminSidebarAfterBuiltInPrimaryLinks = 'admin:sidebar:after-built-in-primary-links',
+	PageContentHomeBeforeContent = 'page:content:home:before-content',
+	PageContentHomeAfterContent = 'page:content:home:after-content',
+	PageContentAnywhereBeforeContent = 'page:content:anywhere:before-content',
+	PageContentAnywhereAfterContent = 'page:content:anywhere:after-content',
 }
 
 export type ClubsSlot = {

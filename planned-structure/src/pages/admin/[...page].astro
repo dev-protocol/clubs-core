@@ -1,8 +1,8 @@
 ---
 import { Admin } from '../../../../src/layouts'
 import { adminFactory, encode } from '../../../../src/'
-import example from '../../../../example/index.mjs'
-import theme from '../../../../example/theme.mjs'
+import example from '../../../../example/index'
+import theme from '../../../../example/theme'
 
 export const { getStaticPaths } = adminFactory({
 	config: () =>
@@ -16,7 +16,10 @@ export const { getStaticPaths } = adminFactory({
 			rpcUrl: '',
 			adminRolePoints: 0,
 			options: [],
-			plugins: [{ name: 'theme' }, { name: 'example', options: [] }],
+			plugins: [
+				{ name: 'theme', options: [] },
+				{ name: 'example', options: [] },
+			],
 		}),
 	plugins: { theme, example },
 })
@@ -29,7 +32,19 @@ console.log('props.slots', Astro.props.clubs.slots)
 ---
 
 <Admin {...Astro.props}>
-	<div slot="admin:sidebar:before-title"><p>Injected contents</p></div>
+	<div slot="admin:sidebar:before-title">
+		<p>
+			Injected contents<br /><span class="text-xs"
+				>admin:sidebar:before-title</span
+			>
+		</p>
+	</div>
+	<div slot="admin:sidebar:before-theme-link">
+		<p>
+			Injected contents<br /><span class="text-xs"
+				>admin:sidebar:before-theme-link</span>
+		</p>
+	</div>
 	<Content {...Astro.props} />
 </Admin>
 
