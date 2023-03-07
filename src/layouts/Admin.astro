@@ -12,7 +12,7 @@ import Modal from './Modal.astro'
 import '../styles'
 
 const { page } = Astro.params
-const { clubs } = Astro.props as ClubsPropsAdminPages
+const { clubs, showAside = true } = Astro.props as ClubsPropsAdminPages
 
 const config = decode(clubs.encodedClubsConfiguration)
 const { name } = config
@@ -131,16 +131,18 @@ const SlotsAsideAfterBuiltInButtons = clubs.slots.filter(
 					}
 				</div>
 			</main>
-			<div class="container mx-auto px-2 py-8 lg:px-0 lg:py-16">
-				<Aside config={config} showConnectButton={true}>
-					<slot name="admin:aside:after-built-in-buttons" />
-					{
-						SlotsAsideAfterBuiltInButtons.map((Slot) => (
-							<Slot.component {...Slot.props} />
-						))
-					}
-				</Aside>
-			</div>
+			{
+				showAside && (
+					<div class="container mx-auto px-2 py-8 lg:px-0 lg:py-16">
+						<Aside config={config} showConnectButton={true}>
+							<slot name="admin:aside:after-built-in-buttons" />
+							{SlotsAsideAfterBuiltInButtons.map((Slot) => (
+								<Slot.component {...Slot.props} />
+							))}
+						</Aside>
+					</div>
+				)
+			}
 
 			<!-- Navigation bar for mobile -->
 			<div
