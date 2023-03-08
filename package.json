@@ -133,7 +133,7 @@
 		"@astrojs/react": "2.1.0",
 		"@astrojs/svelte": "2.1.0",
 		"@astrojs/tailwind": "3.1.0",
-		"@astrojs/vue": "2.0.1",
+		"@astrojs/vue": "2.1.0",
 		"@ava/typescript": "3.0.1",
 		"@rollup/plugin-commonjs": "24.0.1",
 		"@rollup/plugin-multi-entry": "6.0.0",
