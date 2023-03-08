@@ -150,10 +150,33 @@ export enum ClubsPluginSignal {
 	DisplayFullPage = 'display:full-page',
 }
 
+export type ClubsPluginToken = Omit<
+	ClubsConfiguration,
+	| 'name'
+	| 'twitterHandle'
+	| 'description'
+	| 'url'
+	| 'adminRolePoints'
+	| 'rpcUrl'
+	| 'options'
+	| 'plugins'
+>
+
+// Ref.: https://schema.org/Offer
+export type ClubsPluginOffer = {
+	readonly price?: 0
+	readonly priceCurrency?: 'ETH' | 'DEV'
+	readonly requiredSTokens?: {
+		readonly payload?: Uint8Array | string
+	}
+}
+
 export type ClubsPluginMeta = {
 	readonly id?: string
 	readonly displayName: string
 	readonly category: ClubsPluginCategory | string
+	readonly token?: ClubsPluginToken
+	readonly offer?: ClubsPluginOffer
 }
 
 export type ClubsThemePluginMeta = ClubsPluginMeta & {
