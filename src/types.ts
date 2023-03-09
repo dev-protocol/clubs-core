@@ -211,15 +211,15 @@ export type ClubsFunctionAdminFactory =
 	ClubsFunctionPageFactory<ClubsPropsAdminPages>
 
 export type ClubsFunctionStandardPlugin = Readonly<{
-	readonly getPagePaths: ClubsFunctionGetPagePaths
-	readonly getAdminPaths: ClubsFunctionGetAdminPaths
+	readonly getPagePaths?: ClubsFunctionGetPagePaths
+	readonly getAdminPaths?: ClubsFunctionGetAdminPaths
 	readonly getSlots?: ClubsFunctionGetSlots
 	readonly meta: ClubsPluginMeta
 }>
 
 export type ClubsFunctionThemePlugin = Readonly<{
-	readonly getPagePaths: ClubsFunctionGetPagePaths
-	readonly getAdminPaths: ClubsFunctionGetAdminPaths
+	readonly getPagePaths?: ClubsFunctionGetPagePaths
+	readonly getAdminPaths?: ClubsFunctionGetAdminPaths
 	readonly getLayout: ClubsFunctionGetLayout
 	readonly getSlots?: ClubsFunctionGetSlots
 	readonly meta: ClubsThemePluginMeta

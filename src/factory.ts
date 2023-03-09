@@ -17,6 +17,8 @@ import type {
 	ClubsPropsPages,
 	ClubsFunctionGetSlotsResults,
 	ClubsSlot,
+	ClubsFunctionGetPagePaths,
+	ClubsFunctionGetAdminPaths,
 } from './types'
 import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
@@ -101,10 +103,24 @@ const _staticPathsFromPlugins =
 		(
 			await Promise.all(
 				plugins.map(async (plugin) => {
+					const plgFn:
+						| ClubsFunctionGetPagePaths
+						| ClubsFunctionGetAdminPaths
+						| undefined =
+						caller === 'getPagePaths'
+							? plugin.getPagePaths
+							: caller === 'getAdminPaths'
+							? plugin.getAdminPaths
+							: undefined
 					const results = (
-						await plugin[caller](plugin.options, config, {
-							getPluginConfigById: getPluginConfigByIdFactory(config, plugins),
-						})
+						plgFn
+							? await plgFn(plugin.options, config, {
+									getPluginConfigById: getPluginConfigByIdFactory(
+										config,
+										plugins
+									),
+							  })
+							: []
 					).map((x) => ({ ...x, details: plugin }))
 					const updated = additionalProps
 						? results.map((res, i) => ({
