@@ -177,6 +177,11 @@ export type ClubsPluginMeta = {
 	readonly category: ClubsPluginCategory | string
 	readonly token?: ClubsPluginToken
 	readonly offer?: ClubsPluginOffer
+	readonly icon?: string
+	readonly previewImages?: readonly string[]
+	readonly description?: string
+	readonly readme?: AstroComponentFactory
+	readonly clubsUrl?: string
 }
 
 export type ClubsThemePluginMeta = ClubsPluginMeta & {
