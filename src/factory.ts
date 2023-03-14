@@ -125,7 +125,11 @@ const _staticPathsFromPlugins =
 					const updated = additionalProps
 						? results.map((res, i) => ({
 								...res,
-								props: { ...res.props, ...additionalProps(plugin.pluginIndex) },
+								props: {
+									...res.props,
+									...additionalProps(plugin.pluginIndex),
+									pluginMeta: plugin.meta,
+								},
 						  }))
 						: results
 					return updated
