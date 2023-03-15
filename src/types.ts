@@ -22,6 +22,7 @@ export type ClubsPluginOptions = readonly ClubsPluginOption[]
 
 export type ClubsPlugin = Readonly<{
 	readonly id: string
+	readonly name?: string // TODO: This value is used in historical reason, and will be deleted in the future
 	readonly enable?: boolean
 	readonly options: ClubsPluginOptions
 }>
