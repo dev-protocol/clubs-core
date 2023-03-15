@@ -45,6 +45,7 @@ export const getSlots: ClubsFunctionGetSlots = async (options) => [
 ]
 
 export const meta = {
+	id: 'example',
 	displayName: 'Example',
 	category: 'uncategorized',
 }

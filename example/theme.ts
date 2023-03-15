@@ -35,6 +35,7 @@ export const getSlots: ClubsFunctionGetSlots = async (
 }
 
 export const meta = {
+	id: 'theme',
 	displayName: 'Example',
 	category: 'theme',
 	theme: {
