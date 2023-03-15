@@ -9,6 +9,7 @@ $theme: (
 	surface-dark: 'dp-black',
 	background: 'dp-white-200',
 	dark-background: 'dp-black-600',
+	dark-mode: 'media',
 	extend: (
 		padding: (
 			xs: 0.3rem,
@@ -17,9 +18,11 @@ $theme: (
 			lg: 1rem,
 			xl: 1.2rem,
 		),
+		stroke: (
+			default: 3px,
+			set-accent-dark: 3
+		),
 	),
-	stroke: 3px,
-	stroke-set-accent-dark: 3px white,
 );
 
 $button-theme: (
@@ -28,13 +31,7 @@ $button-theme: (
 		'xs',
 		'md',
 	),
-	ink: 'surface-600',
 	border-width: 'stroke',
-	border-focus: 'stroke-set-accent-dark',
-	fill: 'accent-600',
-	fill-hover: 'accent-200',
-	fill-active: 'accent-200',
-	fill-disabled: 'accent-400',
 );
 
 $form-field-theme: (
@@ -42,12 +39,7 @@ $form-field-theme: (
 		'lg',
 		'xl',
 	),
-	ink: 'surface-600',
-	label-ink: 'surface-600',
 	border-width: 'stroke',
-	border-focus: 'stroke-set-accent-dark',
-	fill: 'accent-600',
-	fill-disabled: 'accent-400',
 );
 
 $link-theme: (
@@ -59,16 +51,12 @@ $select-field-theme: (
 		'lg',
 		'xl',
 	),
-	ink: 'surface-600',
-	label-ink: 'surface-600',
 	border-width: 'stroke',
-	border-focus: 'stroke-set-accent-dark',
-	fill: 'accent-600',
-	fill-disabled: 'accent-400',
 );
 
 $tick-field-theme: (
 	radius: 'medium',
+	border-width: 'stroke',
 	padding: (
 		'lg',
 		'xl',
