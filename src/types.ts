@@ -172,7 +172,7 @@ export type ClubsPluginOffer = {
 }
 
 export type ClubsPluginMeta = {
-	readonly id?: string
+	readonly id: string
 	readonly displayName: string
 	readonly category: ClubsPluginCategory | string
 	readonly token?: ClubsPluginToken
