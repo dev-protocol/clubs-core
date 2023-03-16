@@ -6,7 +6,7 @@ import type {
 	ClubsFunctionConfigFetcher,
 	ClubsFunctionPageFactory,
 	ClubsGetStaticPathsResult,
-	ClubsPluginsMap,
+	ClubsPlugins,
 	ClubsPropsAdminPages,
 	ClubsPluginDetails,
 	ClubsStaticPath,
@@ -32,20 +32,20 @@ type ClubsStaticPathWithDetails = ClubsStaticPath & {
 
 const _listPlugins = async (
 	config: ClubsConfiguration,
-	list: ClubsPluginsMap
+	list: ClubsPlugins
 ): Promise<Plugins> => {
-	const plugins: Plugins = await Promise.all(
-		config.plugins.map(
-			async ({ name, enable = true, options = [] }, i: number) => {
-				const fn = list[name] || {}
-				return { name, enable, options, ...fn, pluginIndex: i }
-			}
-		)
+	// Test this `reduce`: `[{a:1}, {a: 2}, {a:3}].reduce((ac, v, i)=>([...ac, {...v, i}]), [])`
+	const plugins: Plugins = config.plugins.reduce(
+		(ac, { id, enable = true, options = [] }, i: number) => {
+			const fn: ClubsFunctionPlugin | undefined = list.find(
+				({ meta: _pluginMeta }) => id === _pluginMeta.id
+			)
+			return fn ? [...ac, { id, enable, options, ...fn, pluginIndex: i }] : ac
+		},
+		[] as Plugins
 	)
 
-	return plugins.filter(({ name }) =>
-		Object.prototype.hasOwnProperty.call(list, name)
-	)
+	return plugins
 }
 
 const _findCurrentTheme = (
@@ -83,7 +83,7 @@ const getPluginConfigByIdFactory =
 			| readonly [undefined, undefined] = plugin
 			? [
 					{
-						name: plugin.name,
+						id: plugin.id,
 						options: plugin.options,
 						enable: plugin.enable,
 					},
@@ -184,7 +184,7 @@ const _compose = <P extends Props>(
 
 const _staticPagePathsFactory: (
 	configFetcher: ClubsFunctionConfigFetcher,
-	pluginsMap: ClubsPluginsMap
+	pluginsMap: ClubsPlugins
 ) => () => Promise<ClubsGetStaticPathsResult> =
 	(configFetcher, pluginsMap) =>
 	// eslint-disable-next-line functional/functional-parameters
@@ -223,7 +223,7 @@ const _staticPagePathsFactory: (
 
 const _staticAdminPathsFactory: (
 	configFetcher: ClubsFunctionConfigFetcher,
-	pluginsMap: ClubsPluginsMap
+	pluginsMap: ClubsPlugins
 ) => () => Promise<ClubsGetStaticPathsResult<ClubsPropsAdminPages>> =
 	(configFetcher, pluginsMap) =>
 	// eslint-disable-next-line functional/functional-parameters
