@@ -17,11 +17,11 @@ export const { getStaticPaths } = adminFactory({
 			adminRolePoints: 0,
 			options: [],
 			plugins: [
-				{ name: 'theme', options: [] },
-				{ name: 'example', options: [] },
+				{ id: 'theme', options: [] },
+				{ id: 'example', options: [] },
 			],
 		}),
-	plugins: { theme, example },
+	plugins: [theme, example],
 })
 
 const Content = Astro.props.component

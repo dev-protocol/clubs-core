@@ -16,11 +16,11 @@ export const { getStaticPaths } = pageFactory({
 			adminRolePoints: 0,
 			options: [],
 			plugins: [
-				{ name: 'theme', options: [] },
-				{ name: 'example', options: [] },
+				{ id: 'theme', options: [] },
+				{ id: 'example', options: [] },
 			],
 		}),
-	plugins: { theme, example },
+	plugins: [theme, example],
 })
 
 const Layout = Astro.props.layout

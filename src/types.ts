@@ -21,7 +21,8 @@ export type ClubsPluginOption = Readonly<{
 export type ClubsPluginOptions = readonly ClubsPluginOption[]
 
 export type ClubsPlugin = Readonly<{
-	readonly name: string
+	readonly id: string
+	readonly name?: string // TODO: This value is used in historical reason, and will be deleted in the future
 	readonly enable?: boolean
 	readonly options: ClubsPluginOptions
 }>
@@ -172,7 +173,7 @@ export type ClubsPluginOffer = {
 }
 
 export type ClubsPluginMeta = {
-	readonly id?: string
+	readonly id: string
 	readonly displayName: string
 	readonly category: ClubsPluginCategory | string
 	readonly token?: ClubsPluginToken
@@ -195,13 +196,11 @@ export type ClubsFunctionFactoryResult<P = Props> = {
 	readonly getCurrentConfig: () => Promise<ClubsConfiguration>
 }
 
-export type ClubsPluginsMap = {
-	readonly [name: string]: ClubsFunctionPlugin
-}
+export type ClubsPlugins = readonly ClubsFunctionPlugin[]
 
 export type ClubsFunctionPageFactoryOptions = {
 	readonly config: ClubsFunctionConfigFetcher
-	readonly plugins: ClubsPluginsMap
+	readonly plugins: ClubsPlugins
 }
 
 export type ClubsFunctionOnSubmitConfiguration = (

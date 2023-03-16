@@ -20,32 +20,32 @@ const singleOptionPluginConfig: ClubsConfiguration = {
 	adminRolePoints: 0,
 	plugins: [
 		{
-			name: 'home',
+			id: 'home',
 			options: [],
 			enable: true,
 		},
 		{
-			name: 'buy',
+			id: 'buy',
 			options: [],
 			enable: true,
 		},
 		{
-			name: 'nft',
+			id: 'nft',
 			options: [],
 			enable: false,
 		},
 		{
-			name: 'community',
+			id: 'community',
 			options: [{ key: 'guild', value: 'https://www.testguild.com' }],
 			enable: true,
 		},
 		{
-			name: 'contact',
+			id: 'contact',
 			options: [{ key: 'requiredDev', value: 100 }],
 			enable: true,
 		},
 		{
-			name: 'membership',
+			id: 'membership',
 			options: [{ key: 'count', value: 10 }],
 			enable: true,
 		},
@@ -54,14 +54,18 @@ const singleOptionPluginConfig: ClubsConfiguration = {
 	rpcUrl: '',
 }
 
-const pluginsMap = {
-	theme: {
+const pluginsMap = [
+	{
 		getPagePaths: async () => [],
 		getAdminPaths: async () => [],
 		getLayout: async () => null as unknown as AstroComponentFactory,
-		meta: { displayName: 'Home', category: ClubsPluginCategory.Theme },
+		meta: {
+			id: 'theme',
+			displayName: 'Home',
+			category: ClubsPluginCategory.Theme,
+		},
 	},
-	home: {
+	{
 		getPagePaths: async (
 			_: any,
 			{
@@ -82,9 +86,13 @@ const pluginsMap = {
 				props: { options },
 			},
 		],
-		meta: { displayName: 'Home', category: ClubsPluginCategory.Uncategorized },
+		meta: {
+			id: 'home',
+			displayName: 'Home',
+			category: ClubsPluginCategory.Uncategorized,
+		},
 	},
-	buy: {
+	{
 		getPagePaths: async (
 			_: any,
 			{
@@ -105,9 +113,13 @@ const pluginsMap = {
 				props: { options },
 			},
 		],
-		meta: { displayName: 'Buy', category: ClubsPluginCategory.Uncategorized },
+		meta: {
+			id: 'buy',
+			displayName: 'Buy',
+			category: ClubsPluginCategory.Uncategorized,
+		},
 	},
-	community: {
+	{
 		getPagePaths: async (
 			_: any,
 			{
@@ -129,11 +141,12 @@ const pluginsMap = {
 			},
 		],
 		meta: {
+			id: 'community',
 			displayName: 'Community',
 			category: ClubsPluginCategory.Uncategorized,
 		},
 	},
-	nft: {
+	{
 		getPagePaths: async (
 			_: any,
 			{
@@ -154,9 +167,13 @@ const pluginsMap = {
 				props: { options },
 			},
 		],
-		meta: { displayName: 'NFT', category: ClubsPluginCategory.Uncategorized },
+		meta: {
+			id: 'nft',
+			displayName: 'NFT',
+			category: ClubsPluginCategory.Uncategorized,
+		},
 	},
-}
+]
 
 test('should update the config correctly', async (t) => {
 	// Make sure that old config is up to date as per test.
@@ -169,9 +186,7 @@ test('should update the config correctly', async (t) => {
 	// Get the static path info.
 	const { getStaticPaths } = adminFactory({
 		config: () => encodedConfig,
-		plugins: {
-			...pluginsMap,
-		},
+		plugins: [...pluginsMap],
 	})
 	// Fetch the path details.
 	const pathDetails: any = (await getStaticPaths()).find(

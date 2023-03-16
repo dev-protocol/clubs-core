@@ -28,7 +28,7 @@ test('Returns decoded configuration', (t) => {
 		adminRolePoints: 0,
 		plugins: [
 			{
-				name: 'test-plugin',
+				id: 'test-plugin',
 				options: [
 					{ key: 'test:date', value: new Date('2001-12-15T02:59:43Z') },
 					{ key: 'test:number', value: 1 },
@@ -70,7 +70,7 @@ test('Bigint less than or equal MAX_SAFE_INTEGER is handled as a number', (t) =>
 		rpcUrl: '',
 		plugins: [
 			{
-				name: '',
+				id: '',
 				options: [
 					{ key: '', value: 1n },
 					{ key: '', value: Number.MAX_SAFE_INTEGER },
