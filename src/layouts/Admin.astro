@@ -19,7 +19,7 @@ const { name } = config
 
 const enabledPlugins = clubs.plugins
 	.filter((plugin) => plugin.enable === true)
-	.filter((plugin) => plugin.name.toUpperCase() !== 'ADMIN')
+	.filter((plugin) => plugin.id !== 'clubs-core:admin')
 const currentTheme = clubs.plugins
 	.filter((plugin) => plugin.enable === true)
 	.find((plugin) => plugin.meta.category === 'theme')

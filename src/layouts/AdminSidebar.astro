@@ -15,8 +15,8 @@ const { page, name, enabledPlugins } = Astro.props as {
 }
 
 const cache = new Set<string>()
-const onlyFirstItems = enabledPlugins.filter(({ name }) =>
-	cache.has(name) ? false : cache.add(name)
+const onlyFirstItems = enabledPlugins.filter(({ id }) =>
+	cache.has(id) ? false : cache.add(id)
 )
 
 const catMonetization = onlyFirstItems.filter(
