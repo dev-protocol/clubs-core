@@ -41,6 +41,9 @@ const SlotsSidebarAfterBuiltInPrimaryLinks = clubs.slots.filter(
 const SlotsAsideAfterBuiltInButtons = clubs.slots.filter(
 	(slot) => slot.slot === ClubsSlotName.AdminAsideAfterBuiltInButtons
 )
+const SlotsModalContent = clubs.slots.filter(
+	(slot) => slot.slot === ClubsSlotName.AdminModalCcontent
+)
 ---
 
 <!DOCTYPE html>
@@ -162,7 +165,10 @@ const SlotsAsideAfterBuiltInButtons = clubs.slots.filter(
 			</div>
 			<AdminConfigurationManager {clubs} />
 		</div>
-		<Modal {...Astro.props} />
+		<Modal>
+			<slot name="admin:modal:content" />
+			{SlotsModalContent.map((Slot) => <Slot.component {...Slot.props} />)}
+		</Modal>
 	</body>
 
 	<script>
