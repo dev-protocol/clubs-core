@@ -83,3 +83,17 @@ test('Bigint less than or equal MAX_SAFE_INTEGER is handled as a number', (t) =>
 	t.is(res.plugins[0].options[0].value, 1)
 	t.is(res.plugins[0].options[1].value, Number.MAX_SAFE_INTEGER)
 })
+
+test('Specify the type of value will be decoded', (t) => {
+	type Value = {
+		readonly a: string
+		readonly b: bigint
+	}
+	const value: Value = {
+		a: 'TEST',
+		b: 100000000000000000000000n,
+	}
+	const encoded = encode<Value>(value)
+	const res = decode<Value>(encoded)
+	t.deepEqual(res, value)
+})

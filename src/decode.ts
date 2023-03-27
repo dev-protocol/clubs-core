@@ -1,10 +1,12 @@
 import { decode as _decode } from 'js-base64'
 import { parse } from 'yaml'
-import type { ClubsConfiguration } from './types'
+import type { ClubsConfiguration, ClubsPluginOptionValue } from './types'
 
-export const decode = (config: string): ClubsConfiguration =>
+export const decode = <R extends ClubsPluginOptionValue = ClubsConfiguration>(
+	value: string
+): R =>
 	parse(
-		_decode(config),
+		_decode(value),
 		(key, value) => {
 			return typeof value === 'bigint' && value <= Number.MAX_SAFE_INTEGER
 				? Number(value)
