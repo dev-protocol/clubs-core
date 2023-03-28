@@ -1,17 +1,19 @@
 import type { Props } from 'astro'
 import type { AstroComponentFactory } from 'astro/dist/runtime/server'
 
-export type ClubsPluginOptionValue =
+export type ClubsGeneralUnit =
 	| string
 	| number
 	| boolean
 	| Date
 	| bigint
 	| Uint8Array
-	| readonly ClubsPluginOptionValue[]
+	| readonly ClubsGeneralUnit[]
 	| {
-			readonly [key: string]: ClubsPluginOptionValue
+			readonly [key: string]: ClubsGeneralUnit
 	  }
+
+export type ClubsPluginOptionValue = ClubsGeneralUnit
 
 export type ClubsPluginOption = Readonly<{
 	readonly key: string

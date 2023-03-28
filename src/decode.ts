@@ -1,8 +1,8 @@
 import { decode as _decode } from 'js-base64'
 import { parse } from 'yaml'
-import type { ClubsConfiguration, ClubsPluginOptionValue } from './types'
+import type { ClubsConfiguration, ClubsGeneralUnit } from './types'
 
-export const decode = <R extends ClubsPluginOptionValue = ClubsConfiguration>(
+export const decode = <R extends ClubsGeneralUnit = ClubsConfiguration>(
 	value: string
 ): R =>
 	parse(
