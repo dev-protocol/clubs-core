@@ -71,7 +71,7 @@ const SlotsModalContent = clubs.slots.filter(
 		>
 			<header
 				id="__clubs:header__"
-				class="bg-dp-blue-grey-400 fixed z-50 grid hidden max-h-screen min-h-screen w-full content-start gap-16 overflow-y-scroll py-16 px-8 lg:relative lg:grid lg:max-h-fit lg:overflow-y-auto"
+				class="bg-dp-blue-grey-400 fixed z-50 grid hidden max-h-screen min-h-screen w-full content-start gap-16 overflow-y-scroll px-8 py-16 lg:relative lg:grid lg:max-h-fit lg:overflow-y-auto"
 			>
 				<AdminSidebar page={page} name={name} enabledPlugins={enabledPlugins}>
 					<slot name="admin:sidebar:before-title" slot="before-title" />
@@ -113,7 +113,7 @@ const SlotsModalContent = clubs.slots.filter(
 				</AdminSidebar>
 				<button
 					id="__clubs:sidebar-close__"
-					class="text-dp-white-ink fixed left-1/2 bottom-[3rem] flex aspect-square w-14 -translate-x-1/2 items-center justify-center rounded-full bg-white shadow-2xl lg:hidden"
+					class="text-dp-white-ink fixed bottom-[3rem] left-1/2 flex aspect-square w-14 -translate-x-1/2 items-center justify-center rounded-full bg-white shadow-2xl lg:hidden"
 					><XMark />
 				</button>
 			</header>
@@ -156,7 +156,7 @@ const SlotsModalContent = clubs.slots.filter(
 				class="fixed bottom-[3rem] left-1/2 flex -translate-x-1/2 items-stretch gap-6 transition-all duration-300 ease-in-out lg:hidden"
 			>
 				<div
-					class="text-dp-white-ink flex items-stretch gap-2 rounded-full bg-white py-4 px-6 shadow-2xl"
+					class="text-dp-white-ink flex items-stretch gap-2 rounded-full bg-white px-6 py-4 shadow-2xl"
 				>
 					<Clubs />
 				</div>

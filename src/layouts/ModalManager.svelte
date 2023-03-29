@@ -53,7 +53,7 @@
 		{#if data.state === 'loading'}
 			<div
 				role="presentation"
-				class="border-native-blue-300 mx-auto h-16 w-16 animate-spin rounded-full border-l border-t border-r"
+				class="border-native-blue-300 mx-auto h-16 w-16 animate-spin rounded-full border-l border-r border-t"
 			/>
 		{/if}
 		{#if data.state === 'alert'}
