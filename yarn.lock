@@ -43,12 +43,13 @@
     vscode-languageserver-types "^3.17.1"
     vscode-uri "^3.0.3"
 
-"@astrojs/lit@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@astrojs/lit/-/lit-1.3.0.tgz#cf689daf487256cbf36b6ac81962c36091df48dc"
-  integrity sha512-mAh0WUNsdBChNRR6t+WznhG4+FzON745u0eH5lJKBOErcIIoHkCb248l9iR7Z4UvVEp24AYYpo4t9WkIb8vTEg==
+"@astrojs/lit@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@astrojs/lit/-/lit-2.0.0.tgz#bbf08f2fc0e3dba4609f54c990425b177b325def"
+  integrity sha512-7Ms63KGeyc3SOMcFu8+HM0n9eC31Mo5aMjNolDAyUZWF279KuNsmqVLDACmcs7gtueujl4R9ILsbcDSS5YahbA==
   dependencies:
-    "@lit-labs/ssr" "^2.2.0"
+    "@lit-labs/ssr" "^3.1.0"
+    "@lit-labs/ssr-dom-shim" "^1.1.0"
     parse5 "^7.1.2"
 
 "@astrojs/markdown-remark@^2.1.2":
@@ -1125,23 +1126,24 @@
   resolved "https://registry.yarnpkg.com/@lit-labs/ssr-dom-shim/-/ssr-dom-shim-1.1.0.tgz#3361d6b8c4cb2ac426d5794ac7cd9776cd2f0814"
   integrity sha512-92uQ5ARf7UXYrzaFcAX3T2rTvaS9Z1//ukV+DqjACM4c8s0ZBQd7ayJU5Dh2AFLD/Ayuyz4uMmxQec8q3U4Ong==
 
-"@lit-labs/ssr@^2.2.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@lit-labs/ssr/-/ssr-2.3.0.tgz#5811ebbc9d219453510bad1d1e80115f1c431c3f"
-  integrity sha512-uPaJoNf5w3t8DOVDpuI4WR6wo552mZwiiE9n9TpIvinh75lDgvl1ki07wvfrFI6VEbDVPRj4jHiCduBr1dVJ7A==
+"@lit-labs/ssr@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@lit-labs/ssr/-/ssr-3.1.0.tgz#4c71cf5a11a6f05d23a48091aceb219a6015f2cd"
+  integrity sha512-D4Ut27bmmj5AV9iQaEOxdjPHSZGp11ww0DI3zAniyFf2KBOH7y/X2U163oOdmKh6KQNFLQDOkVx+A6NlmxcY4Q==
   dependencies:
     "@lit-labs/ssr-client" "^1.0.0"
-    "@lit/reactive-element" "^1.5.0"
+    "@lit-labs/ssr-dom-shim" "^1.1.0"
+    "@lit/reactive-element" "^1.6.0"
     "@parse5/tools" "^0.1.0"
     "@types/node" "^16.0.0"
     enhanced-resolve "^5.10.0"
-    lit "^2.5.0"
-    lit-element "^3.1.0"
-    lit-html "^2.5.0"
+    lit "^2.7.0"
+    lit-element "^3.3.0"
+    lit-html "^2.7.0"
     node-fetch "^3.2.8"
     parse5 "^7.1.1"
 
-"@lit/reactive-element@^1.0.0", "@lit/reactive-element@^1.5.0":
+"@lit/reactive-element@^1.0.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@lit/reactive-element/-/reactive-element-1.5.0.tgz#344cc33f2d1491d094b8ef824a9fe31d150d2375"
   integrity sha512-fQh9FDK0LPTwDk+0HhSZEtb8K0LTN1wXerwpGrWA+a8tWulYRDLI4vQDWp4GOIsewn0572KYV/oZ3+492D7osA==
@@ -3932,14 +3934,6 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
-lit-element@^3.1.0:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-3.2.2.tgz#d148ab6bf4c53a33f707a5168e087725499e5f2b"
-  integrity sha512-6ZgxBR9KNroqKb6+htkyBwD90XGRiqKDHVrW/Eh0EZ+l+iC+u+v+w3/BA5NGi4nizAVHGYvQBHUDuSmLjPp7NQ==
-  dependencies:
-    "@lit/reactive-element" "^1.3.0"
-    lit-html "^2.2.0"
-
 lit-element@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-3.3.0.tgz#a8e0b9ca5239faf721d9af4460f106cf7f03533b"
@@ -3949,17 +3943,10 @@ lit-element@^3.3.0:
     "@lit/reactive-element" "^1.3.0"
     lit-html "^2.7.0"
 
-lit-html@^2.0.0, lit-html@^2.5.0:
+lit-html@^2.0.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-2.5.0.tgz#9d4c0bb3652a6b10bc4ccdb627dfa9eff1215474"
   integrity sha512-bLHosg1XL3JRUcKdSVI0sLCs0y1wWrj2sqqAN3cZ7bDDPNgmDHH29RV48x6Wz3ZmkxIupaE+z7uXSZ/pXWAO1g==
-  dependencies:
-    "@types/trusted-types" "^2.0.2"
-
-lit-html@^2.2.0:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-2.6.1.tgz#eb29f0b0c2ab54ea77379db11fc011b0c71f1cda"
-  integrity sha512-Z3iw+E+3KKFn9t2YKNjsXNEu/LRLI98mtH/C6lnFg7kvaqPIzPn124Yd4eT/43lyqrejpc5Wb6BHq3fdv4S8Rw==
   dependencies:
     "@types/trusted-types" "^2.0.2"
 
@@ -3970,7 +3957,7 @@ lit-html@^2.7.0:
   dependencies:
     "@types/trusted-types" "^2.0.2"
 
-lit@^2.0.0, lit@^2.3.1, lit@^2.5.0:
+lit@^2.0.0, lit@^2.3.1, lit@^2.7.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/lit/-/lit-2.7.0.tgz#94242caa20f7b9e60d49cc0b843e4a694c4af3bb"
   integrity sha512-qSy2BAVA+OiWtNptP404egcC/izDdNRw6iHGIbUmkZtbMJvPKfNsaoKrNs8Zmsbjmv5ZX2tur1l9TfzkSWWT4g==
