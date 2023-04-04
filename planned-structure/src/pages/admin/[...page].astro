@@ -3,6 +3,7 @@ import { Admin } from '../../../../src/layouts'
 import { adminFactory, encode } from '../../../../src/'
 import example from '../../../../example/index'
 import theme from '../../../../example/theme'
+import theme2 from '../../../../example/theme2'
 
 export const { getStaticPaths } = adminFactory({
 	config: () =>
@@ -18,10 +19,11 @@ export const { getStaticPaths } = adminFactory({
 			options: [],
 			plugins: [
 				{ id: 'theme', options: [] },
+				{ id: 'theme2', options: [], enable: false },
 				{ id: 'example', options: [] },
 			],
 		}),
-	plugins: [theme, example],
+	plugins: [theme, theme2, example],
 })
 
 const Content = Astro.props.component
@@ -53,6 +55,7 @@ console.log('props.slots', Astro.props.clubs.slots)
 	import { onSubmitConfig } from '../../../../src'
 
 	onSubmitConfig((data, onFinish) => {
-		console.log('onSubmitConfig', data, onFinish)
+		console.log('onSubmitConfig', data)
+		setTimeout(() => onFinish({ success: true }), 1000)
 	})
 </script>
