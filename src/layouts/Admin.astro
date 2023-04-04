@@ -2,7 +2,7 @@
 import { ClubsPropsAdminPages, ClubsSlotName, decode } from '../index'
 import AdminSidebar from './AdminSidebar.astro'
 import AdminConfigurationManager from './AdminConfigurationManager.astro'
-import AdminThemeCard from './AdminThemeCard.astro'
+import AdminThemeSelector from './AdminThemeSelector.svelte'
 import Aside from './Aside.astro'
 import Clubs from './primitives/Clubs.astro'
 import XMark from './icons/x-mark.astro'
@@ -20,9 +20,9 @@ const { name } = config
 const enabledPlugins = clubs.plugins
 	.filter((plugin) => plugin.enable === true)
 	.filter((plugin) => plugin.id !== 'clubs-core:admin')
-const currentTheme = clubs.plugins
-	.filter((plugin) => plugin.enable === true)
-	.find((plugin) => plugin.meta.category === 'theme')
+const allThemes = clubs.plugins.filter(
+	(plugin) => plugin.meta.category === 'theme'
+)
 
 const theme = page && page.startsWith('theme')
 
@@ -124,8 +124,14 @@ const SlotsModalContent = clubs.slots.filter(
 							<div class="grid gap-16">
 								<section class="grid gap-16">
 									<h2 class="font-title text-2xl font-bold">Theme</h2>
-									<AdminThemeCard meta={currentTheme?.meta} />
 								</section>
+								{
+									<AdminThemeSelector
+										client:load
+										encodedConfiguration={clubs.encodedClubsConfiguration}
+										themes={allThemes}
+									/>
+								}
 								<h2 class="font-title text-2xl font-bold">
 									Theme Configuration
 								</h2>
