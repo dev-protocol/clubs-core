@@ -6,7 +6,6 @@ export const clubs = {
 	],
 	theme: {
 		extend: {
-			screens: hashi.theme.screens,
 			colors: hashi.theme.colors,
 			fontFamily: hashi.theme.fontFamily,
 		},
