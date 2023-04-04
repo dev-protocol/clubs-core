@@ -4,9 +4,9 @@ import Clubs from './primitives/Clubs.astro'
 import AdminSidebarGroup from './AdminSidebarGroup.astro'
 import AdminSidebarMainItem from './AdminSidebarMainItem.astro'
 import IconDesktop from './icons/computer-desktop.astro'
-import IconGlobe from './icons/globe-europe-africa.astro'
 import IconGroup from './icons/rectangle-group.astro'
 import IconSquareSmall from './icons/square-small.astro'
+import { version, homepage } from '../../package.json'
 
 const { page, name, enabledPlugins } = Astro.props as {
 	page?: string
@@ -158,4 +158,10 @@ const navItemPluginInactive = 'hover:bg-dp-blue-grey-300'
 		<li><a class="text-[#88AEFF]" href="/admin/general">General</a></li>
 		<li><a class="text-[#88AEFF]" href="/admin/plugins">Plugins</a></li>
 	</ul>
+
+	<span class="text-center"
+		><a href={homepage} class="hs-link text-native-blue-300 text-xs"
+			>clubs-core v.{version}</a
+		></span
+	>
 </nav>
