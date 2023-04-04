@@ -13,7 +13,7 @@
 				alt={meta.displayName}
 				role="none"
 				src={meta.theme.previewImage}
-				class={`aspect-[4/3] h-56 rounded-lg border-[3px] object-cover ${
+				class={`aspect-[4/3] h-56 max-w-none rounded-lg border-[3px] object-cover ${
 					enable ? 'border-[#5B8BF5]' : 'border-transparent opacity-50'
 				}`}
 			/>

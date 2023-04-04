@@ -37,7 +37,9 @@
 </script>
 
 <div class="grid">
-	<ul class="flex gap-2 overflow-x-auto pb-2">
+	<ul
+		class="mx-[calc((100vw-100%)/-2)] flex flex-nowrap gap-2 overflow-x-auto px-4 pb-4 lg:mx-0 lg:px-0"
+	>
 		{#each themes.sort((a, b) => (a.enable ? -1 : 0)) as theme}
 			<li>
 				<AdminThemeCard
