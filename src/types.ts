@@ -1,4 +1,4 @@
-import type { Props } from 'astro'
+import type { APIRoute, Props } from 'astro'
 import type { AstroComponentFactory } from 'astro/dist/runtime/server'
 
 export type ClubsGeneralUnit =
@@ -60,6 +60,22 @@ export type ClubsStaticPath<P = Props> = ClubsBaseStaticPath<P> &
 		readonly paths: readonly (undefined | string)[]
 		readonly component: AstroComponentFactory
 	}>
+
+export type ClubsApiPath = Readonly<{
+	readonly paths: readonly (undefined | string)[]
+	readonly method:
+		| 'CONNECT'
+		| 'DELETE'
+		| 'GET'
+		| 'HEAD'
+		| 'OPTIONS'
+		| 'POST'
+		| 'PUT'
+		| 'PATCH'
+	readonly handler: APIRoute
+}>
+
+export type ClubsApiPaths = readonly ClubsApiPath[]
 
 export enum ClubsSlotName {
 	AdminSidebarBeforeTitle = 'admin:sidebar:before-title',
@@ -127,6 +143,8 @@ export type ClubsFunctionGetSlots = (
 	config: ClubsConfiguration,
 	utils: ClubsSlotsFactoryUtils
 ) => Promise<ClubsFunctionGetSlotsResults>
+
+export type ClubsFunctionGetApiPaths = ClubsFunctionGetPagePaths<ClubsApiPaths>
 
 export type ClubsGetStaticPathsItem<P = Props> = {
 	readonly params: { readonly page: undefined | string }
@@ -216,10 +234,15 @@ export type ClubsFunctionPageFactory<P = Props> = (
 export type ClubsFunctionAdminFactory =
 	ClubsFunctionPageFactory<ClubsPropsAdminPages>
 
+export type ClubsFunctionApiFactory = (
+	options: ClubsFunctionPageFactoryOptions
+) => { readonly all: APIRoute }
+
 export type ClubsFunctionStandardPlugin = Readonly<{
 	readonly getPagePaths?: ClubsFunctionGetPagePaths
 	readonly getAdminPaths?: ClubsFunctionGetAdminPaths
 	readonly getSlots?: ClubsFunctionGetSlots
+	readonly getApiPaths?: ClubsFunctionGetApiPaths
 	readonly meta: ClubsPluginMeta
 }>
 
@@ -228,6 +251,7 @@ export type ClubsFunctionThemePlugin = Readonly<{
 	readonly getAdminPaths?: ClubsFunctionGetAdminPaths
 	readonly getLayout: ClubsFunctionGetLayout
 	readonly getSlots?: ClubsFunctionGetSlots
+	readonly getApiPaths?: ClubsFunctionGetApiPaths
 	readonly meta: ClubsThemePluginMeta
 }>
 

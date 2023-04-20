@@ -7,6 +7,7 @@ import {
 	ClubsFunctionGetAdminPaths,
 	ClubsFunctionGetSlots,
 	ClubsSlotName,
+	ClubsFunctionGetApiPaths,
 } from '../src'
 
 export const getPagePaths: ClubsFunctionGetPagePaths = async () => [
@@ -44,10 +45,20 @@ export const getSlots: ClubsFunctionGetSlots = async (options) => [
 	},
 ]
 
+export const getApiPaths: ClubsFunctionGetApiPaths = async (options) => [
+	{
+		paths: [],
+		method: 'GET',
+		handler: ({ request }) => ({
+			body: JSON.stringify({ options, body: request.body }),
+		}),
+	},
+]
+
 export const meta = {
 	id: 'example',
 	displayName: 'Example',
 	category: 'uncategorized',
 }
 
-export default { getPagePaths, getAdminPaths, getSlots, meta }
+export default { getPagePaths, getAdminPaths, getSlots, getApiPaths, meta }
