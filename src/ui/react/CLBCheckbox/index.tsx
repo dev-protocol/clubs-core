@@ -1,7 +1,10 @@
 import React from 'react';
 
+type CheckboxTypes = 'raised';
+
 interface CLBCheckboxProps {
 	name?: string;
+	type?: CheckboxTypes|string,
 	value?: string;
 	label: string;
 	helper?: string;
@@ -11,9 +14,18 @@ interface CLBCheckboxProps {
 	onChange?: (() => void|any);
 }
 
-const CLBCheckbox: React.FC<CLBCheckboxProps> = ({value, name, label, helper, media, mediaAlt, isChecked, onChange}) => {
+const CLBCheckbox: React.FC<CLBCheckboxProps> = ({value, name, label, type, helper, media, mediaAlt, isChecked, onChange}) => {
+
+	const _assertType = (type: string): string => {
+		const finalTypes: string[] = [];
+		type.split(' ').forEach((type) => {
+			finalTypes.push('is-' + type);
+		});
+		return finalTypes.join(' ');
+	}
+
   return (
-		<label className="hs-tick-field">
+		<label className={`hs-tick-field${type ? ' ' + _assertType(type) : ''}`}>
 			<input
 				className="hs-tick-field__input"
 				type="checkbox"
