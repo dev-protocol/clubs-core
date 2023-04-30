@@ -19,10 +19,11 @@ import type {
 	ClubsSlot,
 	ClubsFunctionGetPagePaths,
 	ClubsFunctionGetAdminPaths,
+	ClubsFunctionApiFactory,
 } from './types'
 import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
-import { Props } from 'astro'
+import { APIRoute, Props } from 'astro'
 
 type Plugins<P extends ClubsFunctionPlugin = ClubsFunctionPlugin> =
 	readonly ClubsPluginDetails<P>[]
@@ -309,4 +310,33 @@ export const adminFactory: ClubsFunctionAdminFactory = (options) => {
 	)
 	const getCurrentConfig = _configFactory(options.config)
 	return { getStaticPaths, getCurrentConfig }
+}
+
+export const apiFactory: ClubsFunctionApiFactory = (options) => {
+	const all: APIRoute = async (context) => {
+		const [config] = await getClubsConfig(options.config)
+		const plugins = await _listPlugins(config, options.plugins)
+		const getPluginConfigById = getPluginConfigByIdFactory(config, plugins)
+		const utils = { getPluginConfigById }
+		const { path } = context.params
+
+		const plugin = plugins.find((plg) => path?.startsWith(plg.meta.id))
+		const apiRoutes =
+			plugin && typeof plugin.getApiPaths === 'function'
+				? await plugin.getApiPaths(plugin.options, config, utils)
+				: undefined
+
+		const apiRoute = apiRoutes
+			? apiRoutes.find(
+					({ paths, method }) =>
+						method === context.request.method &&
+						path === `${plugin?.meta.id}/${paths.join('/')}`
+			  )
+			: undefined
+		const response = apiRoute
+			? apiRoute.handler(context)
+			: new Response(null, { status: 404 })
+		return response
+	}
+	return { all }
 }
