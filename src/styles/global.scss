@@ -32,9 +32,9 @@
 	@include hs-button.extend('filled.plox') {
 		@include hs-button.color(
 			(
-				fill: 'plox-400',
-				ink: 'plox-ink',
-				border: 'plox-400',
+				fill: 'plox.400',
+				ink: 'plox.ink',
+				border: 'plox.400',
 			)
 		);
 
@@ -42,9 +42,9 @@
 		&:focus {
 			@include hs-button.color(
 				(
-					fill: 'plox-400',
-					ink: 'plox-ink',
-					border: 'plox-400',
+					fill: 'plox.400',
+					ink: 'plox.ink',
+					border: 'plox.400',
 				)
 			);
 		}
@@ -52,9 +52,9 @@
 		&:active {
 			@include hs-button.color(
 				(
-					fill: 'plox-200',
-					ink: 'plox-ink',
-					border: 'plox-200',
+					fill: 'plox.200',
+					ink: 'plox.ink',
+					border: 'plox.200',
 				)
 			);
 		}
@@ -87,7 +87,7 @@
 	@include hs-link.extend('native-blue') {
 		@include hs-link.color(
 			(
-				ink: 'native-blue-400',
+				ink: 'native-blue.400',
 			)
 		);
 
@@ -100,7 +100,7 @@
 							hashi.token-get-raw('native-blue-400'),
 							hashi.$color-fill-hover-opacity
 						),
-					ink: 'native-blue-400',
+					ink: 'native-blue.400',
 				)
 			);
 		}
@@ -113,7 +113,7 @@
 							hashi.token-get-raw('native-blue-400'),
 							hashi.$color-fill-active-opacity
 						),
-					ink: 'native-blue-400',
+					ink: 'native-blue.400',
 				)
 			);
 		}
@@ -134,7 +134,7 @@
 	@include hs-form-field.extend('filled') {
 		@include hs-form-field.color(
 			(
-				border: 'dp-black-600',
+				border: 'dp-black.600',
 			)
 		);
 	}
