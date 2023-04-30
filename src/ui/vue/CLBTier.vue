@@ -41,14 +41,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '@devprotocol/hashi' with (
-	$vue-mode: true
-);
+@use '@devprotocol/hashi' with ($modular-mode: true);
 
 .clb-tier {
 	display: grid;
 	justify-items: start;
-	gap: hashi.token-get('padding-sm');
+	gap: hashi.primitive-token-get('padding.sm');
 
 	.clb-tier__media {
 		width: 100%;
@@ -57,17 +55,17 @@ export default {
 	}
 
 	.clb-tier__title {
-		font-family: hashi.token-get('family-title');
-		font-size: hashi.token-get('size-subtitle');
-		font-weight: hashi.token-get('weight-bold');
-		line-height: hashi.token-get('line-height-condensed');
+		font-family: hashi.token-get('title-family');
+		font-size: hashi.token-get('subtitle-size');
+		font-weight: hashi.primitive-token-get('weight.bold');
+		line-height: hashi.primitive-token-get('line-height.condensed');
 	}
 
 	.clb-tier__subtitle {
-		font-family: hashi.token-get('family-subtitle');
-		font-size: hashi.token-get('size-body');
-		font-weight: hashi.token-get('weight-normal');
-		line-height: hashi.token-get('line-height-condensed');
+		font-family: hashi.token-get('subtitle-family');
+		font-size: hashi.token-get('body-size');
+		font-weight: hashi.primitive-token-get('weight.normal');
+		line-height: hashi.primitive-token-get('line-height.condensed');
 		text-transform: uppercase;
 	}
 
