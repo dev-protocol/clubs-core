@@ -1,6 +1,6 @@
 <template>
 	<label
-		:class="`hs-form-field is-filled${type ? ' ' + assertType(type) : ''}`"
+		:class="`hs-form-field${type ? ' ' + assertType(type) : ''}`"
 	>
 		<span class="hs-form-field__label">{{ label }}</span>
 		<input
