@@ -74,19 +74,21 @@ import CLBTier from '../../../src/ui/vue/CLBTier.vue'
 					<h2>CLBFormField components</h2>
 					<CLBFormField
 						label="Text Field"
+						type="raised"
 						input-type="text"
 						placeholder="Placeholder..."
 						helper="Helper Text"
 					/>
 					<CLBFormField
 						label="Text Area Field"
+						type="raised"
 						input-type="textarea"
 						placeholder="Placeholder..."
 						helper="Helper Text"
 					/>
 					<CLBFormField
 						label="Number Field"
-						type="danger"
+						type="error raised"
 						input-type="number"
 						placeholder="1-100..."
 						helper="Select a number"
@@ -109,12 +111,14 @@ import CLBTier from '../../../src/ui/vue/CLBTier.vue'
 					<h2>CLBRadio components</h2>
 					<CLBRadio
 						label="Hello"
+						type="raised"
 						helper="Helper Text"
 						name="sampleChoice"
 						value="option1"
 					/>
 					<CLBRadio
 						label="Hello"
+						type="raised"
 						helper="Helper Text"
 						name="sampleChoice"
 						value="option2"
@@ -125,12 +129,14 @@ import CLBTier from '../../../src/ui/vue/CLBTier.vue'
 					<h2>CLBCheckbox components</h2>
 					<CLBCheckbox
 						label="Hello"
+						type="raised"
 						helper="Helper Text"
 						name="sampleChoice"
 						value="option1"
 					/>
 					<CLBCheckbox
 						label="Hello"
+						type="raised"
 						helper="Helper Text"
 						name="sampleChoice"
 						value="option2"
@@ -139,18 +145,19 @@ import CLBTier from '../../../src/ui/vue/CLBTier.vue'
 
 				<section id="clb-select-fields">
 					<h2>CLBSelectField components</h2>
-					<CLBSelectField label="Test CLBSelectField" helper="Helper Text">
+					<CLBSelectField type="raised" label="Test CLBSelectField" helper="Helper Text">
 						<option value="val">Value</option>
 					</CLBSelectField>
 					<CLBSelectField
 						label="Test CLBSelectField"
-						type="danger"
+						type="error raised"
 						helper="Helper Text"
 					>
 						<option value="val">Value</option>
 					</CLBSelectField>
 					<CLBSelectField
 						label="Test CLBSelectField"
+						type="raised"
 						helper="Helper Text"
 						is-disabled
 					>
