@@ -17,6 +17,7 @@
 @use '@devprotocol/hashi/hs-tick-field' with (
 	$theme: clubs.$tick-field-theme
 );
+@use '../../globals/clubs.variants' as clb-variants;
 
 @include hashi.init() {
 	@include hs-button.render();
@@ -24,4 +25,6 @@
 	@include hs-link.render();
 	@include hs-select-field.render();
 	@include hs-tick-field.render();
+
+	@include clb-variants.render();
 }
