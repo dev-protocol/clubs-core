@@ -1,19 +1,31 @@
 import React from 'react';
 
+type RadioTypes = 'raised';
+
 interface CLBRadioProps {
 	name?: string;
 	value?: string;
+	type?: string;
 	label: string;
 	helper?: string;
 	media?: string;
 	mediaAlt?: string;
 	isChecked?: boolean;
-	onChange?: (() => void|any);
+	onChange?: (() => void | any);
 }
 
-const CLBRadio: React.FC<CLBRadioProps> = ({value, name, label, helper, media, mediaAlt, isChecked, onChange}) => {
-  return (
-		<label className="hs-tick-field">
+const CLBRadio: React.FC<CLBRadioProps> = ({value, name, type, label, helper, media, mediaAlt, isChecked, onChange}) => {
+
+	const _assertType = (type: string): string => {
+		const finalTypes: string[] = [];
+		type.split(' ').forEach((type) => {
+			finalTypes.push('is-' + type);
+		});
+		return finalTypes.join(' ');
+	}
+
+	return (
+		<label className={`hs-tick-field${type ? ' ' + _assertType(type) : ''}`}>
 			<input
 				className="hs-tick-field__input"
 				type="radio"
@@ -23,7 +35,7 @@ const CLBRadio: React.FC<CLBRadioProps> = ({value, name, label, helper, media, m
 				onChange={onChange}
 				checked={isChecked}
 			/>
-			{ media &&
+			{media &&
 				<img
 					className="hs-tick-field__sprite"
 					src={media}
@@ -37,7 +49,7 @@ const CLBRadio: React.FC<CLBRadioProps> = ({value, name, label, helper, media, m
 				{helper && <span className="hs-tick-field__helper">{helper}</span>}
 			</div>
 		</label>
-  );
+	);
 };
 
 export default CLBRadio;
