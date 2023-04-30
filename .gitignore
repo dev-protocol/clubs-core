@@ -102,3 +102,7 @@ package-lock.json
 
 # dump
 dump
+
+# yarn stuffs
+.yarn
+.yarnrc.yml
