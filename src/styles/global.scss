@@ -97,7 +97,7 @@
 				(
 					fill:
 						rgba(
-							hashi.token-get-raw('native-blue-400'),
+							hashi.primitive-token-get('native-blue.400'),
 							hashi.$color-fill-hover-opacity
 						),
 					ink: 'native-blue.400',
@@ -110,7 +110,7 @@
 				(
 					fill:
 						rgba(
-							hashi.token-get-raw('native-blue-400'),
+							hashi.primitive-token-get('native-blue.400'),
 							hashi.$color-fill-active-opacity
 						),
 					ink: 'native-blue.400',
