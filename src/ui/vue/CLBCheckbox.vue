@@ -1,7 +1,5 @@
 <template>
-	<label
-		:class="`hs-tick-field${type ? ' ' + assertType(type) : ''}`"
-	>
+	<label :class="`hs-tick-field${type ? ' ' + assertType(type) : ''}`">
 		<input
 			class="hs-tick-field__input"
 			type="checkbox"
@@ -40,7 +38,7 @@ export default {
 		isChecked: Boolean,
 		onChange: Function,
 	},
-  methods: {
+	methods: {
 		assertType(type: string): string {
 			const finalTypes: string[] = []
 			type.split(' ').forEach((type) => {
@@ -48,6 +46,6 @@ export default {
 			})
 			return finalTypes.join(' ')
 		},
-  },
+	},
 }
 </script>

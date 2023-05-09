@@ -41,7 +41,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '@devprotocol/hashi' with ($modular-mode: true);
+@use '@devprotocol/hashi' with (
+	$modular-mode: true
+);
 
 .clb-tier {
 	display: grid;
