@@ -135,7 +135,7 @@
 		"@astrojs/tailwind": "3.1.2",
 		"@astrojs/vue": "2.1.1",
 		"@ava/typescript": "4.0.0",
-		"@rollup/plugin-commonjs": "24.1.0",
+		"@rollup/plugin-commonjs": "25.0.0",
 		"@rollup/plugin-multi-entry": "6.0.0",
 		"@rollup/plugin-typescript": "11.1.1",
 		"@rollup/pluginutils": "5.0.2",
