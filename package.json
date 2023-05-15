@@ -153,7 +153,7 @@
 		"eslint": "8.40.0",
 		"eslint-config-prettier": "8.8.0",
 		"eslint-plugin-functional": "4.4.1",
-		"glob": "10.2.3",
+		"glob": "10.2.4",
 		"husky": "8.0.3",
 		"npm-run-all": "4.1.5",
 		"postcss": "8.4.23",
