@@ -126,7 +126,7 @@
 		"lit": "^2.3.1",
 		"ramda": "^0.29.0",
 		"web3modal": "^1.9.9",
-		"yaml": "2.2.2"
+		"yaml": "2.3.0"
 	},
 	"devDependencies": {
 		"@astrojs/lit": "2.0.2",
@@ -147,7 +147,7 @@
 		"@typescript-eslint/eslint-plugin": "5.59.7",
 		"@typescript-eslint/parser": "5.59.7",
 		"@webcomponents/template-shadowroot": "0.2.1",
-		"astro": "2.5.3",
+		"astro": "2.5.5",
 		"autoprefixer": "10.4.14",
 		"ava": "5.2.0",
 		"eslint": "8.41.0",
