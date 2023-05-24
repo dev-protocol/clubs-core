@@ -1,6 +1,6 @@
 import React from 'react';
 
-type FormFieldTypes = 'danger';
+type FormFieldTypes = 'error'|'raised';
 
 interface CLBFormFieldProps {
 	label: string;
@@ -26,7 +26,7 @@ const CLBFormField: React.FC<CLBFormFieldProps> = ({label, helper, type, inputTy
 	}
 
 	return (
-		<label className={`hs-form-field is-filled${type ? ' ' + _assertType(type) : ''}`}>
+		<label className={`hs-form-field${type ? ' ' + _assertType(type) : ''}`}>
 			<span className="hs-form-field__label">{label}</span>
 			{inputType !== 'textarea' &&
 				<input required={isRequired} className="hs-form-field__input" name={name} type={inputType} placeholder={placeholder} disabled={isDisabled} readOnly={isReadonly} />

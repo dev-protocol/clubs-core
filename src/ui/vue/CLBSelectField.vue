@@ -1,7 +1,5 @@
 <template>
-	<label
-		:class="`hs-select-field is-filled${type ? ' ' + assertType(type) : ''}`"
-	>
+	<label :class="`hs-select-field${type ? ' ' + assertType(type) : ''}`">
 		<span class="hs-select-field__label">{{ label }}</span>
 		<select
 			:name="name"

@@ -2,13 +2,13 @@
 
 $theme: (
 	primary: 'dp-white',
-	primary-dark: 'dp-black',
+	primary-dark: 'dp-blue-grey',
 	accent: 'dp-blue-grey',
 	accent-dark: 'dp-white',
 	surface: 'dp-white',
-	surface-dark: 'dp-black',
-	background: 'dp-white-200',
-	dark-background: 'dp-black-600',
+	surface-dark: 'dp-blue-grey',
+	background: 'dp-white.200',
+	dark-background: 'dp-blue-grey.600',
 	extend: (
 		padding: (
 			xs: 0.3rem,
@@ -17,20 +17,19 @@ $theme: (
 			lg: 1rem,
 			xl: 1.2rem,
 		),
+		stroke: 3px,
+		stroke-set-accent-dark: white,
 	),
-	stroke: 3px,
-	stroke-set-accent-dark: 3px white,
 );
 
 $button-theme: (
 	width: auto,
 	padding: (
-		'xs',
+		'sm',
 		'md',
 	),
 	ink: 'surface-600',
 	border-width: 'stroke',
-	border-focus: 'stroke-set-accent-dark',
 	fill: 'accent-600',
 	fill-hover: 'accent-200',
 	fill-active: 'accent-200',
@@ -38,16 +37,12 @@ $button-theme: (
 );
 
 $form-field-theme: (
+	fill: 'primary-300',
 	padding: (
 		'lg',
 		'xl',
 	),
-	ink: 'surface-600',
-	label-ink: 'surface-600',
 	border-width: 'stroke',
-	border-focus: 'stroke-set-accent-dark',
-	fill: 'accent-600',
-	fill-disabled: 'accent-400',
 );
 
 $link-theme: (
@@ -55,16 +50,12 @@ $link-theme: (
 );
 
 $select-field-theme: (
+	fill: 'primary-300',
 	padding: (
 		'lg',
 		'xl',
 	),
-	ink: 'surface-600',
-	label-ink: 'surface-600',
 	border-width: 'stroke',
-	border-focus: 'stroke-set-accent-dark',
-	fill: 'accent-600',
-	fill-disabled: 'accent-400',
 );
 
 $tick-field-theme: (

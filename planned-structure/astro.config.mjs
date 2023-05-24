@@ -8,6 +8,6 @@ export default defineConfig({
 	server: {
 		port: 3000,
 	},
-	output: 'server',
+	// output: 'server',
 	integrations: [vue(), react(), svelte(), tailwind()],
 })

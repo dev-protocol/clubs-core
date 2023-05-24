@@ -1,7 +1,5 @@
 <template>
-	<label
-		:class="`hs-form-field is-filled${type ? ' ' + assertType(type) : ''}`"
-	>
+	<label :class="`hs-form-field${type ? ' ' + assertType(type) : ''}`">
 		<span class="hs-form-field__label">{{ label }}</span>
 		<input
 			v-if="inputType !== 'textarea'"

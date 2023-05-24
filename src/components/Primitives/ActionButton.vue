@@ -47,27 +47,46 @@ export default defineComponent({
 	},
 	data: () => ({
 		classByStatus: {
-			0: 'action-button',
-			1: 'action-button-loading',
-			2: 'action-button-success',
-			3: 'action-button-error',
+			0: 'is-action-button',
+			1: 'is-loading',
+			2: 'is-success',
+			3: 'is-error',
 		},
 	}),
 	components: { Spinner },
 })
 </script>
 
-<style scoped>
-.action-button {
-	@apply bg-gray-900 ring-gray-900 hover:bg-gray-800 hover:ring-1;
-}
+<style lang="scss" scoped>
+@use 'node_modules/@devprotocol/hashi/hs-button';
+
+// @include hs-button.extend('action-button') {
+// 	@include hs-button.color((
+// 		fill: 'accent-400',
+// 		ink: 'accent-ink',
+// 		border: 'accent-400'
+// 	));
+//
+// 	&:active {
+// 		@include hs-button.color((
+// 			fill: 'accent-300',
+// 			ink: 'accent-ink',
+// 			border: 'accent-300'
+// 		));
+// 	}
+// }
+
 .action-button-loading {
 	@apply border-2 border-gray-900 bg-gray-800;
 }
-.action-button-success {
-	@apply border-2 border-green-700 bg-green-600;
-}
-.action-button-error {
-	@apply border-2 border-red-700 bg-red-600;
+
+@include hs-button.extend('success') {
+	@include hs-button.color(
+		(
+			fill: 'dp-green.400',
+			ink: 'dp-green.ink',
+			border: 'dp-green.400',
+		)
+	);
 }
 </style>

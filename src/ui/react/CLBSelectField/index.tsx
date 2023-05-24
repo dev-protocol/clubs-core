@@ -1,6 +1,6 @@
 import React from 'react';
 
-type SelectFieldTypes = 'danger';
+type SelectFieldTypes = 'error'|'raised';
 
 interface CLBSelectFieldProps {
 	label: string;
@@ -23,7 +23,7 @@ const CLBSelectField: React.FC<CLBSelectFieldProps> = ({label, helper, name, typ
 	}
 
   return (
-		<label className={`hs-select-field is-filled${type ? ' ' + _assertType(type) : ''}`}>
+		<label className={`hs-select-field${type ? ' ' + _assertType(type) : ''}`}>
 			<span className="hs-select-field__label">{label}</span>
 			<select name={name} required={isRequired} className="hs-select-field__input" disabled={isDisabled}>
 				{children}

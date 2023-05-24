@@ -47,7 +47,7 @@ const SlotsModalContent = clubs.slots.filter(
 ---
 
 <!DOCTYPE html>
-<html class="dark" lang="en">
+<html class="dark" lang="en" hashi-theme="dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -63,7 +63,7 @@ const SlotsModalContent = clubs.slots.filter(
 	</head>
 
 	<body
-		class="font-body bg-dp-blue-grey-300 min-h-screen text-white"
+		class="font-body bg-primary-200 dark:bg-primary-600 text-primary-ink min-h-screen"
 		data-page={page}
 	>
 		<div
@@ -71,7 +71,7 @@ const SlotsModalContent = clubs.slots.filter(
 		>
 			<header
 				id="__clubs:header__"
-				class="bg-dp-blue-grey-400 fixed z-50 grid hidden max-h-screen min-h-screen w-full content-start gap-16 overflow-y-scroll px-8 py-16 lg:relative lg:grid lg:max-h-fit lg:overflow-y-auto"
+				class="bg-surface-300 fixed z-50 grid hidden max-h-screen min-h-screen w-full content-start gap-16 overflow-y-scroll px-8 py-16 lg:relative lg:grid lg:max-h-fit lg:overflow-y-auto"
 			>
 				<AdminSidebar page={page} name={name} enabledPlugins={enabledPlugins}>
 					<slot name="admin:sidebar:before-title" slot="before-title" />

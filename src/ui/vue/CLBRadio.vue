@@ -1,5 +1,5 @@
 <template>
-	<label class="hs-tick-field">
+	<label :class="`hs-tick-field${type ? ' ' + assertType(type) : ''}`">
 		<input
 			class="hs-tick-field__input"
 			type="radio"
@@ -24,18 +24,28 @@
 	</label>
 </template>
 
-<script>
+<script lang="ts">
 export default {
 	name: 'CLBRadio',
 	props: {
 		name: String,
 		value: String,
+		type: String,
 		label: String,
 		helper: String,
 		media: String,
 		mediaAlt: String,
 		isChecked: Boolean,
 		onChange: Function,
+	},
+	methods: {
+		assertType(type: string): string {
+			const finalTypes: string[] = []
+			type.split(' ').forEach((type) => {
+				finalTypes.push('is-' + type)
+			})
+			return finalTypes.join(' ')
+		},
 	},
 }
 </script>
