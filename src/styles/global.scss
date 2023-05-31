@@ -131,13 +131,13 @@
 	);
 
 	@include hs-form-field.render();
-	@include hs-form-field.extend('filled') {
-		@include hs-form-field.color(
-			(
-				border: 'dp-black.600',
-			)
-		);
-	}
+	// @include hs-form-field.extend('filled') {
+	// 	@include hs-form-field.color(
+	// 		(
+	// 			border: 'dp-black.600',
+	// 		)
+	// 	);
+	// }
 
 	@include hs-select-field.render();
 
