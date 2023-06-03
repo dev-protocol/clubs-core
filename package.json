@@ -158,7 +158,7 @@
 		"npm-run-all": "4.1.5",
 		"postcss": "8.4.24",
 		"prettier": "2.8.8",
-		"prettier-plugin-astro": "0.9.1",
+		"prettier-plugin-astro": "0.10.0",
 		"prettier-plugin-svelte": "^2.9.0",
 		"prettier-plugin-tailwindcss": "^0.3.0",
 		"react": "18.2.0",
