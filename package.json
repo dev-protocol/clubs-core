@@ -118,7 +118,7 @@
 	"dependencies": {
 		"@devprotocol/dev-kit": "7.3.4",
 		"@devprotocol/elements": "0.2.2",
-		"@devprotocol/hashi": "2.1.0",
+		"@devprotocol/hashi": "2.1.1",
 		"@devprotocol/util-ts": "3.0.0",
 		"@metamask/detect-provider": "^2.0.0",
 		"ethers": "^5.7.0",
