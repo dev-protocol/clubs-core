@@ -129,7 +129,7 @@
 		"yaml": "2.3.1"
 	},
 	"devDependencies": {
-		"@astrojs/lit": "2.0.2",
+		"@astrojs/lit": "2.1.0",
 		"@astrojs/react": "2.2.1",
 		"@astrojs/svelte": "3.0.0",
 		"@astrojs/tailwind": "3.1.3",
