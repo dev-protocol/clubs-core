@@ -1,0 +1,183 @@
+---
+import {CLBButton, CLBButtonGroup, CLBButtonGroupItem, CLBCheckbox, CLBFormField, CLBLink, CLBRadio, CLBSelectField, CLBTier} from '../../../src/ui/svelte';
+import DefaultLayout from '../layouts/DefaultLayout.astro';
+---
+
+<DefaultLayout title="Svelte">
+	<main class="content-wrap">
+		<div class="mb-4">
+			<CLBButton type="outlined" link="/">Go Back</CLBButton>
+		</div>
+		<section id="clb-buttons">
+			<h2>CLBButton components</h2>
+			<div class="mb-[1rem] flex flex-row gap-[0.5rem]">
+				<CLBButton type="small">Default</CLBButton>
+				<CLBButton type="small outlined">Outlined</CLBButton>
+				<CLBButton type="small filled">Filled</CLBButton>
+			</div>
+			<div class="mb-[1rem] flex flex-row gap-[0.5rem]">
+				<CLBButton>Default</CLBButton>
+				<CLBButton type="outlined">Outlined</CLBButton>
+				<CLBButton type="filled">Filled</CLBButton>
+			</div>
+			<div class="mb-[1rem] flex flex-row gap-[0.5rem]">
+				<CLBButton type="large">Default</CLBButton>
+				<CLBButton type="large outlined">Outlined</CLBButton>
+				<CLBButton type="large filled">Filled</CLBButton>
+			</div>
+			<div class="mb-[1rem] flex flex-row gap-[0.5rem]">
+				<CLBButton isDisabled>Default Disabled</CLBButton>
+				<CLBButton isDisabled type="outlined">Outlined Disabled</CLBButton>
+				<CLBButton isDisabled type="filled">Filled Disabled</CLBButton>
+			</div>
+			<div class="flex">
+				<CLBButtonGroup>
+					<CLBButtonGroupItem id="polygon" name="network" value="polygon">Polygon</CLBButtonGroupItem>
+					<CLBButtonGroupItem id="arbitrium" name="network" value="arbitrium">Arbitrium</CLBButtonGroupItem>
+					<CLBButtonGroupItem id="ethereum" name="network" value="ethereum">Ethereum</CLBButtonGroupItem>
+				</CLBButtonGroup>
+			</div>
+		</section>
+		<section id="clb-links">
+			<h2>CLBLink components</h2>
+			<p class="mb-[0.5rem]">
+				Lorem ipsum <CLBLink link="#">on-page link test</CLBLink> sit amet, consectetur
+				adipisicing elit. Eius ratione voluptates voluptatibus? Alias exercitationem
+				fugiat labore pariatur quia repellat saepe voluptatum? Dolor dolores
+				necessitatibus odio quod <CLBLink link="#">
+				on-page link test
+			</CLBLink>. Dicta, porro, quidem!
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, <CLBLink link="https://google.com">
+				external link test
+			</CLBLink> adipisicing elit. Beatae dolor ducimus ipsam nulla odit perspiciatis
+				placeat provident quaerat tenetur totam?
+			</p>
+		</section>
+		<section id="clb-form-fields">
+			<h2>CLBFormField components</h2>
+			<CLBFormField
+				label="Text Field"
+				type="raised"
+				inputType="text"
+				placeholder="Placeholder..."
+				helper="Helper Text"
+			/>
+			<CLBFormField
+				label="Text Area Field"
+				type="raised"
+				inputType="textarea"
+				placeholder="Placeholder..."
+				helper="Helper Text"
+			/>
+			<CLBFormField
+				label="Number Field"
+				type="error raised"
+				inputType="number"
+				placeholder="1-100..."
+				helper="Select a number"
+			/>
+			<CLBFormField
+				isDisabled
+				label="E-mail Field"
+				inputType="email"
+				placeholder="This input is disabled"
+			/>
+			<CLBFormField
+				isReadonly
+				label="Password Field"
+				inputType="password"
+				placeholder="This input is readonly"
+			/>
+		</section>
+		<section id="clb-select-fields">
+			<h2>CLBSelectField components</h2>
+			<CLBSelectField
+				type="raised"
+				label="Test CLBSelectField"
+				helper="Helper Text"
+			>
+				<option value="val">Value</option>
+			</CLBSelectField>
+			<CLBSelectField
+				label="Test CLBSelectField"
+				type="error raised"
+				helper="Helper Text"
+			>
+				<option value="val">Value</option>
+			</CLBSelectField>
+			<CLBSelectField
+				label="Test CLBSelectField"
+				helper="Helper Text"
+				isDisabled
+			>
+				<option value="val">Value</option>
+			</CLBSelectField>
+		</section>
+		<section id="clb-radios">
+			<h2>CLBRadio components</h2>
+			<CLBRadio
+				label="Hello"
+				type="raised"
+				helper="Helper Text"
+				name="sampleChoice"
+				value="option1"
+			/>
+			<CLBRadio
+				label="Hello"
+				type="raised"
+				helper="Helper Text"
+				name="sampleChoice"
+				value="option2"
+			/>
+			<CLBRadio
+				label="Hello"
+				type="raised"
+				helper="Helper Text"
+				name="sampleChoice"
+				value="option3"
+				isDisabled
+			/>
+		</section>
+		<section id="clb-checkboxes">
+			<h2>CLBCheckbox components</h2>
+			<CLBCheckbox
+				label="Hello"
+				type="raised"
+				helper="Helper Text"
+				name="sampleChoice"
+				value="option1"
+			/>
+			<CLBCheckbox
+				label="Hello"
+				type="raised"
+				helper="Helper Text"
+				name="sampleChoice"
+				value="option2"
+			/>
+			<CLBCheckbox
+				label="Hello"
+				type="raised"
+				helper="Helper Text"
+				name="sampleChoice"
+				value="option3"
+				isDisabled
+			/>
+		</section>
+		<section id="clb-tiers">
+			<h2>CLBTier components</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+				<CLBTier title="CLBTier" subtitle="500 DEV">
+					<CLBButton type="filled">Select</CLBButton>
+				</CLBTier>
+				<CLBTier title="CLBTier" subtitle="500 DEV">
+					<CLBButton type="filled">Select</CLBButton>
+				</CLBTier>
+				<CLBTier title="CLBTier" subtitle="500 DEV">
+					<CLBButton type="filled">Select</CLBButton>
+				</CLBTier>
+			</div>
+		</section>
+	</main>
+</DefaultLayout>
