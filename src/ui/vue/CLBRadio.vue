@@ -1,13 +1,14 @@
 <template>
-	<label :class="`hs-tick-field${type ? ' ' + assertType(type) : ''}`">
+	<label :class="`hs-tick-field${type ? ' ' + assertType(type) : ''}${isDisabled ? ' is-disabled' : ''}`">
 		<input
 			class="hs-tick-field__input"
 			type="radio"
-			:id="value"
+			:id="id || value"
 			:name="name"
 			:value="value"
 			@change="onChange"
 			:checked="isChecked"
+			:disabled="isDisabled"
 		/>
 		<img
 			v-if="media"
@@ -29,6 +30,7 @@ export default {
 	name: 'CLBRadio',
 	props: {
 		name: String,
+		id: String,
 		value: String,
 		type: String,
 		label: String,
@@ -36,6 +38,7 @@ export default {
 		media: String,
 		mediaAlt: String,
 		isChecked: Boolean,
+		isDisabled: Boolean,
 		onChange: Function,
 	},
 	methods: {

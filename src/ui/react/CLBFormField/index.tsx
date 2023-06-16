@@ -15,7 +15,7 @@ interface CLBFormFieldProps {
 	isReadonly?: boolean;
 }
 
-const CLBFormField: React.FC<CLBFormFieldProps> = ({label, helper, type, inputType, name, placeholder, rows, isRequired, isDisabled, isReadonly}) => {
+const CLBFormField: React.FC<CLBFormFieldProps> = ({label, helper, type, inputType, name, placeholder, rows = 5, isRequired, isDisabled, isReadonly}) => {
 
 	const _assertType = (type: string): string => {
 		const finalTypes: string[] = [];
