@@ -147,7 +147,7 @@
 		"@typescript-eslint/eslint-plugin": "5.59.11",
 		"@typescript-eslint/parser": "5.59.11",
 		"@webcomponents/template-shadowroot": "0.2.1",
-		"astro": "2.6.4",
+		"astro": "2.6.5",
 		"autoprefixer": "10.4.14",
 		"ava": "5.3.1",
 		"eslint": "8.43.0",
