@@ -1,7 +1,10 @@
 export function handleVariants(variants: string): string {
-	const comp: string[] = []
-	variants.split(' ').forEach((variant) => {
-		comp.push('is-' + variant)
+	// eslint-disable-next-line
+	const finalVariants: string[] = []
+	// eslint-disable-next-line
+	variants.split(' ').forEach((variant: string): void => {
+		// eslint-disable-next-line
+		finalVariants.push('is-' + variant)
 	})
-	return comp.join(' ')
+	return finalVariants.join(' ')
 }
