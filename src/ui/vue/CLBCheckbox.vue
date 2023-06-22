@@ -1,5 +1,9 @@
 <template>
-	<label :class="`hs-tick-field${type ? ' ' + assertType(type) : ''}${isDisabled ? ' is-disabled' : ''}`">
+	<label
+		:class="`hs-tick-field${type ? ' ' + assertType(type) : ''}${
+			isDisabled ? ' is-disabled' : ''
+		}`"
+	>
 		<input
 			class="hs-tick-field__input"
 			type="checkbox"

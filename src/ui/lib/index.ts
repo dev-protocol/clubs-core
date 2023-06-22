@@ -1,7 +1,4 @@
-import {handleVariants} from "./variants";
-import {handleTarget} from "./targets";
+import { handleVariants } from './variants'
+import { handleTarget } from './targets'
 
-export {
-	handleVariants,
-	handleTarget
-}
+export { handleVariants, handleTarget }

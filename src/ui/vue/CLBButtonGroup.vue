@@ -1,11 +1,11 @@
 <template>
-  <div class="hs-button-group">
+	<div class="hs-button-group">
 		<slot />
-  </div>
+	</div>
 </template>
 
 <script lang="ts">
 export default {
-  name: 'CLBButtonGroup'
+	name: 'CLBButtonGroup',
 }
 </script>

@@ -1,27 +1,29 @@
 ---
-import '../../../src/styles/global.scss';
-import '../styles/main.scss';
+import '../../../src/styles/global.scss'
+import '../styles/main.scss'
 
-const { title } = Astro.props;
-const _sanitizedTitle = title ? `${title} | ` : '';
+const { title } = Astro.props
+const _sanitizedTitle = title ? `${title} | ` : ''
 
-let hashiTheme: 'dark'|'light' = 'dark';
+let hashiTheme: 'dark' | 'light' = 'dark'
 
 // const switchTheme = () => {
 // 	hashiTheme = hashiTheme === 'dark' ? 'light' : 'dark';
 // }
 ---
+
 <!DOCTYPE html>
 <html lang="en" hashi-theme={hashiTheme}>
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport"
-		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-	/>
-	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<title>{_sanitizedTitle}Clubs UI Testing</title>
-</head>
-<body>
-<slot />
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+		/>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>{_sanitizedTitle}Clubs UI Testing</title>
+	</head>
+	<body>
+		<slot />
+	</body>
 </html>

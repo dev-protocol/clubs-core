@@ -21,5 +21,5 @@ export {
 	CLBRadio,
 	CLBSelectField,
 	CLBTier,
-	CLBSkeleton
+	CLBSkeleton,
 }

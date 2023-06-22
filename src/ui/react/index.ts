@@ -1,5 +1,5 @@
 import CLBButton from './CLBButton'
-import {CLBButtonGroup, CLBButtonGroupItem} from './CLBButtonGroup'
+import { CLBButtonGroup, CLBButtonGroupItem } from './CLBButtonGroup'
 import CLBCheckbox from './CLBCheckbox'
 import CLBFormField from './CLBFormField'
 import CLBLink from './CLBLink'

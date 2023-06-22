@@ -1,6 +1,16 @@
 ---
-import {CLBButton, CLBButtonGroup, CLBButtonGroupItem, CLBCheckbox, CLBFormField, CLBLink, CLBRadio, CLBSelectField, CLBTier} from '../../../src/ui/svelte';
-import DefaultLayout from '../layouts/DefaultLayout.astro';
+import {
+	CLBButton,
+	CLBButtonGroup,
+	CLBButtonGroupItem,
+	CLBCheckbox,
+	CLBFormField,
+	CLBLink,
+	CLBRadio,
+	CLBSelectField,
+	CLBTier,
+} from '../../../src/ui/svelte'
+import DefaultLayout from '../layouts/DefaultLayout.astro'
 ---
 
 <DefaultLayout title="Svelte">
@@ -32,9 +42,15 @@ import DefaultLayout from '../layouts/DefaultLayout.astro';
 			</div>
 			<div class="flex">
 				<CLBButtonGroup>
-					<CLBButtonGroupItem id="polygon" name="network" value="polygon">Polygon</CLBButtonGroupItem>
-					<CLBButtonGroupItem id="arbitrium" name="network" value="arbitrium">Arbitrium</CLBButtonGroupItem>
-					<CLBButtonGroupItem id="ethereum" name="network" value="ethereum">Ethereum</CLBButtonGroupItem>
+					<CLBButtonGroupItem id="polygon" name="network" value="polygon">
+						Polygon
+					</CLBButtonGroupItem>
+					<CLBButtonGroupItem id="arbitrium" name="network" value="arbitrium">
+						Arbitrium
+					</CLBButtonGroupItem>
+					<CLBButtonGroupItem id="ethereum" name="network" value="ethereum">
+						Ethereum
+					</CLBButtonGroupItem>
 				</CLBButtonGroup>
 			</div>
 		</section>
@@ -43,15 +59,14 @@ import DefaultLayout from '../layouts/DefaultLayout.astro';
 			<p class="mb-[0.5rem]">
 				Lorem ipsum <CLBLink link="#">on-page link test</CLBLink> sit amet, consectetur
 				adipisicing elit. Eius ratione voluptates voluptatibus? Alias exercitationem
-				fugiat labore pariatur quia repellat saepe voluptatum? Dolor dolores
-				necessitatibus odio quod <CLBLink link="#">
-				on-page link test
-			</CLBLink>. Dicta, porro, quidem!
+				fugiat labore pariatur quia repellat saepe voluptatum? Dolor dolores necessitatibus
+				odio quod <CLBLink link="#">on-page link test</CLBLink>. Dicta, porro,
+				quidem!
 			</p>
 			<p>
 				Lorem ipsum dolor sit amet, <CLBLink link="https://google.com">
-				external link test
-			</CLBLink> adipisicing elit. Beatae dolor ducimus ipsam nulla odit perspiciatis
+					external link test
+				</CLBLink> adipisicing elit. Beatae dolor ducimus ipsam nulla odit perspiciatis
 				placeat provident quaerat tenetur totam?
 			</p>
 		</section>
