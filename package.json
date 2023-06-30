@@ -134,7 +134,7 @@
 		"@astrojs/svelte": "3.1.0",
 		"@astrojs/tailwind": "4.0.0",
 		"@astrojs/vue": "2.2.1",
-		"@ava/typescript": "4.0.0",
+		"@ava/typescript": "4.1.0",
 		"@rollup/plugin-commonjs": "25.0.2",
 		"@rollup/plugin-multi-entry": "6.0.0",
 		"@rollup/plugin-typescript": "11.1.2",
