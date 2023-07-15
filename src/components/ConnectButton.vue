@@ -96,6 +96,9 @@ export default defineComponent({
 				])
 			this.connection = connection
 			this.modalProvider = GetModalProvider()
+			connection().account.subscribe((acc?: string) => {
+				this.truncateWalletAddress = acc ? this.truncateEthAddress(acc) : ''
+			})
 			const { currentAddress, connectedProvider, provider } =
 				await ReConnectWallet(this.modalProvider as Web3Modal)
 			if (currentAddress) {
