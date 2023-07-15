@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { providers } from 'ethers'
+import { BrowserProvider, type Eip1193Provider } from 'ethers'
 import Web3Modal from 'web3modal'
 import detectEthereumProvider from '@metamask/detect-provider'
 import { whenDefined } from '@devprotocol/util-ts'
@@ -21,7 +21,11 @@ export const ReConnectWallet = async (modalProvider: any) => {
 	const web3ForInjected = await detectEthereumProvider()
 	if (!web3ForInjected) {
 		modalProvider.clearCachedProvider()
-		return { currentAddress: undefined, provider: undefined }
+		return {
+			currentAddress: undefined,
+			connectedProvider: undefined,
+			provider: undefined,
+		}
 	}
 
 	if (
@@ -35,14 +39,14 @@ export const ReConnectWallet = async (modalProvider: any) => {
 }
 
 export const EthersProviderFrom = async (modalProvider: any) => {
-	const connectedProvider = await modalProvider.connect()
+	const connectedProvider: Eip1193Provider = await modalProvider.connect()
 	const newProvider = whenDefined(
 		connectedProvider,
-		(p) => new providers.Web3Provider(p)
+		(p) => new BrowserProvider(p)
 	)
 
-	const currentAddress = await newProvider?.getSigner().getAddress()
-	return { currentAddress, provider: newProvider }
+	const currentAddress = await (await newProvider?.getSigner())?.getAddress()
+	return { currentAddress, connectedProvider, provider: newProvider }
 }
 
 export const Disconnect = (modalProvider: any) => {
