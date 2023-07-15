@@ -64,6 +64,7 @@ import { clientsDev } from '@devprotocol/dev-kit/agent'
 import { whenDefined } from '@devprotocol/util-ts'
 import { onMountClient } from '../events'
 import HSButton from './Primitives/Hashi/HSButton.vue'
+import { combineLatest } from 'rxjs'
 
 type Data = {
 	modalProvider?: Web3Modal
@@ -77,6 +78,9 @@ export default defineComponent({
 	name: 'ConnectButton',
 	components: {
 		HSButton,
+	},
+	props: {
+		chainId: Number,
 	},
 	data(): Data {
 		return {
@@ -96,9 +100,12 @@ export default defineComponent({
 				])
 			this.connection = connection
 			this.modalProvider = GetModalProvider()
-			connection().account.subscribe((acc?: string) => {
-				this.truncateWalletAddress = acc ? this.truncateEthAddress(acc) : ''
-			})
+			combineLatest([connection().chain, connection().account]).subscribe(
+				([chainId, acc]) => {
+					this.supportedNetwork = chainId === this.chainId
+					this.truncateWalletAddress = acc ? this.truncateEthAddress(acc) : ''
+				}
+			)
 			const { currentAddress, connectedProvider, provider } =
 				await ReConnectWallet(this.modalProvider as Web3Modal)
 			if (currentAddress) {
@@ -114,7 +121,7 @@ export default defineComponent({
 	},
 	methods: {
 		setSigner(provider: Eip1193Provider) {
-			this.connection!().setEip1193Provider(provider)
+			this.connection!().setEip1193Provider(provider, BrowserProvider)
 		},
 		async connect() {
 			const connectedProvider = await this.modalProvider!.connect()
@@ -124,7 +131,7 @@ export default defineComponent({
 		},
 		async fetchUserBalance(currentAddress: string, provider: ContractRunner) {
 			const [l1, l2] = await clientsDev(provider)
-			this.supportedNetwork = l1 || l2 ? true : false
+			// this.supportedNetwork = l1 || l2 ? true : false
 			const balance = await (l1 || l2)?.balanceOf(currentAddress)
 			const formatted = formatUnits(balance ?? 0)
 			const rounded = Math.round((+formatted + Number.EPSILON) * 100) / 100
