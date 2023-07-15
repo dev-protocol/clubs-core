@@ -117,7 +117,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"@devprotocol/dev-kit": "8.0.0",
-		"@devprotocol/elements": "0.2.2",
+		"@devprotocol/elements": "1.0.0",
 		"@devprotocol/hashi": "2.1.1",
 		"@devprotocol/util-ts": "3.0.0",
 		"@metamask/detect-provider": "^2.0.0",
