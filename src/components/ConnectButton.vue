@@ -54,11 +54,17 @@
 import type Web3Modal from 'web3modal'
 import type { connection as Connection } from '../connection'
 import { defineComponent } from 'vue'
-import { providers, utils } from 'ethers'
+import {
+	type ContractRunner,
+	BrowserProvider,
+	Eip1193Provider,
+	formatUnits,
+} from 'ethers'
 import { clientsDev } from '@devprotocol/dev-kit/agent'
 import { whenDefined } from '@devprotocol/util-ts'
 import { onMountClient } from '../events'
 import HSButton from './Primitives/Hashi/HSButton.vue'
+import { combineLatest } from 'rxjs'
 
 type Data = {
 	modalProvider?: Web3Modal
@@ -72,6 +78,9 @@ export default defineComponent({
 	name: 'ConnectButton',
 	components: {
 		HSButton,
+	},
+	props: {
+		chainId: Number,
 	},
 	data(): Data {
 		return {
@@ -91,14 +100,19 @@ export default defineComponent({
 				])
 			this.connection = connection
 			this.modalProvider = GetModalProvider()
-			const { currentAddress, provider } = await ReConnectWallet(
-				this.modalProvider as Web3Modal
+			combineLatest([connection().chain, connection().account]).subscribe(
+				([chainId, acc]) => {
+					this.supportedNetwork = chainId === this.chainId
+					this.truncateWalletAddress = acc ? this.truncateEthAddress(acc) : ''
+				}
 			)
+			const { currentAddress, connectedProvider, provider } =
+				await ReConnectWallet(this.modalProvider as Web3Modal)
 			if (currentAddress) {
 				this.truncateWalletAddress = this.truncateEthAddress(currentAddress)
 			}
-			if (provider) {
-				this.setSigner(provider)
+			if (connectedProvider) {
+				this.setSigner(connectedProvider)
 			}
 			if (currentAddress && provider) {
 				this.fetchUserBalance(currentAddress, provider)
@@ -106,33 +120,20 @@ export default defineComponent({
 		})
 	},
 	methods: {
-		setSigner(provider: providers.Web3Provider) {
-			this.connection!().signer.next(provider.getSigner())
+		setSigner(provider: Eip1193Provider) {
+			this.connection!().setEip1193Provider(provider, BrowserProvider)
 		},
 		async connect() {
 			const connectedProvider = await this.modalProvider!.connect()
-			const newProvider = whenDefined(connectedProvider, (p) => {
-				const provider = new providers.Web3Provider(p)
-				this.setSigner(provider)
-				return provider
+			whenDefined(connectedProvider, (p) => {
+				this.setSigner(p)
 			})
-
-			const currentAddress = await newProvider?.getSigner().getAddress()
-			if (currentAddress) {
-				this.truncateWalletAddress = this.truncateEthAddress(currentAddress)
-			}
-			if (currentAddress && newProvider) {
-				this.fetchUserBalance(currentAddress, newProvider)
-			}
 		},
-		async fetchUserBalance(
-			currentAddress: string,
-			provider: providers.BaseProvider
-		) {
+		async fetchUserBalance(currentAddress: string, provider: ContractRunner) {
 			const [l1, l2] = await clientsDev(provider)
-			this.supportedNetwork = l1 || l2 ? true : false
+			// this.supportedNetwork = l1 || l2 ? true : false
 			const balance = await (l1 || l2)?.balanceOf(currentAddress)
-			const formatted = utils.formatUnits(balance ?? 0)
+			const formatted = formatUnits(balance ?? 0)
 			const rounded = Math.round((+formatted + Number.EPSILON) * 100) / 100
 			this.formattedUserBalance = rounded.toLocaleString()
 		},

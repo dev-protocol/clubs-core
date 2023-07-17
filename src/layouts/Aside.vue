@@ -4,6 +4,7 @@
 			id="clubs_connect_button"
 			v-if="showConnectButton"
 			class="w-full"
+			:chainId="config.chainId"
 		/>
 		<div class="relative">
 			<ActionButton
