@@ -10,4 +10,5 @@ export const clubs = {
 			fontFamily: hashi.theme.fontFamily,
 		},
 	},
+	plugins: []
 }

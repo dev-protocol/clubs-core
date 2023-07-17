@@ -1,6 +1,4 @@
 /* eslint-disable functional/prefer-tacit */
-import typescript from '@rollup/plugin-typescript'
-import multi from '@rollup/plugin-multi-entry'
 import dts from 'rollup-plugin-dts'
 import commonjs from '@rollup/plugin-commonjs'
 import { dirname, relative, resolve } from 'path'
