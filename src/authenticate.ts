@@ -5,6 +5,7 @@ import {
 	hashMessage,
 	recoverAddress,
 	formatUnits,
+	AbstractProvider,
 } from 'ethers'
 import { decode } from './decode'
 
@@ -12,7 +13,7 @@ export type ClubsFunctionAuthenticationAdminParams = {
 	readonly signature: string
 	readonly message: string
 	readonly previousConfiguration: string
-	readonly provider: ContractRunner
+	readonly provider: AbstractProvider | ContractRunner
 }
 
 export const authenticate = async ({
