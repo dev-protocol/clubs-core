@@ -578,7 +578,7 @@ __metadata:
     "@ava/typescript": 4.1.0
     "@devprotocol/dev-kit": 8.0.2
     "@devprotocol/elements": 1.0.0
-    "@devprotocol/hashi": 2.1.1
+    "@devprotocol/hashi": 2.2.0
     "@devprotocol/util-ts": 3.0.0
     "@metamask/detect-provider": ^2.0.0
     "@rollup/plugin-commonjs": 25.0.3
@@ -670,12 +670,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@devprotocol/hashi@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@devprotocol/hashi@npm:2.1.1"
+"@devprotocol/hashi@npm:2.2.0":
+  version: 2.2.0
+  resolution: "@devprotocol/hashi@npm:2.2.0"
   dependencies:
     "@matteusan/sentro": 0.1.25
-  checksum: e9026b676512596390cdbb92c606e311315aea0380fc7549e7be2f461bf59f6817e440c49ddc0c1590b2985b67073cd2b7077a1103963bf707d0aa49eb4edd38
+  checksum: 4771700f101fb0432325e2067dc118bb99f15580baf664f4a198e0760190da41eb09e5ea53b43439c9e45404072eddf0c48df70d23d88c61da6ee1e7ce2ef9bb
   languageName: node
   linkType: hard
 

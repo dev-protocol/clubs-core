@@ -18,3 +18,7 @@ declare module '@devprotocol/hashi/tailwind' {
 		readonly lineHeight: Record<string, string>,
 	}
 }
+
+declare module '@devprotocol/hashi/tailwind/extensions' {
+	export const hsExtendedColorTokens: Record<string, any>;
+}
