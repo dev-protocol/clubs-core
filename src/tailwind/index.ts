@@ -1,5 +1,5 @@
 import hashi from '@devprotocol/hashi/tailwind'
-import hsExtendedColorTokens from '@devprotocol/hashi/tailwind/extensions';
+import hsExtendedColorTokens from '@devprotocol/hashi/tailwind/extensions'
 
 export const clubs = {
 	content: [
@@ -9,7 +9,7 @@ export const clubs = {
 		extend: {
 			colors: {
 				...hashi.theme.colors,
-				...hsExtendedColorTokens
+				...hsExtendedColorTokens,
 			},
 			fontFamily: hashi.theme.fontFamily,
 		},
