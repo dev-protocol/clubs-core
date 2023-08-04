@@ -141,7 +141,7 @@
 		"@rollup/plugin-typescript": "11.1.2",
 		"@rollup/pluginutils": "5.0.2",
 		"@types/get-installed-path": "4.0.1",
-		"@types/node": "18.17.1",
+		"@types/node": "18.17.2",
 		"@types/ramda": "0.29.3",
 		"@types/react": "18.2.18",
 		"@types/react-dom": "18.2.7",
