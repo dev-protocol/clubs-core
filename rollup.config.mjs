@@ -49,7 +49,7 @@ export default [
 				format: 'cjs',
 			},
 		],
-		plugins: [commonjs(), useSrc({ ext: ['.astro', '.scss'] })],
+		plugins: [commonjs(), useSrc({ ext: ['.astro', '.scss', '.svelte'] })],
 	})),
 	{
 		input: 'dist/src/index.js',
@@ -81,6 +81,9 @@ export default [
 				format: 'es',
 			},
 		],
-		plugins: [dts(), useSrc({ out: cwd(), ext: ['.astro', '.scss'] })],
+		plugins: [
+			dts(),
+			useSrc({ out: cwd(), ext: ['.astro', '.scss', '.svelte'] }),
+		],
 	})),
 ]

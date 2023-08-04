@@ -124,14 +124,26 @@ export default defineComponent({
 			this.connection!().setEip1193Provider(provider, BrowserProvider)
 		},
 		async connect() {
-			const connectedProvider = await this.modalProvider!.connect()
-			whenDefined(connectedProvider, (p) => {
-				this.setSigner(p)
+			const connectedProvider: Eip1193Provider =
+				await this.modalProvider!.connect()
+			const newProvider = whenDefined(connectedProvider, (p) => {
+				const provider = new BrowserProvider(p)
+				this.setSigner(connectedProvider)
+				return provider
 			})
+
+			const currentAddress = await (
+				await newProvider?.getSigner()
+			)?.getAddress()
+			if (currentAddress) {
+				this.truncateWalletAddress = this.truncateEthAddress(currentAddress)
+			}
+			if (currentAddress && newProvider) {
+				this.fetchUserBalance(currentAddress, newProvider)
+			}
 		},
 		async fetchUserBalance(currentAddress: string, provider: ContractRunner) {
 			const [l1, l2] = await clientsDev(provider)
-			// this.supportedNetwork = l1 || l2 ? true : false
 			const balance = await (l1 || l2)?.balanceOf(currentAddress)
 			const formatted = formatUnits(balance ?? 0)
 			const rounded = Math.round((+formatted + Number.EPSILON) * 100) / 100
