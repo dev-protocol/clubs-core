@@ -1,7 +1,7 @@
 ---
 import { ClubsPropsAdminPages, ClubsSlotName, decode } from '../index'
 import AdminSidebar from './AdminSidebar.astro'
-import AdminConfigurationManager from './AdminConfigurationManager.svelte'
+import AdminConfigurationManager from './AdminConfigurationManager.astro'
 import AdminThemeSelector from './AdminThemeSelector.svelte'
 import Aside from './Aside.astro'
 import Clubs from './primitives/Clubs.astro'
@@ -172,7 +172,7 @@ const SlotsModalContent = clubs.slots.filter(
 					><Bars3BottomLeft />
 				</button>
 			</div>
-			<AdminConfigurationManager client:only="svelte" {clubs} />
+			<AdminConfigurationManager {clubs} />
 		</div>
 		<Modal>
 			<slot name="admin:modal:content" />
