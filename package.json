@@ -64,6 +64,11 @@
 			"require": "./dist/src/layouts/index.cjs",
 			"types": "./layouts.d.ts"
 		},
+		"./profile": {
+			"import": "./dist/src/profile.mjs",
+			"require": "./dist/src/profile.cjs",
+			"types": "./dist/src/profile.d.ts"
+		},
 		"./styles": {
 			"import": "./dist/src/styles/index.mjs",
 			"require": "./dist/src/styles/index.cjs",
