@@ -36,10 +36,18 @@ export const fetchProfile = async (
 				const apiEndpoint = `https://clubs.place/api/profile/${address}`
 
 				const res = await fetch(apiEndpoint)
-				const profile = (await res.json()) as Profile
-				return {
-					profile,
-					error: undefined,
-				}
+
+				return res.ok
+					? (async () => {
+							const profile = (await res.json()) as Profile
+							return {
+								profile,
+								error: undefined,
+							}
+					  })()
+					: {
+							profile: undefined,
+							error: new Error(`Error fetching profile at ${apiEndpoint}`),
+					  }
 		  })()
 }
