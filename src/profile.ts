@@ -27,20 +27,19 @@ export const fetchProfile = async (
 	readonly profile: Profile | undefined
 	readonly error: Error | undefined
 }> => {
-	// eslint-disable-next-line functional/no-conditional-statement
-	if (!isAddress(address)) {
-		return {
-			profile: undefined,
-			error: new Error('Invalid address'),
-		}
-	}
+	return !isAddress(address)
+		? {
+				profile: undefined,
+				error: new Error('Invalid address'),
+		  }
+		: (async () => {
+				const apiEndpoint = `https://clubs.place/api/profile/${address}`
 
-	const apiEndpoint = `https://clubs.place/api/profile/${address}`
-
-	const res = await fetch(apiEndpoint)
-	const profile = (await res.json()) as Profile
-	return {
-		profile,
-		error: undefined,
-	}
+				const res = await fetch(apiEndpoint)
+				const profile = (await res.json()) as Profile
+				return {
+					profile,
+					error: undefined,
+				}
+		  })()
 }
