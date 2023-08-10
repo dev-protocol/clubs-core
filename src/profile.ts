@@ -1,12 +1,5 @@
 import { isAddress } from 'ethers'
-
-/**
- * The profile of a user
- */
-export type Profile = {
-	readonly avatar: string
-	readonly username: string
-}
+import { ClubsProfile } from './types'
 
 /**
  * Fetches the profile of the user
@@ -24,7 +17,7 @@ export type Profile = {
 export const fetchProfile = async (
 	address: string
 ): Promise<{
-	readonly profile: Profile | undefined
+	readonly profile: ClubsProfile | undefined
 	readonly error: Error | undefined
 }> => {
 	return !isAddress(address)
@@ -39,7 +32,7 @@ export const fetchProfile = async (
 
 				return res.ok
 					? (async () => {
-							const profile = (await res.json()) as Profile
+							const profile = (await res.json()) as ClubsProfile
 							return {
 								profile,
 								error: undefined,
