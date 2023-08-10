@@ -363,3 +363,11 @@ export type ClubsEventsFinishConfiguration =
 export type ClubsEventsControlModal = CustomEvent<ClubsEventsDetailControlModal>
 
 export type ClubsAstroIntegrationOptions = undefined
+
+/**
+ * The profile of a user
+ */
+export type ClubsProfile = {
+	readonly avatar: string
+	readonly username: string
+}
