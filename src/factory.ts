@@ -327,11 +327,14 @@ export const apiFactory: ClubsFunctionApiFactory = (options) => {
 				: undefined
 
 		const apiRoute = apiRoutes
-			? apiRoutes.find(
-					({ paths, method }) =>
+			? apiRoutes.find(({ paths, method }) => {
+					const apipath = `${plugin?.meta.id}/${paths.join('/')}`
+					const apipathSlash = `${apipath}/`
+					return (
 						method === context.request.method &&
-						path === `${plugin?.meta.id}/${paths.join('/')}`
-			  )
+						(path === apipath || path === apipathSlash)
+					)
+			  })
 			: undefined
 		const response = apiRoute
 			? apiRoute.handler(context)
