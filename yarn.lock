@@ -453,13 +453,13 @@
     "@babel/helper-validator-identifier" "^7.22.5"
     to-fast-properties "^2.0.0"
 
-"@devprotocol/dev-kit@8.2.5":
-  version "8.2.5"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-8.2.5.tgz#a1c3ac4f77b7704224949b3a6cb0a0371976cd54"
-  integrity sha512-qgU8s35uX4n6zdeKJiSd41LQ6Kr19jF+yTL2Z+0B1TLekX/BBKh2/3yu39sM3gPMnjm/rqr1EZ2ERZeAH715jA==
+"@devprotocol/dev-kit@8.2.6":
+  version "8.2.6"
+  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-8.2.6.tgz#1fbcab6fc33d08c1d8fe9d3804220868e5701f69"
+  integrity sha512-jo+BR2HDz+77HC0lXFeCNB/OBk+0I2iFmrFAn0eaA9N3C3UHBEdOTq1JNnw1k57kNJYspn7eRFWBtgnofpdhuw==
   dependencies:
     "@devprotocol/util-ts" "3.1.0"
-    bignumber.js "9.1.1"
+    bignumber.js "9.1.2"
     js-base64 "^3.7.2"
     ramda "^0.29.0"
 
@@ -2211,10 +2211,10 @@ big-integer@^1.6.44:
   resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.51.tgz#0df92a5d9880560d3ff2d5fd20245c889d130686"
   integrity sha512-GPEid2Y9QU1Exl1rpO9B2IPJGHPSupF5GnVIP0blYvNOMer2bTvSWs1jGOUg04hTmu67nmLsQ9TBo1puaotBHg==
 
-bignumber.js@9.1.1:
-  version "9.1.1"
-  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.1.1.tgz#c4df7dc496bd849d4c9464344c1aa74228b4dac6"
-  integrity sha512-pHm4LsMJ6lzgNGVfZHjMoO8sdoRhOzOH4MLmY65Jg70bpxCKu5iOHNJyfF6OyvYw7t8Fpf35RuzUyqnQsj8Vig==
+bignumber.js@9.1.2:
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.1.2.tgz#b7c4242259c008903b13707983b5f4bbd31eda0c"
+  integrity sha512-2/mKyZH9K85bzOEfhXDBFZTGd1CTs+5IHpeFQo9luiBG7hghdC851Pj2WAhb6E3R6b9tZj/XKhbg4fum+Kepug==
 
 binary-extensions@^2.0.0:
   version "2.2.0"
