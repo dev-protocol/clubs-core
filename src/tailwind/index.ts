@@ -1,5 +1,5 @@
 import hashi from '@devprotocol/hashi/tailwind'
-import hsExtendedColorTokens from '@devprotocol/hashi/tailwind/extensions'
+import { hsExtendedColorTokens } from '@devprotocol/hashi/tailwind/extensions'
 
 export const clubs = {
 	content: [
