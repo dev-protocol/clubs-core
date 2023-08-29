@@ -1,3 +1,5 @@
+@use '@devprotocol/hashi';
+
 main {
 	width: calc(100% - 30px);
 	margin: 0 auto;
@@ -18,8 +20,9 @@ section[id^='clb-'] {
 	> h2 {
 		margin-bottom: 1rem;
 		border-bottom: 1px solid rgba(#fff, 90%);
+		font-family: var(--hs-theme-subtitle-family);
 		font-size: 1.25rem;
-		font-weight: 900;
+		font-weight: 700;
 		line-height: 2;
 	}
 }

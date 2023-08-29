@@ -4,6 +4,7 @@ type CheckboxTypes = 'raised';
 
 interface CLBCheckboxProps {
 	name?: string;
+	id?: string;
 	type?: CheckboxTypes|string,
 	value?: string;
 	label: string;
@@ -11,10 +12,11 @@ interface CLBCheckboxProps {
 	media?: string;
 	mediaAlt?: string;
 	isChecked?: boolean;
+	isDisabled?: boolean;
 	onChange?: (() => void|any);
 }
 
-const CLBCheckbox: React.FC<CLBCheckboxProps> = ({value, name, label, type, helper, media, mediaAlt, isChecked, onChange}) => {
+const CLBCheckbox: React.FC<CLBCheckboxProps> = ({value, name, id =  value, label, type, helper, media, mediaAlt, isChecked, isDisabled, onChange}) => {
 
 	const _assertType = (type: string): string => {
 		const finalTypes: string[] = [];
@@ -25,15 +27,16 @@ const CLBCheckbox: React.FC<CLBCheckboxProps> = ({value, name, label, type, help
 	}
 
   return (
-		<label className={`hs-tick-field${type ? ' ' + _assertType(type) : ''}`}>
+		<label className={`hs-tick-field${type ? ' ' + _assertType(type) : ''}${isDisabled ? ' is-disabled' : ''}`}>
 			<input
 				className="hs-tick-field__input"
 				type="checkbox"
-				id={value}
+				id={id}
 				name={name}
 				value={value}
 				onChange={onChange}
 				checked={isChecked}
+				disabled={isDisabled}
 			/>
 			{media &&
 				<img
