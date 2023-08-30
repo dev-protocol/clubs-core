@@ -54,13 +54,13 @@
     vscode-languageserver-types "^3.17.1"
     vscode-uri "^3.0.3"
 
-"@astrojs/lit@2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@astrojs/lit/-/lit-2.1.1.tgz#986dfdf71afbd6841991d99b4e24851647f0aebc"
-  integrity sha512-dvSywlcJt/mxLLoyBwgu/d7biIkfnkXPyr9y9RcNLvx6IDH2QdmfQ58F+jO4OP8/CEt6QRZJHB8lJwlk8m8zbw==
+"@astrojs/lit@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@astrojs/lit/-/lit-3.0.0.tgz#2d7280e5f05cf582304574c195e98f6fb4264796"
+  integrity sha512-XBRwGq1ImYKS5O+nAVQvsaOHn31S3IIhiOwXs7W6aV+pB9YEFukfenSdGoGwkQdcXSzD+Pkqrn2YwsKgOb/wDw==
   dependencies:
-    "@lit-labs/ssr" "^3.1.4"
-    "@lit-labs/ssr-client" "^1.1.2"
+    "@lit-labs/ssr" "^3.1.5"
+    "@lit-labs/ssr-client" "^1.1.3"
     "@lit-labs/ssr-dom-shim" "^1.1.1"
     parse5 "^7.1.2"
 
@@ -1161,7 +1161,7 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@lit-labs/ssr-client@^1.1.0", "@lit-labs/ssr-client@^1.1.2":
+"@lit-labs/ssr-client@^1.1.0", "@lit-labs/ssr-client@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@lit-labs/ssr-client/-/ssr-client-1.1.3.tgz#5cc516b12fe23278be03d5b52eaf7ea568be14c6"
   integrity sha512-JIvpvfCEJGTIKH1L/kZYN68jiXuTBbHI6JG3H4HQI0Ko/8Z0qtlSP9G35IVDzNdMt+xVE4WYKsY9Vk6N2S55kQ==
@@ -1175,7 +1175,7 @@
   resolved "https://registry.yarnpkg.com/@lit-labs/ssr-dom-shim/-/ssr-dom-shim-1.1.1.tgz#64df34e2f12e68e78ac57e571d25ec07fa460ca9"
   integrity sha512-kXOeFbfCm4fFf2A3WwVEeQj55tMZa8c8/f9AKHMobQMkzNUfUj+antR3fRPaZJawsa1aZiP/Da3ndpZrwEe4rQ==
 
-"@lit-labs/ssr@^3.1.4":
+"@lit-labs/ssr@^3.1.5":
   version "3.1.5"
   resolved "https://registry.yarnpkg.com/@lit-labs/ssr/-/ssr-3.1.5.tgz#d396e10dc9e30079182f5a0b776af850f039f2dd"
   integrity sha512-OvjM3CZGPRjZTIAgWvLCXS3sFj574rXfAzhtzQjgHYNxTuRy+LMfKpgeu8xF7PywdcOniVaLZuGKF4WS7YI7hA==
