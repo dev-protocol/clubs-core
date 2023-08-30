@@ -104,13 +104,13 @@
     "@vitejs/plugin-react" "^4.0.4"
     ultrahtml "^1.3.0"
 
-"@astrojs/svelte@3.1.1":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@astrojs/svelte/-/svelte-3.1.1.tgz#ffcc0de464604dfb624b00126fa4796583841447"
-  integrity sha512-sPTe43zqFVvZq7qjCgT6vkOpMyKI0uEpqm/X3zSRse0Sn1ZyMEipes2KLmJQvPOZw3Zxy4+PX3E3Ns59hwRX1Q==
+"@astrojs/svelte@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@astrojs/svelte/-/svelte-4.0.0.tgz#14dc21af2cfc22e51d1bbed60c840c3ab87dfe8a"
+  integrity sha512-HTn6p2U8GnbiDFxfyaUUCPLGW1P/RAEC0jeg4Zk0IGQd1szSvHwuZst99/k8oRoIytH5eLWSRuiYMI4j5vdA6w==
   dependencies:
-    "@sveltejs/vite-plugin-svelte" "^2.4.2"
-    svelte2tsx "^0.6.15"
+    "@sveltejs/vite-plugin-svelte" "^2.4.5"
+    svelte2tsx "^0.6.20"
 
 "@astrojs/tailwind@4.0.0":
   version "4.0.0"
@@ -1332,7 +1332,7 @@
   dependencies:
     debug "^4.3.4"
 
-"@sveltejs/vite-plugin-svelte@^2.4.2":
+"@sveltejs/vite-plugin-svelte@^2.4.5":
   version "2.4.5"
   resolved "https://registry.yarnpkg.com/@sveltejs/vite-plugin-svelte/-/vite-plugin-svelte-2.4.5.tgz#55ba60ce37dfa3acf76b4ec54955011a34cd49a2"
   integrity sha512-UJKsFNwhzCVuiZd06jM/psscyNJNDwjQC+qIeb7GBJK9iWeQCcIyfcPWDvbCudfcJggY9jtxJeeaZH7uny93FQ==
@@ -6413,10 +6413,10 @@ svelte-hmr@^0.15.3:
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.15.3.tgz#df54ccde9be3f091bf5f18fc4ef7b8eb6405fbe6"
   integrity sha512-41snaPswvSf8TJUhlkoJBekRrABDXDMdpNpT2tfHIv4JuhgvHqLMhEPGtaQn0BmbNSTkuz2Ed20DF2eHw0SmBQ==
 
-svelte2tsx@^0.6.15:
-  version "0.6.20"
-  resolved "https://registry.yarnpkg.com/svelte2tsx/-/svelte2tsx-0.6.20.tgz#58f1d129ae908cf29debe10888402bd1822e69a1"
-  integrity sha512-zaSnHSERYceKxugFbjiZ3YiNcC2fNbVjpQ9qaE5hrYI4tIOX9ZqHS+I30Hp2HF+MVXLOVWVErgn/6pAlQNnheA==
+svelte2tsx@^0.6.20:
+  version "0.6.21"
+  resolved "https://registry.yarnpkg.com/svelte2tsx/-/svelte2tsx-0.6.21.tgz#c2ce9857c3d066b818ef47683f4d997d63f9aa28"
+  integrity sha512-v+vvbiy6WDmEQdIkJpvHYxJYG/obALfH0P6CTreYO350q/9+QmFTNCOJvx0O1o59Zpzx1Bqe+qlDxP/KtJSZEA==
   dependencies:
     dedent-js "^1.0.1"
     pascal-case "^3.1.1"
