@@ -458,10 +458,10 @@
     stream-browserify "^3.0.0"
     util "^0.12.4"
 
-"@devprotocol/dev-kit@8.4.1":
-  version "8.4.1"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-8.4.1.tgz#76db03c55973cf53d8dabd50818c2da7314bf700"
-  integrity sha512-hCuSIu1chSsKTGZrBtg8+UgRmi8lgqcPRfdK5isaEsKTT67SN/YB+IWcB6qg8Apcf0LYrsfCce3DjQOnXzVJ8w==
+"@devprotocol/dev-kit@8.5.0":
+  version "8.5.0"
+  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-8.5.0.tgz#f2deac013a4250888237e9eea6d9f72b5b27e194"
+  integrity sha512-jyjtYrv9/PnngnI2v8rg76Dl15ax2UQwsCfJGQ4tDtCbucl92uB6wmEcL/dUFemICl9rj+kNKHa965SLR2Mlxg==
   dependencies:
     "@devprotocol/util-ts" "3.1.0"
     bignumber.js "9.1.2"
