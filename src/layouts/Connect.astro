@@ -1,10 +1,7 @@
 ---
-import { Connect } from '../components/Connect'
+import { Connect, type ConnectProps } from '../components/Connect'
 
-const { chainId, label } = Astro.props as {
-	chainId?: number
-	label?: string
-}
+const props = Astro.props as ConnectProps
 ---
 
-<Connect client:load {chainId} {label} />
+<Connect client:load {...props} />

@@ -3,13 +3,13 @@ import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/react'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { polygon, polygonMumbai, mainnet } from 'wagmi/chains'
-import { ConnectButton } from './ConnectButton'
+import { ConnectButton, type ConnectButtonProps } from './ConnectButton'
 
 const { PUBLIC_WALLET_CONNECT_PROJECT_ID: projectId } = import.meta.env
 
-type Props = { readonly label?: string; readonly chainId?: number }
+export type ConnectProps = { readonly chainId?: number } & ConnectButtonProps
 
-export const Connect = (props: Props) => {
+export const Connect = (props: ConnectProps) => {
 	const chains = [
 		props.chainId === 137
 			? polygon

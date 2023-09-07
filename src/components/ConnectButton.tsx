@@ -8,7 +8,11 @@ import { whenDefined } from '@devprotocol/util-ts'
 import { combineLatest } from 'rxjs'
 import { BrowserProvider } from 'ethers'
 
-type Params = { readonly label?: string }
+export type ConnectButtonProps = {
+	readonly label?: string
+	readonly className?: string
+	readonly overrideClassName?: string
+}
 
 const truncateEthAddress = (address: string) => {
 	const match = address.match(
@@ -17,7 +21,11 @@ const truncateEthAddress = (address: string) => {
 	return !match ? address : `${match[1]}\u2026${match[2]}`
 }
 
-export const ConnectButton = ({ label }: Params) => {
+export const ConnectButton = ({
+	label,
+	className,
+	overrideClassName,
+}: ConnectButtonProps) => {
 	const { open } = useWeb3Modal()
 	const { data: walletClient, isError, isLoading } = useWalletClient()
 	const publicClient = usePublicClient()
@@ -33,12 +41,6 @@ export const ConnectButton = ({ label }: Params) => {
 			whenDefined(walletClient, (wallet) =>
 				connection().setEip1193Provider(wallet, BrowserProvider)
 			)
-
-			combineLatest([connection().chain, connection().account]).subscribe(
-				([chainId, acc]) => {
-					console.log({ chainId, acc })
-				}
-			)
 		})()
 	})
 
@@ -48,7 +50,13 @@ export const ConnectButton = ({ label }: Params) => {
 		<button
 			data-is-loading={isLoading}
 			data-is-error={Boolean(isError)}
-			className="hs-button is-filled is-large is-fullwidth data-[is-loading=true]:animate-pulse data-[is-error=true]:bg-red-600"
+			className={
+				overrideClassName
+					? overrideClassName
+					: `hs-button is-filled is-large is-fullwidth data-[is-loading=true]:animate-pulse data-[is-error=true]:bg-red-600 ${
+							className ? className : ''
+					  }`
+			}
 			onClick={() => open()}
 		>
 			<span className="hs-button__label">
