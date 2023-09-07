@@ -1,4 +1,5 @@
 ---
+import ConnectButton from '../../../src/components/ConnectButton.vue'
 import CLBButton from '../../../src/ui/vue/CLBButton.vue'
 import DefaultLayout from '../layouts/DefaultLayout.astro'
 ---
@@ -11,6 +12,7 @@ import DefaultLayout from '../layouts/DefaultLayout.astro'
 			<CLBButton type="outlined" link="/react">React ver.</CLBButton>
 			<CLBButton type="outlined" link="/svelte">Svelte ver.</CLBButton>
 			<CLBButton type="outlined" is-disabled>WebComponents ver.</CLBButton>
+			<ConnectButton client:only="vue" chainId={80001} />
 		</section>
 	</main>
 </DefaultLayout>
