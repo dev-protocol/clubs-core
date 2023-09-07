@@ -1,0 +1,10 @@
+---
+import { Connect } from '../components/Connect'
+
+const { chainId, label } = Astro.props as {
+	chainId?: number
+	label?: string
+}
+---
+
+<Connect client:load {chainId} {label} />
