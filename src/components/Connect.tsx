@@ -5,11 +5,12 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { polygon, polygonMumbai, mainnet } from 'wagmi/chains'
 import { ConnectButton, type ConnectButtonProps } from './ConnectButton'
 
-const { PUBLIC_WALLET_CONNECT_PROJECT_ID: projectId } = import.meta.env
+export type ConnectProps = {
+	readonly projectId: string
+	readonly chainId?: number
+} & ConnectButtonProps
 
-export type ConnectProps = { readonly chainId?: number } & ConnectButtonProps
-
-export const Connect = (props: ConnectProps) => {
+export const Connect = ({ projectId, ...props }: ConnectProps) => {
 	const chains = [
 		props.chainId === 137
 			? polygon

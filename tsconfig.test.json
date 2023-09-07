@@ -9,7 +9,8 @@
 		"strict": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
-		"declaration": true
+		"declaration": true,
+		"jsx": "react"
 	},
 	"include": ["src", "example", "planned-structure"],
 	"exclude": ["src/ui"]
