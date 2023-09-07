@@ -1860,10 +1860,10 @@ arrify@^3.0.0:
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-3.0.0.tgz#ccdefb8eaf2a1d2ab0da1ca2ce53118759fd46bc"
   integrity sha512-tLkvA81vQG/XqE2mjDkGQHoOINtMHtysSnemrmoGe6PydDPMRbVugqyk4A6V/WDWEfm3l+0d8anA9r8cv/5Jaw==
 
-astro@3.0.8:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/astro/-/astro-3.0.8.tgz#d7298d6570db009f98f9bed83b11081de690a2e9"
-  integrity sha512-behNlLMlT8yWLlVvKKB2ufbSwxiqYUKqw31LSQx+lNQ8/lBvxemyjSBDMlBbGVCWEfg67B2bqWIrCweHSWb01Q==
+astro@3.0.10:
+  version "3.0.10"
+  resolved "https://registry.yarnpkg.com/astro/-/astro-3.0.10.tgz#635872d10fc218bcb238b002ea6711828edb0172"
+  integrity sha512-LxLlFksTUn3B3Xi3KBirRBg1QI8t2lvOijfODor1OSpAnlEZUzToyLxbdzR2dBVLF5reAoi7LJNKsQouPnMXlg==
   dependencies:
     "@astrojs/compiler" "^2.0.1"
     "@astrojs/internal-helpers" "0.2.0"
@@ -1902,13 +1902,12 @@ astro@3.0.8:
     ora "^7.0.1"
     p-limit "^4.0.0"
     path-to-regexp "^6.2.1"
-    preferred-pm "^3.0.3"
+    preferred-pm "^3.1.2"
     prompts "^2.4.2"
     rehype "^12.0.1"
     resolve "^1.22.4"
     semver "^7.5.4"
     server-destroy "^1.0.1"
-    sharp "^0.32.5"
     shiki "^0.14.3"
     string-width "^6.1.0"
     strip-ansi "^7.1.0"
@@ -1918,9 +1917,11 @@ astro@3.0.8:
     vfile "^5.3.7"
     vite "^4.4.9"
     vitefu "^0.2.4"
-    which-pm "^2.0.0"
+    which-pm "^2.1.1"
     yargs-parser "^21.1.1"
     zod "3.21.1"
+  optionalDependencies:
+    sharp "^0.32.5"
 
 autoprefixer@10.4.15, autoprefixer@^10.4.15:
   version "10.4.15"
@@ -5582,10 +5583,10 @@ prebuild-install@^7.1.1:
     tar-fs "^2.0.0"
     tunnel-agent "^0.6.0"
 
-preferred-pm@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/preferred-pm/-/preferred-pm-3.0.3.tgz#1b6338000371e3edbce52ef2e4f65eb2e73586d6"
-  integrity sha512-+wZgbxNES/KlJs9q40F/1sfOd/j7f1O9JaHcW5Dsn3aUUOZg3L2bjpVUcKV2jvtElYfoTuQiNeMfQJ4kwUAhCQ==
+preferred-pm@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/preferred-pm/-/preferred-pm-3.1.2.tgz#aedb70550734a574dffcbf2ce82642bd1753bdd6"
+  integrity sha512-nk7dKrcW8hfCZ4H6klWcdRknBOXWzNQByJ0oJyX97BOupsYD+FzLS4hflgEu/uPUEHZCuRfMxzCBsuWd7OzT8Q==
   dependencies:
     find-up "^5.0.0"
     find-yarn-workspace-root2 "1.2.16"
@@ -7125,10 +7126,18 @@ which-pm-runs@^1.1.0:
   resolved "https://registry.yarnpkg.com/which-pm-runs/-/which-pm-runs-1.1.0.tgz#35ccf7b1a0fce87bd8b92a478c9d045785d3bf35"
   integrity sha512-n1brCuqClxfFfq/Rb0ICg9giSZqCS+pLtccdag6C2HyufBrh3fBOiy9nb6ggRMvWOVH5GrdJskj5iGTZNxd7SA==
 
-which-pm@2.0.0, which-pm@^2.0.0:
+which-pm@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/which-pm/-/which-pm-2.0.0.tgz#8245609ecfe64bf751d0eef2f376d83bf1ddb7ae"
   integrity sha512-Lhs9Pmyph0p5n5Z3mVnN0yWcbQYUAD7rbQUiMsQxOJ3T57k7RFe35SUwWMf7dsbDZks1uOmw4AecB/JMDj3v/w==
+  dependencies:
+    load-yaml-file "^0.2.0"
+    path-exists "^4.0.0"
+
+which-pm@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/which-pm/-/which-pm-2.1.1.tgz#0be2b70c67e94a32e87b9768a94a7f0954f2dcfa"
+  integrity sha512-xzzxNw2wMaoCWXiGE8IJ9wuPMU+EYhFksjHxrRT8kMT5SnocBPRg69YAMtyV4D12fP582RA+k3P8H9J5EMdIxQ==
   dependencies:
     load-yaml-file "^0.2.0"
     path-exists "^4.0.0"
