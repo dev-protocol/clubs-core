@@ -126,14 +126,13 @@
 		"@devprotocol/elements": "1.0.0",
 		"@devprotocol/hashi": "2.2.1",
 		"@devprotocol/util-ts": "4.0.0",
-		"@wagmi/core": "1.4.1",
-		"@web3modal/wagmi": "3.0.0-alpha.5",
+		"@metamask/detect-provider": "^2.0.0",
 		"ethers": "6.7.1",
 		"js-base64": "^3.7.2",
 		"lit": "^2.3.1",
 		"ramda": "^0.29.0",
 		"rxjs": "^7.8.1",
-		"viem": "^1.10.8",
+		"web3modal": "^1.9.12",
 		"yaml": "2.3.2"
 	},
 	"devDependencies": {

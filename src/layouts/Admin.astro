@@ -10,6 +10,7 @@ import Bars3BottomLeft from './icons/bars-3-bottom-left.astro'
 import Modal from './Modal.astro'
 
 import '../styles'
+import ConnectButton from '../components/ConnectButton.vue'
 
 const { page } = Astro.params
 const { clubs, showAside = true } = Astro.props as ClubsPropsAdminPages
@@ -147,6 +148,9 @@ const SlotsModalContent = clubs.slots.filter(
 				showAside && (
 					<div class="container mx-auto px-2 py-8 lg:px-0 lg:py-16">
 						<Aside config={config} showConnectButton={true}>
+							<slot name="clubs:connect-button" slot="aside:connect-button">
+								<ConnectButton client:load chainId={config.chainId} />
+							</slot>
 							<slot name="admin:aside:after-built-in-buttons" />
 							{SlotsAsideAfterBuiltInButtons.map((Slot) => (
 								<Slot.component {...Slot.props} />

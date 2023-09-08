@@ -10,7 +10,7 @@ const { config, showConnectButton } = Astro.props as {
 ---
 
 <Aside config={config} showConnectButton={showConnectButton} client:only="vue">
-	<Connect slot="admin:aside:connect-button" chainId={config.chainId} />
+	<slot name="aside:connect-button" slot="connect-button" />
 
 	<slot />
 </Aside>

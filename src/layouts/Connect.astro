@@ -1,9 +1,0 @@
----
-import Connect from '../components/Connect.vue'
-
-const { PUBLIC_WALLET_CONNECT_PROJECT_ID: projectId } = import.meta.env
-
-const props = Astro.props
----
-
-<Connect client:load projectId={projectId} {...props} />

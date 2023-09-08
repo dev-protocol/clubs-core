@@ -1,6 +1,6 @@
 <template>
 	<aside class="sticky top-8 grid gap-8">
-		<slot v-if="showConnectButton" name="admin:aside:connect-button" />
+		<slot v-if="showConnectButton" name="connect-button" />
 		<div class="relative">
 			<ActionButton
 				class="w-full"
