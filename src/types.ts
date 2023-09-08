@@ -88,6 +88,7 @@ export enum ClubsSlotName {
 	PageContentHomeAfterContent = 'page:content:home:after-content',
 	PageContentAnywhereBeforeContent = 'page:content:anywhere:before-content',
 	PageContentAnywhereAfterContent = 'page:content:anywhere:after-content',
+	ConnectButton = 'clubs:connect-button',
 }
 
 export type ClubsSlot = {

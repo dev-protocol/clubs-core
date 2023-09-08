@@ -1,6 +1,6 @@
 /* eslint-disable functional/no-expression-statement */
 import type { AstroIntegration } from 'astro'
-import { ClubsAstroIntegrationOptions } from './types'
+import type { ClubsAstroIntegrationOptions } from './types'
 
 export const astro = function (
 	options?: ClubsAstroIntegrationOptions
