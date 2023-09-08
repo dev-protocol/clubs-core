@@ -126,8 +126,6 @@
 		"@devprotocol/elements": "1.0.0",
 		"@devprotocol/hashi": "2.2.1",
 		"@devprotocol/util-ts": "4.0.0",
-		"@devprotocol/web3-esbundle": "0.0.8",
-		"@metamask/detect-provider": "^2.0.0",
 		"@wagmi/core": "1.4.1",
 		"@web3modal/wagmi": "3.0.0-alpha.5",
 		"ethers": "6.7.1",
