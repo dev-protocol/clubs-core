@@ -1,4 +1,8 @@
-import { ClubsConfiguration, ClubsPlugin, ClubsPluginOptions } from '../types'
+import type {
+	ClubsConfiguration,
+	ClubsPlugin,
+	ClubsPluginOptions,
+} from '../types'
 
 export const updatePluginOptionsEventListener = async (
 	detail: { readonly data: ClubsPluginOptions; readonly pluginIndex: number },

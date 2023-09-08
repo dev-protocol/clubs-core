@@ -1,5 +1,5 @@
 import { isAddress } from 'ethers'
-import { ClubsProfile } from './types'
+import type { ClubsProfile } from './types'
 
 /**
  * Fetches the profile of the user
