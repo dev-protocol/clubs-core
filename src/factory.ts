@@ -23,7 +23,7 @@ import type {
 } from './types'
 import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
-import { APIRoute, Props } from 'astro'
+import type { APIRoute, Props } from 'astro'
 
 type Plugins<P extends ClubsFunctionPlugin = ClubsFunctionPlugin> =
 	readonly ClubsPluginDetails<P>[]
