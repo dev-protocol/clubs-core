@@ -29,7 +29,7 @@ export const GetModalProvider = () => {
 	const wagmiConfig = createConfig({
 		autoConnect: true,
 		connectors: w3mConnectors({ projectId, chains: CHAINS }),
-		publicClient
+		publicClient,
 	})
 
 	const ethereumClient = new EthereumClient(wagmiConfig, CHAINS)
