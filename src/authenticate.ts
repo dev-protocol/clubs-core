@@ -1,11 +1,11 @@
 import { clientsProperty } from '@devprotocol/dev-kit'
 import {
 	WeiPerEther,
-	ContractRunner,
+	type ContractRunner,
 	hashMessage,
 	recoverAddress,
 	formatUnits,
-	AbstractProvider,
+	type AbstractProvider,
 } from 'ethers'
 import { decode } from './decode'
 
