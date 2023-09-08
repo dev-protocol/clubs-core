@@ -25,9 +25,9 @@
 import { defineComponent } from 'vue'
 import { buildConfig, onMountClient } from '../events'
 import {
-	ClubsConfiguration,
+	type ClubsConfiguration,
 	ClubsEvents,
-	ClubsEventsDetailFinishConfiguration,
+	type ClubsEventsDetailFinishConfiguration,
 } from '../types'
 import ActionButton from '../components/Primitives/ActionButton.vue'
 

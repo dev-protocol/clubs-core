@@ -136,7 +136,6 @@
 		"rxjs": "^7.8.1",
 		"viem": "^1.10.7",
 		"wagmi": "^1.4.1",
-		"web3modal": "^1.9.9",
 		"yaml": "2.3.2"
 	},
 	"devDependencies": {
