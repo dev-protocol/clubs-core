@@ -1,6 +1,10 @@
 import React from 'react'
-import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
-import { Web3Modal } from '@web3modal/react'
+import {
+	EthereumClient,
+	w3mConnectors,
+	w3mProvider,
+} from '@devprotocol/web3-esbundle/web3modal/ethereum'
+import { Web3Modal } from '@devprotocol/web3-esbundle/web3modal/react'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { polygon, polygonMumbai, mainnet } from 'wagmi/chains'
 import { ConnectButton, type ConnectButtonProps } from './ConnectButton'

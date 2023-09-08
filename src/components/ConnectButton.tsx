@@ -2,10 +2,9 @@
 /* eslint-disable functional/no-expression-statement */
 /* eslint-disable functional/functional-parameters */
 import React, { useEffect, useMemo } from 'react'
-import { useWeb3Modal } from '@web3modal/react'
-import { useWalletClient, usePublicClient, useAccount } from 'wagmi'
+import { useWeb3Modal } from '@devprotocol/web3-esbundle/web3modal/react'
+import { useWalletClient, useAccount } from 'wagmi'
 import { whenDefined } from '@devprotocol/util-ts'
-import { combineLatest } from 'rxjs'
 import { BrowserProvider } from 'ethers'
 
 export type ConnectButtonProps = {
@@ -28,7 +27,6 @@ export const ConnectButton = ({
 }: ConnectButtonProps) => {
 	const { open } = useWeb3Modal()
 	const { data: walletClient, isError, isLoading } = useWalletClient()
-	const publicClient = usePublicClient()
 	const { address } = useAccount()
 	const truncatedEthAddress = useMemo(
 		() => whenDefined(address, truncateEthAddress),
@@ -44,7 +42,7 @@ export const ConnectButton = ({
 		})()
 	})
 
-	console.log({ walletClient, publicClient })
+	console.log({ walletClient })
 
 	return (
 		<button
