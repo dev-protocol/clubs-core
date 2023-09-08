@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts">
-import type Web3Modal from 'web3modal'
+import { type Web3Modal } from '@web3modal/html'
 import type { connection as Connection } from '../connection'
 import { defineComponent } from 'vue'
 import {
