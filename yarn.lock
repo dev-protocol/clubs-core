@@ -30,7 +30,7 @@
   resolved "https://registry.yarnpkg.com/@astrojs/compiler/-/compiler-1.8.2.tgz#f305d5724c45a9932a8ef4e87b2e7227d15d1c2b"
   integrity sha512-o/ObKgtMzl8SlpIdzaxFnt7SATKPxu4oIP/1NL+HDJRzxfJcAkOTAb/ZKMRyULbz4q+1t2/DAebs2Z1QairkZw==
 
-"@astrojs/compiler@^2.0.1":
+"@astrojs/compiler@^2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@astrojs/compiler/-/compiler-2.1.0.tgz#ebc9e648d606709e6f03be9e6ced3777b09e7936"
   integrity sha512-Mp+qrNhly+27bL/Zq8lGeUY+YrdoU0eDfIlAeGIPrzt0PnI/jGpvPUdCaugv4zbCrDkOUScFfcbeEiYumrdJnw==
@@ -50,10 +50,10 @@
     "@lit-labs/ssr-dom-shim" "^1.1.1"
     parse5 "^7.1.2"
 
-"@astrojs/markdown-remark@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@astrojs/markdown-remark/-/markdown-remark-3.0.0.tgz#2e191a1714b95721c1f109cd0e9a1b36e24d25a0"
-  integrity sha512-s8I49Je4++ImgYAgwL32HgN8m6we2qz3RtBpN4AjObMODPwDylmzUHZksD8Toy31q/P59ED3MuwphqOGm9l03w==
+"@astrojs/markdown-remark@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@astrojs/markdown-remark/-/markdown-remark-3.1.0.tgz#5ae8ecb06ca941dd29b7945cec911afa11764782"
+  integrity sha512-5UwamK0iFxN0n1Nw44vUk8AkQr4psKS63hM3D1/4bhhjs4ZFRyrYmg5NjScaMEXZcrd2KgGPsd+PEwNs4mlBOw==
   dependencies:
     "@astrojs/prism" "^3.0.0"
     github-slugger "^2.0.0"
@@ -76,18 +76,18 @@
   dependencies:
     prismjs "^1.29.0"
 
-"@astrojs/react@3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@astrojs/react/-/react-3.0.1.tgz#29c9a49d99e41779f358bec919206e49d4027a27"
-  integrity sha512-BeGi3sCMdrTqyMrtVSyjNQBHcWH8bW/H4bpw3gVDdbBpk76eNa7P/5IyQlROzLp0tonqFGdP0Z8Av5LysY8xSQ==
+"@astrojs/react@3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@astrojs/react/-/react-3.0.2.tgz#f74026bbeacb324bae55473c3ccf93d822558fdb"
+  integrity sha512-aooNIuQxTg+IWGMZPuIEwBeBi4/TCPCMsr3714zuLjAjukVd5ZrX/bCNxJqDWU4HNwUm4XFU1OhcEvYOHa5uMQ==
   dependencies:
     "@vitejs/plugin-react" "^4.0.4"
     ultrahtml "^1.3.0"
 
-"@astrojs/svelte@4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@astrojs/svelte/-/svelte-4.0.1.tgz#25ef4cc779e3f48876c50cb908a042d3d05ac402"
-  integrity sha512-89+ITht8NY6MWs2oCsrFx76kQeuKXF58d7BkQis3EfggVw15LtjevVsDi2dxUKrys7MYKCId2UmcUQJT5YGHyQ==
+"@astrojs/svelte@4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@astrojs/svelte/-/svelte-4.0.2.tgz#7e80681765fb7a44f3754985df446479a6b81376"
+  integrity sha512-XB9Sexq+iW5aUpctDk6zuKHbWIAuPlAnZKbfgaS9VOaOUtx1t12crP9YoKEVcTifXYgoRuWWfeEAm2I8pYlLIQ==
   dependencies:
     "@sveltejs/vite-plugin-svelte" "^2.4.5"
     svelte2tsx "^0.6.20"
@@ -1856,14 +1856,14 @@ arrify@^3.0.0:
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-3.0.0.tgz#ccdefb8eaf2a1d2ab0da1ca2ce53118759fd46bc"
   integrity sha512-tLkvA81vQG/XqE2mjDkGQHoOINtMHtysSnemrmoGe6PydDPMRbVugqyk4A6V/WDWEfm3l+0d8anA9r8cv/5Jaw==
 
-astro@3.0.10:
-  version "3.0.10"
-  resolved "https://registry.yarnpkg.com/astro/-/astro-3.0.10.tgz#635872d10fc218bcb238b002ea6711828edb0172"
-  integrity sha512-LxLlFksTUn3B3Xi3KBirRBg1QI8t2lvOijfODor1OSpAnlEZUzToyLxbdzR2dBVLF5reAoi7LJNKsQouPnMXlg==
+astro@3.0.12:
+  version "3.0.12"
+  resolved "https://registry.yarnpkg.com/astro/-/astro-3.0.12.tgz#b216c975e657da6f8110833734fb1549fc031d2f"
+  integrity sha512-nDLI9OGEjYIX90a1Md1orqyurPxqXTWTy7Sm3ZsWl5dpzSjcUXo3VB/GTvNjAMS9sE40BOxhay7/hnnQuI8p7A==
   dependencies:
-    "@astrojs/compiler" "^2.0.1"
+    "@astrojs/compiler" "^2.1.0"
     "@astrojs/internal-helpers" "0.2.0"
-    "@astrojs/markdown-remark" "3.0.0"
+    "@astrojs/markdown-remark" "3.1.0"
     "@astrojs/telemetry" "3.0.1"
     "@babel/core" "^7.22.10"
     "@babel/generator" "^7.22.10"
