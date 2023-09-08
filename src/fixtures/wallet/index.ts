@@ -7,24 +7,13 @@ import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/html'
 import { type Chain, configureChains, createConfig } from '@wagmi/core'
 import { arbitrum, mainnet, polygon, polygonMumbai } from '@wagmi/core/chains'
+import { getEthersProvider } from './ethers'
 
-// export const GetModalProvider = () => {
-// 	const modalProvider = new Web3Modal({
-// 		providerOptions: {
-// 			injected: {
-// 				package: detectEthereumProvider(),
-// 			},
-// 		},
-// 		cacheProvider: true,
-// 	})
-// 	return modalProvider
-// }
+const { PUBLIC_WALLET_CONNECT_PROJECT_ID: projectId } = import.meta.env
 
-export const CHAINS: Chain[] = [arbitrum, mainnet, polygon]
+export const CHAINS: Chain[] = [arbitrum, mainnet, polygon, polygonMumbai]
 
 export const GetModalProvider = () => {
-	const projectId = '95f551c15a4b53fb5dd14cca66505708'
-
 	const { publicClient } = configureChains(CHAINS, [w3mProvider({ projectId })])
 	const wagmiConfig = createConfig({
 		autoConnect: true,
@@ -36,25 +25,18 @@ export const GetModalProvider = () => {
 	return new Web3Modal({ projectId }, ethereumClient)
 }
 
-export const ReConnectWallet = async (modalProvider: any) => {
-	const web3ForInjected = await detectEthereumProvider()
-	if (!web3ForInjected) {
-		modalProvider.clearCachedProvider()
-		return {
-			currentAddress: undefined,
-			connectedProvider: undefined,
-			provider: undefined,
-		}
+export const ReConnectWallet = async (chainId: number) => {
+	const provider = getEthersProvider({ chainId: chainId || 1 })
+	if (provider) {
+		// TODO: fix `EthersProviderFrom` to use new Web3Modal
+		return EthersProviderFrom(provider)
 	}
 
-	if (
-		modalProvider.cachedProvider === 'injected' &&
-		(web3ForInjected as { selectedAddress?: string }).selectedAddress
-	) {
-		return EthersProviderFrom(modalProvider)
+	return {
+		currentAddress: undefined,
+		provider: undefined,
+		connectedProvider: undefined,
 	}
-
-	return { currentAddress: undefined, provider: undefined }
 }
 
 export const EthersProviderFrom = async (modalProvider: any) => {

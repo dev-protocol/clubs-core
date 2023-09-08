@@ -65,6 +65,8 @@ import { whenDefined } from '@devprotocol/util-ts'
 import { onMountClient } from '../events'
 import HSButton from './Primitives/Hashi/HSButton.vue'
 import { combineLatest } from 'rxjs'
+import { getEthersProvider, getEthersSigner } from '../fixtures/wallet/ethers'
+import { EthersProviderFrom } from '../fixtures/wallet'
 
 type Data = {
 	modalProvider?: Web3Modal
@@ -106,14 +108,18 @@ export default defineComponent({
 					this.truncateWalletAddress = acc ? this.truncateEthAddress(acc) : ''
 				}
 			)
+			// TODO: fix `EthersProviderFrom` to use new Web3Modal
 			const { currentAddress, connectedProvider, provider } =
-				await ReConnectWallet(this.modalProvider as Web3Modal)
+				await ReConnectWallet(this.chainId || 1)
+
 			if (currentAddress) {
 				this.truncateWalletAddress = this.truncateEthAddress(currentAddress)
 			}
+
 			if (connectedProvider) {
 				this.setSigner(connectedProvider)
 			}
+
 			if (currentAddress && provider) {
 				this.fetchUserBalance(currentAddress, provider)
 			}
@@ -124,23 +130,31 @@ export default defineComponent({
 			this.connection!().setEip1193Provider(provider, BrowserProvider)
 		},
 		async connect() {
-			const connectedProvider: Eip1193Provider =
-				await this.modalProvider!.connect()
-			const newProvider = whenDefined(connectedProvider, (p) => {
-				const provider = new BrowserProvider(p)
-				this.setSigner(connectedProvider)
-				return provider
-			})
+			await this.modalProvider!.openModal()
+			this.modalProvider?.subscribeEvents(async (event) => {
+				const eventName = event.name
 
-			const currentAddress = await (
-				await newProvider?.getSigner()
-			)?.getAddress()
-			if (currentAddress) {
-				this.truncateWalletAddress = this.truncateEthAddress(currentAddress)
-			}
-			if (currentAddress && newProvider) {
-				this.fetchUserBalance(currentAddress, newProvider)
-			}
+				if (eventName === 'ACCOUNT_CONNECTED') {
+					const provider = getEthersProvider({ chainId: this.chainId || 1 })
+					const signer = await getEthersSigner({ chainId: this.chainId || 1 })
+
+					// TODO: fix `EthersProviderFrom` to use new Web3Modal
+					if (provider) {
+						const connectedProvider = (await EthersProviderFrom(provider))
+							.connectedProvider
+						this.setSigner(connectedProvider)
+					}
+
+					const currentAddress = await signer?.getAddress()
+					if (currentAddress) {
+						this.truncateWalletAddress = this.truncateEthAddress(currentAddress)
+					}
+
+					if (provider && currentAddress) {
+						this.fetchUserBalance(currentAddress, provider)
+					}
+				}
+			})
 		},
 		async fetchUserBalance(currentAddress: string, provider: ContractRunner) {
 			const [l1, l2] = await clientsDev(provider)
