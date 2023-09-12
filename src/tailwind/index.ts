@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-ignore
 import hashi from '@devprotocol/hashi/tailwind'
+// @ts-ignore
 import { hsExtendedColorTokens } from '@devprotocol/hashi/tailwind/extensions'
 
 export const clubs = {
