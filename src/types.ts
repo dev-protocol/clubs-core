@@ -78,6 +78,8 @@ export type ClubsApiPath = Readonly<{
 export type ClubsApiPaths = readonly ClubsApiPath[]
 
 export enum ClubsSlotName {
+	AdminBodyBeforeContents = 'admin:body:before-contents',
+	AdminBodyAfterContents = 'admin:body:after-contents',
 	AdminSidebarBeforeTitle = 'admin:sidebar:before-title',
 	AdminAsideAfterBuiltInButtons = 'admin:aside:after-built-in-buttons',
 	AdminModalCcontent = 'admin:modal:content',

@@ -27,6 +27,12 @@ const allThemes = clubs.plugins.filter(
 
 const theme = page && page.startsWith('theme')
 
+const SlotsBodyBeforeContents = clubs.slots.filter(
+	(slot) => slot.slot === ClubsSlotName.AdminBodyBeforeContents
+)
+const SlotsBodyAfterContents = clubs.slots.filter(
+	(slot) => slot.slot === ClubsSlotName.AdminBodyAfterContents
+)
 const SlotsSidebarBeforeTitle = clubs.slots.filter(
 	(slot) => slot.slot === ClubsSlotName.AdminSidebarBeforeTitle
 )
@@ -67,6 +73,9 @@ const SlotsModalContent = clubs.slots.filter(
 		class="font-body bg-primary-200 dark:bg-primary-600 text-primary-ink min-h-screen"
 		data-page={page}
 	>
+		<slot name="admin:body:before-contents" />
+		{SlotsBodyBeforeContents.map((Slot) => <Slot.component {...Slot.props} />)}
+
 		<div
 			class="grid gap-20 lg:mr-20 lg:auto-cols-[18rem_minmax(auto,_1fr)_12rem] lg:grid-flow-col"
 		>
@@ -182,6 +191,9 @@ const SlotsModalContent = clubs.slots.filter(
 			<slot name="admin:modal:content" />
 			{SlotsModalContent.map((Slot) => <Slot.component {...Slot.props} />)}
 		</Modal>
+
+		<slot name="admin:body:after-contents" />
+		{SlotsBodyAfterContents.map((Slot) => <Slot.component {...Slot.props} />)}
 	</body>
 
 	<script>
