@@ -419,10 +419,10 @@
     "@babel/helper-validator-identifier" "^7.22.15"
     to-fast-properties "^2.0.0"
 
-"@devprotocol/dev-kit@8.5.0":
-  version "8.5.0"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-8.5.0.tgz#f2deac013a4250888237e9eea6d9f72b5b27e194"
-  integrity sha512-jyjtYrv9/PnngnI2v8rg76Dl15ax2UQwsCfJGQ4tDtCbucl92uB6wmEcL/dUFemICl9rj+kNKHa965SLR2Mlxg==
+"@devprotocol/dev-kit@8.5.1":
+  version "8.5.1"
+  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-8.5.1.tgz#6edb09e18ef81e65d634f65e20c7c6943ed1ab6a"
+  integrity sha512-V1kPlFPOIXheSKwNTYYX3IbDRSFhHYm5THMxg3SaL80bpWzcMPoIVBze+38B0T2CQ+8EGLEL4T8mg2R/nOH+Wg==
   dependencies:
     "@devprotocol/util-ts" "3.1.0"
     bignumber.js "9.1.2"
