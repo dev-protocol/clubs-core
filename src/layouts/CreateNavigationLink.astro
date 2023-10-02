@@ -1,0 +1,20 @@
+---
+import type { ClubsPropsAdminPages, ClubsNavigationLink } from '../types'
+import CreateNavigationLink_ from './CreateNavigationLink.svelte'
+
+interface Props extends ClubsPropsAdminPages {
+	createNavigation: {
+		label: string
+		link: ClubsNavigationLink
+	}
+}
+
+const { clubs, createNavigation } = Astro.props
+---
+
+<CreateNavigationLink_
+	client:load
+	config={clubs.encodedClubsConfiguration}
+	label={createNavigation.label}
+	link={createNavigation.link}
+/>

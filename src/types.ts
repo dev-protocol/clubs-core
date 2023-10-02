@@ -374,3 +374,10 @@ export type ClubsProfile = {
 	readonly avatar: string
 	readonly username: string
 }
+
+export type ClubsNavigationLink = {
+	readonly display: string
+	readonly path: string
+	readonly enable?: boolean
+	readonly kind?: string
+}
