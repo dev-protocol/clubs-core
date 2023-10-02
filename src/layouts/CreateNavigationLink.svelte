@@ -56,7 +56,7 @@
 	<div class="flex w-full justify-end">
 		<button
 			on:click|preventDefault={() => action()}
-			class={`hs-button is-large is-filled ${
+			class={`hs-button is-large is-filled is-fullwidth ${
 				waiting ? 'animate-pulse bg-gray-500/60' : ''
 			}`}
 			disabled={waiting}>{label}</button
