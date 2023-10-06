@@ -152,7 +152,7 @@ export type ClubsFunctionGetSlots = (
  *
  * getApiPaths is an asynchronous function that generates API endpoints and returns an array of ClubsApiPath to define API endpoints and their behavior, etc.
  *
- * @param {	options: readonly ClubsPluginOption[], config: ClubsConfiguration} options
+ * @param {options: readonly ClubsPluginOption[], config: ClubsConfiguration} options
  * @param {ClubsConfiguration} config
  * @param {ClubsFactoryUtils} utils
  *
