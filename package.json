@@ -143,7 +143,7 @@
 		"@astrojs/vue": "3.0.1",
 		"@ava/typescript": "4.1.0",
 		"@rollup/plugin-commonjs": "25.0.5",
-		"@rollup/plugin-multi-entry": "6.0.0",
+		"@rollup/plugin-multi-entry": "6.0.1",
 		"@rollup/plugin-typescript": "11.1.4",
 		"@rollup/pluginutils": "5.0.4",
 		"@types/get-installed-path": "4.0.1",
