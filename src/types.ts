@@ -147,6 +147,45 @@ export type ClubsFunctionGetSlots = (
 	utils: ClubsSlotsFactoryUtils
 ) => Promise<ClubsFunctionGetSlotsResults>
 
+/**
+ * Fetch the internal API Paths for the plugin. Logic would be placed in the /api directory inside of your plugin.
+ *
+ * getApiPaths is an asynchronous function that generates API endpoints and returns an array of ClubsApiPath to define API endpoints and their behavior, etc.
+ *
+ * @param {options: readonly ClubsPluginOption[], config: ClubsConfiguration} options
+ * @param {ClubsConfiguration} config
+ * @param {ClubsFactoryUtils} utils
+ *
+ * @returns {Promise<ClubsApiPaths>} An array of objects containing 'paths', 'method', and 'handler' properties.
+ *
+ * @example
+ *
+ * ```ts
+	export const getApiPaths: ClubsFunctionGetApiPaths = async (
+		options,
+		{ propertyAddress, rpcUrl },
+		utils
+	) => {
+		const [{ get }, { post }] = await Promise.all([
+			import('./api/get'),
+			import('./api/post'),
+		])
+
+		return [
+			{
+				paths: ['tickets'],
+				method: 'GET' as 'GET',
+				handler: get({ tickets, propertyAddress }),
+			},
+			{
+				paths: ['tickets', 'create],
+				method: 'POST' as 'POST',
+				handler: post({ tickets, propertyAddress }),
+			},
+		]
+	}
+ * ```
+ */
 export type ClubsFunctionGetApiPaths = ClubsFunctionGetPagePaths<ClubsApiPaths>
 
 export type ClubsGetStaticPathsItem<P = Props> = {
