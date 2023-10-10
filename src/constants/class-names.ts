@@ -1,4 +1,4 @@
-export const ProseTextInherit = [
+export const ProseTextInheritClassNames = [
 	'text-inherit',
 	'prose',
 	'prose-headings:text-inherit',
@@ -12,6 +12,6 @@ export const ProseTextInherit = [
 	'prose-li:list-[inherit]',
 ]
 
-export const ProseTextInheritString = ProseTextInherit.reduce(
+export const ProseTextInherit = ProseTextInheritClassNames.reduce(
 	(c, p) => `${c} ${p}`
 )
