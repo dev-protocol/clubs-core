@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"lib": ["DOM"],
+		"lib": ["DOM", "ES2022"],
 		"module": "ESNext",
 		"moduleResolution": "Node",
 		"target": "ESNext",
@@ -22,7 +22,8 @@
 		"example",
 		"planned-structure",
 		"ui-preview",
-		"rollup.*.mjs"
+		"rollup.*.mjs",
+		"tailwind.config.js"
 	],
 	"exclude": []
 }
