@@ -2,9 +2,14 @@
 import type { ClubsPropsAdminPages } from '../types'
 import AdminConfigurationManager_ from './AdminConfigurationManager.svelte'
 
-const { clubs } = Astro.props as {
+interface Props {
 	clubs: ClubsPropsAdminPages['clubs']
 }
+
+const { clubs } = Astro.props
 ---
 
-<AdminConfigurationManager_ client:only="svelte" {clubs} />
+<AdminConfigurationManager_
+	client:only="svelte"
+	encodedClubsConfiguration={clubs.encodedClubsConfiguration}
+/>

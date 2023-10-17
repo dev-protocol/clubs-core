@@ -24,11 +24,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { buildConfig, onMountClient } from '../events'
-import {
-	type ClubsConfiguration,
-	ClubsEvents,
-	type ClubsEventsDetailFinishConfiguration,
-} from '../types'
+import { ClubsEvents } from '../types'
 import ActionButton from '../components/Primitives/ActionButton.vue'
 
 export default defineComponent({
@@ -37,10 +33,6 @@ export default defineComponent({
 		ActionButton,
 	},
 	props: {
-		config: {
-			type: Object as () => ClubsConfiguration,
-			required: true,
-		},
 		showConnectButton: {
 			type: Boolean,
 			default: true,

@@ -2,8 +2,6 @@
 	import { decode, encode } from '../index'
 	import { submitConfig, updatedConfig, updatedOptions } from '../events'
 	import type {
-		ClubsConfiguration,
-		ClubsPropsAdminPages,
 		ClubsEventsUpdatePluginOptions,
 		ClubsEventsUpdateConfiguration,
 	} from '../types'
@@ -11,9 +9,9 @@
 	import { updatePluginOptionsEventListener } from '../fixtures/utils'
 	import { onMount } from 'svelte'
 
-	export let clubs: ClubsPropsAdminPages['clubs']
+	export let encodedClubsConfiguration: string
 
-	let currentConfig = decode(clubs.encodedClubsConfiguration)
+	let currentConfig = decode(encodedClubsConfiguration)
 
 	onMount(() => {
 		document.body.addEventListener(

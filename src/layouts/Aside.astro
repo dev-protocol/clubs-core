@@ -1,14 +1,14 @@
 ---
 import Aside_ from './Aside.vue'
-import type { ClubsConfiguration } from '../types'
 
-const { config, showConnectButton } = Astro.props as {
-	config: ClubsConfiguration
+interface Props {
 	showConnectButton?: boolean
 }
+
+const { showConnectButton } = Astro.props
 ---
 
-<Aside_ config={config} showConnectButton={showConnectButton} client:only="vue">
+<Aside_ showConnectButton={showConnectButton} client:only="vue">
 	<slot name="aside:connect-button" slot="connect-button" />
 
 	<slot />
