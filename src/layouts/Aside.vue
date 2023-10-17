@@ -12,7 +12,7 @@
 			>
 			<div
 				v-if="status.error"
-				class="bg-error-400 mx-auto -mt-4 max-w-[99%] rounded px-4 pb-2 pt-6 text-sm text-white shadow"
+				class="mx-auto -mt-4 max-w-[99%] rounded bg-error-400 px-4 pb-2 pt-6 text-sm text-white shadow"
 			>
 				{{ status.error }}
 			</div>

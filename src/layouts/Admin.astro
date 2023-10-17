@@ -70,7 +70,7 @@ const SlotsModalContent = clubs.slots.filter(
 	</head>
 
 	<body
-		class="font-body bg-primary-200 dark:bg-primary-600 text-primary-ink min-h-screen"
+		class="min-h-screen bg-primary-200 font-body text-primary-ink dark:bg-primary-600"
 		data-page={page}
 	>
 		<slot name="admin:body:before-contents" />
@@ -81,7 +81,7 @@ const SlotsModalContent = clubs.slots.filter(
 		>
 			<header
 				id="__clubs:header__"
-				class="bg-surface-300 fixed z-50 grid hidden max-h-screen min-h-screen w-full content-start gap-16 overflow-y-scroll px-8 py-16 lg:relative lg:grid lg:max-h-fit lg:overflow-y-auto"
+				class="fixed z-50 grid hidden max-h-screen min-h-screen w-full content-start gap-16 overflow-y-scroll bg-surface-300 px-8 py-16 lg:relative lg:grid lg:max-h-fit lg:overflow-y-auto"
 			>
 				<AdminSidebar page={page} name={name} enabledPlugins={enabledPlugins}>
 					<slot name="admin:sidebar:before-title" slot="before-title" />
@@ -123,7 +123,7 @@ const SlotsModalContent = clubs.slots.filter(
 				</AdminSidebar>
 				<button
 					id="__clubs:sidebar-close__"
-					class="text-dp-white-ink fixed bottom-[3rem] left-1/2 flex aspect-square w-14 -translate-x-1/2 items-center justify-center rounded-full bg-white shadow-2xl lg:hidden"
+					class="fixed bottom-[3rem] left-1/2 flex aspect-square w-14 -translate-x-1/2 items-center justify-center rounded-full bg-white text-dp-white-ink shadow-2xl lg:hidden"
 					><XMark />
 				</button>
 			</header>
@@ -175,13 +175,13 @@ const SlotsModalContent = clubs.slots.filter(
 				class="fixed bottom-[3rem] left-1/2 flex -translate-x-1/2 items-stretch gap-6 transition-all duration-300 ease-in-out lg:hidden"
 			>
 				<div
-					class="text-dp-white-ink flex items-stretch gap-2 rounded-full bg-white px-6 py-4 shadow-2xl"
+					class="flex items-stretch gap-2 rounded-full bg-white px-6 py-4 text-dp-white-ink shadow-2xl"
 				>
 					<Clubs />
 				</div>
 				<button
 					id="__clubs:sidebar-open__"
-					class="text-dp-white-ink flex aspect-square w-14 items-center justify-center rounded-full bg-white shadow-2xl"
+					class="flex aspect-square w-14 items-center justify-center rounded-full bg-white text-dp-white-ink shadow-2xl"
 					><Bars3BottomLeft />
 				</button>
 			</div>
