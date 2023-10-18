@@ -146,7 +146,7 @@
 		"@rollup/plugin-multi-entry": "6.0.1",
 		"@rollup/plugin-typescript": "11.1.5",
 		"@rollup/pluginutils": "5.0.5",
-		"@types/get-installed-path": "4.0.1",
+		"@types/get-installed-path": "4.0.2",
 		"@types/node": "18.18.5",
 		"@types/ramda": "0.29.6",
 		"@types/react": "18.2.28",
