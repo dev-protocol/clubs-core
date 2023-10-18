@@ -5,9 +5,6 @@ import './style.scss';
 interface CLBTierProps {
 	title: string;
 	subtitle?: string;
-	id?: string;
-	currency?: string;
-	amount?: string;
 	media?: string;
 	children?: React.ReactNode|string;
 }

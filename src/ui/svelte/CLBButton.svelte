@@ -5,7 +5,7 @@
 	export let type: string | null
 	export let isDisabled: boolean = false
 	export let onClick: () => void
-	export let nativeType: string | null
+	export let nativeType: "button" | "submit" | "reset" | null | undefined
 
 	function _assertType(type: string): string {
 		return handleVariants(type)
@@ -17,9 +17,9 @@
 {#if !link}
 	<button
 		class={`hs-button${type ? ' ' + _assertType(type) : ''}`}
-		{onClick}
 		disabled={isDisabled}
 		type={nativeType}
+		on:click={onClick}
 	>
 		{#if $$slots.icon}
 			<i class="hs-button__icon">
@@ -33,7 +33,6 @@
 {:else}
 	<a
 		class={`hs-button${type ? ' ' + _assertType(type) : ''}`}
-		{onClick}
 		href={link}
 		target={_linkTarget}
 	>
