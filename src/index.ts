@@ -4,6 +4,7 @@ export * from './types'
 export default astro
 export { decode } from './decode'
 export { encode } from './encode'
+export { bytes32Hex } from './bytes32Hex'
 export { pageFactory, adminFactory, apiFactory } from './factory'
 export { setOptions, setConfig, onSubmitConfig } from './events'
 export { toBytes } from './parser'

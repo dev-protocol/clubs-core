@@ -1,8 +1,8 @@
 {
 	"name": "@devprotocol/clubs-core",
-	"version": "1.9.0",
+	"version": "1.9.1",
 	"description": "Core library for Clubs",
-	"main": "dist/index.cjs",
+	"main": "dist/index.mjs",
 	"exports": {
 		".": {
 			"import": "./dist/index.mjs",
@@ -49,6 +49,11 @@
 			"require": "./dist/src/encode.cjs",
 			"types": "./dist/src/encode.d.ts"
 		},
+		"./bytes32Hex": {
+			"import": "./dist/src/bytes32Hex.mjs",
+			"require": "./dist/src/bytes32Hex.cjs",
+			"types": "./dist/src/bytes32Hex.d.ts"
+		},
 		"./events": {
 			"import": "./dist/src/events.mjs",
 			"require": "./dist/src/events.cjs",
@@ -91,6 +96,7 @@
 		"connection.d.ts",
 		"decode.d.ts",
 		"encode.d.ts",
+		"bytes32Hex.d.ts",
 		"events.d.ts",
 		"factory.d.ts",
 		"layouts.d.ts",
@@ -210,7 +216,10 @@
 				"/": "dist/"
 			},
 			"compile": false
-		}
+		},
+		"nodeArguments": [
+			"--experimental-specifier-resolution=node"
+		]
 	},
 	"repository": {
 		"type": "git",
@@ -220,5 +229,6 @@
 	"bugs": {
 		"url": "https://github.com/dev-protocol/clubs-core/issues"
 	},
-	"homepage": "https://github.com/dev-protocol/clubs-core#readme"
+	"homepage": "https://github.com/dev-protocol/clubs-core#readme",
+	"type": "module"
 }
