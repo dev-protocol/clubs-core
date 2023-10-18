@@ -154,7 +154,7 @@
 		"@rollup/pluginutils": "5.0.5",
 		"@types/get-installed-path": "4.0.2",
 		"@types/node": "18.18.6",
-		"@types/ramda": "0.29.6",
+		"@types/ramda": "0.29.7",
 		"@types/react": "18.2.29",
 		"@types/react-dom": "18.2.13",
 		"@typescript-eslint/eslint-plugin": "5.62.0",
