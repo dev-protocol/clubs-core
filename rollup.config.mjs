@@ -18,7 +18,7 @@ const majorCoreAPIs = [
 	'dist/src/bytes32Hex.js',
 ]
 
-const useSrc = ({ out, ext } = {}) => ({
+export const useSrc = ({ out, ext } = {}) => ({
 	name: 'astro',
 	resolveId(source, importer) {
 		if (ext.some((e) => source.endsWith(e))) {
