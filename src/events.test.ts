@@ -4,10 +4,10 @@ import type { AstroComponentFactory } from 'astro/dist/runtime/server'
 import { encode } from './encode'
 import { adminFactory } from './factory'
 import {
-	ClubsConfiguration,
-	ClubsEventsDetailUpdatePluginOptions,
+	type ClubsConfiguration,
+	type ClubsEventsDetailUpdatePluginOptions,
 	ClubsPluginCategory,
-	ClubsPluginOption,
+	type ClubsPluginOption,
 } from './types'
 import { updatePluginOptionsEventListener } from './fixtures/utils'
 

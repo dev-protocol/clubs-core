@@ -1,11 +1,6 @@
 <template>
 	<aside class="sticky top-8 grid gap-8">
-		<ConnectButton
-			id="clubs_connect_button"
-			v-if="showConnectButton"
-			class="w-full"
-			:chainId="config.chainId"
-		/>
+		<slot v-if="showConnectButton" name="connect-button" />
 		<div class="relative">
 			<ActionButton
 				class="w-full"
@@ -17,7 +12,7 @@
 			>
 			<div
 				v-if="status.error"
-				class="bg-error-400 mx-auto -mt-4 max-w-[99%] rounded px-4 pb-2 pt-6 text-sm text-white shadow"
+				class="mx-auto -mt-4 max-w-[99%] rounded bg-error-400 px-4 pb-2 pt-6 text-sm text-white shadow"
 			>
 				{{ status.error }}
 			</div>
@@ -29,25 +24,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { buildConfig, onMountClient } from '../events'
-import {
-	ClubsConfiguration,
-	ClubsEvents,
-	ClubsEventsDetailFinishConfiguration,
-} from '../types'
+import { ClubsEvents } from '../types'
 import ActionButton from '../components/Primitives/ActionButton.vue'
-import ConnectButton from '../components/ConnectButton.vue'
 
 export default defineComponent({
 	name: 'Aside',
 	components: {
 		ActionButton,
-		ConnectButton,
 	},
 	props: {
-		config: {
-			type: Object as () => ClubsConfiguration,
-			required: true,
-		},
 		showConnectButton: {
 			type: Boolean,
 			default: true,

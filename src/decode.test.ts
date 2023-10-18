@@ -4,7 +4,7 @@
 import test from 'ava'
 import { encode } from './encode'
 import { decode } from './decode'
-import { ClubsConfiguration } from './types'
+import type { ClubsConfiguration } from './types'
 
 // https://stackoverflow.com/a/12101012
 function toBuffer(ab: ArrayBuffer) {

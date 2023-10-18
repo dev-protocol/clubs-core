@@ -1,8 +1,8 @@
 {
 	"name": "@devprotocol/clubs-core",
-	"version": "1.0.3",
+	"version": "1.9.1",
 	"description": "Core library for Clubs",
-	"main": "dist/index.cjs",
+	"main": "dist/index.mjs",
 	"exports": {
 		".": {
 			"import": "./dist/index.mjs",
@@ -49,6 +49,11 @@
 			"require": "./dist/src/encode.cjs",
 			"types": "./dist/src/encode.d.ts"
 		},
+		"./bytes32Hex": {
+			"import": "./dist/src/bytes32Hex.mjs",
+			"require": "./dist/src/bytes32Hex.cjs",
+			"types": "./dist/src/bytes32Hex.d.ts"
+		},
 		"./events": {
 			"import": "./dist/src/events.mjs",
 			"require": "./dist/src/events.cjs",
@@ -63,6 +68,11 @@
 			"import": "./dist/src/layouts/index.mjs",
 			"require": "./dist/src/layouts/index.cjs",
 			"types": "./layouts.d.ts"
+		},
+		"./profile": {
+			"import": "./dist/src/profile.mjs",
+			"require": "./dist/src/profile.cjs",
+			"types": "./dist/src/profile.d.ts"
 		},
 		"./styles": {
 			"import": "./dist/src/styles/index.mjs",
@@ -86,6 +96,7 @@
 		"connection.d.ts",
 		"decode.d.ts",
 		"encode.d.ts",
+		"bytes32Hex.d.ts",
 		"events.d.ts",
 		"factory.d.ts",
 		"layouts.d.ts",
@@ -96,6 +107,7 @@
 	],
 	"scripts": {
 		"test": "ava",
+		"docs": "npx typedoc src/index.ts && npx open-cli ./docs/index.html",
 		"preview": "run-p preview:tsc preview:rollup preview:astro",
 		"preview:astro": "astro --root ui-preview/ dev",
 		"preview:tsc": "yarn build:ts --watch",
@@ -116,71 +128,73 @@
 	"author": "aggre",
 	"license": "MIT",
 	"dependencies": {
-		"@devprotocol/dev-kit": "8.1.0",
-		"@devprotocol/elements": "1.0.0",
-		"@devprotocol/hashi": "2.2.0",
-		"@devprotocol/util-ts": "3.0.0",
+		"@devprotocol/dev-kit": "8.5.1",
+		"@devprotocol/elements": "1.1.0",
+		"@devprotocol/hashi": "2.2.1",
+		"@devprotocol/util-ts": "4.0.0",
 		"@metamask/detect-provider": "^2.0.0",
-		"ethers": "6.6.5",
+		"ethers": "6.8.0",
 		"js-base64": "^3.7.2",
-		"lit": "^2.3.1",
+		"lit": "^3.0.0",
 		"ramda": "^0.29.0",
 		"rxjs": "^7.8.1",
-		"web3modal": "^1.9.9",
-		"yaml": "2.3.1"
+		"web3modal": "^1.9.12",
+		"yaml": "2.3.3"
 	},
 	"devDependencies": {
-		"@astrojs/lit": "2.1.0",
-		"@astrojs/react": "2.2.1",
-		"@astrojs/svelte": "3.1.0",
-		"@astrojs/tailwind": "4.0.0",
-		"@astrojs/vue": "2.2.1",
+		"@astrojs/lit": "3.0.2",
+		"@astrojs/react": "3.0.3",
+		"@astrojs/svelte": "4.0.3",
+		"@astrojs/tailwind": "5.0.2",
+		"@astrojs/vue": "3.0.1",
 		"@ava/typescript": "4.1.0",
-		"@rollup/plugin-commonjs": "25.0.3",
-		"@rollup/plugin-multi-entry": "6.0.0",
-		"@rollup/plugin-typescript": "11.1.2",
-		"@rollup/pluginutils": "5.0.2",
-		"@types/get-installed-path": "4.0.1",
-		"@types/node": "18.17.1",
-		"@types/ramda": "0.29.3",
-		"@types/react": "18.2.17",
-		"@types/react-dom": "18.2.7",
+		"@rollup/plugin-commonjs": "25.0.7",
+		"@rollup/plugin-multi-entry": "6.0.1",
+		"@rollup/plugin-typescript": "11.1.5",
+		"@rollup/pluginutils": "5.0.5",
+		"@types/get-installed-path": "4.0.2",
+		"@types/node": "18.18.5",
+		"@types/ramda": "0.29.6",
+		"@types/react": "18.2.28",
+		"@types/react-dom": "18.2.13",
 		"@typescript-eslint/eslint-plugin": "5.62.0",
 		"@typescript-eslint/parser": "5.62.0",
 		"@webcomponents/template-shadowroot": "0.2.1",
-		"astro": "2.9.3",
-		"autoprefixer": "10.4.14",
+		"astro": "3.3.1",
+		"autoprefixer": "10.4.16",
 		"ava": "5.3.1",
-		"eslint": "8.45.0",
-		"eslint-config-prettier": "8.8.0",
+		"eslint": "8.51.0",
+		"eslint-config-prettier": "9.0.0",
 		"eslint-plugin-functional": "4.4.1",
-		"glob": "10.3.3",
+		"glob": "10.3.10",
 		"husky": "8.0.3",
 		"npm-run-all": "4.1.5",
-		"postcss": "8.4.27",
+		"open-cli": "^7.2.0",
+		"postcss": "8.4.31",
 		"prettier": "2.8.8",
 		"prettier-plugin-astro": "0.10.0",
 		"prettier-plugin-svelte": "^2.9.0",
 		"prettier-plugin-tailwindcss": "^0.4.0",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
-		"rimraf": "5.0.1",
-		"rollup": "3.26.3",
-		"rollup-plugin-dts": "5.3.0",
-		"sass": "1.64.1",
-		"svelte": "4.1.1",
+		"rimraf": "5.0.5",
+		"rollup": "4.1.4",
+		"rollup-plugin-dts": "6.1.0",
+		"sass": "1.69.4",
+		"svelte": "4.2.1",
 		"tailwindcss": "3.3.3",
-		"typescript": "5.1.6",
+		"typedoc": "^0.25.0",
+		"typescript": "5.2.2",
 		"vue": "3.3.4"
 	},
 	"peerDependencies": {
-		"@astrojs/lit": "^1.0.1 || ^2.0.0",
-		"@astrojs/react": "^1.2.2 || ^2.0.0",
-		"@astrojs/svelte": "^1.0.2 || ^2.0.0 || ^3.0.0",
-		"@astrojs/tailwind": "^2.1.3 || ^3.0.0 || ^4.0.0",
-		"@astrojs/vue": "^1.2.2 || ^2.0.0",
-		"astro": "^1.0.0 || ^2.0.0",
-		"lit": "^2.3.1",
+		"@astrojs/lit": "^1.0.1 || ^2.0.0 || ^3.0.0",
+		"@astrojs/react": "^1.2.2 || ^2.0.0 || ^3.0.0",
+		"@astrojs/svelte": "^1.0.2 || ^2.0.0 || ^3.0.0 || ^4.0.0",
+		"@astrojs/tailwind": "^2.1.3 || ^3.0.0 || ^4.0.0 || ^5.0.0",
+		"@astrojs/vue": "^1.2.2 || ^2.0.0 || ^3.0.0",
+		"astro": "^1.0.0 || ^2.0.0 || ^3.0.0",
+		"lit": "^2.3.1 || ^3.0.0",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0",
 		"svelte": "^3.49.0 || ^4.0.0",
@@ -202,7 +216,10 @@
 				"/": "dist/"
 			},
 			"compile": false
-		}
+		},
+		"nodeArguments": [
+			"--experimental-specifier-resolution=node"
+		]
 	},
 	"repository": {
 		"type": "git",
@@ -212,5 +229,6 @@
 	"bugs": {
 		"url": "https://github.com/dev-protocol/clubs-core/issues"
 	},
-	"homepage": "https://github.com/dev-protocol/clubs-core#readme"
+	"homepage": "https://github.com/dev-protocol/clubs-core#readme",
+	"type": "module"
 }

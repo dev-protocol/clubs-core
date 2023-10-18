@@ -1,4 +1,4 @@
-const {clubs} = require('../dist/src/tailwind/index.cjs')
+const {clubs} = require('./dist/src/tailwind/index.js')
 
 module.exports = {
 	presets: [clubs],

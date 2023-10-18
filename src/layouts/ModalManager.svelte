@@ -48,12 +48,12 @@
 	aria-hidden="true"
 >
 	<div
-		class="bg-dp-blue-grey-300 grid w-full max-w-md gap-8 rounded-xl p-8 shadow-xl"
+		class="grid w-full max-w-md gap-8 rounded-xl bg-dp-blue-grey-300 p-8 shadow-xl"
 	>
 		{#if data.state === 'loading'}
 			<div
 				role="presentation"
-				class="border-native-blue-300 mx-auto h-16 w-16 animate-spin rounded-full border-l border-r border-t"
+				class="mx-auto h-16 w-16 animate-spin rounded-full border-l border-r border-t border-native-blue-300"
 			/>
 		{/if}
 		{#if data.state === 'alert'}
@@ -63,7 +63,7 @@
 				viewBox="0 0 24 24"
 				stroke-width="1.5"
 				stroke="currentColor"
-				class="text-plox-300 mx-auto h-16 w-16"
+				class="mx-auto h-16 w-16 text-plox-300"
 			>
 				<path
 					stroke-linecap="round"

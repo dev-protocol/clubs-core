@@ -78,6 +78,8 @@ export type ClubsApiPath = Readonly<{
 export type ClubsApiPaths = readonly ClubsApiPath[]
 
 export enum ClubsSlotName {
+	AdminBodyBeforeContents = 'admin:body:before-contents',
+	AdminBodyAfterContents = 'admin:body:after-contents',
 	AdminSidebarBeforeTitle = 'admin:sidebar:before-title',
 	AdminAsideAfterBuiltInButtons = 'admin:aside:after-built-in-buttons',
 	AdminModalCcontent = 'admin:modal:content',
@@ -88,6 +90,7 @@ export enum ClubsSlotName {
 	PageContentHomeAfterContent = 'page:content:home:after-content',
 	PageContentAnywhereBeforeContent = 'page:content:anywhere:before-content',
 	PageContentAnywhereAfterContent = 'page:content:anywhere:after-content',
+	ConnectButton = 'clubs:connect-button',
 }
 
 export type ClubsSlot = {
@@ -144,6 +147,45 @@ export type ClubsFunctionGetSlots = (
 	utils: ClubsSlotsFactoryUtils
 ) => Promise<ClubsFunctionGetSlotsResults>
 
+/**
+ * Fetch the internal API Paths for the plugin. Logic would be placed in the /api directory inside of your plugin.
+ *
+ * getApiPaths is an asynchronous function that generates API endpoints and returns an array of ClubsApiPath to define API endpoints and their behavior, etc.
+ *
+ * @param {options: readonly ClubsPluginOption[], config: ClubsConfiguration} options
+ * @param {ClubsConfiguration} config
+ * @param {ClubsFactoryUtils} utils
+ *
+ * @returns {Promise<ClubsApiPaths>} An array of objects containing 'paths', 'method', and 'handler' properties.
+ *
+ * @example
+ *
+ * ```ts
+	export const getApiPaths: ClubsFunctionGetApiPaths = async (
+		options,
+		{ propertyAddress, rpcUrl },
+		utils
+	) => {
+		const [{ get }, { post }] = await Promise.all([
+			import('./api/get'),
+			import('./api/post'),
+		])
+
+		return [
+			{
+				paths: ['tickets'],
+				method: 'GET' as 'GET',
+				handler: get({ tickets, propertyAddress }),
+			},
+			{
+				paths: ['tickets', 'create],
+				method: 'POST' as 'POST',
+				handler: post({ tickets, propertyAddress }),
+			},
+		]
+	}
+ * ```
+ */
 export type ClubsFunctionGetApiPaths = ClubsFunctionGetPagePaths<ClubsApiPaths>
 
 export type ClubsGetStaticPathsItem<P = Props> = {
@@ -363,3 +405,18 @@ export type ClubsEventsFinishConfiguration =
 export type ClubsEventsControlModal = CustomEvent<ClubsEventsDetailControlModal>
 
 export type ClubsAstroIntegrationOptions = undefined
+
+/**
+ * The profile of a user
+ */
+export type ClubsProfile = {
+	readonly avatar: string
+	readonly username: string
+}
+
+export type ClubsNavigationLink = {
+	readonly display: string
+	readonly path: string
+	readonly enable?: boolean
+	readonly kind?: string
+}

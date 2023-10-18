@@ -1,5 +1,5 @@
 import { decode } from './decode'
-import { ClubsConfiguration, ClubsFunctionConfigFetcher } from './types'
+import type { ClubsConfiguration, ClubsFunctionConfigFetcher } from './types'
 
 export const getClubsConfig: (
 	fetcher: ClubsFunctionConfigFetcher

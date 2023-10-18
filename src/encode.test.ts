@@ -1,6 +1,6 @@
 import test from 'ava'
 import { encode } from './encode'
-import { ClubsConfiguration } from './types'
+import type { ClubsConfiguration } from './types'
 
 test('Returns base64 encoded yaml string', (t) => {
 	const config: ClubsConfiguration = {
