@@ -1420,10 +1420,10 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.1.tgz#aa22750962f3bf0e79d753d3cc067f010c95f194"
   integrity sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==
 
-"@types/get-installed-path@4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@types/get-installed-path/-/get-installed-path-4.0.1.tgz#5257d75aaaf110803e0bd4527c17b1a04ae90100"
-  integrity sha512-E5837Qz+MZWdD7415qrjK/2srkx41zdInNCGzgLvFeqMeZepTZmIPGD/Dwz9UuPvHmfCh0XeokvLreOXksIY9g==
+"@types/get-installed-path@4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/get-installed-path/-/get-installed-path-4.0.2.tgz#af11fc9492eb0af0d06e5132d34d987fe15dce4c"
+  integrity sha512-RXNfqnwBDt3xZX/gJpuSc8ulGeoY3Y7LEb9oCydZPRzrzsHl7AJlVe4NKgxGQs7CMGCOHkG9vr1mBfAZoOGVTw==
 
 "@types/hast@^2.0.0":
   version "2.3.5"
