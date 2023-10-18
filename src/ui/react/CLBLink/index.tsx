@@ -2,7 +2,7 @@ import React from 'react';
 
 interface CLBLinkProps {
 	link: string;
-  children?: React.ReactNode|string;
+  	children?: React.ReactNode|string;
 }
 
 const CLBLink: React.FC<CLBLinkProps> = ({link, children}) => {
