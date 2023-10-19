@@ -206,7 +206,8 @@ export type ClubsGetStaticPathsItem<P extends Props = Props> = {
 export type ClubsGetStaticPathsResult<
 	P extends Props = Props,
 	SP extends Props = Props
-> = readonly ClubsGetStaticPathsItem<
+	/* eslint-disable functional/prefer-readonly-type */
+> = ClubsGetStaticPathsItem<
 	ClubsPropsPages<P, SP> & {
 		readonly component: AstroComponentFactory
 		readonly layout: AstroComponentFactory
@@ -216,7 +217,8 @@ export type ClubsGetStaticPathsResult<
 export type ClubsGetStaticPathsAdminResult<
 	P extends Props = Props,
 	SP extends Props = Props
-> = readonly ClubsGetStaticPathsItem<
+	/* eslint-disable functional/prefer-readonly-type */
+> = ClubsGetStaticPathsItem<
 	ClubsPropsPages<ClubsPropsAdminPages<P>, SP> & {
 		readonly component: AstroComponentFactory
 		readonly layout?: AstroComponentFactory
@@ -282,9 +284,33 @@ export type ClubsFunctionFactoryResult<T> = {
 	readonly getCurrentConfig: () => Promise<ClubsConfiguration>
 }
 
+export type ClubsFunctionApiFactoryResult = { readonly all: APIRoute }
+
+export type ClubsFunctionPageFactoryResult<
+	O extends ClubsFunctionFactoryOptions = ClubsFunctionFactoryOptions
+> = ClubsFunctionFactoryResult<
+	ClubsGetStaticPathsResult<
+		ClubsInferFactoryPropsType<
+			O extends { plugins: infer P } ? P : never,
+			'getPagePaths'
+		> & { readonly signals?: readonly (ClubsPluginSignal | string)[] }
+	>
+>
+
+export type ClubsFunctionAdminFactoryResult<
+	O extends ClubsFunctionFactoryOptions = ClubsFunctionFactoryOptions
+> = ClubsFunctionFactoryResult<
+	ClubsGetStaticPathsAdminResult<
+		ClubsInferFactoryPropsType<
+			O extends { plugins: infer P } ? P : never,
+			'getAdminPaths'
+		>
+	>
+>
+
 export type ClubsPlugins = readonly ClubsFunctionPlugin[]
 
-export type ClubsFunctionPageFactoryOptions = {
+export type ClubsFunctionFactoryOptions = {
 	readonly config: ClubsFunctionConfigFetcher
 	readonly plugins: ClubsPlugins
 }
@@ -293,28 +319,37 @@ export type ClubsFunctionOnSubmitConfiguration = (
 	encodedConfig: string
 ) => Promise<void | Error>
 
-type InferGetStaticPropsType<T> = T extends (
-	opts: GetStaticPathsOptions
-) => infer R | Promise<infer R>
-	? R extends ReadonlyArray<infer U>
-		? U extends {
-				readonly props: infer P
-		  }
-			? P
-			: never
-		: never
-	: never
-export type ClubsFunctionPageFactory<P extends Props = Props> = (
-	options: ClubsFunctionPageFactoryOptions
-) => ClubsFunctionFactoryResult<ClubsGetStaticPathsResult<P>>
+export type ClubsInferFactoryPropsType<
+	T extends ClubsPlugins,
+	F extends keyof ClubsFunctionPlugin
+> = T extends Array<infer P> | ReadonlyArray<infer P>
+	? P extends ClubsFunctionPlugin
+		? P[F] extends
+				| ClubsFunctionGetPagePaths
+				| ClubsFunctionGetAdminPaths
+				| undefined
+			? P[F] extends ((...args: any) => Promise<infer U>) | undefined
+				? U extends
+						| Array<{ props?: infer V }>
+						| ReadonlyArray<{ props?: infer V }>
+					? V
+					: Props
+				: Props
+			: Props
+		: Props
+	: Props
 
-export type ClubsFunctionAdminFactory<P extends Props = Props> = (
-	options: ClubsFunctionPageFactoryOptions
-) => ClubsFunctionFactoryResult<ClubsGetStaticPathsAdminResult<P>>
+export type ClubsFunctionPageFactory<
+	O extends ClubsFunctionFactoryOptions = ClubsFunctionFactoryOptions
+> = (options: O) => ClubsFunctionPageFactoryResult<O>
+
+export type ClubsFunctionAdminFactory<
+	O extends ClubsFunctionFactoryOptions = ClubsFunctionFactoryOptions
+> = (options: O) => ClubsFunctionAdminFactoryResult<O>
 
 export type ClubsFunctionApiFactory = (
-	options: ClubsFunctionPageFactoryOptions
-) => { readonly all: APIRoute }
+	options: ClubsFunctionFactoryOptions
+) => ClubsFunctionApiFactoryResult
 
 export type ClubsFunctionStandardPlugin = Readonly<{
 	readonly getPagePaths?: ClubsFunctionGetPagePaths

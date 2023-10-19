@@ -1,10 +1,15 @@
 ---
-import { pageFactory, encode, ClubsFunctionPageFactory } from '../../../src/'
+import {
+	pageFactory,
+	encode,
+	type ClubsFunctionPageFactoryResult,
+	type ClubsFunctionFactoryOptions,
+} from '../../../src/'
 import example from '../../../example/index'
 import theme from '../../../example/theme'
 import type { InferGetStaticPropsType } from 'astro'
 
-export const { getStaticPaths } = pageFactory({
+const options = {
 	config: () =>
 		encode({
 			name: 'Debug',
@@ -22,7 +27,11 @@ export const { getStaticPaths } = pageFactory({
 			],
 		}),
 	plugins: [theme, example],
-}) satisfies ReturnType<ClubsFunctionPageFactory>
+} satisfies ClubsFunctionFactoryOptions
+
+export const { getStaticPaths } = pageFactory(
+	options
+) as ClubsFunctionPageFactoryResult<typeof options>
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>
 
