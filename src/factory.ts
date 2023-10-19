@@ -20,10 +20,12 @@ import type {
 	ClubsFunctionGetPagePaths,
 	ClubsFunctionGetAdminPaths,
 	ClubsFunctionApiFactory,
+	ClubsGetStaticPathsAdminResult,
 } from './types'
 import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
 import type { APIRoute, Props } from 'astro'
+import { AstroComponentFactory } from 'astro/dist/runtime/server'
 
 type Plugins<P extends ClubsFunctionPlugin = ClubsFunctionPlugin> =
 	readonly ClubsPluginDetails<P>[]
@@ -169,8 +171,11 @@ const _slotsFromPlugins =
 const _pathsToPage = (paths: readonly (string | undefined)[]) =>
 	paths.join('/') || undefined
 
-const _compose = <P extends Props>(
-	pluginResults: readonly ClubsStaticPathWithDetails[]
+const _compose = <
+	P extends Props,
+	A extends ClubsStaticPathWithDetails = ClubsStaticPathWithDetails
+>(
+	pluginResults: readonly A[]
 ) =>
 	pluginResults.map((res) => ({
 		params: {
@@ -217,7 +222,7 @@ const _staticPagePathsFactory: (
 		)
 		const staticPaths = _compose<ClubsPropsPages>(
 			slotsInjected
-		) as ClubsGetStaticPathsResult<ClubsPropsPages>
+		) as ClubsGetStaticPathsResult
 
 		return staticPaths
 	}
@@ -225,10 +230,10 @@ const _staticPagePathsFactory: (
 const _staticAdminPathsFactory: (
 	configFetcher: ClubsFunctionConfigFetcher,
 	pluginsMap: ClubsPlugins
-) => () => Promise<ClubsGetStaticPathsResult<ClubsPropsAdminPages>> =
+) => () => Promise<ClubsGetStaticPathsAdminResult> =
 	(configFetcher, pluginsMap) =>
 	// eslint-disable-next-line functional/functional-parameters
-	async (): Promise<ClubsGetStaticPathsResult<ClubsPropsAdminPages>> => {
+	async (): Promise<ClubsGetStaticPathsAdminResult> => {
 		const [config, encodedClubsConfiguration] = await getClubsConfig(
 			configFetcher
 		)
@@ -287,9 +292,7 @@ const _staticAdminPathsFactory: (
 			}))
 		)
 
-		const staticPaths = _compose<ClubsPropsAdminPages>(
-			slotsInjected
-		) as ClubsGetStaticPathsResult<ClubsPropsAdminPages>
+		const staticPaths = _compose<ClubsPropsAdminPages>(slotsInjected)
 
 		return staticPaths
 	}
