@@ -25,7 +25,6 @@ import type {
 import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
 import type { APIRoute, Props } from 'astro'
-import { AstroComponentFactory } from 'astro/dist/runtime/server'
 
 type Plugins<P extends ClubsFunctionPlugin = ClubsFunctionPlugin> =
 	readonly ClubsPluginDetails<P>[]

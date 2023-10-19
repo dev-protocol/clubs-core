@@ -9,7 +9,12 @@ import example from '../../../example/index'
 import theme from '../../../example/theme'
 import type { InferGetStaticPropsType } from 'astro'
 
-const options = {
+type Options = {
+	config: () => string
+	plugins: [typeof theme, typeof example]
+}
+
+export const { getStaticPaths } = pageFactory({
 	config: () =>
 		encode({
 			name: 'Debug',
@@ -27,11 +32,7 @@ const options = {
 			],
 		}),
 	plugins: [theme, example],
-} satisfies ClubsFunctionFactoryOptions
-
-export const { getStaticPaths } = pageFactory(
-	options
-) as ClubsFunctionPageFactoryResult<typeof options>
+} satisfies Options) as ClubsFunctionPageFactoryResult<Options>
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>
 
