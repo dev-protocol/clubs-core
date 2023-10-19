@@ -280,7 +280,7 @@ export type ClubsThemePluginMeta = ClubsPluginMeta & {
 }
 
 export type ClubsFunctionFactoryResult<T> = {
-	readonly getStaticPaths: (opts: GetStaticPathsOptions) => Promise<T>
+	readonly getStaticPaths: (opts?: GetStaticPathsOptions) => Promise<T>
 	readonly getCurrentConfig: () => Promise<ClubsConfiguration>
 }
 
