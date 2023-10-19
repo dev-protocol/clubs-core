@@ -1,6 +1,6 @@
 {
 	"name": "@devprotocol/clubs-core",
-	"version": "1.9.1",
+	"version": "2.0.1",
 	"description": "Core library for Clubs",
 	"main": "dist/index.mjs",
 	"exports": {
@@ -34,74 +34,25 @@
 			"require": "./dist/src/connection/index.cjs",
 			"types": "./dist/src/connection/index.d.ts"
 		},
-		"./authenticate": {
-			"import": "./dist/src/authenticate.mjs",
-			"require": "./dist/src/authenticate.cjs",
-			"types": "./dist/src/authenticate.d.ts"
-		},
-		"./decode": {
-			"import": "./dist/src/decode.mjs",
-			"require": "./dist/src/decode.cjs",
-			"types": "./dist/src/decode.d.ts"
-		},
-		"./encode": {
-			"import": "./dist/src/encode.mjs",
-			"require": "./dist/src/encode.cjs",
-			"types": "./dist/src/encode.d.ts"
-		},
-		"./bytes32Hex": {
-			"import": "./dist/src/bytes32Hex.mjs",
-			"require": "./dist/src/bytes32Hex.cjs",
-			"types": "./dist/src/bytes32Hex.d.ts"
-		},
-		"./events": {
-			"import": "./dist/src/events.mjs",
-			"require": "./dist/src/events.cjs",
-			"types": "./dist/src/events.d.ts"
-		},
-		"./factory": {
-			"import": "./dist/src/factory.mjs",
-			"require": "./dist/src/factory.cjs",
-			"types": "./dist/src/factory.d.ts"
-		},
 		"./layouts": {
 			"import": "./dist/src/layouts/index.mjs",
 			"require": "./dist/src/layouts/index.cjs",
 			"types": "./layouts.d.ts"
 		},
-		"./profile": {
-			"import": "./dist/src/profile.mjs",
-			"require": "./dist/src/profile.cjs",
-			"types": "./dist/src/profile.d.ts"
-		},
 		"./styles": {
 			"import": "./dist/src/styles/index.mjs",
 			"require": "./dist/src/styles/index.cjs",
 			"types": "./styles.d.ts"
-		},
-		"./tailwind": {
-			"import": "./dist/src/tailwind/index.mjs",
-			"require": "./dist/src/tailwind/index.cjs",
-			"types": "./dist/src/tailwind/index.d.ts"
-		},
-		"./admin": "./src/layouts/Admin.astro",
-		"./aside": "./src/layouts/Aside.vue"
+		}
 	},
 	"types": "./dist/clubs-core.d.ts",
 	"files": [
 		"dist/**/*.d.ts",
 		"dist/**/*.mjs",
 		"dist/**/*.cjs",
-		"authenticate.d.ts",
 		"connection.d.ts",
-		"decode.d.ts",
-		"encode.d.ts",
-		"bytes32Hex.d.ts",
-		"events.d.ts",
-		"factory.d.ts",
 		"layouts.d.ts",
 		"styles.d.ts",
-		"tailwind.d.ts",
 		"!**/*.test.*",
 		"src"
 	],

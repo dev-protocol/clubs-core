@@ -5,7 +5,7 @@
 	export let type: string | null
 	export let isDisabled: boolean = false
 	export let onClick: () => void
-	export let nativeType: "button" | "submit" | "reset" | null | undefined
+	export let nativeType: 'button' | 'submit' | 'reset' | null | undefined
 
 	function _assertType(type: string): string {
 		return handleVariants(type)
