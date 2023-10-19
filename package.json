@@ -43,9 +43,7 @@
 			"import": "./dist/src/styles/index.mjs",
 			"require": "./dist/src/styles/index.cjs",
 			"types": "./styles.d.ts"
-		},
-		"./admin": "./src/layouts/Admin.astro",
-		"./aside": "./src/layouts/Aside.vue"
+		}
 	},
 	"types": "./dist/clubs-core.d.ts",
 	"files": [
