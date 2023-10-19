@@ -10,21 +10,20 @@ import {
 	ClubsSlotName,
 } from '../src'
 
-export const getPagePaths: ClubsFunctionGetPagePaths = async () => []
+export const getPagePaths = (async () => [
+	{ paths: ['theme'], component: Admin, props: { a: 1 } },
+]) satisfies ClubsFunctionGetPagePaths
 
-export const getAdminPaths: ClubsFunctionGetAdminPaths = async () => [
-	{ paths: ['theme'], component: Admin },
-]
+export const getAdminPaths = (async () => [
+	{ paths: ['theme'], component: Admin, props: { a: 1 } },
+]) satisfies ClubsFunctionGetAdminPaths
 
-export const getLayout: ClubsFunctionGetLayout = async () => ({
+export const getLayout = (async () => ({
 	layout: Layout,
-})
+	props: { a: 1 },
+})) satisfies ClubsFunctionGetLayout
 
-export const getSlots: ClubsFunctionGetSlots = async (
-	options,
-	_,
-	{ paths }
-) => {
+export const getSlots = (async (options, _, { paths }) => {
 	return [
 		{
 			slot: ClubsSlotName.AdminModalCcontent,
@@ -32,7 +31,7 @@ export const getSlots: ClubsFunctionGetSlots = async (
 			props: { x: 456 },
 		},
 	]
-}
+}) satisfies ClubsFunctionGetSlots
 
 export const meta = {
 	id: 'theme',

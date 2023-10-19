@@ -10,7 +10,7 @@ import {
 	ClubsFunctionGetApiPaths,
 } from '../src'
 
-export const getPagePaths: ClubsFunctionGetPagePaths = async () => [
+export const getPagePaths = (async () => [
 	{ paths: [], component: Example },
 	{
 		paths: ['example'],
@@ -21,17 +21,17 @@ export const getPagePaths: ClubsFunctionGetPagePaths = async () => [
 			someMethod: (i: unknown) => i,
 		},
 	},
-]
+]) satisfies ClubsFunctionGetPagePaths
 
-export const getAdminPaths: ClubsFunctionGetAdminPaths = async (options) => [
+export const getAdminPaths = (async (options) => [
 	{
 		paths: ['example'],
 		component: Admin,
 		props: { options },
 	},
-]
+]) satisfies ClubsFunctionGetAdminPaths
 
-export const getSlots: ClubsFunctionGetSlots = async (options) => [
+export const getSlots = (async (options) => [
 	{
 		slot: ClubsSlotName.AdminModalCcontent,
 		component: Modal,
@@ -43,9 +43,9 @@ export const getSlots: ClubsFunctionGetSlots = async (options) => [
 		component: Modal,
 		props: { x: 123 },
 	},
-]
+]) satisfies ClubsFunctionGetSlots
 
-export const getApiPaths: ClubsFunctionGetApiPaths = async (options) => [
+export const getApiPaths = (async (options) => [
 	{
 		paths: [],
 		method: 'GET',
@@ -53,7 +53,7 @@ export const getApiPaths: ClubsFunctionGetApiPaths = async (options) => [
 			body: JSON.stringify({ options, body: request.body }),
 		}),
 	},
-]
+]) satisfies ClubsFunctionGetApiPaths
 
 export const meta = {
 	id: 'example',

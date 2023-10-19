@@ -1,4 +1,4 @@
-import type { APIRoute, Props } from 'astro'
+import type { APIRoute, GetStaticPathsOptions, Props } from 'astro'
 import type { AstroComponentFactory } from 'astro/dist/runtime/server'
 
 export type ClubsGeneralUnit =
@@ -50,12 +50,12 @@ export type ClubsConfiguration = Readonly<{
 	readonly plugins: readonly ClubsPlugin[]
 }>
 
-export type ClubsBaseStaticPath<P = Props> = Readonly<{
+export type ClubsBaseStaticPath<P extends Props = Props> = Readonly<{
 	readonly layout?: AstroComponentFactory
 	readonly props?: P
 }>
 
-export type ClubsStaticPath<P = Props> = ClubsBaseStaticPath<P> &
+export type ClubsStaticPath<P extends Props = Props> = ClubsBaseStaticPath<P> &
 	Readonly<{
 		readonly paths: readonly (undefined | string)[]
 		readonly component: AstroComponentFactory
@@ -93,18 +93,20 @@ export enum ClubsSlotName {
 	ConnectButton = 'clubs:connect-button',
 }
 
-export type ClubsSlot = {
+export type ClubsSlot<P extends Props = Props> = {
 	readonly slot: ClubsSlotName | string
 	readonly component: AstroComponentFactory
 	readonly order?: number
-	readonly props?: Props
+	readonly props?: P
 }
 
-export type ClubsSlots = readonly ClubsSlot[]
+export type ClubsSlots<P extends Props = Props> = readonly ClubsSlot<P>[]
 
-export type ClubsFunctionGetSlotsResults = ClubsSlots
+export type ClubsFunctionGetSlotsResults<P extends Props = Props> =
+	ClubsSlots<P>
 
-export type ClubsStaticPaths<P = Props> = readonly ClubsStaticPath<P>[]
+export type ClubsStaticPaths<P extends Props = Props> =
+	readonly ClubsStaticPath<P>[]
 
 export type ClubsFunctionGetPluginConfigById = (
 	id: string
@@ -119,33 +121,36 @@ export type ClubsSlotsFactoryUtils = ClubsFactoryUtils & {
 	readonly factory: 'page' | 'admin'
 }
 
-export type ClubsFunctionGetPagePaths<
-	P = ClubsStaticPaths<
-		Props & {
-			readonly signals?: readonly (ClubsPluginSignal | string)[]
-		}
-	>
-> = (
+export type ClubsFunctionGetPagePaths<P extends Props = Props> = (
 	options: readonly ClubsPluginOption[],
 	config: ClubsConfiguration,
 	utils: ClubsFactoryUtils
-) => Promise<P>
-
-export type ClubsFunctionGetAdminPaths = ClubsFunctionGetPagePaths<
-	ReadonlyArray<ClubsStaticPath>
+) => Promise<
+	ClubsStaticPaths<
+		P & {
+			readonly signals?: readonly (ClubsPluginSignal | string)[]
+		}
+	>
 >
 
-export type ClubsFunctionGetLayout = ClubsFunctionGetPagePaths<
-	ClubsBaseStaticPath & {
+export type ClubsFunctionGetAdminPaths<P extends Props = Props> =
+	ClubsFunctionGetPagePaths<P>
+
+export type ClubsFunctionGetLayout<P extends Props = Props> = (
+	options: readonly ClubsPluginOption[],
+	config: ClubsConfiguration,
+	utils: ClubsFactoryUtils
+) => Promise<
+	ClubsBaseStaticPath<P> & {
 		readonly layout: AstroComponentFactory
 	}
 >
 
-export type ClubsFunctionGetSlots = (
+export type ClubsFunctionGetSlots<P extends Props = Props> = (
 	options: readonly ClubsPluginOption[],
 	config: ClubsConfiguration,
 	utils: ClubsSlotsFactoryUtils
-) => Promise<ClubsFunctionGetSlotsResults>
+) => Promise<ClubsFunctionGetSlotsResults<P>>
 
 /**
  * Fetch the internal API Paths for the plugin. Logic would be placed in the /api directory inside of your plugin.
@@ -186,18 +191,37 @@ export type ClubsFunctionGetSlots = (
 	}
  * ```
  */
-export type ClubsFunctionGetApiPaths = ClubsFunctionGetPagePaths<ClubsApiPaths>
+export type ClubsFunctionGetApiPaths = (
+	options: readonly ClubsPluginOption[],
+	config: ClubsConfiguration,
+	utils: ClubsFactoryUtils
+) => Promise<ClubsApiPaths>
 
-export type ClubsGetStaticPathsItem<P = Props> = {
+export type ClubsGetStaticPathsItem<P extends Props = Props> = {
 	readonly params: { readonly page: undefined | string }
-	readonly props: P & {
+} & {
+	readonly props: ClubsPropsPages<P>
+}
+
+export type ClubsGetStaticPathsResult<
+	P extends Props = Props,
+	SP extends Props = Props
+> = readonly ClubsGetStaticPathsItem<
+	ClubsPropsPages<P, SP> & {
 		readonly component: AstroComponentFactory
 		readonly layout: AstroComponentFactory
 	}
-}
+>[]
 
-export type ClubsGetStaticPathsResult<P = Props> =
-	readonly ClubsGetStaticPathsItem<P>[]
+export type ClubsGetStaticPathsAdminResult<
+	P extends Props = Props,
+	SP extends Props = Props
+> = readonly ClubsGetStaticPathsItem<
+	ClubsPropsPages<ClubsPropsAdminPages<P>, SP> & {
+		readonly component: AstroComponentFactory
+		readonly layout?: AstroComponentFactory
+	}
+>[]
 
 export enum ClubsPluginCategory {
 	Monetization = 'monetization',
@@ -253,8 +277,8 @@ export type ClubsThemePluginMeta = ClubsPluginMeta & {
 	}
 }
 
-export type ClubsFunctionFactoryResult<P = Props> = {
-	readonly getStaticPaths: () => Promise<ClubsGetStaticPathsResult<P>>
+export type ClubsFunctionFactoryResult<T> = {
+	readonly getStaticPaths: (opts: GetStaticPathsOptions) => Promise<T>
 	readonly getCurrentConfig: () => Promise<ClubsConfiguration>
 }
 
@@ -269,12 +293,24 @@ export type ClubsFunctionOnSubmitConfiguration = (
 	encodedConfig: string
 ) => Promise<void | Error>
 
-export type ClubsFunctionPageFactory<P = Props> = (
+type InferGetStaticPropsType<T> = T extends (
+	opts: GetStaticPathsOptions
+) => infer R | Promise<infer R>
+	? R extends ReadonlyArray<infer U>
+		? U extends {
+				readonly props: infer P
+		  }
+			? P
+			: never
+		: never
+	: never
+export type ClubsFunctionPageFactory<P extends Props = Props> = (
 	options: ClubsFunctionPageFactoryOptions
-) => ClubsFunctionFactoryResult<P>
+) => ClubsFunctionFactoryResult<ClubsGetStaticPathsResult<P>>
 
-export type ClubsFunctionAdminFactory =
-	ClubsFunctionPageFactory<ClubsPropsAdminPages>
+export type ClubsFunctionAdminFactory<P extends Props = Props> = (
+	options: ClubsFunctionPageFactoryOptions
+) => ClubsFunctionFactoryResult<ClubsGetStaticPathsAdminResult<P>>
 
 export type ClubsFunctionApiFactory = (
 	options: ClubsFunctionPageFactoryOptions
@@ -322,13 +358,16 @@ export type ClubsPropsClubsPlugin = Omit<
 	readonly pathname: string
 }
 
-export type ClubsPropsPages = Props & {
+export type ClubsPropsPages<
+	P extends Props = Props,
+	SP extends Props = Props
+> = P & {
 	readonly clubs: {
-		readonly slots: ClubsFunctionGetSlotsResults
+		readonly slots: ClubsFunctionGetSlotsResults<SP>
 	}
 }
 
-export type ClubsPropsAdminPages = Props & {
+export type ClubsPropsAdminPages<P extends Props = Props> = P & {
 	readonly clubs: {
 		readonly currentPluginIndex: number
 		readonly encodedClubsConfiguration: string
