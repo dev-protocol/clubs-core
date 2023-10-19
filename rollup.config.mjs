@@ -5,17 +5,9 @@ import { dirname, relative, resolve } from 'path'
 import { cwd } from 'process'
 
 const majorCoreAPIs = [
-	'dist/src/authenticate.js',
-	'dist/src/decode.js',
-	'dist/src/encode.js',
-	'dist/src/events.js',
-	'dist/src/factory.js',
-	'dist/src/profile.js',
 	'dist/src/layouts/index.js',
 	'dist/src/connection/index.js',
 	'dist/src/styles/index.js',
-	'dist/src/tailwind/index.js',
-	'dist/src/bytes32Hex.js',
 ]
 
 const useSrc = ({ out, ext } = {}) => ({
