@@ -332,15 +332,7 @@ export type ClubsInferFactoryPropsType<
 				? U extends
 						| Array<{ props?: infer V }>
 						| ReadonlyArray<{ props?: infer V }>
-					? P['getSlots'] extends
-							| ((...args: any) => Promise<infer S>)
-							| undefined
-						? S extends
-								| Array<{ props?: infer C }>
-								| ReadonlyArray<{ props?: infer C }>
-							? V & C
-							: Props
-						: Props
+					? V
 					: Props
 				: Props
 			: Props
