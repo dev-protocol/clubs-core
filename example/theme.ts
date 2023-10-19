@@ -20,7 +20,7 @@ export const getAdminPaths = (async () => [
 
 export const getLayout = (async () => ({
 	layout: Layout,
-	props: { a: 1 },
+	props: { tProps: 1 },
 })) satisfies ClubsFunctionGetLayout
 
 export const getSlots = (async (options, _, { paths }) => {

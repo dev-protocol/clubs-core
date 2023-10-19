@@ -58,7 +58,9 @@ const pluginsMap = [
 	{
 		getPagePaths: async () => [],
 		getAdminPaths: async () => [],
-		getLayout: async () => null as unknown as AstroComponentFactory,
+		getLayout: async () => ({
+			layout: null as unknown as AstroComponentFactory,
+		}),
 		meta: {
 			id: 'theme',
 			displayName: 'Home',

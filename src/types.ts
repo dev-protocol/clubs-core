@@ -141,7 +141,7 @@ export type ClubsFunctionGetLayout<P extends Props = Props> = (
 	config: ClubsConfiguration,
 	utils: ClubsFactoryUtils
 ) => Promise<
-	ClubsBaseStaticPath<P> & {
+	Omit<ClubsBaseStaticPath<P>, 'layout'> & {
 		readonly layout: AstroComponentFactory
 	}
 >
@@ -293,7 +293,15 @@ export type ClubsFunctionPageFactoryResult<
 		ClubsInferFactoryPropsType<
 			O extends { plugins: infer P } ? P : never,
 			'getPagePaths'
-		> & { readonly signals?: readonly (ClubsPluginSignal | string)[] }
+		> &
+			ClubsInferFactoryPropsType<
+				O extends { plugins: infer P } ? P : never,
+				'getLayout'
+			> & { readonly signals?: readonly (ClubsPluginSignal | string)[] },
+		ClubsInferFactoryPropsType<
+			O extends { plugins: infer P } ? P : never,
+			'getSlots'
+		>
 	>
 >
 
@@ -304,7 +312,11 @@ export type ClubsFunctionAdminFactoryResult<
 		ClubsInferFactoryPropsType<
 			O extends { plugins: infer P } ? P : never,
 			'getAdminPaths'
-		>
+		> &
+			ClubsInferFactoryPropsType<
+				O extends { plugins: infer P } ? P : never,
+				'getLayout'
+			>
 	>
 >
 
@@ -321,17 +333,20 @@ export type ClubsFunctionOnSubmitConfiguration = (
 
 export type ClubsInferFactoryPropsType<
 	T extends ClubsPlugins,
-	F extends keyof ClubsFunctionPlugin
+	F extends keyof Omit<ClubsFunctionPlugin, 'getApiPaths' | 'meta'>
 > = T extends Array<infer P> | ReadonlyArray<infer P>
 	? P extends ClubsFunctionPlugin
 		? P[F] extends
 				| ClubsFunctionGetPagePaths
 				| ClubsFunctionGetAdminPaths
+				| ClubsFunctionGetSlots
+				| ClubsFunctionGetLayout
 				| undefined
 			? P[F] extends ((...args: any) => Promise<infer U>) | undefined
 				? U extends
 						| Array<{ props?: infer V }>
 						| ReadonlyArray<{ props?: infer V }>
+						| { props?: infer V }
 					? V
 					: Props
 				: Props
@@ -354,6 +369,7 @@ export type ClubsFunctionApiFactory = (
 export type ClubsFunctionStandardPlugin = Readonly<{
 	readonly getPagePaths?: ClubsFunctionGetPagePaths
 	readonly getAdminPaths?: ClubsFunctionGetAdminPaths
+	readonly getLayout?: ClubsFunctionGetLayout
 	readonly getSlots?: ClubsFunctionGetSlots
 	readonly getApiPaths?: ClubsFunctionGetApiPaths
 	readonly meta: ClubsPluginMeta
