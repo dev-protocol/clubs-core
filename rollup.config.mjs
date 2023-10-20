@@ -15,7 +15,10 @@ export const useSrc = ({ out, ext } = {}) => ({
 	resolveId(source, importer) {
 		if (ext.some((e) => source.endsWith(e))) {
 			const here = cwd()
-			const from = out ?? dirname(importer)
+			const from =
+				typeof out === 'string'
+					? out
+					: dirname(typeof out === 'function' ? out(importer) : importer)
 			const originalImporter = importer.replace(`${here}/dist`, here)
 			const originalImporterDir = dirname(originalImporter)
 			const original = resolve(originalImporterDir, source)

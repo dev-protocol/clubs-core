@@ -3,10 +3,10 @@ import commonjs from '@rollup/plugin-commonjs'
 import { useSrc } from './rollup.config.mjs'
 import tailwind from './rollup.plugin.tw.mjs'
 import { globSync } from 'glob'
-import { cwd } from 'process'
 // import { litScss } from 'rollup-plugin-scss-lit'
 
 const files = globSync('dist/src/ui/*/*.js')
+const dfiles = globSync('dist/src/ui/*/*.d.ts')
 
 const ext = ['.astro', '.vue', '.svelte', '.css', '.scss']
 
@@ -38,7 +38,7 @@ export const createOptions = (file) => ({
 
 export default [
 	...files.map(createOptions),
-	...files.map((input) => ({
+	...dfiles.map((input) => ({
 		input: input.replace('.js', '.d.ts'),
 		output: [
 			{
@@ -49,7 +49,7 @@ export default [
 		plugins: [
 			dts(),
 			useSrc({
-				out: cwd(),
+				out: (importer) => importer.replace('dist/src/', ''),
 				ext,
 			}),
 		],
