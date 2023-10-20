@@ -53,11 +53,10 @@ export default {
 	},
 	computed: {
 		isLabelVisible(): boolean {
-			return (
-				this.$slots.default &&
+			return this.$slots.default &&
 				this.$slots.default().findIndex((o) => o.type !== Comment) !== -1
-				? true : false
-			)
+				? true
+				: false
 		},
 		isIconVisible() {
 			return (
