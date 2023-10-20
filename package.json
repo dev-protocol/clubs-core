@@ -1,6 +1,6 @@
 {
 	"name": "@devprotocol/clubs-core",
-	"version": "1.9.1",
+	"version": "2.1.1",
 	"description": "Core library for Clubs",
 	"main": "dist/index.mjs",
 	"exports": {
@@ -29,58 +29,16 @@
 			"require": "./dist/src/connection/index.cjs",
 			"types": "./dist/src/connection/index.d.ts"
 		},
-		"./authenticate": {
-			"import": "./dist/src/authenticate.mjs",
-			"require": "./dist/src/authenticate.cjs",
-			"types": "./dist/src/authenticate.d.ts"
-		},
-		"./decode": {
-			"import": "./dist/src/decode.mjs",
-			"require": "./dist/src/decode.cjs",
-			"types": "./dist/src/decode.d.ts"
-		},
-		"./encode": {
-			"import": "./dist/src/encode.mjs",
-			"require": "./dist/src/encode.cjs",
-			"types": "./dist/src/encode.d.ts"
-		},
-		"./bytes32Hex": {
-			"import": "./dist/src/bytes32Hex.mjs",
-			"require": "./dist/src/bytes32Hex.cjs",
-			"types": "./dist/src/bytes32Hex.d.ts"
-		},
-		"./events": {
-			"import": "./dist/src/events.mjs",
-			"require": "./dist/src/events.cjs",
-			"types": "./dist/src/events.d.ts"
-		},
-		"./factory": {
-			"import": "./dist/src/factory.mjs",
-			"require": "./dist/src/factory.cjs",
-			"types": "./dist/src/factory.d.ts"
-		},
 		"./layouts": {
 			"import": "./dist/src/layouts/index.mjs",
 			"require": "./dist/src/layouts/index.cjs",
 			"types": "./layouts.d.ts"
 		},
-		"./profile": {
-			"import": "./dist/src/profile.mjs",
-			"require": "./dist/src/profile.cjs",
-			"types": "./dist/src/profile.d.ts"
-		},
 		"./styles": {
 			"import": "./dist/src/styles/index.mjs",
 			"require": "./dist/src/styles/index.cjs",
 			"types": "./styles.d.ts"
-		},
-		"./tailwind": {
-			"import": "./dist/src/tailwind/index.mjs",
-			"require": "./dist/src/tailwind/index.cjs",
-			"types": "./dist/src/tailwind/index.d.ts"
-		},
-		"./admin": "./src/layouts/Admin.astro",
-		"./aside": "./src/layouts/Aside.vue"
+		}
 	},
 	"types": "./dist/clubs-core.d.ts",
 	"files": [
@@ -140,14 +98,14 @@
 		"@rollup/plugin-typescript": "11.1.5",
 		"@rollup/pluginutils": "5.0.5",
 		"@types/get-installed-path": "4.0.2",
-		"@types/node": "18.18.5",
-		"@types/ramda": "0.29.6",
-		"@types/react": "18.2.28",
-		"@types/react-dom": "18.2.13",
+		"@types/node": "18.18.6",
+		"@types/ramda": "0.29.7",
+		"@types/react": "18.2.30",
+		"@types/react-dom": "18.2.14",
 		"@typescript-eslint/eslint-plugin": "5.62.0",
 		"@typescript-eslint/parser": "5.62.0",
 		"@webcomponents/template-shadowroot": "0.2.1",
-		"astro": "3.3.1",
+		"astro": "3.3.2",
 		"autoprefixer": "10.4.16",
 		"ava": "5.3.1",
 		"del-cli": "^5.1.0",
@@ -168,7 +126,7 @@
 		"rollup": "4.1.4",
 		"rollup-plugin-dts": "6.1.0",
 		"sass": "1.69.4",
-		"svelte": "4.2.1",
+		"svelte": "4.2.2",
 		"tailwindcss": "3.3.3",
 		"typedoc": "^0.25.0",
 		"typescript": "5.2.2",

@@ -1,7 +1,18 @@
 ---
-import { pageFactory, encode } from '../../../src/'
+import {
+	pageFactory,
+	encode,
+	type ClubsFunctionPageFactoryResult,
+	type ClubsFunctionFactoryOptions,
+} from '../../../src/'
 import example from '../../../example/index'
 import theme from '../../../example/theme'
+import type { InferGetStaticPropsType } from 'astro'
+
+type Options = {
+	config: () => string
+	plugins: [typeof theme, typeof example]
+}
 
 export const { getStaticPaths } = pageFactory({
 	config: () =>
@@ -21,7 +32,9 @@ export const { getStaticPaths } = pageFactory({
 			],
 		}),
 	plugins: [theme, example],
-})
+} satisfies Options) as ClubsFunctionPageFactoryResult<Options>
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>
 
 const Layout = Astro.props.layout
 const Content = Astro.props.component
