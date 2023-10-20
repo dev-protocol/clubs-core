@@ -1,9 +1,11 @@
 <template>
 	<button
 		v-if="!link"
-		v-bind:class="`hs-button${type && ' ' + assertType(type)}`"
+		v-bind:class="`hs-button${type && ' ' + assertType(type)} ${
+			loading && 'w-full animate-pulse bg-gray-500/60'
+		}`"
 		role="button"
-		:disabled="isDisabled"
+		:disabled="isDisabled || loading"
 	>
 		<i v-if="isIconVisible" class="hs-button__icon"
 			><slot name="icon"></slot
@@ -13,9 +15,11 @@
 
 	<a
 		v-else
-		v-bind:class="`hs-button${type && ' ' + assertType(type)}`"
+		v-bind:class="`hs-button${type && ' ' + assertType(type)} ${
+			loading && 'w-full animate-pulse bg-gray-500/60'
+		}`"
 		role="link"
-		:[href]="link"
+		:href="link"
 		:target="assertTarget(link)"
 	>
 		<i v-if="isIconVisible" class="hs-button__icon"
@@ -25,10 +29,10 @@
 	</a>
 </template>
 
-<script>
+<script lang="ts">
 import { Comment } from 'vue'
 export default {
-	name: 'HSButton',
+	name: 'CLBButton',
 	props: {
 		link: {
 			type: String,
@@ -38,16 +42,21 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		loading: {
+			type: Boolean,
+			default: false,
+		},
 		type: {
 			type: String,
 			default: '',
 		},
 	},
 	computed: {
-		isLabelVisible() {
+		isLabelVisible(): boolean {
 			return (
 				this.$slots.default &&
 				this.$slots.default().findIndex((o) => o.type !== Comment) !== -1
+				? true : false
 			)
 		},
 		isIconVisible() {
@@ -61,15 +70,15 @@ export default {
 		},
 	},
 	methods: {
-		assertType(type) {
-			const finalTypes = []
+		assertType(type: string) {
+			const finalTypes: string[] = []
 			type.split(' ').forEach((type) => {
 				finalTypes.push('is-' + type)
 			})
 			return finalTypes.join(' ')
 		},
-		assertTarget(link) {
-			const _isExternalLink = (link) =>
+		assertTarget(link: string) {
+			const _isExternalLink = (link: string) =>
 				!!(link.startsWith('http://') || link.startsWith('https://'))
 			return _isExternalLink(link) ? '_blank' : '_self'
 		},

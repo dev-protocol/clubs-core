@@ -9,7 +9,7 @@
 		}`"
 		class="w-full"
 	>
-		<HSButton
+		<CLBButton
 			type="filled large"
 			v-if="
 				truncateWalletAddress &&
@@ -18,8 +18,8 @@
 			"
 		>
 			{{ truncateWalletAddress }}
-		</HSButton>
-		<HSButton
+		</CLBButton>
+		<CLBButton
 			type="filled large"
 			v-else-if="
 				truncateWalletAddress &&
@@ -28,15 +28,15 @@
 			"
 		>
 			Unsupported Network
-		</HSButton>
-		<HSButton
+		</CLBButton>
+		<CLBButton
 			type="filled large"
 			v-else
 			v-on:click="connect"
 			:loading="connection === undefined || modalProvider === undefined"
 		>
 			Connect Wallet
-		</HSButton>
+		</CLBButton>
 		<ul
 			class="hs-wallet__details"
 			v-if="
@@ -63,7 +63,7 @@ import {
 import { clientsDev } from '@devprotocol/dev-kit/agent'
 import { whenDefined } from '@devprotocol/util-ts'
 import { onMountClient } from '../events'
-import HSButton from './Primitives/Hashi/HSButton.vue'
+import { CLBButton } from '../ui/vue'
 import { combineLatest } from 'rxjs'
 
 type Data = {
@@ -77,7 +77,7 @@ type Data = {
 export default defineComponent({
 	name: 'ConnectButton',
 	components: {
-		HSButton,
+		CLBButton,
 	},
 	props: {
 		chainId: Number,
