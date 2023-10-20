@@ -52,7 +52,7 @@
 
 <script lang="ts">
 import type Web3Modal from 'web3modal'
-import type { connection as Connection } from '../connection'
+import type { connection as Connection } from '../../connection'
 import { defineComponent } from 'vue'
 import {
 	type ContractRunner,
@@ -62,8 +62,8 @@ import {
 } from 'ethers'
 import { clientsDev } from '@devprotocol/dev-kit/agent'
 import { whenDefined } from '@devprotocol/util-ts'
-import { onMountClient } from '../events'
-import { CLBButton } from '../ui/vue'
+import { onMountClient } from '../../events'
+import { CLBButton } from '../../ui/vue'
 import { combineLatest } from 'rxjs'
 
 type Data = {
@@ -95,8 +95,8 @@ export default defineComponent({
 		onMountClient(async () => {
 			const [{ connection }, { GetModalProvider, ReConnectWallet }] =
 				await Promise.all([
-					import('../connection'),
-					import('../fixtures/wallet'),
+					import('../../connection'),
+					import('../../fixtures/wallet'),
 				])
 			this.connection = connection
 			this.modalProvider = GetModalProvider()

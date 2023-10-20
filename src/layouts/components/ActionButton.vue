@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Spinner from '../Icons/Spinner.vue'
+import Spinner from './Spinner.vue'
 
 export default defineComponent({
 	name: 'BaseButton',
@@ -59,22 +59,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use 'node_modules/@devprotocol/hashi/hs-button';
-
-// @include hs-button.extend('action-button') {
-// 	@include hs-button.color((
-// 		fill: 'accent-400',
-// 		ink: 'accent-ink',
-// 		border: 'accent-400'
-// 	));
-//
-// 	&:active {
-// 		@include hs-button.color((
-// 			fill: 'accent-300',
-// 			ink: 'accent-ink',
-// 			border: 'accent-300'
-// 		));
-// 	}
-// }
 
 .action-button-loading {
 	@apply border-2 border-gray-900 bg-gray-800;
