@@ -510,3 +510,23 @@ export type ClubsNavigationLink = {
 	readonly enable?: boolean
 	readonly kind?: string
 }
+
+export type Membership = {
+	readonly id: string
+	readonly name: string
+	readonly description: string
+	readonly price: number
+	readonly currency: 'USDC' | 'DEV' | 'ETH' | 'MATIC'
+	readonly imageSrc: string
+	readonly payload: Uint8Array | string
+	readonly fee?: {
+		readonly percentage: number
+		readonly beneficiary: string
+	}
+	readonly deprecated?: boolean
+	readonly paymentType?: 'instant' | 'stake' | 'custom'
+	readonly accessControl?: {
+		readonly url: string
+		readonly description: string
+	}
+}
