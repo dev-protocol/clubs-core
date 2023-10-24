@@ -73,7 +73,7 @@
 	"author": "aggre",
 	"license": "MIT",
 	"dependencies": {
-		"@devprotocol/dev-kit": "8.5.1",
+		"@devprotocol/dev-kit": "8.5.3",
 		"@devprotocol/elements": "1.1.0",
 		"@devprotocol/hashi": "2.2.1",
 		"@devprotocol/util-ts": "4.0.0",
