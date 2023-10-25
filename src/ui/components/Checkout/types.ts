@@ -1,4 +1,4 @@
-import type { CurrencyOption } from '@constants/currencyOption'
+import type { CurrencyOption } from '../../../constants/currencyOption'
 
 export type CheckoutOptions = {
 	readonly amount: number
