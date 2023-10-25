@@ -98,7 +98,7 @@
 		"@rollup/plugin-typescript": "11.1.5",
 		"@rollup/pluginutils": "5.0.5",
 		"@types/get-installed-path": "4.0.2",
-		"@types/node": "20.8.8",
+		"@types/node": "20.8.9",
 		"@types/ramda": "0.29.7",
 		"@types/react": "18.2.32",
 		"@types/react-dom": "18.2.14",
