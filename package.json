@@ -130,7 +130,7 @@
 		"tailwindcss": "3.3.4",
 		"typedoc": "^0.25.0",
 		"typescript": "5.2.2",
-		"vue": "3.3.6"
+		"vue": "3.3.7"
 	},
 	"peerDependencies": {
 		"@astrojs/lit": "^1.0.1 || ^2.0.0 || ^3.0.0",
