@@ -78,10 +78,11 @@
 	"author": "aggre",
 	"license": "MIT",
 	"dependencies": {
-		"@devprotocol/dev-kit": "8.5.1",
+		"@devprotocol/dev-kit": "^8.6.0-alpha.0",
 		"@devprotocol/elements": "1.1.0",
 		"@devprotocol/hashi": "2.2.1",
 		"@devprotocol/util-ts": "4.0.0",
+		"@ethersproject/abstract-provider": "^5.7.0",
 		"@metamask/detect-provider": "^2.0.0",
 		"dompurify": "^3.0.6",
 		"ethers": "6.8.0",

@@ -9,10 +9,11 @@ import {
 } from 'ethers'
 import type { Tiers } from '../constants/tier'
 import { stakeWithEth, stakeWithEthForPolygon, tokenURISim } from './dev-kit'
-import { clientsSTokens, client } from '@devprotocol/dev-kit'
+import { client } from '@devprotocol/dev-kit'
 import { whenDefined } from '@devprotocol/util-ts'
 import { xprod } from 'ramda'
 import { Membership } from '../types'
+import { clientsSTokens } from '@devprotocol/dev-kit/agent'
 
 const falsyOrZero = <T>(num?: T): T | 0 => (num ? num : 0)
 

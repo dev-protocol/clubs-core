@@ -291,7 +291,8 @@ const submitStake = async function () {
 								const create = await _res.create()
 								isWaitingForStaked.value = true
 								const res = await create.wait()
-								const id_ = await mintedIdByLogs(res?.logs)
+								if (!res) return
+								const id_ = await mintedIdByLogs(res.logs)
 								console.log('res is: ', res)
 								console.log({ id_ })
 								return id_
@@ -326,7 +327,8 @@ const submitStake = async function () {
 								const run = await waitOrSkipApproval?.run()
 								isWaitingForStaked.value = true
 								const res = await run?.wait()
-								const id_ = await mintedIdByLogs(res?.logs)
+								if (!res) return
+								const id_ = await mintedIdByLogs(res.logs)
 								console.log('res is: ', res)
 								console.log({ id_ })
 								return id_
@@ -350,7 +352,8 @@ const submitStake = async function () {
 								const run = await waitOrSkipApproval.run()
 								isWaitingForStaked.value = true
 								const res = await run.wait()
-								const id_ = await mintedIdByLogs(res?.logs)
+								if (!res) return
+								const id_ = await mintedIdByLogs(res.logs)
 								console.log('res is: ', res)
 								console.log({ id_ })
 								return id_

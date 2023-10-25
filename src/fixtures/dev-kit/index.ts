@@ -19,11 +19,7 @@ import {
 	whenDefined,
 	whenDefinedAll,
 } from '@devprotocol/util-ts'
-import {
-	type STokensContract,
-	positionsCreate,
-	addresses,
-} from '@devprotocol/dev-kit'
+import { type STokensContract, addresses } from '@devprotocol/dev-kit'
 
 import type { Log as Log_ } from '@ethersproject/abstract-provider'
 import { bytes32Hex } from '../../bytes32Hex'
@@ -131,22 +127,6 @@ export const getBalances = async (
 	// only for L2
 	const [, l2] = await clientsProperty(prov, propertyAddress)
 	return l2?.getBalances()
-}
-
-export const stake = async (
-	provider: ContractRunner,
-	propertyAddress: string,
-	from: string,
-	devAmount: number | string
-) => {
-	const amount = parseUnits(devAmount.toString(), 18).toString()
-	const res = await positionsCreate({
-		provider,
-		from,
-		amount,
-		destination: propertyAddress,
-	})
-	return res
 }
 
 export const stakeWithEth = async ({
