@@ -17,7 +17,7 @@
 	</div>
 </template>
 
-<script>
+<script lang="ts">
 import { Comment } from 'vue'
 import CLBSkeleton from './CLBSkeleton.vue'
 
