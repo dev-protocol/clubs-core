@@ -60,7 +60,7 @@ export default defineComponent({
 				default:
 					return 'is-error'
 			}
-		}
+		},
 	},
 	components: { Spinner },
 })
