@@ -10,7 +10,7 @@ import Skeleton from '@components/Global/Skeleton.vue'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 import { clientsSTokens } from '@devprotocol/dev-kit'
-import { ProseTextInherit } from '@devprotocol/clubs-core'
+import { ProseTextInherit } from '../../../constants/class-names'
 
 type Props = {
 	id?: number | string
