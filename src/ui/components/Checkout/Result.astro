@@ -1,6 +1,6 @@
 ---
-import Result_ from '@components/Checkout/Result.vue'
-import type { ClubsPropsPages } from '@devprotocol/clubs-core'
+import { ClubsPropsPages } from '../../../types'
+import Result_ from './Result.vue'
 
 const { clubs, id, rpcUrl } = Astro.props as ClubsPropsPages & {
 	id?: string | number
