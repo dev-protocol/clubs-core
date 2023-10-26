@@ -15,7 +15,9 @@
 		/>
 	{/if}
 	{#if !media}
-		<CLBSkeleton class="min-h-[16rem] w-full" />
+		<div class="min-h-[16rem] w-full">
+			<CLBSkeleton />
+		</div>
 	{/if}
 	<div class="mb-2 grid">
 		<div class="clb-tier__title">{title}</div>
