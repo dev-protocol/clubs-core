@@ -25,7 +25,7 @@
 import { defineComponent } from 'vue'
 import { buildConfig, onMountClient } from '../events'
 import { ClubsEvents } from '../types'
-import ActionButton from '../components/Primitives/ActionButton.vue'
+import ActionButton from './components/ActionButton.vue'
 
 export default defineComponent({
 	name: 'Aside',

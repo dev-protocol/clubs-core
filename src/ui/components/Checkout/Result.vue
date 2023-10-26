@@ -6,7 +6,7 @@ import {
 	whenDefinedAll,
 } from '@devprotocol/util-ts'
 import { JsonRpcProvider } from 'ethers'
-import Skeleton from '@components/Global/Skeleton.vue'
+import Skeleton from '../Skeleton/Skeleton.vue'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 import { clientsSTokens } from '@devprotocol/dev-kit'

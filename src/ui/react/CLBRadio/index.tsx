@@ -1,33 +1,51 @@
-import React from 'react';
+import React from 'react'
 
-type RadioTypes = 'raised';
-
+// eslint-disable-next-line functional/no-mixed-type
 interface CLBRadioProps {
-	name?: string;
-	id?: string;
-	value?: string;
-	type?: string;
-	label: string;
-	helper?: string;
-	media?: string;
-	mediaAlt?: string;
-	isChecked?: boolean;
-	isDisabled?: boolean;
-	onChange?: (() => void | any);
+	readonly name?: string
+	readonly id?: string
+	readonly value?: string
+	readonly type?: string
+	readonly label: string
+	readonly helper?: string
+	readonly media?: string
+	readonly mediaAlt?: string
+	readonly isChecked?: boolean
+	readonly isDisabled?: boolean
+	// eslint-disable-next-line functional/no-return-void
+	readonly onChange?: () => void
 }
 
-const CLBRadio: React.FC<CLBRadioProps> = ({value, name, id = value, type, label, helper, media, mediaAlt, isChecked, isDisabled, onChange}) => {
-
+const CLBRadio: React.FC<CLBRadioProps> = ({
+	value,
+	name,
+	id = value,
+	type,
+	label,
+	helper,
+	media,
+	mediaAlt,
+	isChecked,
+	isDisabled,
+	onChange,
+}) => {
 	const _assertType = (type: string): string => {
-		const finalTypes: string[] = [];
+		// eslint-disable-next-line functional/prefer-readonly-type
+		const finalTypes: string[] = []
+		// eslint-disable-next-line functional/no-expression-statement, functional/no-return-void
 		type.split(' ').forEach((type) => {
-			finalTypes.push('is-' + type);
-		});
-		return finalTypes.join(' ');
+			// eslint-disable-next-line functional/no-expression-statement, functional/immutable-data
+			finalTypes.push('is-' + type)
+		})
+		return finalTypes.join(' ')
 	}
 
 	return (
-		<label className={`hs-tick-field${type ? ' ' + _assertType(type) : ''}${isDisabled ? ' is-disabled' : ''}`}>
+		<label
+			className={`hs-tick-field${type ? ' ' + _assertType(type) : ''}${
+				isDisabled ? ' is-disabled' : ''
+			}`}
+		>
 			<input
 				className="hs-tick-field__input"
 				type="radio"
@@ -38,7 +56,7 @@ const CLBRadio: React.FC<CLBRadioProps> = ({value, name, id = value, type, label
 				checked={isChecked}
 				disabled={isDisabled}
 			/>
-			{media &&
+			{media && (
 				<img
 					className="hs-tick-field__sprite"
 					src={media}
@@ -46,13 +64,19 @@ const CLBRadio: React.FC<CLBRadioProps> = ({value, name, id = value, type, label
 					height="32"
 					alt={mediaAlt}
 				/>
-			}
-			<div style={{display: 'flex', flexFlow: 'column nowrap', alignItems: 'start'}}>
+			)}
+			<div
+				style={{
+					display: 'flex',
+					flexFlow: 'column nowrap',
+					alignItems: 'start',
+				}}
+			>
 				<span className="hs-tick-field__label">{label}</span>
 				{helper && <span className="hs-tick-field__helper">{helper}</span>}
 			</div>
 		</label>
-	);
-};
+	)
+}
 
-export default CLBRadio;
+export default CLBRadio

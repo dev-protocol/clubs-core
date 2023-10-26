@@ -1,19 +1,24 @@
-import React from 'react';
+import React from 'react'
 
 interface CLBLinkProps {
-	link: string;
-  	children?: React.ReactNode|string;
+	readonly link: string
+	readonly children?: React.ReactNode | string
 }
 
-const CLBLink: React.FC<CLBLinkProps> = ({link, children}) => {
+const CLBLink: React.FC<CLBLinkProps> = ({ link, children }) => {
+	const isLinkExternal = !!(
+		link.startsWith('http://') || link.startsWith('https://')
+	)
 
-	const isLinkExternal: boolean = !!(link.startsWith('http://') || link.startsWith('https://'));
-
-  return (
-		<a href={link} className="hs-link" target={isLinkExternal ? '_blank' : '_self'}>
+	return (
+		<a
+			href={link}
+			className="hs-link"
+			target={isLinkExternal ? '_blank' : '_self'}
+		>
 			{children}
 		</a>
-  );
-};
+	)
+}
 
-export default CLBLink;
+export default CLBLink

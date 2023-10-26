@@ -1,7 +1,7 @@
 <template>
 	<button
 		class="hs-button is-large is-filled transition"
-		:class="classByStatus[status]"
+		:class="classByStatus"
 	>
 		<!-- Default Status -->
 		<slot v-if="status === 0" />
@@ -31,6 +31,7 @@ export default defineComponent({
 		status: {
 			type: Number,
 			default: 0,
+			validator: (v: number) => [0, 1, 2, 3].includes(v),
 		},
 		loadingText: {
 			type: String,
@@ -45,14 +46,22 @@ export default defineComponent({
 			default: 'Error',
 		},
 	},
-	data: () => ({
-		classByStatus: {
-			0: 'is-action-button',
-			1: 'is-loading',
-			2: 'is-success',
-			3: 'is-error',
-		},
-	}),
+	computed: {
+		classByStatus(): string {
+			switch (this.status) {
+				case 0:
+					return 'is-action-button'
+				case 1:
+					return 'is-loading'
+				case 2:
+					return 'is-success'
+				case 3:
+					return 'is-error'
+				default:
+					return 'is-error'
+			}
+		}
+	},
 	components: { Spinner },
 })
 </script>
