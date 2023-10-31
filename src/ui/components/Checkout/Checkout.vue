@@ -132,9 +132,15 @@ const htmlVerificationFlow: ComputedRef<UndefinedOr<string>> = computed(() => {
 })
 const accessControlUrl: ComputedRef<UndefinedOr<URL>> = computed(() => {
 	return whenDefinedAll(
-		[props.accessControlUrl, account.value],
-		([_accessControl, _account]) => {
-			const url = new URL(_accessControl)
+		[
+			props.accessControlUrl,
+			account.value,
+			typeof window !== 'undefined' ? window.location.origin : undefined,
+		],
+		([_accessControl, _account, _viewer]) => {
+			const url = _accessControl.startsWith('http')
+				? new URL(_accessControl)
+				: new URL(_accessControl, _viewer)
 			url.searchParams.set('account', _account)
 			return url
 		}
