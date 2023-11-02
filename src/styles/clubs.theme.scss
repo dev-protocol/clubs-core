@@ -9,6 +9,7 @@ $theme: (
 	surface-dark: 'dp-blue-grey',
 	background: 'dp-white.200',
 	dark-background: 'dp-blue-grey.600',
+	dark-mode: 'media',
 	extend: (
 		padding: (
 			xs: 0.3rem,
@@ -28,7 +29,6 @@ $button-theme: (
 		'sm',
 		'md',
 	),
-	ink: 'surface-600',
 	border-width: 'stroke',
 	fill: 'accent-600',
 	fill-hover: 'accent-200',
