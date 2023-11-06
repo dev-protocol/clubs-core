@@ -1,7 +1,7 @@
 <template>
 	<button
 		class="hs-button is-large is-filled transition"
-		:class="classByStatus[status]"
+		:class="classByStatus"
 	>
 		<!-- Default Status -->
 		<slot v-if="status === 0" />
@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Spinner from '../Icons/Spinner.vue'
+import Spinner from './Spinner.vue'
 
 export default defineComponent({
 	name: 'BaseButton',
@@ -31,6 +31,7 @@ export default defineComponent({
 		status: {
 			type: Number,
 			default: 0,
+			validator: (v: number) => [0, 1, 2, 3].includes(v),
 		},
 		loadingText: {
 			type: String,
@@ -45,36 +46,28 @@ export default defineComponent({
 			default: 'Error',
 		},
 	},
-	data: () => ({
-		classByStatus: {
-			0: 'is-action-button',
-			1: 'is-loading',
-			2: 'is-success',
-			3: 'is-error',
+	computed: {
+		classByStatus(): string {
+			switch (this.status) {
+				case 0:
+					return 'is-action-button'
+				case 1:
+					return 'is-loading'
+				case 2:
+					return 'is-success'
+				case 3:
+					return 'is-error'
+				default:
+					return 'is-error'
+			}
 		},
-	}),
+	},
 	components: { Spinner },
 })
 </script>
 
 <style lang="scss" scoped>
 @use 'node_modules/@devprotocol/hashi/hs-button';
-
-// @include hs-button.extend('action-button') {
-// 	@include hs-button.color((
-// 		fill: 'accent-400',
-// 		ink: 'accent-ink',
-// 		border: 'accent-400'
-// 	));
-//
-// 	&:active {
-// 		@include hs-button.color((
-// 			fill: 'accent-300',
-// 			ink: 'accent-ink',
-// 			border: 'accent-300'
-// 		));
-// 	}
-// }
 
 .action-button-loading {
 	@apply border-2 border-gray-900 bg-gray-800;

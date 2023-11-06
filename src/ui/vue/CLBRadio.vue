@@ -1,3 +1,38 @@
+<script lang="ts" setup>
+const {
+	name,
+	id,
+	value,
+	type,
+	label,
+	helper,
+	media,
+	mediaAlt,
+	isChecked,
+	isDisabled,
+	onChange,
+} = defineProps<{
+	name: string
+	id: string
+	value: string
+	type: string
+	label: string
+	helper: string
+	media: string
+	mediaAlt: string
+	isChecked: boolean
+	isDisabled: boolean
+	onChange: ((payload: Event) => void) | undefined
+}>()
+const assertType = (type: string): string => {
+	const finalTypes: string[] = []
+	type.split(' ').forEach((type) => {
+		finalTypes.push('is-' + type)
+	})
+	return finalTypes.join(' ')
+}
+</script>
+
 <template>
 	<label
 		:class="`hs-tick-field${type ? ' ' + assertType(type) : ''}${
@@ -28,31 +63,3 @@
 		</span>
 	</label>
 </template>
-
-<script lang="ts">
-export default {
-	name: 'CLBRadio',
-	props: {
-		name: String,
-		id: String,
-		value: String,
-		type: String,
-		label: String,
-		helper: String,
-		media: String,
-		mediaAlt: String,
-		isChecked: Boolean,
-		isDisabled: Boolean,
-		onChange: Function,
-	},
-	methods: {
-		assertType(type: string): string {
-			const finalTypes: string[] = []
-			type.split(' ').forEach((type) => {
-				finalTypes.push('is-' + type)
-			})
-			return finalTypes.join(' ')
-		},
-	},
-}
-</script>

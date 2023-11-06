@@ -40,5 +40,8 @@
 			readonly={isReadonly}
 		/>
 	{/if}
-	<span v-if="helper" class="hs-form-field__helper">{helper}</span>
+
+	{#if helper}
+		<span class="hs-form-field__helper">{helper}</span>
+	{/if}
 </label>

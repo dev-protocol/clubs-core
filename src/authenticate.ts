@@ -1,4 +1,3 @@
-import { clientsProperty } from '@devprotocol/dev-kit'
 import {
 	WeiPerEther,
 	type ContractRunner,
@@ -8,6 +7,7 @@ import {
 	type AbstractProvider,
 } from 'ethers'
 import { decode } from './decode'
+import { clientsProperty } from '@devprotocol/dev-kit/agent'
 
 export type ClubsFunctionAuthenticationAdminParams = {
 	readonly signature: string
