@@ -142,7 +142,7 @@
 		"tailwindcss": "3.3.5",
 		"typedoc": "^0.25.0",
 		"typescript": "5.2.2",
-		"vue": "3.3.7",
+		"vue": "3.3.8",
 		"vue-tsc": "^1.8.21"
 	},
 	"peerDependencies": {
