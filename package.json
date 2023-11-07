@@ -107,7 +107,7 @@
 		"@rollup/plugin-typescript": "11.1.5",
 		"@rollup/pluginutils": "5.0.5",
 		"@types/dompurify": "^3.0.4",
-		"@types/get-installed-path": "4.0.2",
+		"@types/get-installed-path": "4.0.3",
 		"@types/marked": "^6.0.0",
 		"@types/node": "20.8.10",
 		"@types/ramda": "0.29.7",
