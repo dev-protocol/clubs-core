@@ -100,7 +100,7 @@
 		"@astrojs/react": "3.0.4",
 		"@astrojs/svelte": "4.0.3",
 		"@astrojs/tailwind": "5.0.2",
-		"@astrojs/vue": "3.0.3",
+		"@astrojs/vue": "3.0.4",
 		"@ava/typescript": "4.1.0",
 		"@rollup/plugin-commonjs": "25.0.7",
 		"@rollup/plugin-multi-entry": "6.0.1",
