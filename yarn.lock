@@ -40,10 +40,10 @@
   resolved "https://registry.yarnpkg.com/@astrojs/internal-helpers/-/internal-helpers-0.2.1.tgz#4e2e6aabaa9819f17119aa10f413c4d6122c94cf"
   integrity sha512-06DD2ZnItMwUnH81LBLco3tWjcZ1lGU9rLCCBaeUCGYe9cI0wKyY2W3kDyoW1I6GmcWgt1fu+D1CTvz+FIKf8A==
 
-"@astrojs/lit@3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@astrojs/lit/-/lit-3.0.2.tgz#e20475adb9a96099c7bf49cde5fcd68f3c6fb9cf"
-  integrity sha512-aBbZ1nkLSnh7CpUhDlX5+3MN+Zj/3uIUfQdUSBJdLaPCxRvvnUDyx7p8uPrVYeMIrYpohpry8ZT+wbNWQZh13Q==
+"@astrojs/lit@3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@astrojs/lit/-/lit-3.0.3.tgz#28d0992ab05b78665e56fd046a7d18df7aa04da5"
+  integrity sha512-bmgK/TT95Qwkfg7+JVqX3RFJMwOf35SXNPD3OfEz9iWxd/0H6P6AHpYJ1y5/HREeOkKyv2vMPG0oubMPE3kOKg==
   dependencies:
     "@lit-labs/ssr" "3.1.7"
     "@lit-labs/ssr-client" "1.1.3"
