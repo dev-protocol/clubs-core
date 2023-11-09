@@ -2,10 +2,12 @@
 import { ClubsPropsPages } from '../../../types'
 import Result_ from './Result.vue'
 
-const { clubs, id, rpcUrl } = Astro.props as ClubsPropsPages & {
+type Props = ClubsPropsPages & {
 	id?: string | number
 	rpcUrl: string
 }
+
+const { clubs, id, rpcUrl } = Astro.props
 
 const SlotsCheckoutResultBeforePreview = clubs.slots.filter(
 	(slot) => slot.slot === 'checkout-result:before:preview'
