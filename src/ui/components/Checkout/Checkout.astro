@@ -3,6 +3,16 @@ import { ClubsPropsPages } from '../../../types'
 import Checkout_ from './Checkout.vue'
 import type { CheckoutOptions } from './types'
 
+type Props = ClubsPropsPages &
+	CheckoutOptions & {
+		useDiscretePaymentFlow?: boolean
+		useInjectedTransactionForm?: boolean
+		itemImageSrc?: string
+		itemName?: string
+		accessControlUrl?: string
+		accessControlDescription?: string
+	}
+
 const {
 	amount,
 	propertyAddress,
@@ -20,15 +30,7 @@ const {
 	accessControlUrl,
 	accessControlDescription,
 	clubs,
-} = Astro.props as ClubsPropsPages &
-	CheckoutOptions & {
-		useDiscretePaymentFlow?: boolean
-		useInjectedTransactionForm?: boolean
-		itemImageSrc?: string
-		itemName?: string
-		accessControlUrl?: string
-		accessControlDescription?: string
-	}
+} = Astro.props
 
 const checkoutOptions: CheckoutOptions = {
 	amount,
