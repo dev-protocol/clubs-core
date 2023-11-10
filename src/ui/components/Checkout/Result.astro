@@ -1,11 +1,8 @@
 ---
-import { ClubsPropsPages } from '../../../types'
 import Result_ from './Result.vue'
+import type { ResultProps } from './types'
 
-type Props = ClubsPropsPages & {
-	id?: string | number
-	rpcUrl: string
-}
+type Props = ResultProps
 
 const { clubs, id, rpcUrl } = Astro.props
 

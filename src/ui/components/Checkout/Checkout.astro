@@ -1,17 +1,8 @@
 ---
-import type { ClubsPropsPages } from '../../../types'
 import Checkout_ from './Checkout.vue'
-import type { CheckoutOptions } from './types'
+import type { CheckoutOptions, CheckoutProps } from './types'
 
-type Props = ClubsPropsPages &
-	CheckoutOptions & {
-		useDiscretePaymentFlow?: boolean
-		useInjectedTransactionForm?: boolean
-		itemImageSrc?: string
-		itemName?: string
-		accessControlUrl?: string
-		accessControlDescription?: string
-	}
+type Props = CheckoutProps
 
 const {
 	amount,
@@ -42,6 +33,12 @@ const checkoutOptions: CheckoutOptions = {
 	feePercentage,
 	payload,
 	description,
+	useDiscretePaymentFlow,
+	useInjectedTransactionForm,
+	itemImageSrc,
+	itemName,
+	accessControlUrl,
+	accessControlDescription,
 }
 
 const SlotsCheckoutBeforeTransactionForm = clubs.slots.filter(
