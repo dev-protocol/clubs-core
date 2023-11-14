@@ -11,6 +11,11 @@ import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 import { clientsSTokens } from '@devprotocol/dev-kit'
 import { ProseTextInherit } from '../../../constants/class-names'
+import { Strings } from './i18n'
+import { i18nFactory } from '../../../i18n'
+
+const i18nBase = i18nFactory(Strings)
+let i18n = i18nBase(['en'])
 
 type Props = {
 	id?: number | string
@@ -50,6 +55,7 @@ const htmlDescription: ComputedRef<UndefinedOr<string>> = computed(() => {
 
 onMounted(async () => {
 	const provider = new JsonRpcProvider(props.rpcUrl)
+	i18n = i18nBase(navigator.languages)
 
 	const [c1, c2] = await clientsSTokens(provider)
 	const sTokens = c1 ?? c2
@@ -77,7 +83,7 @@ onMounted(async () => {
 			>
 				<div class="flex flex-col gap-6">
 					<p class="font-mono font-bold">
-						Minted <span class="text-black/50">#{{ id }}</span>
+						{{ i18n('Minted') }} <span class="text-black/50">#{{ id }}</span>
 					</p>
 
 					<div class="rounded-lg border border-black/20 bg-black/10 p-4">
