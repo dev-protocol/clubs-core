@@ -35,10 +35,15 @@ import DOMPurify from 'dompurify'
 import Result from './Result.vue'
 import { tags, attrs } from '../../../constants/dompurify'
 import { ProseTextInherit } from '../../../constants'
+import { i18nFactory } from '../../../i18n'
+import { Strings } from './i18n'
 
 let providerPool: UndefinedOr<ContractRunner>
 let subscriptions: Subscription[] = []
 const REGEX_DESC_ACCOUNT = /{ACCOUNT}/g
+
+const i18nBase = i18nFactory(Strings)
+let i18n = i18nBase(['en'])
 
 type Props = {
 	amount?: number
@@ -379,6 +384,7 @@ onMounted(async () => {
 		providerPool = _provider
 		account.value = _account
 		chain.value = _chain
+		i18n = i18nBase(navigator.languages)
 		whenDefinedAll(
 			[providerPool, _account, props.destination, props.amount, chain.value],
 			async ([_prov, _userAddress, _destination, _amount, _chain]) => {
@@ -507,9 +513,7 @@ onUnmounted(() => {
 					<slot name="after:price"></slot>
 				</p>
 				<p v-if="stakingAmount" class="text-sm text-black/90">
-					{{
-						`${stakingAmount.toLocaleString()} DEV will be staked automatically.`
-					}}
+					{{ i18n('AutomaticStaking', [stakingAmount.toLocaleString()]) }}
 				</p>
 			</span>
 			<aside
@@ -542,7 +546,7 @@ onUnmounted(() => {
 								d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"
 							/>
 						</svg>
-						Permission required
+						{{ i18n('PermissionRequired') }}
 					</p>
 					<p
 						:data-is-loading="isCheckingAccessControl"
@@ -552,14 +556,14 @@ onUnmounted(() => {
 					>
 						{{
 							!account
-								? `Connect wallet to check you're verified`
+								? i18n('ConnectWalletVerification')
 								: isCheckingAccessControl
-								? `Now checking the verification status`
+								? i18n('Verifying')
 								: accessAllowed
-								? `Verified`
+								? i18n('Verified')
 								: accessControlError
 								? accessControlError.message
-								: `Not verified`
+								: i18n('Unverified')
 						}}
 					</p>
 				</span>
@@ -603,11 +607,7 @@ onUnmounted(() => {
 					:data-is-approving="isApproving"
 					class="hs-button is-large is-fullwidth is-filled data-[is-approving=true]:animate-pulse"
 				>
-					{{
-						approveNeeded === false
-							? "You've already approved"
-							: 'Sign with wallet and approve'
-					}}
+					{{ approveNeeded === false ? i18n('Approved') : i18n('Unapproved') }}
 				</button>
 			</span>
 
@@ -639,7 +639,7 @@ onUnmounted(() => {
 						class="hs-button is-large is-filled data-[is-staking=true]:animate-pulse"
 						v-bind:class="insufficientFunds ? 'bg-red-600' : ''"
 					>
-						Pay with {{ verifiedPropsCurrency.toUpperCase() }}
+						{{ i18n('PayWith', [verifiedPropsCurrency.toUpperCase()]) }}
 					</button>
 
 					<p
@@ -658,12 +658,12 @@ onUnmounted(() => {
 						role="presentation"
 						class="mx-auto h-16 w-16 animate-spin rounded-full border-l border-r border-t border-native-blue-300"
 					/>
-					<p v-if="isApproving">Waiting for approving to complete...</p>
+					<p v-if="isApproving">{{ i18n('ApprovalPending') }}</p>
 					<p v-if="isStaking && !isWaitingForStaked">
-						Awaiting transaction confirmation on wallet...
+						{{ i18n('TxConfirmationPending') }}
 					</p>
 					<p v-if="isWaitingForStaked">
-						Just a few minutes until your item is minted...
+						{{ i18n('StakePending') }}
 					</p>
 				</span>
 			</div>
