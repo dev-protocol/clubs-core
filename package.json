@@ -109,7 +109,7 @@
 		"@types/get-installed-path": "4.0.3",
 		"@types/marked": "^6.0.0",
 		"@types/node": "20.9.0",
-		"@types/ramda": "0.29.8",
+		"@types/ramda": "0.29.9",
 		"@types/react": "18.2.37",
 		"@types/react-dom": "18.2.15",
 		"@typescript-eslint/eslint-plugin": "5.62.0",
