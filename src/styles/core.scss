@@ -1,7 +1,4 @@
 @use './clubs.theme' as clubs;
-@use '@devprotocol/hashi' with (
-	$theme: clubs.$theme
-);
 @use '@devprotocol/hashi/hs-button' with (
 	$theme: clubs.$button-theme
 );
