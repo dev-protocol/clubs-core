@@ -43,6 +43,12 @@
 			"import": "./dist/src/styles/index.mjs",
 			"require": "./dist/src/styles/index.cjs",
 			"types": "./styles.d.ts"
+		},
+		"./styles/theme": {
+			"default": "./src/styles/clubs.theme.scss"
+		},
+		"./styles/variants": {
+			"default": "./src/styles/clubs.variants.scss"
 		}
 	},
 	"types": "./dist/clubs-core.d.ts",
