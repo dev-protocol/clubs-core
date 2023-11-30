@@ -48,7 +48,7 @@
 	aria-hidden="true"
 >
 	<div
-		class="grid w-full max-w-md gap-8 rounded-xl bg-dp-blue-grey-300 p-8 shadow-xl"
+		class="grid w-full max-w-md gap-8 rounded-xl bg-primary-200 p-8 shadow-xl"
 	>
 		{#if data.state === 'loading'}
 			<div
