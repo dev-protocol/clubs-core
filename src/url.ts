@@ -13,12 +13,12 @@ const reg = /(\[\[((?!\]\]).)*\]\])/gi
  *
  * @example
  * ```ts
- * findPageBy("my/123", [...])
+ * findPage("my/123", [...])
  * ```
  */
-export const findPageBy = <P extends Props = Props>(
+export const findPage = <P extends Props = Props>(
 	page: string,
-	items: ClubsGetStaticPathsItem<P>[]
+	items: readonly ClubsGetStaticPathsItem<P>[]
 ): UndefinedOr<ClubsGetStaticPathsItem<P>> =>
 	items.find(({ params }) => params.page === page) ??
 	items.find(({ params }) => {
