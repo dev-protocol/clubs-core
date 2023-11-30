@@ -117,7 +117,7 @@ export type ClubsFactoryUtils = {
 }
 
 export type ClubsSlotsFactoryUtils = ClubsFactoryUtils & {
-	readonly paths: readonly (undefined | string)[]
+	readonly paths: readonly (undefined | string | RegExp)[]
 	readonly factory: 'page' | 'admin'
 }
 

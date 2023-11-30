@@ -142,7 +142,7 @@ const _slotsFromPlugins =
 	(config: ClubsConfiguration, factory: 'page' | 'admin') =>
 	async (
 		plugins: Plugins,
-		paths: readonly (undefined | string)[],
+		paths: readonly (undefined | string | RegExp)[],
 		additionalProps?: Props
 	): Promise<ClubsFunctionGetSlotsResults> => {
 		const results = await Promise.all(
@@ -167,7 +167,7 @@ const _slotsFromPlugins =
 		return res
 	}
 
-const _pathsToPage = (paths: readonly (string | undefined)[]) =>
+const _pathsToPage = (paths: readonly (string | RegExp | undefined)[]) =>
 	paths.join('/') || undefined
 
 const _compose = <
