@@ -57,7 +57,7 @@ export type ClubsBaseStaticPath<P extends Props = Props> = Readonly<{
 
 export type ClubsStaticPath<P extends Props = Props> = ClubsBaseStaticPath<P> &
 	Readonly<{
-		readonly paths: readonly (undefined | string)[]
+		readonly paths: readonly (undefined | string | RegExp)[]
 		readonly component: AstroComponentFactory
 	}>
 
