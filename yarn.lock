@@ -1881,10 +1881,10 @@ arrify@^3.0.0:
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-3.0.0.tgz#ccdefb8eaf2a1d2ab0da1ca2ce53118759fd46bc"
   integrity sha512-tLkvA81vQG/XqE2mjDkGQHoOINtMHtysSnemrmoGe6PydDPMRbVugqyk4A6V/WDWEfm3l+0d8anA9r8cv/5Jaw==
 
-astro@3.6.3:
-  version "3.6.3"
-  resolved "https://registry.yarnpkg.com/astro/-/astro-3.6.3.tgz#18d72ca264c6592a823b67b9287faae512b1f57b"
-  integrity sha512-oEkYfXTk38MulcM0lgonGxDO+si4XbPyaf82YK+STLbEFtRggJYiQTyM0zGXnpLEiXX0DOjSvWLhFw3iVcZY1w==
+astro@3.6.4:
+  version "3.6.4"
+  resolved "https://registry.yarnpkg.com/astro/-/astro-3.6.4.tgz#9741fb45a449992333af5e39ec6925eb658875e1"
+  integrity sha512-YatUyWEQ9GUC79Wc2zbovy6D6bXPW9++Z6PYs4GDamEDspUSnnzL/INB7WJqgFI0xAFk9jcUr+MZYjkdWqXYTw==
   dependencies:
     "@astrojs/compiler" "^2.3.0"
     "@astrojs/internal-helpers" "0.2.1"
