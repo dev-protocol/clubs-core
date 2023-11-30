@@ -25,6 +25,7 @@ import type {
 import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
 import type { APIRoute, Props } from 'astro'
+import { regexpToSymbol } from './fixtures/regexp'
 
 type Plugins<P extends ClubsFunctionPlugin = ClubsFunctionPlugin> =
 	readonly ClubsPluginDetails<P>[]
@@ -168,7 +169,8 @@ const _slotsFromPlugins =
 	}
 
 const _pathsToPage = (paths: readonly (string | RegExp | undefined)[]) =>
-	paths.join('/') || undefined
+	paths.map((p) => (p instanceof RegExp ? regexpToSymbol(p) : p)).join('/') ||
+	undefined
 
 const _compose = <
 	P extends Props,
