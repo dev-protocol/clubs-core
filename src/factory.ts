@@ -25,6 +25,7 @@ import type {
 import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
 import type { APIRoute, Props } from 'astro'
+import { regexpToSymbol } from './fixtures/regexp'
 
 type Plugins<P extends ClubsFunctionPlugin = ClubsFunctionPlugin> =
 	readonly ClubsPluginDetails<P>[]
@@ -142,7 +143,7 @@ const _slotsFromPlugins =
 	(config: ClubsConfiguration, factory: 'page' | 'admin') =>
 	async (
 		plugins: Plugins,
-		paths: readonly (undefined | string)[],
+		paths: readonly (undefined | string | RegExp)[],
 		additionalProps?: Props
 	): Promise<ClubsFunctionGetSlotsResults> => {
 		const results = await Promise.all(
@@ -167,8 +168,9 @@ const _slotsFromPlugins =
 		return res
 	}
 
-const _pathsToPage = (paths: readonly (string | undefined)[]) =>
-	paths.join('/') || undefined
+const _pathsToPage = (paths: readonly (string | RegExp | undefined)[]) =>
+	paths.map((p) => (p instanceof RegExp ? regexpToSymbol(p) : p)).join('/') ||
+	undefined
 
 const _compose = <
 	P extends Props,
