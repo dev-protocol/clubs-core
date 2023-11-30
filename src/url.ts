@@ -28,6 +28,6 @@ export const findPage = <P extends Props = Props>(
 			const regexp = symbolToRegexp(c).toString().slice(1, -1)
 			return p.replace(c, `${regexp}`)
 		}, paramsPage)
-		const tester = whenDefined(regStr, (exp) => new RegExp(exp))
+		const tester = whenDefined(regStr, (exp) => new RegExp(`^${exp}$`))
 		return tester?.test(page) ?? false
 	})
