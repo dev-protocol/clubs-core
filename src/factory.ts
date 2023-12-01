@@ -26,6 +26,7 @@ import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
 import type { APIRoute, Props } from 'astro'
 import { regexpToSymbol } from './fixtures/regexp'
+import { routerFactory } from './fixtures'
 
 type Plugins<P extends ClubsFunctionPlugin = ClubsFunctionPlugin> =
 	readonly ClubsPluginDetails<P>[]
@@ -327,19 +328,19 @@ export const apiFactory: ClubsFunctionApiFactory = (options) => {
 		const plugin = plugins.find((plg) => path?.startsWith(plg.meta.id))
 		const apiRoutes =
 			plugin && typeof plugin.getApiPaths === 'function'
-				? await plugin.getApiPaths(plugin.options, config, utils)
-				: undefined
+				? (await plugin.getApiPaths(plugin.options, config, utils)).filter(
+						({ method }) => method === context.request.method
+				  )
+				: []
 
-		const apiRoute = apiRoutes
-			? apiRoutes.find(({ paths, method }) => {
-					const apipath = `${plugin?.meta.id}/${paths.join('/')}`
-					const apipathSlash = `${apipath}/`
-					return (
-						method === context.request.method &&
-						(path === apipath || path === apipathSlash)
-					)
-			  })
-			: undefined
+		const router = routerFactory(apiRoutes, (i) =>
+			_pathsToPage([plugin?.meta.id, ...i.paths])
+		)
+		const routerWithSlash = routerFactory(
+			apiRoutes,
+			(i) => `${_pathsToPage([plugin?.meta.id, ...i.paths])}/`
+		)
+		const apiRoute = router(path) ?? routerWithSlash(path)
 		const response = apiRoute
 			? apiRoute.handler(context)
 			: new Response(null, { status: 404 })

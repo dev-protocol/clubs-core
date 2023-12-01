@@ -62,7 +62,7 @@ export type ClubsStaticPath<P extends Props = Props> = ClubsBaseStaticPath<P> &
 	}>
 
 export type ClubsApiPath = Readonly<{
-	readonly paths: readonly (undefined | string)[]
+	readonly paths: readonly (undefined | string | RegExp)[]
 	readonly method:
 		| 'CONNECT'
 		| 'DELETE'
