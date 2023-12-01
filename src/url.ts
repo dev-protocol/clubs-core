@@ -1,12 +1,10 @@
 import type { Props } from 'astro'
 import type { ClubsGetStaticPathsItem } from './types'
-import { whenDefined, type UndefinedOr } from '@devprotocol/util-ts'
-import { symbolToRegexp } from './fixtures/regexp'
-
-const reg = /(\[\[((?!\]\]).)*\]\])/gi
+import type { UndefinedOr } from '@devprotocol/util-ts'
+import { routerFactory } from './fixtures'
 
 /**
- * Converts RegExp to a special symbol string
+ * Find a path where matches Astro.params.page
  * @param page Astro.params.page of [...page]
  * @param items The result array of getStaticPaths
  * @returns the found path or undefined
@@ -20,14 +18,4 @@ export const findPage = <P extends Props = Props>(
 	page: string,
 	items: readonly ClubsGetStaticPathsItem<P>[]
 ): UndefinedOr<ClubsGetStaticPathsItem<P>> =>
-	items.find(({ params }) => params.page === page) ??
-	items.find(({ params }) => {
-		const paramsPage = params.page ?? ''
-		const match = paramsPage.match(reg) ?? undefined
-		const regStr = match?.reduce((p, c) => {
-			const regexp = symbolToRegexp(c).toString().slice(1, -1)
-			return p.replace(c, `${regexp}`)
-		}, paramsPage)
-		const tester = whenDefined(regStr, (exp) => new RegExp(`^${exp}$`))
-		return tester?.test(page) ?? false
-	})
+	routerFactory(items, (i) => i.params.page)(page)
