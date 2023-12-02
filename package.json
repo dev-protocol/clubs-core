@@ -126,7 +126,7 @@
 		"ava": "5.3.1",
 		"del-cli": "^5.1.0",
 		"eslint": "8.55.0",
-		"eslint-config-prettier": "9.0.0",
+		"eslint-config-prettier": "9.1.0",
 		"eslint-plugin-functional": "4.4.1",
 		"ethers": "6.9.0",
 		"glob": "10.3.10",
