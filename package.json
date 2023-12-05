@@ -104,7 +104,7 @@
 		"@astrojs/lit": "3.0.3",
 		"@astrojs/react": "3.0.7",
 		"@astrojs/svelte": "4.0.4",
-		"@astrojs/tailwind": "5.0.2",
+		"@astrojs/tailwind": "5.0.3",
 		"@astrojs/vue": "3.0.4",
 		"@ava/typescript": "4.1.0",
 		"@rollup/plugin-commonjs": "25.0.7",
