@@ -318,7 +318,7 @@ export const adminFactory: ClubsFunctionAdminFactory = (options) => {
 }
 
 export const apiFactory: ClubsFunctionApiFactory = (options) => {
-	const all: APIRoute = async (context) => {
+	const ALL: APIRoute = async (context) => {
 		const [config] = await getClubsConfig(options.config)
 		const plugins = await _listPlugins(config, options.plugins)
 		const getPluginConfigById = getPluginConfigByIdFactory(config, plugins)
@@ -346,5 +346,5 @@ export const apiFactory: ClubsFunctionApiFactory = (options) => {
 			: new Response(null, { status: 404 })
 		return response
 	}
-	return { all }
+	return { ALL }
 }

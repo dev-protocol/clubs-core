@@ -284,7 +284,7 @@ export type ClubsFunctionFactoryResult<T> = {
 	readonly getCurrentConfig: () => Promise<ClubsConfiguration>
 }
 
-export type ClubsFunctionApiFactoryResult = { readonly all: APIRoute }
+export type ClubsFunctionApiFactoryResult = { readonly ALL: APIRoute }
 
 export type ClubsFunctionPageFactoryResult<
 	O extends ClubsFunctionFactoryOptions = ClubsFunctionFactoryOptions
