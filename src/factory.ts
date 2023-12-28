@@ -324,8 +324,9 @@ export const apiFactory: ClubsFunctionApiFactory = (options) => {
 		const getPluginConfigById = getPluginConfigByIdFactory(config, plugins)
 		const utils = { getPluginConfigById }
 		const { path } = context.params
+		const [firstPath] = path?.split('/') ?? []
 
-		const plugin = plugins.find((plg) => path?.startsWith(plg.meta.id))
+		const plugin = plugins.find((plg) => firstPath === plg.meta.id)
 		const apiRoutes =
 			plugin && typeof plugin.getApiPaths === 'function'
 				? (await plugin.getApiPaths(plugin.options, config, utils)).filter(
