@@ -51,10 +51,12 @@ const SlotsAsideAfterBuiltInButtons = clubs.slots.filter(
 const SlotsModalContent = clubs.slots.filter(
 	(slot) => slot.slot === ClubsSlotName.AdminModalCcontent
 )
+
+const hashiTheme = 'dark'
 ---
 
 <!DOCTYPE html>
-<html class="dark" lang="en" hashi-theme="dark">
+<html class="dark" lang="en" hashi-theme={hashiTheme}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
