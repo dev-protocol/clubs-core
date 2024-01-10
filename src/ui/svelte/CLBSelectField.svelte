@@ -1,10 +1,10 @@
 <script lang="ts">
-	export let label: string
-	export let name: string
-	export let helper: string
-	export let type: string
-	export let isRequired: boolean
-	export let isDisabled: boolean
+	export let label: string|undefined
+	export let name: string|undefined
+	export let helper: string|undefined
+	export let type: string|undefined
+	export let isRequired: boolean = false
+	export let isDisabled: boolean = false
 
 	function assertType(type: string) {
 		const finalTypes: string[] = []
