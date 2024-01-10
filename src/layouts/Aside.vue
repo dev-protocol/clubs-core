@@ -3,7 +3,7 @@
 		<slot v-if="showConnectButton" name="connect-button" />
 		<div class="relative">
 			<ActionButton
-				class="w-full"
+				class="is-fullwidth"
 				:status="status.save"
 				successText="Saved"
 				loadingText="Saving"
