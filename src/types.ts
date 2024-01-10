@@ -57,12 +57,12 @@ export type ClubsBaseStaticPath<P extends Props = Props> = Readonly<{
 
 export type ClubsStaticPath<P extends Props = Props> = ClubsBaseStaticPath<P> &
 	Readonly<{
-		readonly paths: readonly (undefined | string)[]
+		readonly paths: readonly (undefined | string | RegExp)[]
 		readonly component: AstroComponentFactory
 	}>
 
 export type ClubsApiPath = Readonly<{
-	readonly paths: readonly (undefined | string)[]
+	readonly paths: readonly (undefined | string | RegExp)[]
 	readonly method:
 		| 'CONNECT'
 		| 'DELETE'
@@ -117,7 +117,7 @@ export type ClubsFactoryUtils = {
 }
 
 export type ClubsSlotsFactoryUtils = ClubsFactoryUtils & {
-	readonly paths: readonly (undefined | string)[]
+	readonly paths: readonly (undefined | string | RegExp)[]
 	readonly factory: 'page' | 'admin'
 }
 
@@ -284,7 +284,7 @@ export type ClubsFunctionFactoryResult<T> = {
 	readonly getCurrentConfig: () => Promise<ClubsConfiguration>
 }
 
-export type ClubsFunctionApiFactoryResult = { readonly all: APIRoute }
+export type ClubsFunctionApiFactoryResult = { readonly ALL: APIRoute }
 
 export type ClubsFunctionPageFactoryResult<
 	O extends ClubsFunctionFactoryOptions = ClubsFunctionFactoryOptions

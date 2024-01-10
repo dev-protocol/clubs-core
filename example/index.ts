@@ -49,9 +49,8 @@ export const getApiPaths = (async (options) => [
 	{
 		paths: [],
 		method: 'GET',
-		handler: ({ request }) => ({
-			body: JSON.stringify({ options, body: request.body }),
-		}),
+		handler: ({ request }) =>
+			new Response(JSON.stringify({ options, body: request.body })),
 	},
 ]) satisfies ClubsFunctionGetApiPaths
 

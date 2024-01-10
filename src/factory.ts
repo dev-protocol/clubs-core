@@ -25,6 +25,8 @@ import type {
 import { ClubsPluginCategory } from './types'
 import { getClubsConfig } from './getClubsConfig'
 import type { APIRoute, Props } from 'astro'
+import { regexpToSymbol } from './fixtures/regexp'
+import { routerFactory } from './fixtures'
 
 type Plugins<P extends ClubsFunctionPlugin = ClubsFunctionPlugin> =
 	readonly ClubsPluginDetails<P>[]
@@ -142,7 +144,7 @@ const _slotsFromPlugins =
 	(config: ClubsConfiguration, factory: 'page' | 'admin') =>
 	async (
 		plugins: Plugins,
-		paths: readonly (undefined | string)[],
+		paths: readonly (undefined | string | RegExp)[],
 		additionalProps?: Props
 	): Promise<ClubsFunctionGetSlotsResults> => {
 		const results = await Promise.all(
@@ -167,8 +169,9 @@ const _slotsFromPlugins =
 		return res
 	}
 
-const _pathsToPage = (paths: readonly (string | undefined)[]) =>
-	paths.join('/') || undefined
+const _pathsToPage = (paths: readonly (string | RegExp | undefined)[]) =>
+	paths.map((p) => (p instanceof RegExp ? regexpToSymbol(p) : p)).join('/') ||
+	undefined
 
 const _compose = <
 	P extends Props,
@@ -315,33 +318,34 @@ export const adminFactory: ClubsFunctionAdminFactory = (options) => {
 }
 
 export const apiFactory: ClubsFunctionApiFactory = (options) => {
-	const all: APIRoute = async (context) => {
+	const ALL: APIRoute = async (context) => {
 		const [config] = await getClubsConfig(options.config)
 		const plugins = await _listPlugins(config, options.plugins)
 		const getPluginConfigById = getPluginConfigByIdFactory(config, plugins)
 		const utils = { getPluginConfigById }
 		const { path } = context.params
+		const [firstPath] = path?.split('/') ?? []
 
-		const plugin = plugins.find((plg) => path?.startsWith(plg.meta.id))
+		const plugin = plugins.find((plg) => firstPath === plg.meta.id)
 		const apiRoutes =
 			plugin && typeof plugin.getApiPaths === 'function'
-				? await plugin.getApiPaths(plugin.options, config, utils)
-				: undefined
+				? (await plugin.getApiPaths(plugin.options, config, utils)).filter(
+						({ method }) => method === context.request.method
+				  )
+				: []
 
-		const apiRoute = apiRoutes
-			? apiRoutes.find(({ paths, method }) => {
-					const apipath = `${plugin?.meta.id}/${paths.join('/')}`
-					const apipathSlash = `${apipath}/`
-					return (
-						method === context.request.method &&
-						(path === apipath || path === apipathSlash)
-					)
-			  })
-			: undefined
+		const router = routerFactory(apiRoutes, (i) =>
+			_pathsToPage([plugin?.meta.id, ...i.paths])
+		)
+		const routerWithSlash = routerFactory(
+			apiRoutes,
+			(i) => `${_pathsToPage([plugin?.meta.id, ...i.paths])}/`
+		)
+		const apiRoute = router(path) ?? routerWithSlash(path)
 		const response = apiRoute
 			? apiRoute.handler(context)
 			: new Response(null, { status: 404 })
 		return response
 	}
-	return { all }
+	return { ALL }
 }
