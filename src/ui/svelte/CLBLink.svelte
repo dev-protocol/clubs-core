@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let link: string
-	const target: string | null = link && _assertTarget(link)
+	export let link: string|undefined
+	const target: string|undefined = link && _assertTarget(link)
 
 	function _assertTarget(link: string): string {
 		const _isExternalLink = (link: string): boolean =>

@@ -1,15 +1,16 @@
 <script lang="ts">
-	export let id: string
-	export let name: string
-	export let value: string
-	export let type: string
-	export let label: string
-	export let helper: string
-	export let media: string
-	export let mediaAlt: string
-	export let isChecked: boolean
-	export let isDisabled: boolean
-	export let onChange: (...args: any) => void
+	export let id: string|undefined
+	export let name: string|undefined
+	export let value: string|undefined
+	export let type: string|undefined
+	export let label: string|undefined
+	export let helper: string|undefined
+	export let media: string|undefined
+	export let mediaAlt: string|undefined
+	export let isChecked: boolean = false
+	export let isDisabled: boolean = false
+	export let onChange: (...args: any) => void|undefined
+	export let onChange: (...args: any) => void|undefined
 
 	function _assertType(type: string): string {
 		const finalTypes: string[] = []
