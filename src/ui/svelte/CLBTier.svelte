@@ -1,9 +1,9 @@
 <script lang="ts">
 	import CLBSkeleton from './CLBSkeleton.svelte'
 
-	export let title: string|undefined
-	export let subtitle: string|undefined
-	export let media: string|undefined
+	export let title: string
+	export let subtitle: string
+	export let media: string
 </script>
 
 <div class="clb-tier">

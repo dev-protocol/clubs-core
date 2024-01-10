@@ -1,9 +1,9 @@
 <script lang="ts">
-	export let id: string|undefined
-	export let name: string|undefined
-	export let value: string|undefined
-	export let isChecked: boolean = false
-	export let isDisabled: boolean = false
+	export let id: string
+	export let name: string
+	export let value: string
+	export let isChecked: boolean
+	export let isDisabled: boolean
 </script>
 
 <input

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { handleTarget, handleVariants } from '../lib'
 
-	export let link: string|undefined
-	export let type: string|undefined
+	export let link: string | null
+	export let type: string | null
 	export let isDisabled: boolean = false
-	export let onClick: () => void|undefined
+	export let onClick: () => void
 	export let nativeType: 'button' | 'submit' | 'reset' | null | undefined
 
 	function _assertType(type: string): string {
