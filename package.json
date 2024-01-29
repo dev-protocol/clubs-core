@@ -131,7 +131,7 @@
 		"ethers": "6.10.0",
 		"glob": "10.3.10",
 		"husky": "9.0.6",
-		"npm-run-all2": "5.0.2",
+		"npm-run-all2": "6.1.1",
 		"open-cli": "^8.0.0",
 		"postcss": "8.4.33",
 		"prettier": "2.8.8",
