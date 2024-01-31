@@ -12,8 +12,12 @@ import Modal from './Modal.astro'
 import '../styles'
 import ConnectButton from './components/ConnectButton.vue'
 
+type Props = ClubsPropsAdminPages & {
+	showAside?: boolean
+}
+
 const { page } = Astro.params
-const { clubs, showAside = true } = Astro.props as ClubsPropsAdminPages
+const { clubs, showAside = true } = Astro.props
 
 const config = decode(clubs.encodedClubsConfiguration)
 const { name } = config
@@ -77,11 +81,13 @@ const SlotsModalContent = clubs.slots.filter(
 		{SlotsBodyBeforeContents.map((Slot) => <Slot.component {...Slot.props} />)}
 
 		<div
-			class="grid gap-20 lg:mr-20 lg:auto-cols-[18rem_minmax(auto,_1fr)_12rem] lg:grid-flow-col"
+			id="__clubs:main-container__"
+			data-show-navigation="false"
+			class="group grid gap-20 lg:mr-20 lg:auto-cols-[18rem_minmax(auto,_1fr)_12rem] lg:grid-flow-col data-[show-navigation=true]:lg:ml-20 data-[show-navigation=true]:lg:auto-cols-[minmax(auto,_1fr)_12rem]"
 		>
 			<header
 				id="__clubs:header__"
-				class="fixed z-50 grid hidden max-h-screen min-h-screen w-full content-start gap-16 overflow-y-scroll bg-surface-300 px-8 py-16 lg:relative lg:grid lg:max-h-fit lg:overflow-y-auto"
+				class="fixed z-50 grid hidden max-h-screen min-h-screen w-full content-start gap-16 overflow-y-scroll bg-surface-300 px-8 py-16 group-data-[show-navigation=true]:hidden lg:relative lg:grid lg:max-h-fit lg:overflow-y-auto"
 			>
 				<AdminSidebar page={page} name={name} enabledPlugins={enabledPlugins}>
 					<slot name="admin:sidebar:before-title" slot="before-title" />
@@ -124,7 +130,8 @@ const SlotsModalContent = clubs.slots.filter(
 				<button
 					id="__clubs:sidebar-close__"
 					class="fixed bottom-[3rem] left-1/2 flex aspect-square w-14 -translate-x-1/2 items-center justify-center rounded-full bg-white text-dp-white-ink shadow-2xl lg:hidden"
-					><XMark />
+				>
+					<XMark />
 				</button>
 			</header>
 			<main class="container mx-auto px-2 py-8 lg:px-0 lg:py-16">
