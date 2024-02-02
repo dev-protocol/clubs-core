@@ -19,7 +19,6 @@ function toBuffer(ab: ArrayBuffer) {
 test('Returns decoded configuration', (t) => {
 	const config: ClubsConfiguration = {
 		name: 'TEST',
-		adminPageVisibility: true,
 		twitterHandle: '@TEST',
 		description: '',
 		url: 'https://example.com',
@@ -62,7 +61,6 @@ test('Returns decoded configuration', (t) => {
 test('Bigint less than or equal MAX_SAFE_INTEGER is handled as a number', (t) => {
 	const config: ClubsConfiguration = {
 		name: '',
-		adminPageVisibility: true,
 		twitterHandle: '',
 		description: '',
 		url: '',
