@@ -5,6 +5,7 @@ import type { ClubsConfiguration } from './types'
 test('Returns base64 encoded yaml string', (t) => {
 	const config: ClubsConfiguration = {
 		name: 'TEST',
+		adminPageVisibility: true,
 		twitterHandle: '@TEST',
 		description: '',
 		url: 'https://example.com',

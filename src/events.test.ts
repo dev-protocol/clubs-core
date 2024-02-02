@@ -13,6 +13,7 @@ import { updatePluginOptionsEventListener } from './fixtures/utils'
 
 const singleOptionPluginConfig: ClubsConfiguration = {
 	name: '',
+	adminPageVisibility: true,
 	twitterHandle: '',
 	description: '',
 	url: '',
