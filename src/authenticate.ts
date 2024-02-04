@@ -8,6 +8,7 @@ import {
 } from 'ethers'
 import { decode } from './decode'
 import { clientsProperty } from '@devprotocol/dev-kit/agent'
+import { ClubsConfiguration } from './types'
 
 export type ClubsFunctionAuthenticationAdminParams = {
 	readonly signature: string
@@ -54,14 +55,13 @@ export const isAdmin = async ({
 	provider,
 }: {
 	readonly address: string
-	readonly previousConfiguration: string
+	readonly previousConfiguration: ClubsConfiguration
 	readonly provider: AbstractProvider | ContractRunner
 }) => {
-	const previousConfig = decode(previousConfiguration)
 
 	const propertyClient = await clientsProperty(
 		provider,
-		previousConfig.propertyAddress
+		previousConfiguration.propertyAddress
 	)
 
 	// eslint-disable-next-line functional/no-conditional-statement
@@ -78,5 +78,5 @@ export const isAdmin = async ({
 		formatUnits((userBalance * WeiPerEther) / totalSupply, 16)
 	)
 
-	return userShare >= previousConfig.adminRolePoints
+	return userShare >= previousConfiguration.adminRolePoints
 }
