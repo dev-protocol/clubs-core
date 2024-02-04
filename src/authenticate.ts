@@ -58,7 +58,6 @@ export const isAdmin = async ({
 	readonly previousConfiguration: ClubsConfiguration
 	readonly provider: AbstractProvider | ContractRunner
 }) => {
-
 	const propertyClient = await clientsProperty(
 		provider,
 		previousConfiguration.propertyAddress
