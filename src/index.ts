@@ -20,7 +20,7 @@ export {
 	updatedOptions,
 } from './events'
 export { toBytes } from './parser'
-export { authenticate } from './authenticate'
+export { authenticate, isAdmin } from './authenticate'
 export { clubs as tailwindPreset } from './tailwind'
 export { fetchProfile } from './profile'
 export * from './i18n'
