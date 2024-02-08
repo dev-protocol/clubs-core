@@ -3,8 +3,8 @@ import { CurrencyOption } from './currencyOption'
 export type Tier = Readonly<{
 	readonly title: string
 	readonly id: string
-	readonly amount: number | string
-	readonly currency: CurrencyOption
+	readonly amount?: number | string
+	readonly currency?: CurrencyOption
 	readonly badgeImageDescription?: string
 	readonly badgeImageSrc?: string
 }>
