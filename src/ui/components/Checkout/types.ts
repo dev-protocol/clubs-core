@@ -2,7 +2,7 @@ import type { CurrencyOption } from '../../../constants/currencyOption'
 import type { ClubsPropsPages } from '../../../types'
 
 export type CheckoutOptions = {
-	readonly amount: number
+	readonly amount?: number
 	readonly propertyAddress: string
 	readonly currency?:
 		| CurrencyOption
