@@ -85,6 +85,7 @@
 	"author": "aggre",
 	"license": "MIT",
 	"dependencies": {
+		"@devprotocol/clubs-core": "3.1.8",
 		"@devprotocol/dev-kit": "8.6.0",
 		"@devprotocol/elements": "1.1.0",
 		"@devprotocol/hashi": "2.2.1",
