@@ -1,7 +1,9 @@
-import test from 'ava'
+import { describe, it, expect } from 'vitest'
 import { fetchProfile } from './profile'
 
-test('should fail when non-valid address is passed', async (t) => {
-	const { error } = await fetchProfile('xzy')
-	t.is(error?.message, 'Invalid address')
+describe('fetchProfile', () => {
+	it('should fail when non-valid address is passed', async () => {
+		const { error } = await fetchProfile('xzy')
+		expect(error?.message).toBe('Invalid address')
+	})
 })
