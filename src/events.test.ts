@@ -212,7 +212,7 @@ describe('updatePluginOptionsEventListener', () => {
 		)
 
 		// The new config should not match the old config.
-		expect(singleOptionPluginConfig).not.toBe(newConfig)
+		expect(singleOptionPluginConfig).not.toEqual(newConfig)
 
 		// The new config update should be reflected here.
 		const newCommunityPluginGuildOption = newConfig.plugins[3].options[0]
