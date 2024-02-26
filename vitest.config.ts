@@ -6,6 +6,8 @@ import { vitePreprocess } from '@astrojs/svelte'
 
 export default getViteConfig({
 	plugins: [vue(), svelte({ preprocess: [vitePreprocess()] })],
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	test: {
 		environment: 'jsdom',
 	},
