@@ -1,3 +1,3 @@
-import test from 'ava'
+import { describe } from 'vitest'
 
-test.todo('skip')
+describe.todo('skip')
