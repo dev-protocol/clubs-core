@@ -1,4 +1,4 @@
-import test from 'ava'
+import { describe, it, expect } from 'vitest'
 import type { AstroComponentFactory } from 'astro/dist/runtime/server'
 
 import { encode } from './encode'
@@ -177,43 +177,47 @@ const pluginsMap = [
 	},
 ]
 
-test('should update the config correctly', async (t) => {
-	// Make sure that old config is up to date as per test.
-	const communityPluginGuildOption =
-		singleOptionPluginConfig.plugins[3].options[0]
-	t.is(communityPluginGuildOption.value, 'https://www.testguild.com')
+describe('updatePluginOptionsEventListener', () => {
+	it('should update the config correctly', async () => {
+		// Make sure that old config is up to date as per test.
+		const communityPluginGuildOption =
+			singleOptionPluginConfig.plugins[3].options[0]
+		expect(communityPluginGuildOption.value).toBe('https://www.testguild.com')
 
-	// Encode the configuration.
-	const encodedConfig = encode(singleOptionPluginConfig)
-	// Get the static path info.
-	const { getStaticPaths } = adminFactory({
-		config: () => encodedConfig,
-		plugins: [...pluginsMap],
+		// Encode the configuration.
+		const encodedConfig = encode(singleOptionPluginConfig)
+		// Get the static path info.
+		const { getStaticPaths } = adminFactory({
+			config: () => encodedConfig,
+			plugins: [...pluginsMap],
+		})
+		// Fetch the path details.
+		const pathDetails: any = (await getStaticPaths()).find(
+			(i: any) => i.params.page === 'community'
+		)
+
+		// Assert that pluginIndex is equal to that in the config.
+		expect(pathDetails.props.clubs.currentPluginIndex).toBe(3)
+
+		// Create a new artificial update.
+		const updateDetails: ClubsEventsDetailUpdatePluginOptions = {
+			data: [{ key: 'guild', value: 'https://www.newTestGuild.com' }],
+			pluginIndex: pathDetails.props.clubs.currentPluginIndex || 0,
+		}
+
+		// Call the event listener that performs updates and returns the new config.
+		const newConfig = await updatePluginOptionsEventListener(
+			updateDetails,
+			singleOptionPluginConfig
+		)
+
+		// The new config should not match the old config.
+		expect(singleOptionPluginConfig).not.toBe(newConfig)
+
+		// The new config update should be reflected here.
+		const newCommunityPluginGuildOption = newConfig.plugins[3].options[0]
+		expect(newCommunityPluginGuildOption.value).toBe(
+			'https://www.newTestGuild.com'
+		)
 	})
-	// Fetch the path details.
-	const pathDetails: any = (await getStaticPaths()).find(
-		(i: any) => i.params.page === 'community'
-	)
-
-	// Assert that pluginIndex is equal to that in the config.
-	t.is(pathDetails.props.clubs.currentPluginIndex, 3)
-
-	// Create a new artificial update.
-	const updateDetails: ClubsEventsDetailUpdatePluginOptions = {
-		data: [{ key: 'guild', value: 'https://www.newTestGuild.com' }],
-		pluginIndex: pathDetails.props.clubs.currentPluginIndex || 0,
-	}
-
-	// Call the event listener that performs updates and returns the new config.
-	const newConfig = await updatePluginOptionsEventListener(
-		updateDetails,
-		singleOptionPluginConfig
-	)
-
-	// The new config should not match the old config.
-	t.notDeepEqual(singleOptionPluginConfig, newConfig)
-
-	// The new config update should be reflected here.
-	const newCommunityPluginGuildOption = newConfig.plugins[3].options[0]
-	t.is(newCommunityPluginGuildOption.value, 'https://www.newTestGuild.com')
 })

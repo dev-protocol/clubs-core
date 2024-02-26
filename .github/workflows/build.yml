@@ -27,7 +27,7 @@ jobs:
         run: yarn lint
 
       - name: test
-        run: yarn test
+        run: yarn test:ci
 
       - name: astro check
         run: yarn typecheck
