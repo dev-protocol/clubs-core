@@ -104,7 +104,7 @@
 	"devDependencies": {
 		"@astrojs/lit": "4.0.1",
 		"@astrojs/react": "3.0.10",
-		"@astrojs/svelte": "5.1.0",
+		"@astrojs/svelte": "5.2.0",
 		"@astrojs/tailwind": "5.1.0",
 		"@astrojs/vue": "4.0.8",
 		"@rollup/plugin-commonjs": "25.0.7",
