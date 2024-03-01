@@ -83,7 +83,7 @@ const check = async ({
  * @param options.base - the base URL if the membership has an access control URL and it is a relative URL.
  * @returns
  */
-export const membershipValidatorFactory = async ({
+export const membershipVerifierFactory = async ({
 	provider,
 	propertyAddress,
 	memberships,

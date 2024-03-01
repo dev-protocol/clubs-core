@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, type Mock } from 'vitest'
-import { membershipValidatorFactory } from './memberships'
+import { membershipVerifierFactory } from './memberships'
 import { JsonRpcProvider, ZeroAddress, randomBytes } from 'ethers'
 import { Membership } from './types'
 import { bytes32Hex } from './bytes32Hex'
@@ -48,7 +48,7 @@ vi.mock('cross-fetch', () => {
 
 describe('membershipValidatorFactory', () => {
 	it('should return validator function', async () => {
-		const fn = await membershipValidatorFactory({
+		const fn = await membershipVerifierFactory({
 			provider: new JsonRpcProvider(WILL_BE_ERROR),
 			propertyAddress: ZeroAddress,
 			memberships: [{ payload: CORRECT_PAYLOAD } as unknown as Membership],
@@ -61,7 +61,7 @@ describe('membershipValidatorFactory', () => {
 	describe('the validator function', () => {
 		it('should return {result: true, membership: THE_FIRST_MATCH_MEMBERSHIP}', async () => {
 			const membership = { payload: CORRECT_PAYLOAD }
-			const fn = await membershipValidatorFactory({
+			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(''),
 				propertyAddress: ZeroAddress,
 				memberships: [membership as unknown as Membership],
@@ -79,7 +79,7 @@ describe('membershipValidatorFactory', () => {
 				payload: CORRECT_PAYLOAD,
 				accessControl: { url: '/x/y/z' },
 			}
-			const fn = await membershipValidatorFactory({
+			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(''),
 				propertyAddress: ZeroAddress,
 				memberships: [membership as unknown as Membership],
@@ -101,7 +101,7 @@ describe('membershipValidatorFactory', () => {
 
 		it('should return {result: false, error: THE_ERROR} when the user does not have required membership', async () => {
 			const membership = { payload: randomBytes(3) }
-			const fn = await membershipValidatorFactory({
+			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(''),
 				propertyAddress: ZeroAddress,
 				memberships: [membership as unknown as Membership],
@@ -120,7 +120,7 @@ describe('membershipValidatorFactory', () => {
 
 		it('should return {result: false, error: THE_ERROR} when creating STokensManager instance is failed', async () => {
 			const membership = { payload: randomBytes(3) }
-			const fn = await membershipValidatorFactory({
+			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(WILL_BE_ERROR),
 				propertyAddress: ZeroAddress,
 				memberships: [membership as unknown as Membership],
@@ -139,7 +139,7 @@ describe('membershipValidatorFactory', () => {
 				payload: randomBytes(3),
 				accessControl: { url: WILL_BE_ERROR },
 			}
-			const fn = await membershipValidatorFactory({
+			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(''),
 				propertyAddress: ZeroAddress,
 				memberships: [membership as unknown as Membership],
@@ -161,7 +161,7 @@ describe('membershipValidatorFactory', () => {
 				payload: randomBytes(3),
 				accessControl: { url: WILL_BE_FAILED_TO_FETCH },
 			}
-			const fn = await membershipValidatorFactory({
+			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(''),
 				propertyAddress: ZeroAddress,
 				memberships: [membership as unknown as Membership],
@@ -183,7 +183,7 @@ describe('membershipValidatorFactory', () => {
 				payload: randomBytes(3),
 				accessControl: { url: WILL_BE_UNEXPECTED },
 			}
-			const fn = await membershipValidatorFactory({
+			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(''),
 				propertyAddress: ZeroAddress,
 				memberships: [membership as unknown as Membership],
