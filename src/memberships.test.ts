@@ -1,4 +1,4 @@
-import { describe, expect, it, vi, type Mock } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { membershipVerifierFactory } from './memberships'
 import { JsonRpcProvider, ZeroAddress, randomBytes } from 'ethers'
 import { Membership } from './types'
