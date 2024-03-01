@@ -516,8 +516,8 @@ export type Membership = {
 	readonly id: string
 	readonly name: string
 	readonly description: string
-	readonly price: number
-	readonly currency: 'USDC' | 'DEV' | 'ETH' | 'MATIC'
+	readonly price?: number
+	readonly currency?: 'USDC' | 'DEV' | 'ETH' | 'MATIC'
 	readonly imageSrc: string
 	readonly payload: Uint8Array | string
 	readonly fee?: {

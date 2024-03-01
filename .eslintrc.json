@@ -31,7 +31,8 @@
 				"functional/functional-parameters": "off",
 				"@typescript-eslint/no-explicit-any": "off",
 				"functional/no-return-void": "off",
-				"@typescript-eslint/prefer-readonly-parameter-types": "off"
+				"@typescript-eslint/prefer-readonly-parameter-types": "off",
+				"functional/no-promise-reject": "off"
 			}
 		},
 		{
