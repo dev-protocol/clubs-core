@@ -52,7 +52,11 @@ const check = async ({
 							.catch((err: Error) => err)
 					: new Error('Bad request')
 			)
-			return isNotError(body) ? Number(body) === 1 : body
+			return isNotError(body)
+				? Number(body) === 1
+					? true
+					: new Error(`${url.href} returned a value other than 1.`)
+				: body
 		})) ?? null
 
 	// eslint-disable-next-line functional/no-conditional-statement
@@ -64,7 +68,11 @@ const check = async ({
 	}
 
 	// eslint-disable-next-line functional/no-promise-reject
-	return Promise.reject('Membership not found')
+	return Promise.reject(
+		testForAccessControl instanceof Error
+			? testForAccessControl
+			: new Error('Membership not found')
+	)
 }
 
 export const membershipValidatorFactory = async ({

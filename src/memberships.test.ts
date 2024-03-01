@@ -3,11 +3,13 @@ import { membershipValidatorFactory } from './memberships'
 import { JsonRpcProvider, ZeroAddress, randomBytes } from 'ethers'
 import { Membership } from './types'
 import { bytes32Hex } from './bytes32Hex'
+import { url } from 'inspector'
 
 const CORRECT_TOKEN_ID = 2
 const CORRECT_PAYLOAD = bytes32Hex(randomBytes(3))
 const WILL_BE_ERROR = 'http://error'
 const WILL_BE_FAILED_TO_FETCH = 'http://fail'
+const WILL_BE_UNEXPECTED = 'http://unexpected'
 
 vi.mock('@devprotocol/dev-kit', async () => {
 	const actual = await vi.importActual('@devprotocol/dev-kit')
@@ -32,11 +34,13 @@ vi.mock('@devprotocol/dev-kit', async () => {
 	return { ...actual, clientsSTokens }
 })
 vi.mock('cross-fetch', () => {
-	const lib = vi.fn(async (url: string) => {
-		return url.includes(WILL_BE_ERROR)
+	const lib = vi.fn(async (url: URL) => {
+		return url.href.includes(WILL_BE_ERROR)
 			? Promise.reject(new Error('ERROR'))
-			: url.includes(WILL_BE_FAILED_TO_FETCH)
+			: url.href.includes(WILL_BE_FAILED_TO_FETCH)
 			? { ok: false }
+			: url.href.includes(WILL_BE_UNEXPECTED)
+			? { ok: true, text: async () => `2` }
 			: { ok: true, text: async () => `1` }
 	})
 	return { default: lib }
@@ -83,6 +87,10 @@ describe('membershipValidatorFactory', () => {
 				result: false,
 				error: new Error('Membership not found'),
 			})
+			expect((res.error?.cause as any).errors).toEqual([
+				new Error('Membership not found'),
+				new Error('Membership not found'),
+			])
 		})
 
 		it('should return {result: false, error: THE_ERROR} when creating STokensManager instance is failed', async () => {
@@ -98,6 +106,77 @@ describe('membershipValidatorFactory', () => {
 				result: false,
 				error: new Error('STokensManager instance cannot be created'),
 			})
+			expect(res.error?.cause).toBe(undefined)
+		})
+
+		it('should return {result: false, error: THE_ERROR} when the accessControl returned error', async () => {
+			const membership = {
+				payload: randomBytes(3),
+				accessControl: { url: WILL_BE_ERROR },
+			}
+			const fn = await membershipValidatorFactory({
+				provider: new JsonRpcProvider(''),
+				propertyAddress: ZeroAddress,
+				memberships: [membership as unknown as Membership],
+			})
+			const res = await fn(ZeroAddress)
+
+			expect(res).toEqual({
+				result: false,
+				error: new Error('Membership not found'),
+			})
+			expect((res.error?.cause as any).errors).toEqual([
+				new Error('ERROR'),
+				new Error('ERROR'),
+			])
+		})
+
+		it('should return {result: false, error: THE_ERROR} when fetching the accessControl is failed', async () => {
+			const membership = {
+				payload: randomBytes(3),
+				accessControl: { url: WILL_BE_FAILED_TO_FETCH },
+			}
+			const fn = await membershipValidatorFactory({
+				provider: new JsonRpcProvider(''),
+				propertyAddress: ZeroAddress,
+				memberships: [membership as unknown as Membership],
+			})
+			const res = await fn(ZeroAddress)
+
+			expect(res).toEqual({
+				result: false,
+				error: new Error('Membership not found'),
+			})
+			expect((res.error?.cause as any).errors).toEqual([
+				new Error('Bad request'),
+				new Error('Bad request'),
+			])
+		})
+
+		it('should return {result: false, error: THE_ERROR} when the accessControl returned an unexpected value', async () => {
+			const membership = {
+				payload: randomBytes(3),
+				accessControl: { url: WILL_BE_UNEXPECTED },
+			}
+			const fn = await membershipValidatorFactory({
+				provider: new JsonRpcProvider(''),
+				propertyAddress: ZeroAddress,
+				memberships: [membership as unknown as Membership],
+			})
+			const res = await fn(ZeroAddress)
+
+			expect(res).toEqual({
+				result: false,
+				error: new Error('Membership not found'),
+			})
+			expect((res.error?.cause as any).errors).toEqual([
+				new Error(
+					'http://unexpected/?account=0x0000000000000000000000000000000000000000 returned a value other than 1.'
+				),
+				new Error(
+					'http://unexpected/?account=0x0000000000000000000000000000000000000000 returned a value other than 1.'
+				),
+			])
 		})
 	})
 })
