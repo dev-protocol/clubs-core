@@ -1,9 +1,9 @@
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi, type Mock } from 'vitest'
 import { membershipValidatorFactory } from './memberships'
 import { JsonRpcProvider, ZeroAddress, randomBytes } from 'ethers'
 import { Membership } from './types'
 import { bytes32Hex } from './bytes32Hex'
-import { url } from 'inspector'
+import fetch from 'cross-fetch'
 
 const CORRECT_TOKEN_ID = 2
 const CORRECT_PAYLOAD = bytes32Hex(randomBytes(3))
@@ -38,10 +38,10 @@ vi.mock('cross-fetch', () => {
 		return url.href.includes(WILL_BE_ERROR)
 			? Promise.reject(new Error('ERROR'))
 			: url.href.includes(WILL_BE_FAILED_TO_FETCH)
-			? { ok: false }
+			? { ok: false, url }
 			: url.href.includes(WILL_BE_UNEXPECTED)
-			? { ok: true, text: async () => `2` }
-			: { ok: true, text: async () => `1` }
+			? { ok: true, url, text: async () => `2` }
+			: { ok: true, url, text: async () => `1` }
 	})
 	return { default: lib }
 })
@@ -72,6 +72,31 @@ describe('membershipValidatorFactory', () => {
 				result: true,
 				membership,
 			})
+		})
+
+		it('should use the given options.base as a base URL of the accessControl.url if it is a relative URL', async () => {
+			const membership = {
+				payload: CORRECT_PAYLOAD,
+				accessControl: { url: '/x/y/z' },
+			}
+			const fn = await membershipValidatorFactory({
+				provider: new JsonRpcProvider(''),
+				propertyAddress: ZeroAddress,
+				memberships: [membership as unknown as Membership],
+				base: 'http://base',
+			})
+			const res = await fn(ZeroAddress)
+
+			expect(res).toEqual({
+				result: true,
+				membership,
+			})
+
+			expect(fetch).toHaveBeenCalledWith(
+				new URL(
+					'http://base/x/y/z?account=0x0000000000000000000000000000000000000000'
+				)
+			)
 		})
 
 		it('should return {result: false, error: THE_ERROR} when the user does not have required membership', async () => {

@@ -1,4 +1,4 @@
-import { BrowserProvider, JsonRpcProvider } from 'ethers'
+import type { ContractRunner } from 'ethers'
 import {
 	clientsSTokens,
 	client,
@@ -75,13 +75,21 @@ const check = async ({
 	)
 }
 
+/**
+ * Create a validator function to check the user has the available membership(s).
+ * @param options - all options
+ * @param options.provider - ethers ContractRunner
+ * @param options.memberships - all required memberships (verify one-of-them)
+ * @param options.base - the base URL if the membership has an access control URL and it is a relative URL.
+ * @returns
+ */
 export const membershipValidatorFactory = async ({
 	provider,
 	propertyAddress,
 	memberships,
 	base,
 }: {
-	readonly provider: BrowserProvider | JsonRpcProvider
+	readonly provider: ContractRunner
 	readonly propertyAddress: string
 	readonly memberships: readonly Membership[]
 	readonly base?: string
