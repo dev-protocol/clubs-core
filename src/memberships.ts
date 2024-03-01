@@ -81,7 +81,7 @@ export const membershipValidatorFactory = async ({
 	const clients = await clientsSTokens(provider)
 	const contract =
 		whenDefined(clients, ([l1, l2]) => l1 ?? l2) ??
-		new Error('STokensManager contract cannot be created')
+		new Error('STokensManager instance cannot be created')
 
 	const detectSTokens = whenNotError(contract, client.createDetectSTokens)
 
@@ -108,6 +108,8 @@ export const membershipValidatorFactory = async ({
 					_pairs.map(async (pair) =>
 						check({ pair, base, contract: STokens, account })
 					)
+				).catch(
+					(err: Error) => new Error('Membership not found', { cause: err })
 				)
 		)
 
