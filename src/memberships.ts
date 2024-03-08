@@ -12,7 +12,7 @@ import {
 } from '@devprotocol/util-ts'
 import { type KeyValuePair, xprod } from 'ramda'
 import type { Membership } from './types'
-import fetch from 'cross-fetch'
+import axios from 'axios'
 import { bytes32Hex } from './bytes32Hex'
 
 const check = async ({
@@ -43,15 +43,8 @@ const check = async ({
 			// eslint-disable-next-line functional/no-expression-statement
 			url.searchParams.set('account', account)
 
-			const result = await fetch(url).catch((err: Error) => err)
-			const body = await whenNotError(result, async (r) =>
-				r.ok
-					? r
-							.text()
-							.then((txt: string) => txt)
-							.catch((err: Error) => err)
-					: new Error('Bad request')
-			)
+			const result = await axios(url.toString()).catch((err: Error) => err)
+			const body = await whenNotError(result, (r) => r.data)
 			return isNotError(body)
 				? Number(body) === 1
 					? true
