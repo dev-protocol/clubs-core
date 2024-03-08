@@ -99,7 +99,6 @@
 		"marked": "^10.0.0",
 		"ramda": "^0.29.0",
 		"rxjs": "^7.8.1",
-		"web3modal": "^1.9.12",
 		"yaml": "2.4.1"
 	},
 	"devDependencies": {
