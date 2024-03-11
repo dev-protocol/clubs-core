@@ -24,6 +24,27 @@ describe('routerFactory', () => {
 		expect(router('a/b')?.as).toBe(2)
 	})
 
+	it('router returns a route where exact matches with an undefined', () => {
+		const router = routerFactory(
+			[
+				{
+					params: { page: 'a' },
+					as: 1,
+				},
+				{
+					params: {},
+					as: 2,
+				},
+				{
+					params: { page: 'a/b/c' },
+					as: 3,
+				},
+			],
+			(i) => i.params.page
+		)
+		expect(router(undefined)?.as).toBe(2)
+	})
+
 	it('router returns the first match one when there are duplicate routes', () => {
 		const router = routerFactory(
 			[

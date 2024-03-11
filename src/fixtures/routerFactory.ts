@@ -2,6 +2,7 @@ import { UndefinedOr, whenDefined } from '@devprotocol/util-ts'
 import { symbolToRegexp } from './regexp'
 
 const reg = /(\[\[((?!\]\]).)*\]\])/gi
+const EMPTY = ''
 
 /**
  * Returns a function that searches an array for items that have the string as value of the given key and returns it.
@@ -21,9 +22,9 @@ export const routerFactory =
 	) =>
 	(search?: string): UndefinedOr<T> => {
 		return (
-			list.find((item) => (key(item) ?? '') === search) ??
+			list.find((item) => (key(item) ?? EMPTY) === (search ?? EMPTY)) ??
 			list.find((item) => {
-				const value = `${key(item) ?? ''}`
+				const value = `${key(item) ?? EMPTY}`
 				const match = value.match(reg) ?? undefined
 				const regStr = match?.reduce((p, c) => {
 					const regexp = symbolToRegexp(c).toString().slice(1, -1)
