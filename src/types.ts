@@ -1,4 +1,9 @@
-import type { APIRoute, GetStaticPathsOptions, Props } from 'astro'
+import type {
+	APIRoute,
+	GetStaticPathsOptions,
+	ImageMetadata,
+	Props,
+} from 'astro'
 import type { AstroComponentFactory } from 'astro/dist/runtime/server'
 
 export type ClubsGeneralUnit =
@@ -267,8 +272,8 @@ export type ClubsPluginMeta = {
 	readonly category: ClubsPluginCategory | string
 	readonly token?: ClubsPluginToken
 	readonly offer?: ClubsPluginOffer
-	readonly icon?: string
-	readonly previewImages?: readonly string[]
+	readonly icon?: string | ImageMetadata
+	readonly previewImages?: readonly (string | ImageMetadata)[]
 	readonly description?: string
 	readonly readme?: AstroComponentFactory
 	readonly clubsUrl?: string
