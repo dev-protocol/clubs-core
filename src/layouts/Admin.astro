@@ -21,7 +21,7 @@ const { page } = Astro.params
 const { clubs, showAside = true } = Astro.props
 
 const config = decode(clubs.encodedClubsConfiguration)
-const { name } = config
+const { name, adminPageVisibility } = config
 
 const enabledPlugins = clubs.plugins
 	.filter((plugin) => plugin.enable === true)
@@ -83,12 +83,12 @@ const SlotsModalContent = clubs.slots.filter(
 
 		<div
 			id="__clubs:main-container__"
-			data-show-navigation="false"
-			class="group grid gap-20 lg:mr-20 lg:auto-cols-[18rem_minmax(auto,_1fr)_12rem] lg:grid-flow-col data-[show-navigation=true]:lg:ml-20 data-[show-navigation=true]:lg:auto-cols-[minmax(auto,_1fr)_12rem]"
+			data-show-content={adminPageVisibility === false ? 'false' : 'true'}
+			class="group grid gap-10 lg:mr-20 lg:auto-cols-[18rem_minmax(auto,_1fr)_12rem] lg:grid-flow-col lg:gap-20 data-[show-content=false]:lg:ml-20 data-[show-content=false]:lg:auto-cols-fr data-[show-content=false]:lg:grid-flow-row"
 		>
 			<header
 				id="__clubs:header__"
-				class="fixed z-50 grid hidden max-h-screen min-h-screen w-full content-start gap-16 overflow-y-scroll bg-surface-300 px-8 py-16 group-data-[show-navigation=true]:hidden lg:relative lg:grid lg:max-h-fit lg:overflow-y-auto"
+				class="fixed z-50 grid hidden max-h-screen min-h-screen w-full content-start gap-16 overflow-y-scroll bg-surface-300 px-8 py-16 group-data-[show-content=false]:hidden lg:relative lg:grid lg:max-h-fit lg:overflow-y-auto"
 			>
 				<AdminSidebar page={page} name={name} enabledPlugins={enabledPlugins}>
 					<slot name="admin:sidebar:before-title" slot="before-title" />
@@ -136,7 +136,7 @@ const SlotsModalContent = clubs.slots.filter(
 				</button>
 			</header>
 			<main class="container mx-auto px-2 py-8 lg:px-0 lg:py-16">
-				<div class="break-words">
+				<div class="break-words group-data-[show-content=false]:hidden">
 					{
 						theme ? (
 							<div class="grid gap-16">
@@ -160,10 +160,21 @@ const SlotsModalContent = clubs.slots.filter(
 						)
 					}
 				</div>
+				<div
+					id="__clubs:non-admin-message__"
+					class="group-data-[show-content=true]:hidden"
+				>
+				</div>
+				<div
+					id="__clubs:non-admin-message-loading__"
+					role="presentation"
+					class="invisible mx-auto mt-16 h-8 w-8 animate-spin rounded-full border-l border-r border-t border-surface-ink group-data-[show-content=true]:hidden"
+				>
+				</div>
 			</main>
 			{
 				showAside && (
-					<div class="container mx-auto px-2 py-8 lg:px-0 lg:py-16">
+					<div class="container mx-auto max-w-96 px-2 py-8 lg:px-0 lg:py-16">
 						<Aside showConnectButton={true}>
 							<slot name="clubs:connect-button" slot="aside:connect-button">
 								<ConnectButton client:load chainId={config.chainId} />
@@ -189,7 +200,7 @@ const SlotsModalContent = clubs.slots.filter(
 				</div>
 				<button
 					id="__clubs:sidebar-open__"
-					class="flex aspect-square w-14 items-center justify-center rounded-full bg-white text-dp-white-ink shadow-2xl"
+					class="flex aspect-square w-14 items-center justify-center rounded-full bg-white text-dp-white-ink shadow-2xl group-data-[show-content=false]:hidden"
 					><Bars3BottomLeft />
 				</button>
 			</div>
@@ -203,7 +214,10 @@ const SlotsModalContent = clubs.slots.filter(
 		<slot name="admin:body:after-contents" />
 		{SlotsBodyAfterContents.map((Slot) => <Slot.component {...Slot.props} />)}
 
-		<AdminScripts client:only="svelte" />
+		<AdminScripts
+			client:only="svelte"
+			encodedClubsConfiguration={clubs.encodedClubsConfiguration}
+		/>
 	</body>
 
 	<style>
