@@ -53,7 +53,7 @@
 	})
 
 	onMount(async () => {
-		if (config.adminPageVisibility !== false) return
+		if (config.adminPageVisibility !== 'private') return
 
 		function handleAccessDenied() {
 			const targetDiv = document.getElementById('__clubs:non-admin-message__')

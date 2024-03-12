@@ -83,7 +83,7 @@ const SlotsModalContent = clubs.slots.filter(
 
 		<div
 			id="__clubs:main-container__"
-			data-show-content={adminPageVisibility === false ? 'false' : 'true'}
+			data-show-content={adminPageVisibility === 'private' ? 'false' : 'true'}
 			class="group grid gap-10 lg:mr-20 lg:auto-cols-[18rem_minmax(auto,_1fr)_12rem] lg:grid-flow-col lg:gap-20 data-[show-content=false]:lg:ml-20 data-[show-content=false]:lg:auto-cols-fr data-[show-content=false]:lg:grid-flow-row"
 		>
 			<header

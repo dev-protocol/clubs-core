@@ -44,7 +44,7 @@ export type ClubsPluginDetails<
 
 export type ClubsConfiguration = Readonly<{
 	readonly name: string
-	readonly adminPageVisibility?: boolean
+	readonly adminPageVisibility?: 'public' | 'private'
 	readonly twitterHandle: string
 	readonly description: string
 	readonly url: string
