@@ -1,5 +1,11 @@
 ---
-import { ClubsPropsAdminPages, ClubsSlotName, decode } from '../index'
+import {
+	ClubsPropsAdminPages,
+	ClubsSlotName,
+	decode,
+	ClubsPreferredColorScheme,
+	normalizePreferredColorScheme,
+} from '../index'
 import AdminSidebar from './AdminSidebar.astro'
 import AdminConfigurationManager from './AdminConfigurationManager.astro'
 import AdminThemeSelector from './AdminThemeSelector.svelte'
@@ -32,6 +38,12 @@ const allThemes = clubs.plugins.filter(
 
 const theme = page && page.startsWith('theme')
 
+let UITheme: ClubsPreferredColorScheme = ClubsPreferredColorScheme.System
+if (Astro.cookies.has('theme')) {
+	const cookie = Astro.cookies.get('theme')
+	UITheme = normalizePreferredColorScheme(cookie?.value)
+}
+
 const SlotsBodyBeforeContents = clubs.slots.filter(
 	(slot) => slot.slot === ClubsSlotName.AdminBodyBeforeContents
 )
@@ -59,7 +71,7 @@ const SlotsModalContent = clubs.slots.filter(
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" hashi-theme={UITheme}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />

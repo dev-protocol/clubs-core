@@ -3,10 +3,34 @@
 	import { JsonRpcProvider } from 'ethers'
 	import { isAdmin } from '../authenticate'
 	import { decode } from '../decode'
+	import { ClubsEvents, ClubsPreferredColorScheme } from '../types'
+	import { getPreferredColorScheme } from '../fixtures'
 
 	export let encodedClubsConfiguration: string
 
 	const config = decode(encodedClubsConfiguration)
+
+	const watchUpdateTheme = () => {
+		const theme: ClubsPreferredColorScheme = getPreferredColorScheme()
+		const handler = (t: ClubsPreferredColorScheme) => {
+			if (t === ClubsPreferredColorScheme.System) {
+				document.documentElement.removeAttribute('hashi-theme')
+			} else {
+				document.documentElement.setAttribute('hashi-theme', t)
+			}
+		}
+
+		handler(theme)
+		document.body.addEventListener(
+			ClubsEvents.UpdatePreferredColorScheme,
+			() => {
+				const next = getPreferredColorScheme()
+				handler(next)
+			}
+		)
+	}
+
+	watchUpdateTheme()
 
 	onMount(() => {
 		const header = document.getElementById('__clubs:header__')!
