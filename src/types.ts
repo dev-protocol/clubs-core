@@ -433,6 +433,12 @@ export type ClubsPropsAdminPages<P extends Props = Props> = P & {
 	}
 }
 
+export enum ClubsPreferredColorScheme {
+	System = 'system',
+	Light = 'light',
+	Dark = 'dark',
+}
+
 export enum ClubsEvents {
 	UpdatePluginOptions = 'clubs:update_plugin_options',
 	UpdatedPluginOptions = 'clubs:updated_plugin_options',
@@ -442,6 +448,7 @@ export enum ClubsEvents {
 	SubmitConfiguration = 'clubs:submit_configuration',
 	FinishConfiguration = 'clubs:submit_finish_configuration',
 	ControlModal = 'clubs:control_modal',
+	UpdatePreferredColorScheme = 'clubs:updated_preferred_color_scheme',
 }
 
 export type ClubsEventsDetailUpdatePluginOptions = {
@@ -484,6 +491,10 @@ export type ClubsEventsDetailControlModal = {
 	}
 }
 
+export type ClubsEventsDetailUpdatePreferredColorScheme = {
+	readonly theme: ClubsPreferredColorScheme
+}
+
 export type ClubsEventsUpdatePluginOptions =
 	CustomEvent<ClubsEventsDetailUpdatePluginOptions>
 export type ClubsEventsUpdatedPluginOptions =
@@ -499,6 +510,8 @@ export type ClubsEventsSubmitConfiguration =
 export type ClubsEventsFinishConfiguration =
 	CustomEvent<ClubsEventsDetailFinishConfiguration>
 export type ClubsEventsControlModal = CustomEvent<ClubsEventsDetailControlModal>
+export type ClubsEventsUpdatePreferredColorScheme =
+	CustomEvent<ClubsEventsDetailUpdatePreferredColorScheme>
 
 export type ClubsAstroIntegrationOptions = undefined
 

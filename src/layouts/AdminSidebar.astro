@@ -7,6 +7,7 @@ import IconDesktop from './icons/computer-desktop.astro'
 import IconGroup from './icons/rectangle-group.astro'
 import IconSquareSmall from './icons/square-small.astro'
 import { version, homepage } from '../../package.json'
+import ThemeSwitcher from './components/ThemeSwitcher.vue'
 
 const { page, name, enabledPlugins } = Astro.props as {
 	page?: string
@@ -158,6 +159,8 @@ const navItemPluginInactive = 'hover:bg-surface-200'
 		<li><a class="text-[#88AEFF]" href="/admin/general">General</a></li>
 		<li><a class="text-[#88AEFF]" href="/admin/plugins">Plugins</a></li>
 	</ul>
+
+	<ThemeSwitcher client:only="vue" />
 
 	<span class="text-center"
 		><a
