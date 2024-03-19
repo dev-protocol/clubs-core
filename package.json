@@ -114,7 +114,7 @@
 		"@types/dompurify": "^3.0.4",
 		"@types/get-installed-path": "4.0.3",
 		"@types/marked": "^6.0.0",
-		"@types/node": "20.11.29",
+		"@types/node": "20.11.30",
 		"@types/ramda": "0.29.11",
 		"@types/react": "18.2.67",
 		"@types/react-dom": "18.2.22",
