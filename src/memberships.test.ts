@@ -71,6 +71,20 @@ describe('membershipValidatorFactory', () => {
 			})
 		})
 
+		it.only('should return {result: true, membership: undefined} if the required memberships is empty', async () => {
+			const fn = await membershipVerifierFactory({
+				provider: new JsonRpcProvider(''),
+				propertyAddress: ZeroAddress,
+				memberships: [],
+			})
+			const res = await fn(ZeroAddress)
+
+			expect(res).toEqual({
+				result: true,
+				membership: undefined,
+			})
+		})
+
 		it('should use the given options.base as a base URL of the accessControl.url if it is a relative URL', async () => {
 			const membership = {
 				payload: CORRECT_PAYLOAD,

@@ -122,13 +122,15 @@ export const membershipVerifierFactory = async ({
 		const checkResult = await whenNotErrorAll(
 			[contract, pairs],
 			([STokens, _pairs]) =>
-				Promise.any(
-					_pairs.map(async (pair) =>
-						check({ pair, base, contract: STokens, account })
-					)
-				).catch(
-					(err: Error) => new Error('Membership not found', { cause: err })
-				)
+				_pairs.length > 0
+					? Promise.any(
+							_pairs.map(async (pair) =>
+								check({ pair, base, contract: STokens, account })
+							)
+					  ).catch(
+							(err: Error) => new Error('Membership not found', { cause: err })
+					  )
+					: undefined
 		)
 
 		const result = isNotError(checkResult)
