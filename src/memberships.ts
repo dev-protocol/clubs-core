@@ -77,7 +77,7 @@ const check = async ({
  * @param options - all options
  * @param options.provider - ethers ContractRunner
  * @param options.propertyAddress - the property address
- * @param options.memberships - all required memberships (verify one-of-them)
+ * @param options.account - the account address
  * @param options.base - the base URL if the membership has an access control URL and it is a relative URL.
  * @returns the verifier function
  * @example
@@ -85,19 +85,19 @@ const check = async ({
  * ```ts
  * import { membershipVerifierFactory } from '@devprotocol/clubs-core'
  *
- * const hasRole = await membershipVerifierFactory({provider, propertyAddress, memberships})
- * const res = await hasRole('0x...')
+ * const hasOneOf = await membershipVerifierFactory({provider, propertyAddress, account})
+ * const res = await hasOneOf(memberships)
  * ```
  */
 export const membershipVerifierFactory = async ({
 	provider,
 	propertyAddress,
-	memberships,
+	account,
 	base,
 }: {
 	readonly provider: ContractRunner
 	readonly propertyAddress: string
-	readonly memberships: readonly Membership[]
+	readonly account: string
 	readonly base?: string
 }) => {
 	const clients = await clientsSTokens(provider)
@@ -106,31 +106,30 @@ export const membershipVerifierFactory = async ({
 		new Error('STokensManager instance cannot be created')
 
 	const detectSTokens = whenNotError(contract, client.createDetectSTokens)
+	// gets all sTokens of the passed Property address that the visitor have
+	const allSTokens = await whenNotError(detectSTokens, (detector) =>
+		queue.add(always(detector(propertyAddress, account)))
+	)
 
 	/**
 	 * The verifier function
-	 * @param account - the account address
+	 * @param memberships - the memberships to check (one of them is enough to pass the check)
 	 * @returns the result
 	 * @example
 	 * ```ts
-	 * const hasRole = await membershipVerifierFactory({provider, propertyAddress, memberships})
-	 * const res = await hasRole('0x...')
+	 * const hasOneOf = await membershipVerifierFactory({provider, propertyAddress, account})
+	 * const res = await hasOneOf(memberships)
 	 * console.log(res)
 	 * // { result: true, membership: { payload: '0x...', accessControl: { url: 'http://...' } } }
 	 * ```
 	 */
 	return async (
-		account: string
+		memberships: readonly Membership[]
 	): Promise<{
 		readonly result: boolean
 		readonly membership?: Membership
 		readonly error?: Error
 	}> => {
-		// gets all sTokens of the passed Property address that the visitor have
-		const allSTokens = await whenNotError(detectSTokens, (detector) =>
-			queue.add(always(detector(propertyAddress, account)))
-		)
-
 		// https://ramdajs.com/docs/#xprod
 		const pairs = whenNotError(allSTokens, (list) =>
 			xprod(memberships, list ?? [])

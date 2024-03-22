@@ -48,9 +48,11 @@ describe('membershipValidatorFactory', () => {
 		const fn = await membershipVerifierFactory({
 			provider: new JsonRpcProvider(WILL_BE_ERROR),
 			propertyAddress: ZeroAddress,
-			memberships: [{ payload: CORRECT_PAYLOAD } as unknown as Membership],
+			account: ZeroAddress,
 		})
-		const res = await fn(ZeroAddress)
+		const res = await fn([
+			{ payload: CORRECT_PAYLOAD } as unknown as Membership,
+		])
 
 		expect(res).toBeTruthy()
 	})
@@ -61,9 +63,9 @@ describe('membershipValidatorFactory', () => {
 			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(''),
 				propertyAddress: ZeroAddress,
-				memberships: [membership as unknown as Membership],
+				account: ZeroAddress,
 			})
-			const res = await fn(ZeroAddress)
+			const res = await fn([membership as unknown as Membership])
 
 			expect(res).toEqual({
 				result: true,
@@ -75,9 +77,9 @@ describe('membershipValidatorFactory', () => {
 			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(''),
 				propertyAddress: ZeroAddress,
-				memberships: [],
+				account: ZeroAddress,
 			})
-			const res = await fn(ZeroAddress)
+			const res = await fn([])
 
 			expect(res).toEqual({
 				result: true,
@@ -93,10 +95,10 @@ describe('membershipValidatorFactory', () => {
 			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(''),
 				propertyAddress: ZeroAddress,
-				memberships: [membership as unknown as Membership],
+				account: ZeroAddress,
 				base: 'http://base',
 			})
-			const res = await fn(ZeroAddress)
+			const res = await fn([membership as unknown as Membership])
 
 			expect(res).toEqual({
 				result: true,
@@ -115,9 +117,9 @@ describe('membershipValidatorFactory', () => {
 			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(''),
 				propertyAddress: ZeroAddress,
-				memberships: [membership as unknown as Membership],
+				account: ZeroAddress,
 			})
-			const res = await fn(ZeroAddress)
+			const res = await fn([membership as unknown as Membership])
 
 			expect(res).toEqual({
 				result: false,
@@ -134,9 +136,9 @@ describe('membershipValidatorFactory', () => {
 			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(WILL_BE_ERROR),
 				propertyAddress: ZeroAddress,
-				memberships: [membership as unknown as Membership],
+				account: ZeroAddress,
 			})
-			const res = await fn(ZeroAddress)
+			const res = await fn([membership as unknown as Membership])
 
 			expect(res).toEqual({
 				result: false,
@@ -153,9 +155,9 @@ describe('membershipValidatorFactory', () => {
 			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(''),
 				propertyAddress: ZeroAddress,
-				memberships: [membership as unknown as Membership],
+				account: ZeroAddress,
 			})
-			const res = await fn(ZeroAddress)
+			const res = await fn([membership as unknown as Membership])
 
 			expect(res).toEqual({
 				result: false,
@@ -175,9 +177,9 @@ describe('membershipValidatorFactory', () => {
 			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(''),
 				propertyAddress: ZeroAddress,
-				memberships: [membership as unknown as Membership],
+				account: ZeroAddress,
 			})
-			const res = await fn(ZeroAddress)
+			const res = await fn([membership as unknown as Membership])
 
 			expect(res).toEqual({
 				result: false,
