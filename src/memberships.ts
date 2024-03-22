@@ -10,10 +10,13 @@ import {
 	whenNotError,
 	whenNotErrorAll,
 } from '@devprotocol/util-ts'
-import { type KeyValuePair, xprod } from 'ramda'
+import { always, type KeyValuePair, xprod } from 'ramda'
 import type { Membership } from './types'
 import axios from 'axios'
 import { bytes32Hex } from './bytes32Hex'
+import pQueue from 'p-queue'
+
+const queue = new pQueue({ concurrency: 3 })
 
 const check = async ({
 	contract,
@@ -32,7 +35,8 @@ const check = async ({
 
 	const testForPayload = await whenDefined(
 		payload,
-		async (v) => (await sTokenContract.payloadOf(tokenId)) === v
+		async (v) =>
+			(await queue.add(always(sTokenContract.payloadOf(tokenId)))) === v
 	)
 	const testForAccessControl =
 		(await whenDefined(mem.accessControl?.url, async (_accessControl) => {
@@ -124,11 +128,13 @@ export const membershipVerifierFactory = async ({
 	}> => {
 		// gets all sTokens of the passed Property address that the visitor have
 		const allSTokens = await whenNotError(detectSTokens, (detector) =>
-			detector(propertyAddress, account)
+			queue.add(always(detector(propertyAddress, account)))
 		)
 
 		// https://ramdajs.com/docs/#xprod
-		const pairs = whenNotError(allSTokens, (list) => xprod(memberships, list))
+		const pairs = whenNotError(allSTokens, (list) =>
+			xprod(memberships, list ?? [])
+		)
 
 		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/any
 		const checkResult = await whenNotErrorAll(
