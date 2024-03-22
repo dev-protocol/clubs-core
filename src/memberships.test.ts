@@ -71,7 +71,7 @@ describe('membershipValidatorFactory', () => {
 			})
 		})
 
-		it.only('should return {result: true, membership: undefined} if the required memberships is empty', async () => {
+		it('should return {result: true, membership: undefined} if the required memberships is empty', async () => {
 			const fn = await membershipVerifierFactory({
 				provider: new JsonRpcProvider(''),
 				propertyAddress: ZeroAddress,
