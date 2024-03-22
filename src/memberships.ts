@@ -103,6 +103,18 @@ export const membershipVerifierFactory = async ({
 
 	const detectSTokens = whenNotError(contract, client.createDetectSTokens)
 
+	/**
+	 * The verifier function
+	 * @param account - the account address
+	 * @returns the result
+	 * @example
+	 * ```ts
+	 * const hasRole = await membershipVerifierFactory({provider, propertyAddress, memberships})
+	 * const res = await hasRole('0x...')
+	 * console.log(res)
+	 * // { result: true, membership: { payload: '0x...', accessControl: { url: 'http://...' } } }
+	 * ```
+	 */
 	return async (
 		account: string
 	): Promise<{
