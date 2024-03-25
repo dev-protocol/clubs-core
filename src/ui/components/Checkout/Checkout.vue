@@ -165,6 +165,7 @@ const parsedAmount: ComputedRef<UndefinedOr<bigint>> = computed(() =>
 		  )
 		: undefined
 )
+const isPriced = computed<boolean>(() => props.amount !== undefined)
 
 const approve = function () {
 	whenDefinedAll(
@@ -510,7 +511,7 @@ onUnmounted(() => {
 				<h3 class="text-sm text-black/50">
 					<span>{{ previewName }}</span>
 				</h3>
-				<p class="flex items-center gap-3 text-2xl font-bold">
+				<p v-if="isPriced" class="flex items-center gap-3 text-2xl font-bold">
 					{{
 						`${
 							Number(amount) > 1 ? Number(amount).toLocaleString() : amount
@@ -621,7 +622,7 @@ onUnmounted(() => {
 		</section>
 
 		<section
-			v-if="!useInjectedTransactionForm"
+			v-if="!useInjectedTransactionForm && isPriced"
 			class="sticky bottom-0 flex grow flex-col gap-5 rounded-b-xl border-t border-dp-white-300 bg-white p-5"
 			v-bind:class="
 				!props.accessControlUrl || (props.accessControlUrl && accessAllowed)
