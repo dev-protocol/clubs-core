@@ -3,12 +3,13 @@
 /* eslint-disable functional/no-loop-statement */
 import { describe, it, expect } from 'vitest'
 import { bytes32Hex } from './bytes32Hex'
+import { keccak256 } from 'ethers'
 
 describe('bytes32Hex', () => {
 	/**
 	 * @todo Implement this test
 	 */
-	it('Passing a UInt8Array returns keccak256(val)', () => {
+	it('should returns hex from Uint8Array', () => {
 		const str = 'test'
 		// change to Uint8Array
 		const uint8Array = new Uint8Array(str.length)
@@ -22,10 +23,42 @@ describe('bytes32Hex', () => {
 		)
 	})
 
-	it('Passing a string returns itself', () => {
-		const str = 'test'
+	it('should returns hex from an array like object', () => {
+		const v = { 0: 0, 1: 1, 2: 2, 3: 3 }
+		const expected = keccak256(new Uint8Array([0, 1, 2, 3]))
+
+		const res = bytes32Hex(v)
+		expect(res).toEqual(expected)
+	})
+
+	it('should returns hex from an array-like object has string keys', () => {
+		const v = { '0': 0, '1': 1, '2': 2, '3': 3 }
+		const expected = keccak256(new Uint8Array([0, 1, 2, 3]))
+
+		const res = bytes32Hex(v)
+		expect(res).toEqual(expected)
+	})
+
+	it('should returns hex from a array value-like string', () => {
+		const v = '0,1,2,3'
+		const expected = keccak256(new Uint8Array([0, 1, 2, 3]))
+
+		const res = bytes32Hex(v)
+		expect(res).toEqual(expected)
+	})
+
+	it('should returns hex from an object-like string', () => {
+		const v = JSON.stringify({ '0': 0, '1': 1, '2': 2, '3': 3 })
+		const expected = keccak256(new Uint8Array([0, 1, 2, 3]))
+
+		const res = bytes32Hex(v)
+		expect(res).toEqual(expected)
+	})
+
+	it('should returns a hex like string as is', () => {
+		const str = '0x'
 
 		const res = bytes32Hex(str)
-		expect(res).toEqual('test')
+		expect(res).toEqual('0x')
 	})
 })
