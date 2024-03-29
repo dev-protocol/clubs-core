@@ -87,6 +87,20 @@ describe('membershipValidatorFactory', () => {
 			})
 		})
 
+		it('should return {result: true, membership: undefined} if the required memberships is empty and the user also does not have any memberships.', async () => {
+			const fn = await membershipVerifierFactory({
+				provider: new JsonRpcProvider(''),
+				propertyAddress: ZeroAddress,
+				account: '0x533ae9d683B10C02EbDb05471642F85230071FC3',
+			})
+			const res = await fn([])
+
+			expect(res).toEqual({
+				result: true,
+				membership: undefined,
+			})
+		})
+
 		it('should use the given options.base as a base URL of the accessControl.url if it is a relative URL', async () => {
 			const membership = {
 				payload: CORRECT_PAYLOAD,
@@ -110,6 +124,24 @@ describe('membershipValidatorFactory', () => {
 					'http://base/x/y/z?account=0x0000000000000000000000000000000000000000'
 				).toString()
 			)
+		})
+
+		it('should return {result: false, error: THE_ERROR} when the user does not have any memberships.', async () => {
+			const membership = { payload: randomBytes(3) }
+			const fn = await membershipVerifierFactory({
+				provider: new JsonRpcProvider(''),
+				propertyAddress: ZeroAddress,
+				account: '0x533ae9d683B10C02EbDb05471642F85230071FC3',
+			})
+			const res = await fn([membership as unknown as Membership])
+
+			expect(res).toEqual({
+				result: false,
+				error: new Error(
+					'account:0x533ae9d683B10C02EbDb05471642F85230071FC3 does not have any memberships.'
+				),
+			})
+			expect(res.error?.cause as any).toBeUndefined()
 		})
 
 		it('should return {result: false, error: THE_ERROR} when the user does not have required membership', async () => {

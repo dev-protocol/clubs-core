@@ -147,7 +147,9 @@ export const membershipVerifierFactory = async ({
 					  ).catch(
 							(err: Error) => new Error('Membership not found', { cause: err })
 					  )
-					: undefined
+					: memberships.length === 0
+					? undefined
+					: new Error(`account:${account} does not have any memberships.`)
 		)
 
 		const result = isNotError(checkResult)
