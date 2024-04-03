@@ -83,7 +83,7 @@
 
 		const mainContainer = document.getElementById('__clubs:main-container__')
 
-		if(mainContainer && dataTypeValue === 'marketplace' ){
+		if (mainContainer && dataTypeValue === 'marketplace') {
 			mainContainer.dataset.showContent = 'true'
 			return
 		}
@@ -102,7 +102,6 @@
 			)
 			if (loading) loading.classList.toggle('invisible')
 		}
-
 
 		const provider = new JsonRpcProvider(config.rpcUrl)
 		const { connection } = await import('../connection')
