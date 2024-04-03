@@ -77,7 +77,16 @@
 	})
 
 	onMount(async () => {
+		const dataTypeValue = document.body.getAttribute('data-page')
+
 		if (config.adminPageVisibility !== 'private') return
+
+		const mainContainer = document.getElementById('__clubs:main-container__')
+
+		if (mainContainer && dataTypeValue === 'marketplace') {
+			mainContainer.dataset.showContent = 'true'
+			return
+		}
 
 		function handleAccessDenied() {
 			const targetDiv = document.getElementById('__clubs:non-admin-message__')
@@ -94,7 +103,6 @@
 			if (loading) loading.classList.toggle('invisible')
 		}
 
-		const mainContainer = document.getElementById('__clubs:main-container__')
 		const provider = new JsonRpcProvider(config.rpcUrl)
 		const { connection } = await import('../connection')
 
