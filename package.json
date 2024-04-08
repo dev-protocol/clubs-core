@@ -117,7 +117,7 @@
 		"@types/marked": "^6.0.0",
 		"@types/node": "20.12.5",
 		"@types/ramda": "0.29.12",
-		"@types/react": "18.2.74",
+		"@types/react": "18.2.75",
 		"@types/react-dom": "18.2.24",
 		"@typescript-eslint/eslint-plugin": "5.62.0",
 		"@typescript-eslint/parser": "5.62.0",
