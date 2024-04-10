@@ -122,7 +122,7 @@
 		"@typescript-eslint/eslint-plugin": "5.62.0",
 		"@typescript-eslint/parser": "5.62.0",
 		"@webcomponents/template-shadowroot": "0.2.1",
-		"astro": "4.5.17",
+		"astro": "4.5.18",
 		"autoprefixer": "10.4.19",
 		"del-cli": "^5.1.0",
 		"eslint": "8.57.0",
