@@ -53,8 +53,10 @@ export const Strings = {
 		en: ([amount]) => `${amount} DEV will be staked automatically.`,
 		ja: ([amount]) => `${amount} DEVは自動的にステーキングされます。`,
 	},
-	AutomaticEarned:{
-		en: ([amount, currency]) => `${amount} ${currency} will be directly earned by the owner!`,
-		ja: ([amount, currency]) => `${amount} ${currency} はオーナーに直接支払われます！`,
+	AutomaticEarned: {
+		en: ([amount, currency]) =>
+			`${amount} ${currency} will be directly earned by the owner!`,
+		ja: ([amount, currency]) =>
+			`${amount} ${currency} はオーナーに直接支払われます！`,
 	},
 } satisfies ClubsI18nParts

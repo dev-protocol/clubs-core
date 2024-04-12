@@ -466,9 +466,9 @@ onMounted(async () => {
 			stakingAmount.value = !props.useDiscretePaymentFlow
 				? new BigNumber(devAmount ?? 0).dp(6).toNumber()
 				: undefined
-			
-			directAmount.value = !props.useDiscretePaymentFlow ?
-				new BigNumber(_amount).times(new BigNumber(feeDeposit)).toNumber()
+
+			directAmount.value = !props.useDiscretePaymentFlow
+				? new BigNumber(_amount).times(new BigNumber(feeDeposit)).toNumber()
 				: undefined
 
 			if (previewImageSrc.value || previewName.value) {
@@ -530,7 +530,12 @@ onUnmounted(() => {
 					{{ i18n('AutomaticStaking', [stakingAmount.toLocaleString()]) }}
 				</p>
 				<p v-if="directAmount" class="text-sm text-black/90">
-					{{ i18n('AutomaticEarned', [directAmount.toLocaleString(), verifiedPropsCurrency.toUpperCase()])}}
+					{{
+						i18n('AutomaticEarned', [
+							directAmount.toLocaleString(),
+							verifiedPropsCurrency.toUpperCase(),
+						])
+					}}
 				</p>
 			</span>
 			<aside
