@@ -75,6 +75,7 @@ const chain = ref<UndefinedOr<number>>(undefined)
 const previewImageSrc = ref<UndefinedOr<string>>(props.itemImageSrc)
 const previewName = ref<UndefinedOr<string>>(props.itemName)
 const stakingAmount = ref<UndefinedOr<number>>(undefined)
+const directAmount = ref<UndefinedOr<number>>(undefined)
 const isCheckingAccessControl = ref<boolean>(false)
 const accessControlError = ref<UndefinedOr<Error>>(undefined)
 const accessAllowed = ref<UndefinedOr<boolean>>(undefined)
@@ -454,7 +455,9 @@ onMounted(async () => {
 					: stakeWithAnyTokens({
 							provider,
 							propertyAddress: _destination,
-							tokenAmount: _amount.toString(),
+							tokenAmount: new BigNumber(_amount)
+								.times(new BigNumber(1).minus(feeDeposit))
+								.toString(),
 							currency: verifiedPropsCurrency.value,
 							chain: _chain,
 					  }).then((res) => formatUnits(res?.estimatedDev ?? 0)),
@@ -462,6 +465,10 @@ onMounted(async () => {
 
 			stakingAmount.value = !props.useDiscretePaymentFlow
 				? new BigNumber(devAmount ?? 0).dp(6).toNumber()
+				: undefined
+
+			directAmount.value = !props.useDiscretePaymentFlow
+				? new BigNumber(_amount).times(new BigNumber(feeDeposit)).toNumber()
 				: undefined
 
 			if (previewImageSrc.value || previewName.value) {
@@ -521,6 +528,14 @@ onUnmounted(() => {
 				</p>
 				<p v-if="stakingAmount" class="text-sm text-black/90">
 					{{ i18n('AutomaticStaking', [stakingAmount.toLocaleString()]) }}
+				</p>
+				<p v-if="directAmount" class="text-sm text-black/90">
+					{{
+						i18n('AutomaticEarned', [
+							directAmount.toLocaleString(),
+							verifiedPropsCurrency.toUpperCase(),
+						])
+					}}
 				</p>
 			</span>
 			<aside
