@@ -1,4 +1,4 @@
-import type { ContractRunner } from 'ethers'
+import { MaxUint256, parseUnits, ZeroAddress, type ContractRunner } from 'ethers'
 import {
 	clientsSTokens,
 	client,
@@ -10,11 +10,14 @@ import {
 	whenNotError,
 	whenNotErrorAll,
 } from '@devprotocol/util-ts'
-import { always, type KeyValuePair, xprod } from 'ramda'
+import { always,  type KeyValuePair, xprod } from 'ramda'
 import type { Membership } from './types'
 import axios from 'axios'
 import { bytes32Hex } from './bytes32Hex'
 import pQueue from 'p-queue'
+import { getTokenAddress } from './fixtures'
+import { CurrencyOption } from './constants'
+import BigNumber from 'bignumber.js'
 
 const queue = new pQueue({ concurrency: 3 })
 
@@ -165,4 +168,40 @@ export const membershipVerifierFactory = async ({
 		// returns the result
 		return result
 	}
+}
+
+export const membershipToStruct =(mem: Membership, chain: number):{
+	readonly src:string
+	readonly name:string
+	readonly description:string
+	readonly requiredTokenAmount:bigint
+	readonly requiredTokenFee:bigint
+	readonly gateway:string
+	readonly token:string
+} => {
+    const hasPrice = mem.price !== undefined
+    const hasNoPrice = !hasPrice
+	const token = whenDefined(mem.currency, currency=> getTokenAddress(currency, chain))
+	const decimals = whenDefined(mem.currency, currency=> currency.toLowerCase() === CurrencyOption.USDC ? 6 : 18)
+    return {
+        src: mem.imageSrc,
+        name: JSON.stringify(mem.name).slice(1, -1),
+        description: JSON.stringify(mem.description).slice(1, -1),
+        requiredTokenAmount: whenDefined(mem.price, price => parseUnits(String(price), decimals))??MaxUint256,
+        requiredTokenFee: hasNoPrice
+          ? MaxUint256
+          : mem.fee?.percentage&&decimals
+            ? parseUnits(
+                new BigNumber(mem.price)
+                  .times(mem.fee.percentage)
+                  .dp(decimals, 1)
+                  .toFixed(),
+                decimals,
+              )
+            : 0n,
+        gateway: hasNoPrice
+          ? ZeroAddress
+          : mem.fee?.beneficiary ?? ZeroAddress,
+        token: token??ZeroAddress,
+    }
 }
