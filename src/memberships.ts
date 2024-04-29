@@ -12,6 +12,7 @@ import {
 import {
 	isNotError,
 	whenDefined,
+	whenDefinedAll,
 	whenNotError,
 	whenNotErrorAll,
 } from '@devprotocol/util-ts'
@@ -175,6 +176,14 @@ export const membershipVerifierFactory = async ({
 	}
 }
 
+/**
+ * Convert the membership object to the struct object.
+ * The struct object is used in the `ERC20SimpleCollections.sol` contract.
+ * https://github.com/dev-protocol/dynamic-s-tokens-simple-collections/blob/main/contracts/ERC20SimpleCollections.sol
+ * @param mem membership object
+ * @param chain chain id
+ * @returns
+ */
 export const membershipToStruct = (
 	mem: Membership,
 	chain: number
@@ -187,8 +196,7 @@ export const membershipToStruct = (
 	readonly gateway: string
 	readonly token: string
 } => {
-	const hasPrice = mem.price !== undefined
-	const hasNoPrice = !hasPrice
+	const hasNoPrice = mem.price === undefined
 	const token = whenDefined(mem.currency, (currency) =>
 		getTokenAddress(currency, chain)
 	)
@@ -200,8 +208,9 @@ export const membershipToStruct = (
 		name: JSON.stringify(mem.name).slice(1, -1),
 		description: JSON.stringify(mem.description).slice(1, -1),
 		requiredTokenAmount:
-			whenDefined(mem.price, (price) => parseUnits(String(price), decimals)) ??
-			MaxUint256,
+			whenDefinedAll([mem.price, decimals], ([price, dp]) =>
+				parseUnits(new BigNumber(price).dp(dp, 1).toFixed(), dp)
+			) ?? MaxUint256,
 		requiredTokenFee: hasNoPrice
 			? MaxUint256
 			: mem.fee?.percentage && decimals
