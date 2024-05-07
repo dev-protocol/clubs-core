@@ -81,5 +81,17 @@ describe('astro', () => {
 				expected
 			)
 		})
+
+		it('should pass the predefined value as vite.resolve.alias', async () => {
+			const expected = {
+				'@walletconnect/jsonrpc-utils':
+					'@walletconnect/jsonrpc-utils/dist/umd/index.min.js',
+			}
+
+			const { hooks } = astro()
+			const hook = hooks['astro:config:setup']
+			await hook!({ updateConfig } as any)
+			expect(updateConfig.mock.lastCall[0].vite.resolve.alias).toEqual(expected)
+		})
 	})
 })
