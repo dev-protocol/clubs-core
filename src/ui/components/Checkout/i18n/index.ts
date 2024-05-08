@@ -18,8 +18,8 @@ export const Strings = {
 		ja: '認証済み',
 	},
 	Unverified: {
-		en: 'Not verified',
-		ja: '認証に失敗',
+		en: 'Verification Required',
+		ja: '認証が必要',
 	},
 	Approved: {
 		en: "You've already approved",
