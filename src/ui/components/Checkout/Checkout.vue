@@ -81,6 +81,7 @@ const accessControlError = ref<UndefinedOr<Error>>(undefined)
 const accessAllowed = ref<UndefinedOr<boolean>>(undefined)
 const mintedId = ref<UndefinedOr<bigint>>(undefined)
 const insufficientFunds = ref<UndefinedOr<Error>>(undefined)
+const stakingError = ref<UndefinedOr<Error>>(undefined)
 
 const verifiedPropsCurrency: ComputedRef<CurrencyOption> = computed(() => {
 	return props.currency?.toUpperCase() === 'ETH'
@@ -273,7 +274,7 @@ const fetchAccessControl = async (_accessControl: URL) => {
 }
 const submitStake = async function () {
 	debugger
-	await whenDefinedAll(
+	;(await whenDefinedAll(
 		[
 			providerPool,
 			account.value,
@@ -298,6 +299,11 @@ const submitStake = async function () {
 										? props.feePercentage * 10_000
 										: undefined,
 								payload: props.payload,
+							}).catch((err: Error) => {
+								stakingError.value = new Error(
+									`Failed to send transaction with ${verifiedPropsCurrency.value}: ${err.message}`
+								)
+								return undefined
 							})
 							return whenDefined(res, async (_res) => {
 								isStaking.value = true
@@ -328,6 +334,11 @@ const submitStake = async function () {
 								payload: props.payload,
 								from: _account,
 								chain: _chain,
+							}).catch((err: Error) => {
+								stakingError.value = new Error(
+									`Failed to send transaction with ${verifiedPropsCurrency.value}: ${err.message}`
+								)
+								return undefined
 							})
 							return whenDefined(res, async (_res) => {
 								isStaking.value = true
@@ -355,6 +366,11 @@ const submitStake = async function () {
 								destination: _destination,
 								amount: _parsedAmount,
 								payload: props.payload,
+							}).catch((err: Error) => {
+								stakingError.value = new Error(
+									`Failed to send transaction with ${verifiedPropsCurrency.value}: ${err.message}`
+								)
+								return undefined
 							})
 
 							return whenDefined(res, async (_x) => {
@@ -373,8 +389,12 @@ const submitStake = async function () {
 							})
 					  })()
 			onCompleted({ detail: { id } })
+			return id
 		}
-	)
+	)) ??
+		(() => {
+			stakingError.value = new Error('Missing required data.')
+		})()
 }
 const onCompleted = function (ev?: { detail?: { id?: bigint } }) {
 	isStaking.value = false
@@ -669,6 +689,12 @@ onUnmounted(() => {
 						class="text-bold mt-2 rounded-md bg-red-600 p-2 text-white"
 					>
 						{{ insufficientFunds.message }}
+					</p>
+					<p
+						v-if="stakingError"
+						class="text-bold mt-2 rounded-md bg-red-600 p-2 text-white"
+					>
+						{{ stakingError.message }}
 					</p>
 				</span>
 
