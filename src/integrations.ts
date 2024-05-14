@@ -62,12 +62,6 @@ export const astro = function (
 								'void-elements',
 							],
 						},
-						resolve: {
-							alias: {
-								'@walletconnect/jsonrpc-utils':
-									'@walletconnect/jsonrpc-utils/dist/umd/index.min.js',
-							},
-						},
 					},
 				})
 			},
