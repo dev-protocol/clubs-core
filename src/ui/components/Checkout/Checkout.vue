@@ -43,7 +43,7 @@ let subscriptions: Subscription[] = []
 const REGEX_DESC_ACCOUNT = /{ACCOUNT}/g
 
 const i18nBase = i18nFactory(Strings)
-let i18n = i18nBase(['en'])
+let i18n = ref<ReturnType<typeof i18nBase>>(i18nBase(['en']))
 
 type Props = {
 	amount?: number
@@ -412,7 +412,7 @@ onMounted(async () => {
 		providerPool = _provider
 		account.value = _account
 		chain.value = _chain
-		i18n = i18nBase(navigator.languages)
+		i18n.value = i18nBase(navigator.languages)
 		whenDefinedAll(
 			[providerPool, _account, props.destination, props.amount, chain.value],
 			async ([_prov, _userAddress, _destination, _amount, _chain]) => {
