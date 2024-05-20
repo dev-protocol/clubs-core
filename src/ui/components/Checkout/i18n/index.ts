@@ -7,7 +7,7 @@ export const Strings = {
 	},
 	ConnectWalletVerification: {
 		en: `Connect wallet to check you're verified`,
-		ja: 'ウォレットを接続して認証をしてください',
+		ja: '右上のConnect ボタンをクリックして、Clubsにログインしてください',
 	},
 	Verifying: {
 		en: 'Now checking the verification status',
@@ -27,7 +27,7 @@ export const Strings = {
 	},
 	Unapproved: {
 		en: 'Sign with wallet and approve',
-		ja: 'ウォレットを接続して承認してください',
+		ja: 'ログインして承認してください',
 	},
 	ApprovalPending: {
 		en: 'Waiting for approving to complete...',
