@@ -7,7 +7,7 @@ export const Strings = {
 	},
 	ConnectWalletVerification: {
 		en: `Connect wallet to check you're verified`,
-		ja: '右上のConnect ボタンをクリックして、Clubsにログインしてください',
+		ja: '右上のサインインボタンをクリックして、Clubsにログインしてください',
 	},
 	Verifying: {
 		en: 'Now checking the verification status',
@@ -19,11 +19,11 @@ export const Strings = {
 	},
 	Unverified: {
 		en: 'Verification Required',
-		ja: '認証が必要',
+		ja: '認証が必要です',
 	},
 	Approved: {
 		en: "You've already approved",
-		ja: '既に承認されたユーザー',
+		ja: '既に承認が完了しています',
 	},
 	Unapproved: {
 		en: 'Sign with wallet and approve',
@@ -43,7 +43,7 @@ export const Strings = {
 	},
 	PayWith: {
 		en: ([currency]) => `Pay with ${currency}`,
-		ja: ([currency]) => `次の貨幣で支払う`,
+		ja: ([currency]) => `次の貨幣で支払う：`,
 	},
 	Minted: {
 		en: 'Minted',
