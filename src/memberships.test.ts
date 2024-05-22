@@ -603,14 +603,14 @@ describe('membershipToStruct', () => {
 
 				expect(res.token).toBe('0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619')
 			})
-			it('should be 0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270 (MATIC)', () => {
+			it('should be the zero address (MATIC)', () => {
 				const membership: Membership = {
 					currency: 'MATIC',
 					...base,
 				}
 				const res = membershipToStruct(membership, chain)
 
-				expect(res.token).toBe('0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270')
+				expect(res.token).toBe(ZeroAddress)
 			})
 			it('should be 0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174 (USDC)', () => {
 				const membership: Membership = {
@@ -644,14 +644,14 @@ describe('membershipToStruct', () => {
 				expect(res.token).toBe('0x3c8d6A6420C922c88577352983aFFdf7b0F977cA')
 			})
 
-			it('should be 0x9c3c9283d3e44854697cd22d3faa240cfb032889 (MATIC)', () => {
+			it('should be the zero address (MATIC)', () => {
 				const membership: Membership = {
 					currency: 'MATIC',
 					...base,
 				}
 				const res = membershipToStruct(membership, chain)
 
-				expect(res.token).toBe('0x9c3c9283d3e44854697cd22d3faa240cfb032889')
+				expect(res.token).toBe(ZeroAddress)
 			})
 
 			it('should be 0x9c3c9283d3e44854697cd22d3faa240cfb032889 (USDC)', () => {
