@@ -197,12 +197,21 @@ export const membershipToStruct = (
 	readonly token: string
 } => {
 	const hasNoPrice = mem.price === undefined
-	const token = whenDefined(mem.currency, (currency) =>
-		getTokenAddress(currency, chain)
-	)
 	const decimals = whenDefined(mem.currency, (currency) =>
 		currency.toLowerCase() === CurrencyOption.USDC ? 6 : 18
 	)
+	const useNativeToken = whenDefined(mem.currency, (currency) => {
+		const _currency = currency.toLowerCase()
+		return (
+			(chain === 137 && _currency === CurrencyOption.MATIC) ||
+			(chain === 80001 && _currency === CurrencyOption.MATIC) ||
+			(chain === 1 && _currency === CurrencyOption.ETH)
+		)
+	})
+
+	const token = useNativeToken
+		? ZeroAddress
+		: whenDefined(mem.currency, (currency) => getTokenAddress(currency, chain))
 	return {
 		src: mem.imageSrc,
 		name: JSON.stringify(mem.name).slice(1, -1),
