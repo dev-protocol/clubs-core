@@ -2374,10 +2374,10 @@ assertion-error@^1.1.0:
   resolved "https://registry.yarnpkg.com/assertion-error/-/assertion-error-1.1.0.tgz#e60b6b0e8f301bd97e5375215bda406c85118c0b"
   integrity sha512-jgsaNduz+ndvGyFt3uSuWqvy4lCnIJiovtouQN5JZHOKCS2QuhEdbcQHFhVksz2N2U9hXJo8odG7ETyWlEeuDw==
 
-astro@4.9.0:
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/astro/-/astro-4.9.0.tgz#5ec5bbd71f9eef5c139b452f918c64d5ae2d4e36"
-  integrity sha512-beb3go5Oh5QDjns7YVxG1r40Flt/cuXB+YFTnVRqbh2NuMpYRoXZqIT+ZNaorleEfrLjLFXfsn1AAKVP+XZ2KA==
+astro@4.9.1:
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/astro/-/astro-4.9.1.tgz#2883fabd5c4c9f1ba9417236b4fdf70320432a65"
+  integrity sha512-9TsoAu0WBPiqyAIj9H0JW7R+tIjPjFsPKo70Nja6WL3imTTuUJQmnCre4ZVmoNV3oicTTlb+N4zjRYANW0Ty9A==
   dependencies:
     "@astrojs/compiler" "^2.8.0"
     "@astrojs/internal-helpers" "0.4.0"
