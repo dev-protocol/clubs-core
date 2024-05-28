@@ -7,6 +7,7 @@ import {
 } from '@devprotocol/dev-kit/agent'
 import { connection as getConnection } from '../../../connection'
 import {
+	isNotError,
 	type UndefinedOr,
 	whenDefined,
 	whenDefinedAll,
@@ -68,6 +69,7 @@ const approveNeeded = ref<UndefinedOr<boolean>>(undefined)
 const stakeSuccessful = ref<boolean>(false)
 const account = ref<UndefinedOr<string>>(undefined)
 const isApproving = ref<boolean>(false)
+const isFetchingApproval = ref<UndefinedOr<'progress' | Error>>(undefined)
 const isStaking = ref<boolean>(false)
 const isWaitingForStaked = ref<boolean>(false)
 const feeAmount = ref<UndefinedOr<number>>(undefined)
@@ -81,6 +83,7 @@ const accessControlError = ref<UndefinedOr<Error>>(undefined)
 const accessAllowed = ref<UndefinedOr<boolean>>(undefined)
 const mintedId = ref<UndefinedOr<bigint>>(undefined)
 const insufficientFunds = ref<UndefinedOr<Error>>(undefined)
+const isFetchingFunds = ref<UndefinedOr<'progress' | Error>>(undefined)
 const stakingError = ref<UndefinedOr<Error>>(undefined)
 
 const verifiedPropsCurrency: ComputedRef<CurrencyOption> = computed(() => {
@@ -216,6 +219,7 @@ const checkApproved = async function (
 	amount: BigNumberish,
 	chain: number
 ) {
+	isFetchingApproval.value = 'progress'
 	const res =
 		verifiedPropsCurrency.value === CurrencyOption.DEV
 			? await positionsCreate({
@@ -223,7 +227,7 @@ const checkApproved = async function (
 					destination,
 					from: userAddress,
 					amount: amount.toString(),
-			  })
+			  }).catch((err: Error) => err)
 			: await stakeWithAnyTokens({
 					provider,
 					propertyAddress: destination,
@@ -231,8 +235,14 @@ const checkApproved = async function (
 					tokenAmount: amount.toString(),
 					currency: verifiedPropsCurrency.value,
 					chain,
-			  }).then((res) => res?.create())
-	approveNeeded.value = whenDefined(res, (x) => x.approvalNeeded)
+			  })
+					.then((res) => res?.create().catch((err: Error) => err))
+					.catch((err: Error) => err)
+	approveNeeded.value = whenDefined(
+		res,
+		(x) => isNotError(x) && x.approvalNeeded
+	)
+	isFetchingApproval.value = isNotError(res) ? undefined : res
 	console.log({ approveNeeded })
 }
 const checkBalance = async function (
@@ -240,10 +250,13 @@ const checkBalance = async function (
 	userAddress: string,
 	chain: number
 ) {
+	isFetchingFunds.value = 'progress'
 	const token = getTokenAddress(verifiedPropsCurrency.value, chain)
 	const res = useERC20.value
-		? await createErc20Contract(provider)(token).balanceOf(userAddress)
-		: await provider.getBalance(userAddress)
+		? await createErc20Contract(provider)(token)
+				.balanceOf(userAddress)
+				.catch((err: Error) => err)
+		: await provider.getBalance(userAddress).catch((err: Error) => err)
 	console.log({
 		useERC20: useERC20.value,
 		token,
@@ -252,8 +265,9 @@ const checkBalance = async function (
 	})
 	const insufficient = whenDefined(
 		parsedAmount.value,
-		(amount) => BigInt(res) < BigInt(amount)
+		(amount) => isNotError(res) && BigInt(res) < BigInt(amount)
 	)
+	isFetchingFunds.value = isNotError(res) ? undefined : res
 	insufficientFunds.value = insufficient
 		? new Error(
 				`Insufficient token balance. Please check you're using the correct wallet.`
@@ -644,13 +658,21 @@ onUnmounted(() => {
 						isApproving ||
 						approveNeeded === undefined ||
 						approveNeeded === false ||
-						Boolean(props.accessControlUrl && !accessAllowed)
+						Boolean(props.accessControlUrl && !accessAllowed) ||
+						!isNotError(isFetchingApproval)
 					"
 					:data-is-approving="isApproving"
-					class="hs-button is-large is-fullwidth is-filled data-[is-approving=true]:animate-pulse"
+					:data-is-fetching="isFetchingApproval === 'progress'"
+					class="hs-button is-large is-fullwidth is-filled data-[is-approving=true]:animate-pulse data-[is-fetching=true]:animate-pulse"
 				>
 					{{ approveNeeded === false ? i18n('Approved') : i18n('Unapproved') }}
 				</button>
+				<p
+					v-if="!isNotError(isFetchingApproval)"
+					class="text-bold mt-2 rounded-md bg-red-600 p-2 text-white"
+				>
+					{{ isFetchingApproval.message }}
+				</p>
 			</span>
 
 			<slot name="after:transaction-form"></slot>
@@ -675,10 +697,12 @@ onUnmounted(() => {
 							isStaking ||
 							approveNeeded !== false ||
 							Boolean(props.accessControlUrl && !accessAllowed) ||
-							Boolean(insufficientFunds)
+							Boolean(insufficientFunds) ||
+							!isNotError(isFetchingFunds)
 						"
 						:data-is-staking="isStaking"
-						class="hs-button is-large is-filled data-[is-staking=true]:animate-pulse"
+						:data-is-fetching="isFetchingFunds === 'progress'"
+						class="hs-button is-large is-filled data-[is-fetching=true]:animate-pulse data-[is-staking=true]:animate-pulse"
 						v-bind:class="insufficientFunds ? 'bg-red-600' : ''"
 					>
 						{{ i18n('PayWith', [verifiedPropsCurrency.toUpperCase()]) }}
@@ -695,6 +719,12 @@ onUnmounted(() => {
 						class="text-bold mt-2 rounded-md bg-red-600 p-2 text-white"
 					>
 						{{ stakingError.message }}
+					</p>
+					<p
+						v-if="!isNotError(isFetchingFunds)"
+						class="text-bold mt-2 rounded-md bg-red-600 p-2 text-white"
+					>
+						{{ isFetchingFunds.message }}
 					</p>
 				</span>
 
