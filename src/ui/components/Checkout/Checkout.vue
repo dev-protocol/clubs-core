@@ -65,7 +65,6 @@ type Props = {
 }
 const props = defineProps<Props>()
 
-const approveNeeded = ref<UndefinedOr<boolean>>(undefined)
 const stakeSuccessful = ref<boolean>(false)
 const account = ref<UndefinedOr<string>>(undefined)
 const isApproving = ref<boolean>(false)
@@ -102,13 +101,22 @@ const usePolygonWETH: ComputedRef<boolean> = computed(() => {
 		(chain.value === 137 || chain.value === 80001)
 	)
 })
+const useEthreumWMATIC: ComputedRef<boolean> = computed(() => {
+	return (
+		verifiedPropsCurrency.value === CurrencyOption.MATIC &&
+		typeof chain.value === 'number' &&
+		chain.value === 1
+	)
+})
 const useERC20: ComputedRef<boolean> = computed(() => {
 	return (
 		(verifiedPropsCurrency.value !== CurrencyOption.ETH &&
 			verifiedPropsCurrency.value !== CurrencyOption.MATIC) ||
-		usePolygonWETH.value
+		usePolygonWETH.value ||
+		useEthreumWMATIC.value
 	)
 })
+const approveNeeded = ref<UndefinedOr<boolean>>(useERC20.value)
 const htmlDescription: ComputedRef<UndefinedOr<string>> = computed(() => {
 	return (
 		props.description && DOMPurify.sanitize(marked.parse(props.description))
@@ -430,7 +438,7 @@ onMounted(async () => {
 		whenDefinedAll(
 			[providerPool, _account, props.destination, props.amount, chain.value],
 			async ([_prov, _userAddress, _destination, _amount, _chain]) => {
-				useERC20 &&
+				useERC20.value &&
 					!props.useDiscretePaymentFlow &&
 					checkApproved(_prov, _userAddress, _destination, _amount, _chain)
 			}
