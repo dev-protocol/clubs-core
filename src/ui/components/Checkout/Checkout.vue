@@ -42,6 +42,7 @@ import { Strings } from './i18n'
 let providerPool: UndefinedOr<ContractRunner>
 let subscriptions: Subscription[] = []
 const REGEX_DESC_ACCOUNT = /{ACCOUNT}/g
+const REGEX_DESC_EMAIL = /{EMAIL}/g
 
 const i18nBase = i18nFactory(Strings)
 let i18n = ref<ReturnType<typeof i18nBase>>(i18nBase(['en']))
@@ -67,6 +68,7 @@ const props = defineProps<Props>()
 
 const stakeSuccessful = ref<boolean>(false)
 const account = ref<UndefinedOr<string>>(undefined)
+const email = ref<UndefinedOr<string>>(undefined)
 const isApproving = ref<boolean>(false)
 const isFetchingApproval = ref<UndefinedOr<'progress' | Error>>(undefined)
 const isStaking = ref<boolean>(false)
@@ -124,14 +126,14 @@ const htmlDescription: ComputedRef<UndefinedOr<string>> = computed(() => {
 })
 const htmlVerificationFlow: ComputedRef<UndefinedOr<string>> = computed(() => {
 	const accountAddress = account.value ?? ''
+	const emailAddress = email.value ?? ''
 	return (
 		props.accessControlDescription &&
 		DOMPurify.sanitize(
 			marked.parse(
-				props.accessControlDescription.replace(
-					REGEX_DESC_ACCOUNT,
-					accountAddress
-				)
+				props.accessControlDescription
+					.replace(REGEX_DESC_ACCOUNT, accountAddress)
+					.replace(REGEX_DESC_EMAIL, emailAddress)
 			),
 			{
 				ALLOWED_TAGS: [...tags, 'iframe'],
@@ -430,10 +432,12 @@ onMounted(async () => {
 		getConnection().provider,
 		getConnection().account,
 		getConnection().chain,
-	]).subscribe(async ([_provider, _account, _chain]) => {
+		getConnection().identifiers,
+	]).subscribe(async ([_provider, _account, _chain, _identifiers]) => {
 		providerPool = _provider
 		account.value = _account
 		chain.value = _chain
+		email.value = _identifiers?.email
 		i18n.value = i18nBase(navigator.languages)
 		whenDefinedAll(
 			[providerPool, _account, props.destination, props.amount, chain.value],
