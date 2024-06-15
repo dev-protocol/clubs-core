@@ -7,12 +7,11 @@ import {
 } from '@devprotocol/util-ts'
 import { JsonRpcProvider } from 'ethers'
 import Skeleton from '../Skeleton/Skeleton.vue'
-import { marked } from 'marked'
-import DOMPurify from 'dompurify'
 import { clientsSTokens } from '@devprotocol/dev-kit'
 import { ProseTextInherit } from '../../../constants/class-names'
 import { Strings } from './i18n'
 import { i18nFactory } from '../../../i18n'
+import { parseMarkdownToHtml } from '../../../markdown'
 
 const i18nBase = i18nFactory(Strings)
 let i18n = i18nBase(['en'])
@@ -49,7 +48,7 @@ const image = ref<HTMLImageElement>()
 const htmlDescription: ComputedRef<UndefinedOr<string>> = computed(() => {
 	return (
 		tokenURI.value?.description &&
-		DOMPurify.sanitize(marked.parse(tokenURI.value.description))
+		parseMarkdownToHtml(tokenURI.value.description)
 	)
 })
 
