@@ -11,7 +11,7 @@ import { clientsSTokens } from '@devprotocol/dev-kit'
 import { ProseTextInherit } from '../../../constants/class-names'
 import { Strings } from './i18n'
 import { i18nFactory } from '../../../i18n'
-import { parseMarkdownToHtml } from '../../../markdown'
+import { markdownToHtml } from '../../../markdown'
 
 const i18nBase = i18nFactory(Strings)
 let i18n = i18nBase(['en'])
@@ -47,8 +47,7 @@ const tokenURI = ref<
 const image = ref<HTMLImageElement>()
 const htmlDescription: ComputedRef<UndefinedOr<string>> = computed(() => {
 	return (
-		tokenURI.value?.description &&
-		parseMarkdownToHtml(tokenURI.value.description)
+		tokenURI.value?.description && markdownToHtml(tokenURI.value.description)
 	)
 })
 

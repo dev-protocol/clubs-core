@@ -35,7 +35,7 @@ import Result from './Result.vue'
 import { ProseTextInherit } from '../../../constants'
 import { i18nFactory } from '../../../i18n'
 import { Strings } from './i18n'
-import { parseMarkdownToHtml } from '../../../markdown'
+import { markdownToHtml } from '../../../markdown'
 
 let providerPool: UndefinedOr<ContractRunner>
 let subscriptions: Subscription[] = []
@@ -118,14 +118,14 @@ const useERC20: ComputedRef<boolean> = computed(() => {
 })
 const approveNeeded = ref<UndefinedOr<boolean>>(useERC20.value)
 const htmlDescription: ComputedRef<UndefinedOr<string>> = computed(() => {
-	return props.description && parseMarkdownToHtml(props.description)
+	return props.description && markdownToHtml(props.description)
 })
 const htmlVerificationFlow: ComputedRef<UndefinedOr<string>> = computed(() => {
 	const accountAddress = account.value ?? ''
 	const emailAddress = email.value ?? ''
 	return (
 		props.accessControlDescription &&
-		parseMarkdownToHtml(
+		markdownToHtml(
 			props.accessControlDescription
 				.replace(REGEX_DESC_ACCOUNT, accountAddress)
 				.replace(REGEX_DESC_EMAIL, emailAddress)

@@ -2,17 +2,17 @@
 /* eslint-disable functional/immutable-data */
 /* eslint-disable functional/no-loop-statement */
 import { describe, it, expect } from 'vitest'
-import { parseMarkdownToHtml } from './markdown'
+import { markdownToHtml } from './markdown'
 
-describe('parseMarkdownToHtml', () => {
+describe('markdownToHtml', () => {
 	it('should return string html', () => {
-		const res = parseMarkdownToHtml('# Hello')
+		const res = markdownToHtml('# Hello')
 
 		expect(res).toEqual(`<h1>Hello</h1>\n`)
 	})
 
 	it('should accept iframe, and frameborder/onmousewheel/allow attributes', () => {
-		const res = parseMarkdownToHtml(
+		const res = markdownToHtml(
 			'# Hello\n\n<iframe src="https://example.com" frameborder onmousewheel allow="autoplay"></iframe>'
 		)
 
@@ -22,7 +22,7 @@ describe('parseMarkdownToHtml', () => {
 	})
 
 	it('should accept img, and src/width/height attributes', () => {
-		const res = parseMarkdownToHtml(
+		const res = markdownToHtml(
 			'# Hello\n\n<img src="https://example.com" width="50" height="50" />'
 		)
 
@@ -32,9 +32,7 @@ describe('parseMarkdownToHtml', () => {
 	})
 
 	it('should convert youtube url to the embed url', () => {
-		const res = parseMarkdownToHtml(
-			'https://www.youtube.com/watch?v=6RAtoigjsoY'
-		)
+		const res = markdownToHtml('https://www.youtube.com/watch?v=6RAtoigjsoY')
 
 		expect(res).toEqual(
 			`<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" frameborder="0" src="https://www.youtube.com/embed/6RAtoigjsoY" class="youtube aspect-video mx-auto w-full rounded"></iframe></p>\n`
@@ -42,7 +40,7 @@ describe('parseMarkdownToHtml', () => {
 	})
 
 	it('should convert url to a', () => {
-		const res = parseMarkdownToHtml('https://www.example.com')
+		const res = markdownToHtml('https://www.example.com')
 
 		expect(res).toEqual(
 			`<p><a href="https://www.example.com">https://www.example.com</a></p>\n`

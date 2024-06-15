@@ -22,7 +22,7 @@ const parser = marked.use({ renderer })
  * @param content The markdown content to parse.
  * @returns The sanitized HTML representation of the parsed markdown.
  */
-export const parseMarkdownToHtml = (content = '') => {
+export const markdownToHtml = (content = '') => {
 	return DOMPurify.sanitize(parser.parse(content), {
 		ALLOWED_TAGS: [...tags, 'iframe'],
 		ALLOWED_ATTR: [
