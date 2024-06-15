@@ -39,6 +39,16 @@ describe('markdownToHtml', () => {
 		)
 	})
 
+	it('should convert youtu.be url to the embed url', () => {
+		const res = markdownToHtml(
+			'https://youtu.be/6RAtoigjsoY?si=EfT8TJ_uM3kXwCKF'
+		)
+
+		expect(res).toEqual(
+			`<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" frameborder="0" src="https://www.youtube.com/embed/6RAtoigjsoY" class="youtube aspect-video mx-auto w-full rounded"></iframe></p>\n`
+		)
+	})
+
 	it('should convert url to a', () => {
 		const res = markdownToHtml('https://www.example.com')
 

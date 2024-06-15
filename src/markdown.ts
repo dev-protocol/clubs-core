@@ -5,8 +5,14 @@ import { tags, attrs } from './constants/dompurify'
 const renderer = {
 	link(href: string, _: string | null | undefined, text: string) {
 		const url = new URL(href)
-		const youtube = url.host === 'youtube.com' || url.host === 'www.youtube.com'
-		const v = url.searchParams.get('v')
+		const youtube =
+			url.host === 'youtube.com' ||
+			url.host === 'www.youtube.com' ||
+			url.host === 'youtu.be'
+		const v =
+			url.host === 'youtu.be'
+				? url.pathname.replace('/', '')
+				: url.searchParams.get('v')
 
 		return youtube
 			? `<iframe class="youtube aspect-video mx-auto w-full rounded" src="https://www.youtube.com/embed/${v}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
