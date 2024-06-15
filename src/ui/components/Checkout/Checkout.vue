@@ -31,13 +31,11 @@ import {
 	mintedIdByLogs,
 	getTokenAddress,
 } from '../../../fixtures/dev-kit'
-import { marked } from 'marked'
-import DOMPurify from 'dompurify'
 import Result from './Result.vue'
-import { tags, attrs } from '../../../constants/dompurify'
 import { ProseTextInherit } from '../../../constants'
 import { i18nFactory } from '../../../i18n'
 import { Strings } from './i18n'
+import { markdownToHtml } from '../../../markdown'
 
 let providerPool: UndefinedOr<ContractRunner>
 let subscriptions: Subscription[] = []
@@ -120,33 +118,17 @@ const useERC20: ComputedRef<boolean> = computed(() => {
 })
 const approveNeeded = ref<UndefinedOr<boolean>>(useERC20.value)
 const htmlDescription: ComputedRef<UndefinedOr<string>> = computed(() => {
-	return (
-		props.description && DOMPurify.sanitize(marked.parse(props.description))
-	)
+	return props.description && markdownToHtml(props.description)
 })
 const htmlVerificationFlow: ComputedRef<UndefinedOr<string>> = computed(() => {
 	const accountAddress = account.value ?? ''
 	const emailAddress = email.value ?? ''
 	return (
 		props.accessControlDescription &&
-		DOMPurify.sanitize(
-			marked.parse(
-				props.accessControlDescription
-					.replace(REGEX_DESC_ACCOUNT, accountAddress)
-					.replace(REGEX_DESC_EMAIL, emailAddress)
-			),
-			{
-				ALLOWED_TAGS: [...tags, 'iframe'],
-				ALLOWED_ATTR: [
-					...attrs,
-					'src',
-					'frameborder',
-					'onmousewheel',
-					'width',
-					'height',
-					'style',
-				],
-			}
+		markdownToHtml(
+			props.accessControlDescription
+				.replace(REGEX_DESC_ACCOUNT, accountAddress)
+				.replace(REGEX_DESC_EMAIL, emailAddress)
 		)
 	)
 })

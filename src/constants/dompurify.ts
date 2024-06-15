@@ -194,6 +194,9 @@ export const attrs = [
 	'pattern',
 	'placeholder',
 	'playsinline',
+	'popover',
+	'popovertarget',
+	'popovertargetaction',
 	'poster',
 	'preload',
 	'pubdate',
@@ -228,6 +231,7 @@ export const attrs = [
 	'valign',
 	'value',
 	'width',
+	'wrap',
 	'xmlns',
 	'slot',
 ]
