@@ -41,6 +41,7 @@ export const astro = function (
 								'eventemitter3',
 								'events',
 								'hoist-non-react-statics',
+								'isomorphic-dompurify',
 								'isomorphic-unfetch',
 								'jayson',
 								'jayson/lib/client/browser',
