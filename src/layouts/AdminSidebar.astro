@@ -162,6 +162,8 @@ const navItemPluginInactive = 'hover:bg-surface-200'
 
 	<ThemeSwitcher client:only="vue" />
 
+	<slot name="before-footer" />
+
 	<span class="text-center"
 		><a
 			href={homepage}
@@ -171,4 +173,6 @@ const navItemPluginInactive = 'hover:bg-surface-200'
 			>clubs-core v.{version}</a
 		></span
 	>
+
+	<slot name="after-footer" />
 </nav>

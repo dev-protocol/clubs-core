@@ -42,6 +42,13 @@ console.log('props.slots', Astro.props.clubs.slots)
 			>
 		</p>
 	</div>
+	<div slot="admin:sidebar:before-overview-link">
+		<p>
+			Injected contents<br /><span class="text-xs"
+				>admin:sidebar:before-overview-link</span
+			>
+		</p>
+	</div>
 	<div slot="admin:sidebar:before-theme-link">
 		<p>
 			Injected contents<br /><span class="text-xs"
@@ -49,6 +56,28 @@ console.log('props.slots', Astro.props.clubs.slots)
 			>
 		</p>
 	</div>
+	<div slot="admin:sidebar:after-built-in-primary-links">
+		<p>
+			Injected contents<br /><span class="text-xs"
+				>admin:sidebar:after-built-in-primary-links</span
+			>
+		</p>
+	</div>
+	<div slot="admin:sidebar:before-footer">
+		<p>
+			Injected contents<br /><span class="text-xs"
+				>admin:sidebar:before-footer</span
+			>
+		</p>
+	</div>
+	<div slot="admin:sidebar:after-footer">
+		<p>
+			Injected contents<br /><span class="text-xs"
+				>admin:sidebar:after-footer</span
+			>
+		</p>
+	</div>
+
 	<Content {...Astro.props} />
 </Admin>
 

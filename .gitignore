@@ -109,3 +109,6 @@ dump
 
 # generated docs
 docs
+
+# Astro output
+.astro

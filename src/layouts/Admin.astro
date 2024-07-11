@@ -68,6 +68,12 @@ const SlotsAsideAfterBuiltInButtons = clubs.slots.filter(
 const SlotsModalContent = clubs.slots.filter(
 	(slot) => slot.slot === ClubsSlotName.AdminModalCcontent
 )
+const SlotsSidebarBeforeFooter = clubs.slots.filter(
+	(slot) => slot.slot === ClubsSlotName.AdminSidebarBeforeFooter
+)
+const SlotsSidebarAfterFooter = clubs.slots.filter(
+	(slot) => slot.slot === ClubsSlotName.AdminSidebarAfterFooter
+)
 ---
 
 <!DOCTYPE html>
@@ -116,6 +122,8 @@ const SlotsModalContent = clubs.slots.filter(
 						name="admin:sidebar:after-built-in-primary-links"
 						slot="after-built-in-primary-links"
 					/>
+					<slot name="admin:sidebar:before-footer" slot="before-footer" />
+					<slot name="admin:sidebar:after-footer" slot="after-footer" />
 					{
 						SlotsSidebarBeforeTitle.map((Slot) => (
 							<Slot.component {...Slot.props} slot="before-title" />
@@ -137,6 +145,16 @@ const SlotsModalContent = clubs.slots.filter(
 								{...Slot.props}
 								slot="after-built-in-primary-links"
 							/>
+						))
+					}
+					{
+						SlotsSidebarBeforeFooter.map((Slot) => (
+							<Slot.component {...Slot.props} slot="before-footer" />
+						))
+					}
+					{
+						SlotsSidebarAfterFooter.map((Slot) => (
+							<Slot.component {...Slot.props} slot="after-footer" />
 						))
 					}
 				</AdminSidebar>
