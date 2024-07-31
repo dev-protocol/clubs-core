@@ -1,7 +1,8 @@
 /* eslint-disable functional/functional-parameters */
-import { default as Example } from './Example.astro'
-import { default as Admin } from './Admin.astro'
-import { default as Modal } from './Modal.astro'
+import Example from './Example.astro'
+import Admin from './Admin.astro'
+import Modal from './Modal.astro'
+import Checkout from './Checkout.astro'
 import {
 	ClubsFunctionGetPagePaths,
 	ClubsFunctionGetAdminPaths,
@@ -20,6 +21,10 @@ export const getPagePaths = (async () => [
 			complexData: new Uint8Array([1, 2, 3]),
 			someMethod: (i: unknown) => i,
 		},
+	},
+	{
+		paths: ['checkout'],
+		component: Checkout,
 	},
 ]) satisfies ClubsFunctionGetPagePaths
 
