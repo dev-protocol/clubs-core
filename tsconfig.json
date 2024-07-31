@@ -20,7 +20,7 @@
 	"include": [
 		"src",
 		"example",
-		"planned-structure",
+		".preview",
 		"ui-preview",
 		"rollup.*.mjs",
 		"tailwind.config.js",
