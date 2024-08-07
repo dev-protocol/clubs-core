@@ -95,7 +95,7 @@
 		"@metamask/detect-provider": "^2.0.0",
 		"axios": "^1.6.7",
 		"bignumber.js": "^9.1.2",
-		"isomorphic-dompurify": "2.13.0",
+		"isomorphic-dompurify": "2.14.0",
 		"js-base64": "^3.7.2",
 		"lit": "^3.0.0",
 		"marked": "^10.0.0",
