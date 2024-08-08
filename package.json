@@ -102,7 +102,7 @@
 		"p-queue": "^8.0.1",
 		"ramda": "^0.30.0",
 		"rxjs": "^7.8.1",
-		"yaml": "2.4.5"
+		"yaml": "2.5.0"
 	},
 	"devDependencies": {
 		"@astrojs/lit": "4.0.1",
