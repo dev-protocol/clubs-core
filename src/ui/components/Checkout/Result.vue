@@ -12,6 +12,8 @@ import { ProseTextInherit } from '../../../constants/class-names'
 import { Strings } from './i18n'
 import { i18nFactory } from '../../../i18n'
 import { markdownToHtml } from '../../../markdown'
+import Modal from '../Modal.vue'
+import ModalCheckout from './ModalCheckout.vue'
 
 const i18nBase = i18nFactory(Strings)
 let i18n = i18nBase(['en'])
@@ -19,6 +21,10 @@ let i18n = i18nBase(['en'])
 type Props = {
 	id?: number | string
 	rpcUrl: string
+	stakeSuccessful: boolean
+	name: string | undefined
+	description: string | undefined
+	imageSrc: string | undefined
 }
 const props = defineProps<Props>()
 
@@ -51,6 +57,22 @@ const htmlDescription: ComputedRef<UndefinedOr<string>> = computed(() => {
 	)
 })
 
+// setup Modal
+// Todo: img2後で消す
+const img2 = new Image()
+img2.onload = () => {
+	image.value = img2
+}
+img2.src = '/images/image01.png'
+
+// modal visibility
+const modalVisible = ref(false)
+
+// open modal
+const open = () => {
+	modalVisible.value = true
+}
+
 onMounted(async () => {
 	const provider = new JsonRpcProvider(props.rpcUrl)
 	i18n = i18nBase(navigator.languages)
@@ -77,12 +99,29 @@ onMounted(async () => {
 		<div class="mx-auto grid gap-8 md:max-w-lg">
 			<slot name="before:preview" />
 			<div
-				class="-mx-8 grid gap-8 bg-dp-white-300 p-6 md:mx-auto md:w-full md:rounded-md"
+				class="bg-dp-white-300 -mx-8 grid gap-8 p-6 md:mx-auto md:w-full md:rounded-md"
 			>
 				<div class="flex flex-col gap-6">
 					<p class="font-mono font-bold">
 						{{ i18n('Minted') }} <span class="text-black/50">#{{ id }}</span>
 					</p>
+
+					<!-- me -->
+					<button @click="open">Open Modal</button>
+					<Modal
+						:is-visible="modalVisible"
+						:modal-content="ModalCheckout"
+						:attrs="{
+							name: 'Flower Pot',
+							description:
+								'Enhance the beauty of your living space with our stylish flower pot. Its simple yet sophisticated design seamlessly blends into any interior decor. Made from durable materials, this flower pot is built to last. ',
+							image: img2,
+						}"
+					>
+						<template #after:description>
+							<slot name="before:preview" />
+						</template>
+					</Modal>
 
 					<div class="rounded-lg border border-black/20 bg-black/10 p-4">
 						<img
