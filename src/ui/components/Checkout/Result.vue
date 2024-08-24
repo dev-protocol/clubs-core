@@ -57,19 +57,11 @@ const htmlDescription: ComputedRef<UndefinedOr<string>> = computed(() => {
 	)
 })
 
-// setup Modal
-// Todo: img2後で消す
-const img2 = new Image()
-img2.onload = () => {
-	image.value = img2
-}
-img2.src = '/images/image01.png'
-
 // modal visibility
 const modalVisible = ref(false)
 
 // open modal
-const open = () => {
+const modalOpen = () => {
 	modalVisible.value = true
 }
 
@@ -91,6 +83,9 @@ onMounted(async () => {
 		img.src = src
 	})
 	console.log({ metadata })
+
+	// Modal Open
+	modalOpen()
 })
 </script>
 
@@ -107,15 +102,13 @@ onMounted(async () => {
 					</p>
 
 					<!-- me -->
-					<button @click="open">Open Modal</button>
 					<Modal
 						:is-visible="modalVisible"
 						:modal-content="ModalCheckout"
 						:attrs="{
-							name: 'Flower Pot',
-							description:
-								'Enhance the beauty of your living space with our stylish flower pot. Its simple yet sophisticated design seamlessly blends into any interior decor. Made from durable materials, this flower pot is built to last. ',
-							image: img2,
+							name: tokenURI?.name,
+							description: htmlDescription,
+							image: image,
 						}"
 					>
 						<template #after:description>
