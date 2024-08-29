@@ -59,4 +59,12 @@ export const Strings = {
 		ja: ([amount, currency]) =>
 			`${amount} ${currency} はオーナーに直接支払われます！`,
 	},
+	Passport: {
+		en: 'Passport',
+		ja: 'Passport',
+	},
+	Home: {
+		en: 'Home',
+		ja: 'Home',
+	},
 } satisfies ClubsI18nParts
