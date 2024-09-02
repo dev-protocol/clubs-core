@@ -581,7 +581,7 @@ onUnmounted(() => {
 			<div v-if="props.accessControlUrl" class="grid gap-4 p-5 lg:gap-8">
 				<!-- Access control section -->
 				<span>
-					<p class="text-dp-white-600 mb-2 flex items-center gap-2 font-bold">
+					<p class="mb-2 flex items-center gap-2 font-bold text-dp-white-600">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -674,7 +674,7 @@ onUnmounted(() => {
 
 		<section
 			v-if="!useInjectedTransactionForm && isPriced"
-			class="border-dp-white-300 sticky bottom-0 flex grow flex-col gap-5 rounded-b-xl border-t bg-white p-5"
+			class="sticky bottom-0 flex grow flex-col gap-5 rounded-b-xl border-t border-dp-white-300 bg-white p-5"
 			v-bind:class="
 				!props.accessControlUrl || (props.accessControlUrl && accessAllowed)
 					? 'lg:static lg:border-0 lg:bg-transparent'
@@ -728,7 +728,7 @@ onUnmounted(() => {
 				>
 					<div
 						role="presentation"
-						class="border-native-blue-300 mx-auto h-16 w-16 animate-spin rounded-full border-l border-r border-t"
+						class="mx-auto h-16 w-16 animate-spin rounded-full border-l border-r border-t border-native-blue-300"
 					/>
 					<p v-if="isApproving">{{ i18n('ApprovalPending') }}</p>
 					<p v-if="isStaking && !isWaitingForStaked">
