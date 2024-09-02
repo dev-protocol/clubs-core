@@ -6,6 +6,7 @@ import { cwd } from 'process'
 
 const majorCoreAPIs = [
 	'dist/src/layouts/index.js',
+	'dist/src/images/index.js',
 	'dist/src/connection/index.js',
 	'dist/src/styles/index.js',
 ]

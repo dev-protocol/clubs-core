@@ -39,6 +39,11 @@
 			"require": "./dist/src/layouts/index.cjs",
 			"types": "./layouts.d.ts"
 		},
+		"./images": {
+			"import": "./dist/src/images/index.mjs",
+			"require": "./dist/src/images/index.cjs",
+			"types": "./images.d.ts"
+		},
 		"./styles": {
 			"import": "./dist/src/styles/index.mjs",
 			"require": "./dist/src/styles/index.cjs",
