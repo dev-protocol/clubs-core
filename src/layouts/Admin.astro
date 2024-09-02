@@ -14,6 +14,7 @@ import Aside from './Aside.astro'
 import Clubs from './primitives/Clubs.astro'
 import XMark from './icons/x-mark.astro'
 import Bars3BottomLeft from './icons/bars-3-bottom-left.astro'
+import Pictogram from './icons/clubs-pictogram.svg'
 import Modal from './Modal.astro'
 
 import '../styles'
@@ -89,6 +90,7 @@ const SlotsSidebarAfterFooter = clubs.slots.filter(
 			href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Poppins:wght@700&family=Syne:wght@700&display=swap"
 			rel="stylesheet"
 		/>
+		<link rel="icon" type="image/svg" href={Pictogram.src} />
 		<title>{name} | Admin</title>
 	</head>
 
