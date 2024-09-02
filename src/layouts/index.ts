@@ -5,5 +5,5 @@ export { default as AdminConfigurationManager } from './AdminConfigurationManage
 export { default as Aside } from './Aside.astro'
 export { default as Modal } from './Modal.astro'
 export { default as CreateNavigationLink } from './CreateNavigationLink.astro'
-export { default as Clubs } from './primitives/Clubs.astro'
+export { default as ClubsLogo } from './primitives/ClubsLogo.astro'
 export { ClubsPictogram }
