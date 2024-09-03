@@ -86,7 +86,7 @@
 		"lint:eslint": "eslint . --ext .ts,.js,.mjs --fix",
 		"lint:format": "prettier --write '**/*.{ts,mts,js,mjs,json,md,yml,astro,scss,svelte,vue}'",
 		"prepack": "yarn test:ci && yarn build",
-		"prepare": "husky install",
+		"prepare": "husky",
 		"typecheck": "astro check && tsc --noEmit && svelte-check && vue-tsc --noEmit --p tsconfig.vue.json"
 	},
 	"author": "aggre",
