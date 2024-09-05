@@ -5,6 +5,7 @@ import type {
 	Props,
 } from 'astro'
 import type { AstroComponentFactory } from 'astro/dist/runtime/server'
+import { Signal } from '@devprotocol/elements/constants'
 
 export type ClubsGeneralUnit =
 	| string
@@ -551,3 +552,5 @@ export type Membership = {
 		readonly description: string
 	}
 }
+
+export { Signal }

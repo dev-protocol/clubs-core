@@ -12,13 +12,13 @@
   resolved "https://registry.yarnpkg.com/@adraffy/ens-normalize/-/ens-normalize-1.10.1.tgz#63430d04bd8c5e74f8d7d049338f1cd9d4f02069"
   integrity sha512-96Z2IP3mYmF1Xg2cDm8f1gWGf/HUVedQ3FMifV4kG/PQ4yEP51xDtRAEfhVNt5f/uzpNkZHwWQuUcu6D6K+Ekw==
 
-"@aggre/ullr@^3.1.5":
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/@aggre/ullr/-/ullr-3.1.5.tgz#7e787f81fd1cb5b95dfa2033d6bfd3a4bad50b6b"
-  integrity sha512-aRSlO1zDwCU+y7TG8H4LIPyFW8PgprkG0oxuYReWAtzTYGPPLi/eDlFkrZJmnpjtHo5rUI7q/Q7P4wh+MquTYA==
+"@aggre/ullr@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@aggre/ullr/-/ullr-3.2.0.tgz#f3079b3889a4f1cc884acb4a39687b192c99a447"
+  integrity sha512-iBfZFv3xHuARaa9uPIUlxS7fhOZCLNUqMWnj1IJogVvvV8zkPGeL+zPRY/urzk7gMlQhodd8/aPk3OuPSD4MAQ==
   dependencies:
-    ramda "^0.29.0"
-    type-fest "^2.13.0"
+    ramda "^0.30.1"
+    type-fest "^4.26.0"
 
 "@alloc/quick-lru@^5.2.0":
   version "5.2.0"
@@ -717,13 +717,13 @@
     js-base64 "^3.7.2"
     ramda "^0.30.0"
 
-"@devprotocol/elements@1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@devprotocol/elements/-/elements-1.4.1.tgz#1a4eb0cd12242c204e21e54fc714086700b22b71"
-  integrity sha512-46rkQlsguOpogHX2E3gx5Cv5rSxoidLxU83qtPbWLYXVo17HoToy4VZT02TbsUmh12q2GGSR1dFP9facncwO2g==
+"@devprotocol/elements@1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@devprotocol/elements/-/elements-1.5.2.tgz#360bcce838931baa8f16754623c031c404a8f979"
+  integrity sha512-lTIQHNXFVoOa2OQphKR7uV/r6CmqcdfwGIJe0Y0p3h//SpeMi2IgvJKReUzWBWAPNurNLlJyJ94bZSqRH7gc6Q==
   dependencies:
-    "@aggre/ullr" "^3.1.5"
-    lit "^2.8.0"
+    "@aggre/ullr" "^3.2.0"
+    lit "^3.0.0"
 
 "@devprotocol/hashi@2.3.1":
   version "2.3.1"
@@ -1350,11 +1350,6 @@
     lit "^2.7.0 || ^3.0.0"
     lit-html "^2.7.0 || ^3.0.0"
 
-"@lit-labs/ssr-dom-shim@^1.0.0", "@lit-labs/ssr-dom-shim@^1.1.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@lit-labs/ssr-dom-shim/-/ssr-dom-shim-1.2.0.tgz#353ce4a76c83fadec272ea5674ede767650762fd"
-  integrity sha512-yWJKmpGE6lUURKAaIltoPIE/wrbY3TEkqQt+X0m+7fQNnAv0keydnYvbiJFP1PnMhizmIWRWOG5KLhYyc/xl+g==
-
 "@lit-labs/ssr-dom-shim@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@lit-labs/ssr-dom-shim/-/ssr-dom-shim-1.1.2.tgz#d693d972974a354034454ec1317eb6afd0b00312"
@@ -1381,13 +1376,6 @@
     lit-html "^3.1.0"
     node-fetch "^3.2.8"
     parse5 "^7.1.1"
-
-"@lit/reactive-element@^1.3.0", "@lit/reactive-element@^1.6.0":
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/@lit/reactive-element/-/reactive-element-1.6.3.tgz#25b4eece2592132845d303e091bad9b04cdcfe03"
-  integrity sha512-QuTgnG52Poic7uM1AN5yJ09QMe0O28e10XzSvWDz02TJiiKee4stsiownEIadWm8nYzyDAyT+gKzUoZmiWQtsQ==
-  dependencies:
-    "@lit-labs/ssr-dom-shim" "^1.0.0"
 
 "@lit/reactive-element@^1.6.1 || ^2.0.0", "@lit/reactive-element@^2.0.0":
   version "2.0.3"
@@ -4522,15 +4510,6 @@ linkify-it@^5.0.0:
   dependencies:
     uc.micro "^2.0.0"
 
-lit-element@^3.3.0:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-3.3.3.tgz#10bc19702b96ef5416cf7a70177255bfb17b3209"
-  integrity sha512-XbeRxmTHubXENkV4h8RIPyr8lXc+Ff28rkcQzw3G6up2xg5E8Zu1IgOWIwBLEQsu3cOVFqdYwiVi0hv0SlpqUA==
-  dependencies:
-    "@lit-labs/ssr-dom-shim" "^1.1.0"
-    "@lit/reactive-element" "^1.3.0"
-    lit-html "^2.8.0"
-
 "lit-element@^3.3.0 || ^4.0.0":
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-4.0.3.tgz#18239840a7c1a6a6e09c6ed3b5cd3db0512ebf15"
@@ -4556,13 +4535,6 @@ lit-element@^4.1.0:
   dependencies:
     "@types/trusted-types" "^2.0.2"
 
-lit-html@^2.8.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-2.8.0.tgz#96456a4bb4ee717b9a7d2f94562a16509d39bffa"
-  integrity sha512-o9t+MQM3P4y7M7yNzqAyjp7z+mQGa4NS4CxiyLqFPyFWyc4O+nodLrkrxSaCTrla6M5YOLaT3RpbbqjszB5g3Q==
-  dependencies:
-    "@types/trusted-types" "^2.0.2"
-
 lit-html@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-3.2.0.tgz#cb09071a8a1f5f0850873f9143f18f0260be1fda"
@@ -4578,15 +4550,6 @@ lit-html@^3.2.0:
     "@lit/reactive-element" "^2.0.4"
     lit-element "^4.1.0"
     lit-html "^3.2.0"
-
-lit@^2.8.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/lit/-/lit-2.8.0.tgz#4d838ae03059bf9cafa06e5c61d8acc0081e974e"
-  integrity sha512-4Sc3OFX9QHOJaHbmTMk28SYgVxLN3ePDjg7hofEft2zWlehFL3LiAuapWc4U/kYwMYJSh2hTCPZ6/LIC7ii0MA==
-  dependencies:
-    "@lit/reactive-element" "^1.6.0"
-    lit-element "^3.3.0"
-    lit-html "^2.8.0"
 
 load-yaml-file@^0.2.0:
   version "0.2.0"
@@ -5993,7 +5956,7 @@ ramda@^0.29.0:
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.29.1.tgz#408a6165b9555b7ba2fc62555804b6c5a2eca196"
   integrity sha512-OfxIeWzd4xdUNxlWhgFazxsA/nl3mS4/jGZI5n00uWOoSSFRhC1b6gl6xvmzUamgmqELraWp0J/qqVlXYPDPyA==
 
-ramda@^0.30.0:
+ramda@^0.30.0, ramda@^0.30.1:
   version "0.30.1"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.30.1.tgz#7108ac95673062b060025052cd5143ae8fc605bf"
   integrity sha512-tEF5I22zJnuclswcZMc8bDIrwRHRzf+NqVEmqg50ShAZMP7MWeR/RGDthfM/p+BlqvF2fXAzpn8i+SJcYD3alw==
@@ -7071,6 +7034,11 @@ type-fest@^2.12.2, type-fest@^2.13.0:
   version "2.19.0"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.19.0.tgz#88068015bb33036a598b952e55e9311a60fd3a9b"
   integrity sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==
+
+type-fest@^4.26.0:
+  version "4.26.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-4.26.0.tgz#703f263af10c093cd6277d079e26b9e17d517c4b"
+  integrity sha512-OduNjVJsFbifKb57UqZ2EMP1i4u64Xwow3NYXUtBbD4vIwJdQd4+xl8YDou1dlm4DVrtwT/7Ky8z8WyCULVfxw==
 
 typedoc@^0.26.0:
   version "0.26.5"
