@@ -717,10 +717,10 @@
     js-base64 "^3.7.2"
     ramda "^0.30.0"
 
-"@devprotocol/elements@1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@devprotocol/elements/-/elements-1.4.0.tgz#023e13a8c674f9dc0516cb113ef549d5b3112cb0"
-  integrity sha512-WQDaUKvi/Rmln084tpSFGPxhazv+3S+7sMAGh9N2825A8BO3gfThwuqiql8xWyEJ5WpejgPZqA9ymynIdte6SA==
+"@devprotocol/elements@1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@devprotocol/elements/-/elements-1.4.1.tgz#1a4eb0cd12242c204e21e54fc714086700b22b71"
+  integrity sha512-46rkQlsguOpogHX2E3gx5Cv5rSxoidLxU83qtPbWLYXVo17HoToy4VZT02TbsUmh12q2GGSR1dFP9facncwO2g==
   dependencies:
     "@aggre/ullr" "^3.1.5"
     lit "^2.8.0"
