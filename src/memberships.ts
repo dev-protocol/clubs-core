@@ -17,7 +17,7 @@ import {
 	whenNotErrorAll,
 } from '@devprotocol/util-ts'
 import { always, type KeyValuePair, xprod } from 'ramda'
-import type { Membership } from './types'
+import type { ClubsConfiguration, ClubsOffering, Membership } from './types'
 import axios from 'axios'
 import { bytes32Hex } from './bytes32Hex'
 import pQueue from 'p-queue'
@@ -234,4 +234,20 @@ export const membershipToStruct = (
 		gateway: hasNoPrice ? ZeroAddress : mem.fee?.beneficiary ?? ZeroAddress,
 		token: token ?? ZeroAddress,
 	}
+}
+
+/**
+ * Get offerings that match managedBy and the specified plugin ID.
+ * @param config ClubsConfigration
+ * @param pluginId plugin ID
+ * @returns an array of filtered offerings
+ */
+export const getOfferingsByPluginId = (
+	config: ClubsConfiguration,
+	pluginId: string
+): readonly ClubsOffering[] => {
+	const filtered = (config.offerings ?? []).filter(
+		({ managedBy }) => managedBy === pluginId
+	)
+	return filtered
 }

@@ -43,6 +43,9 @@ export type ClubsPluginDetails<
 		readonly pluginIndex: number
 	}>
 
+export type ClubsOffering = Membership &
+	Readonly<{ readonly managedBy: string }>
+
 export type ClubsConfiguration = Readonly<{
 	readonly name: string
 	readonly adminPageVisibility?: 'public' | 'private'
@@ -53,6 +56,7 @@ export type ClubsConfiguration = Readonly<{
 	readonly adminRolePoints: number
 	readonly chainId: number
 	readonly rpcUrl: string
+	readonly offerings?: readonly ClubsOffering[]
 	readonly options?: ClubsPluginOptions
 	readonly plugins: readonly ClubsPlugin[]
 }>

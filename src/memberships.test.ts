@@ -1,5 +1,9 @@
 import { describe, expect, it, vi } from 'vitest'
-import { membershipVerifierFactory, membershipToStruct } from './memberships'
+import {
+	membershipVerifierFactory,
+	membershipToStruct,
+	getOfferingsByPluginId,
+} from './memberships'
 import {
 	JsonRpcProvider,
 	MaxUint256,
@@ -684,3 +688,5 @@ describe('membershipToStruct', () => {
 		})
 	})
 })
+
+describe.skip('getOfferingsByPluginId')
