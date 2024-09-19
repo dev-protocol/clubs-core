@@ -19,6 +19,7 @@ const i18nBase = i18nFactory(Strings)
 let i18n = i18nBase(['en'])
 
 type Props = {
+	eoa?: string
 	id?: number | string
 	rpcUrl: string
 	stakeSuccessful: boolean
@@ -65,6 +66,11 @@ const modalOpen = () => {
 	modalVisible.value = true
 }
 
+// close modal
+const modalClose = () => {
+	modalVisible.value = false
+}
+
 onMounted(async () => {
 	const provider = new JsonRpcProvider(props.rpcUrl)
 	i18n = i18nBase(navigator.languages)
@@ -103,6 +109,8 @@ onMounted(async () => {
 
 					<!-- me -->
 					<Modal
+						:eoa="eoa"
+						:modalClose="modalClose"
 						:is-visible="modalVisible"
 						:modal-content="ModalCheckout"
 						:attrs="{

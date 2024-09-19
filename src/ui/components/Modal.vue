@@ -2,6 +2,8 @@
 import { Component as VueComponent } from 'vue'
 
 defineProps<{
+	eoa?: string
+	modalClose?: () => void
 	isVisible: boolean
 	modalContent: VueComponent
 	attrs: { [key: string]: any }
@@ -93,6 +95,8 @@ html:has(#modal-container[data-active='true']) {
 				<div class="modal-overlay"></div>
 				<Transition>
 					<component
+						:eoa="eoa"
+						:modalClose="modalClose"
 						v-show="isVisible"
 						class="modal-content"
 						:is="modalContent"

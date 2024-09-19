@@ -744,6 +744,7 @@ onUnmounted(() => {
 
 	<Result
 		v-if="stakeSuccessful"
+		:eoa="account"
 		:id="mintedId?.toString()"
 		:rpc-url="rpcUrl"
 		:stake-successful="stakeSuccessful"
