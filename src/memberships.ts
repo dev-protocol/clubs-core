@@ -242,7 +242,7 @@ export const membershipToStruct = (
  * @param pluginId plugin ID
  * @returns an array of filtered offerings
  */
-export const getOfferingsByPluginId = (
+export const getPluginManagedOfferingsById = (
 	config: ClubsConfiguration,
 	pluginId: string
 ): readonly ClubsOffering[] => {
