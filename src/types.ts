@@ -43,7 +43,7 @@ export type ClubsPluginDetails<
 		readonly pluginIndex: number
 	}>
 
-export type ClubsOffering = Membership &
+export type ClubsOffering<T extends Membership = Membership> = T &
 	Readonly<{ readonly managedBy: string }>
 
 export type ClubsConfiguration = Readonly<{

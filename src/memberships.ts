@@ -242,21 +242,23 @@ export const membershipToStruct = (
  * @param search all find options
  * @returns an array of filtered offerings
  */
-export const findOfferings = (
-	config: ClubsConfiguration,
-	search: Partial<
+export const findOfferings = <
+	T extends Partial<
 		Omit<ClubsOffering, 'fee'> & {
 			readonly fee?: Partial<ClubsOffering['fee']>
 		}
 	>
-): readonly ClubsOffering[] => {
+>(
+	config: ClubsConfiguration,
+	search: T
+): readonly ClubsOffering<T & Membership>[] => {
 	const filtered = (config.offerings ?? []).filter((item) => {
 		const base = { ...item, payload: bytes32Hex(item.payload) }
 		const match = search.payload
 			? { ...search, payload: bytes32Hex(search.payload) }
 			: search
-		const merged = mergeDeepRight(base, match)
+		const merged = mergeDeepRight(base, match) as ClubsOffering
 		return equals(base, merged)
-	})
+	}) as readonly ClubsOffering<T & Membership>[]
 	return filtered
 }
