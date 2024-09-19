@@ -16,7 +16,7 @@ import {
 	whenNotError,
 	whenNotErrorAll,
 } from '@devprotocol/util-ts'
-import { always, type KeyValuePair, xprod } from 'ramda'
+import { always, equals, type KeyValuePair, mergeDeepRight, xprod } from 'ramda'
 import type { ClubsConfiguration, ClubsOffering, Membership } from './types'
 import axios from 'axios'
 import { bytes32Hex } from './bytes32Hex'
@@ -237,17 +237,26 @@ export const membershipToStruct = (
 }
 
 /**
- * Find offerings that match managedBy and the specified plugin ID.
+ * Find offerings by some options.
  * @param config ClubsConfigration
- * @param pluginId plugin ID
+ * @param search all find options
  * @returns an array of filtered offerings
  */
 export const findOfferings = (
 	config: ClubsConfiguration,
-	pluginId: string
+	search: Partial<
+		Omit<ClubsOffering, 'fee'> & {
+			readonly fee?: Partial<ClubsOffering['fee']>
+		}
+	>
 ): readonly ClubsOffering[] => {
-	const filtered = (config.offerings ?? []).filter(
-		({ managedBy }) => managedBy === pluginId
-	)
+	const filtered = (config.offerings ?? []).filter((item) => {
+		const base = { ...item, payload: bytes32Hex(item.payload) }
+		const match = search.payload
+			? { ...search, payload: bytes32Hex(search.payload) }
+			: search
+		const merged = mergeDeepRight(base, match)
+		return equals(base, merged)
+	})
 	return filtered
 }
