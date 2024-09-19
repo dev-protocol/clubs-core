@@ -1,5 +1,9 @@
 import { describe, expect, it, vi } from 'vitest'
-import { membershipVerifierFactory, membershipToStruct } from './memberships'
+import {
+	membershipVerifierFactory,
+	membershipToStruct,
+	findOfferings,
+} from './memberships'
 import {
 	JsonRpcProvider,
 	MaxUint256,
@@ -7,7 +11,7 @@ import {
 	formatUnits,
 	randomBytes,
 } from 'ethers'
-import { Membership } from './types'
+import { ClubsConfiguration, ClubsOffering, Membership } from './types'
 import { bytes32Hex } from './bytes32Hex'
 import axios from 'axios'
 import BigNumber from 'bignumber.js'
@@ -683,4 +687,120 @@ describe('membershipToStruct', () => {
 			expect(res.token).toBe(ZeroAddress)
 		})
 	})
+})
+
+describe('findOfferings', () => {
+	it('should return offerings', () => {
+		const offerings = [
+			{
+				managedBy: 'DEBUG',
+				payload: new Uint8Array([1, 2, 3]),
+				currency: 'DEV',
+				imageSrc: 'imageSrc',
+				name: 'name',
+				description: 'description',
+				fee: { beneficiary: '0x123', percentage: 0.1 },
+				id: 'id',
+			},
+			{
+				managedBy: 'DEBUG',
+				payload: new Uint8Array([10, 11, 12]),
+				currency: 'USDC',
+				imageSrc: 'imageSrc4',
+				name: 'name3',
+				description: 'description4',
+				fee: { beneficiary: '0x123', percentage: 0.1 },
+				id: 'id4',
+			},
+		] as readonly ClubsOffering[]
+		const config = {
+			offerings: [
+				...offerings,
+				{
+					managedBy: 'DEBUG2',
+					payload: new Uint8Array([3, 4, 5]),
+					currency: 'DEV',
+					imageSrc: 'imageSrc2',
+					name: 'name2',
+					description: 'description2',
+					fee: { beneficiary: '0x123', percentage: 0.1 },
+					id: 'id2',
+				},
+				{
+					managedBy: 'DEBUG',
+					payload: new Uint8Array([7, 8, 9]),
+					currency: 'USDC',
+					imageSrc: 'imageSrc3',
+					name: 'name3',
+					description: 'description3',
+					fee: { beneficiary: '0x456', percentage: 0.1 },
+					id: 'id3',
+				},
+			] as readonly ClubsOffering[],
+		} as unknown as ClubsConfiguration
+		const res = findOfferings(config, {
+			managedBy: 'DEBUG',
+			fee: { beneficiary: '0x123' },
+		})
+
+		expect(res).toEqual(offerings)
+	})
+
+	it('should always handling payload as a string', () => {
+		const offerings = [
+			{
+				managedBy: 'DEBUG',
+				payload: new Uint8Array([1, 2, 3]),
+				currency: 'DEV',
+				imageSrc: 'imageSrc',
+				name: 'name',
+				description: 'description',
+				fee: { beneficiary: '0x123', percentage: 0.1 },
+				id: 'id',
+			},
+		] as readonly ClubsOffering[]
+		const config = {
+			offerings: [
+				...offerings,
+				{
+					managedBy: 'DEBUG2',
+					payload: new Uint8Array([3, 4, 5]),
+					currency: 'DEV',
+					imageSrc: 'imageSrc2',
+					name: 'name2',
+					description: 'description2',
+					fee: { beneficiary: '0x123', percentage: 0.1 },
+					id: 'id2',
+				},
+				{
+					managedBy: 'DEBUG',
+					payload: new Uint8Array([7, 8, 9]),
+					currency: 'USDC',
+					imageSrc: 'imageSrc3',
+					name: 'name3',
+					description: 'description3',
+					fee: { beneficiary: '0x456', percentage: 0.1 },
+					id: 'id3',
+				},
+				{
+					managedBy: 'DEBUG',
+					payload: new Uint8Array([10, 11, 12]),
+					currency: 'USDC',
+					imageSrc: 'imageSrc4',
+					name: 'name3',
+					description: 'description4',
+					fee: { beneficiary: '0x123', percentage: 0.1 },
+					id: 'id4',
+				},
+			] as readonly ClubsOffering[],
+		} as unknown as ClubsConfiguration
+		const res = findOfferings(config, {
+			managedBy: 'DEBUG',
+			payload: bytes32Hex(new Uint8Array([1, 2, 3])),
+		})
+
+		expect(res).toEqual(offerings)
+	})
+
+	it.skip('... test more ...')
 })
