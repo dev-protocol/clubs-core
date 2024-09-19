@@ -237,12 +237,12 @@ export const membershipToStruct = (
 }
 
 /**
- * Get offerings that match managedBy and the specified plugin ID.
+ * Find offerings that match managedBy and the specified plugin ID.
  * @param config ClubsConfigration
  * @param pluginId plugin ID
  * @returns an array of filtered offerings
  */
-export const getPluginManagedOfferingsById = (
+export const findOfferings = (
 	config: ClubsConfiguration,
 	pluginId: string
 ): readonly ClubsOffering[] => {
