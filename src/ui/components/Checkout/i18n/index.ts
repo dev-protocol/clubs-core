@@ -1,6 +1,10 @@
 import { ClubsI18nParts } from '../../../../i18n'
 
 export const Strings = {
+	Close: {
+		en: 'Close',
+		ja: '近い',
+	},
 	PermissionRequired: {
 		en: 'Permission required',
 		ja: 'アクセス許可が必要です',

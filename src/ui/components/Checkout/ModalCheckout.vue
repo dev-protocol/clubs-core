@@ -3,8 +3,11 @@ import { i18nFactory } from '../../../i18n'
 import { Strings } from './i18n'
 import Skeleton from '../Skeleton/Skeleton.vue'
 import { ProseTextInherit } from '../../../constants'
+import { computed } from 'vue'
 
-defineProps<{
+const props = defineProps<{
+	eoa?: string
+	modalClose?: () => void
 	name: string | undefined
 	description: string | undefined
 	image: HTMLImageElement | undefined
@@ -12,6 +15,14 @@ defineProps<{
 
 const i18nBase = i18nFactory(Strings)
 let i18n = i18nBase(['en'])
+
+const passportPageUrl = computed(() =>
+	window.location.hostname.includes('.prerelease.clubs.place')
+		? `https://prerelease.clubs.place/passport/${props.eoa ?? ''}`
+		: window.location.hostname.includes('.clubs.place')
+		? `https://clubs.place/passport/${props.eoa ?? ''}`
+		: `http://localhost:${window.location.port}/passport/${props.eoa ?? ''}`
+)
 </script>
 
 <style>
@@ -124,7 +135,8 @@ let i18n = i18nBase(['en'])
 				class="flex w-full flex-col gap-4 lg:flex-row lg:justify-between lg:gap-0"
 			>
 				<a
-					href="/passport/0x262A038D0bc05B4112c7D58BBfd407810bcfE2aB"
+					v-if="!!eoa"
+					:href="passportPageUrl"
 					class="hs-button is-filled rounded-lg border px-0 py-4 text-base lg:px-12 lg:py-6"
 				>
 					{{ i18n('Passport') }}
@@ -135,6 +147,12 @@ let i18n = i18nBase(['en'])
 				>
 					{{ i18n('Home') }}
 				</a>
+				<button
+					@click="modalClose"
+					class="hs-button is-filled rounded-lg border px-12 py-4 text-base lg:py-6"
+				>
+					{{ i18n('Close') }}
+				</button>
 			</div>
 		</div>
 	</div>
