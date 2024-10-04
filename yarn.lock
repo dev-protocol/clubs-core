@@ -725,10 +725,10 @@
     "@aggre/ullr" "^3.2.0"
     lit "^3.0.0"
 
-"@devprotocol/hashi@2.3.1":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@devprotocol/hashi/-/hashi-2.3.1.tgz#e73b1fb74a3a040986e30c59e8f62c836848e351"
-  integrity sha512-LKsU0N1l3tN6btp3zz8KKEtEsKMK+HVzFttuEAs1nUT0ZY3WfdchD9T5Z8dhArbucZ29vZ/HjkM/GICila8ikQ==
+"@devprotocol/hashi@2.3.4":
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/@devprotocol/hashi/-/hashi-2.3.4.tgz#681ff4aebbbafed757d8854a40afc824be1601f4"
+  integrity sha512-wbyriYx+akOACxpoiVaTxJhNRjgrTPMNJmWgaHFBKHiOm01ZBun+T8ductgmR5U8DdSxmP/apQuLqf/ohjMmzg==
   dependencies:
     "@matteusan/sentro" "0.1.25"
 
