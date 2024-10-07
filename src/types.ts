@@ -355,7 +355,8 @@ export type ClubsInferFactoryPropsType<
 				| ClubsFunctionGetSlots
 				| ClubsFunctionGetLayout
 				| undefined
-			? P[F] extends ((...args: any) => Promise<infer U>) | undefined
+			? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+			  P[F] extends ((...args: any) => Promise<infer U>) | undefined
 				? U extends
 						| Array<{ props?: infer V }>
 						| ReadonlyArray<{ props?: infer V }>

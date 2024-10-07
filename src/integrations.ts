@@ -2,6 +2,7 @@ import type { AstroIntegration } from 'astro'
 import type { ClubsAstroIntegrationOptions } from './types'
 
 export const astro = function (
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	options?: ClubsAstroIntegrationOptions
 ): AstroIntegration {
 	return {

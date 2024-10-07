@@ -1,4 +1,3 @@
-// @ts-nocheck // TODO: REMOVE THIS TS FLAG
 import CLBButton from './CLBButton.vue'
 import CLBButtonGroup from './CLBButtonGroup.vue'
 import CLBButtonGroupItem from './CLBButtonGroupItem.vue'

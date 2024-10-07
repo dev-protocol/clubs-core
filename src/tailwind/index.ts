@@ -1,6 +1,4 @@
-// @ts-ignore
 import hashi from '@devprotocol/hashi/tailwind'
-// @ts-ignore
 import { hsExtendedColorTokens } from '@devprotocol/hashi/tailwind/extensions'
 
 export const clubs = {

@@ -20,5 +20,5 @@ declare module '@devprotocol/hashi/tailwind' {
 }
 
 declare module '@devprotocol/hashi/tailwind/extensions' {
-	export const hsExtendedColorTokens: Record<string, any>;
+	export const hsExtendedColorTokens: Record<string, unknown>;
 }

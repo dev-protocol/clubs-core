@@ -160,6 +160,7 @@ export const onMountClient = (
 	handlerStore.add(_handler)
 	const handler = (data?: Event) => {
 		if (((data?.target as Document) ?? document).readyState === 'complete') {
+			// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 			handlerStore.has(_handler) && _handler(data)
 			handlerStore.delete(_handler)
 			document.removeEventListener('readystatechange', handler)
