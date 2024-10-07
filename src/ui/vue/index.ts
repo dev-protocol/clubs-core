@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck // TODO: REMOVE THIS TS FLAG
 import CLBButton from './CLBButton.vue'
 import CLBButtonGroup from './CLBButtonGroup.vue'

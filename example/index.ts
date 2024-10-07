@@ -1,4 +1,3 @@
-/* eslint-disable functional/functional-parameters */
 import Example from './Example.astro'
 import Admin from './Admin.astro'
 import Modal from './Modal.astro'

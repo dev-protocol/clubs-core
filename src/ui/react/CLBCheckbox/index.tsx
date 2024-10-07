@@ -1,8 +1,10 @@
+/* eslint-disable functional/no-return-void */
+/* eslint-disable functional/no-expression-statements */
+/* eslint-disable functional/no-mixed-types */
 import React from 'react'
 
 type CheckboxTypes = 'raised'
 
-// eslint-disable-next-line functional/no-mixed-type
 interface CLBCheckboxProps {
 	readonly name?: string
 	readonly id?: string
@@ -14,7 +16,7 @@ interface CLBCheckboxProps {
 	readonly mediaAlt?: string
 	readonly isChecked?: boolean
 	readonly isDisabled?: boolean
-	// eslint-disable-next-line functional/no-return-void
+
 	readonly onChange?: () => void
 }
 
@@ -32,11 +34,9 @@ const CLBCheckbox: React.FC<CLBCheckboxProps> = ({
 	onChange,
 }) => {
 	const _assertType = (type: string): string => {
-		// eslint-disable-next-line functional/prefer-readonly-type
 		const finalTypes: string[] = []
-		// eslint-disable-next-line functional/no-expression-statement, functional/no-return-void
 		type.split(' ').forEach((type) => {
-			// eslint-disable-next-line functional/no-expression-statement, functional/immutable-data
+			// eslint-disable-next-line functional/immutable-data
 			finalTypes.push('is-' + type)
 		})
 		return finalTypes.join(' ')

@@ -4,7 +4,6 @@ import example from '../../../../example/index'
 import theme from '../../../../example/theme'
 
 export const { ALL } = apiFactory({
-	// eslint-disable-next-line functional/functional-parameters
 	config: () =>
 		encode({
 			name: 'Debug',

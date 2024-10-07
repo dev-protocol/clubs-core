@@ -1,3 +1,4 @@
+/* eslint-disable functional/no-expression-statements */
 import {
 	ClubsEvents,
 	ClubsEventsDetailUpdatePreferredColorScheme,
@@ -15,7 +16,7 @@ const themes: readonly ClubsPreferredColorScheme[] = [
  * @param input - preferred color scheme input
  * @returns preferred color scheme
  */
-// eslint-disable-next-line functional/functional-parameters
+
 export const normalizePreferredColorScheme = (
 	input?: string
 ): ClubsPreferredColorScheme => {
@@ -26,7 +27,7 @@ export const normalizePreferredColorScheme = (
  * Get the preferred color scheme from the localStorage
  * @returns preferred color scheme
  */
-// eslint-disable-next-line functional/functional-parameters
+
 export const getPreferredColorScheme = (): ClubsPreferredColorScheme => {
 	return ((_cookie: string) => {
 		const theme = _cookie
@@ -45,10 +46,9 @@ export const getPreferredColorScheme = (): ClubsPreferredColorScheme => {
 export const setPreferredColorScheme = (
 	theme: ClubsPreferredColorScheme
 ): true => {
-	// eslint-disable-next-line functional/no-expression-statement, functional/immutable-data
+	// eslint-disable-next-line functional/immutable-data
 	document.cookie = `theme=${theme}; max-age=31536000; path=/; secure; samesite=strict`
 
-	// eslint-disable-next-line functional/no-return-void, functional/no-expression-statement
 	document.body.dispatchEvent(
 		new CustomEvent<ClubsEventsDetailUpdatePreferredColorScheme>(
 			ClubsEvents.UpdatePreferredColorScheme,

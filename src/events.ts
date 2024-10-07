@@ -1,4 +1,5 @@
-/* eslint-disable functional/no-expression-statement */
+/* eslint-disable functional/no-expression-statements */
+
 /* eslint-disable functional/no-return-void */
 import type {
 	ClubsConfiguration,
@@ -9,7 +10,6 @@ import type {
 	ClubsPluginOptions,
 	ClubsEventsDetailFinishConfiguration,
 	ClubsEventsDetailBuildConfiguration,
-	ClubsEventsFinishConfiguration,
 	ClubsEventsDetailUpdatedPluginOptions,
 	ClubsEventsDetailUpdatedConfiguration,
 	ClubsEventsDetailControlModal,
@@ -68,7 +68,6 @@ export const updatedConfig = (
 	)
 }
 
-// eslint-disable-next-line functional/functional-parameters
 export const buildConfig = () => {
 	return document.body.dispatchEvent(
 		new CustomEvent<ClubsEventsDetailBuildConfiguration>(
@@ -160,11 +159,11 @@ export const onMountClient = (
 ) => {
 	handlerStore.add(_handler)
 	const handler = (data?: Event) => {
-		// eslint-disable-next-line functional/no-conditional-statement
 		if (((data?.target as Document) ?? document).readyState === 'complete') {
 			handlerStore.has(_handler) && _handler(data)
 			handlerStore.delete(_handler)
 			document.removeEventListener('readystatechange', handler)
+			return
 		}
 	}
 	document.addEventListener('readystatechange', handler, options)

@@ -1,4 +1,3 @@
-/* eslint-disable functional/no-expression-statement */
 import type { AstroIntegration } from 'astro'
 import type { ClubsAstroIntegrationOptions } from './types'
 
@@ -9,6 +8,7 @@ export const astro = function (
 		name: '@devprotocol/clubs-core',
 		hooks: {
 			'astro:config:setup': async ({ updateConfig }) => {
+				// eslint-disable-next-line functional/no-expression-statements
 				updateConfig({
 					vite: {
 						ssr: {

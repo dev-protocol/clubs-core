@@ -1,3 +1,5 @@
+/* eslint-disable functional/no-return-void */
+/* eslint-disable functional/no-expression-statements */
 import React from 'react'
 
 type SelectFieldTypes = 'error' | 'raised'
@@ -22,11 +24,9 @@ const CLBSelectField: React.FC<CLBSelectFieldProps> = ({
 	children,
 }) => {
 	const _assertType = (type: string): string => {
-		// eslint-disable-next-line functional/prefer-readonly-type
 		const finalTypes: string[] = []
-		// eslint-disable-next-line functional/no-expression-statement, functional/no-return-void
 		type.split(' ').forEach((type) => {
-			// eslint-disable-next-line functional/no-expression-statement, functional/immutable-data
+			// eslint-disable-next-line functional/immutable-data
 			finalTypes.push('is-' + type)
 		})
 		return finalTypes.join(' ')

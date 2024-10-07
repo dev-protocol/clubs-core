@@ -1,4 +1,3 @@
-/* eslint-disable functional/functional-parameters */
 import { default as Layout } from './Layout.astro'
 import { default as Admin } from './Admin.astro'
 import { default as Modal } from './Modal.astro'

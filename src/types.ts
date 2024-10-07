@@ -1,3 +1,5 @@
+/* eslint-disable functional/no-mixed-types */
+
 import type {
 	APIRoute,
 	GetStaticPathsOptions,
@@ -219,7 +221,6 @@ export type ClubsGetStaticPathsItem<P extends Props = Props> = {
 export type ClubsGetStaticPathsResult<
 	P extends Props = Props,
 	SP extends Props = Props
-	/* eslint-disable functional/prefer-readonly-type */
 > = ClubsGetStaticPathsItem<
 	ClubsPropsPages<P, SP> & {
 		readonly component: AstroComponentFactory
@@ -230,7 +231,6 @@ export type ClubsGetStaticPathsResult<
 export type ClubsGetStaticPathsAdminResult<
 	P extends Props = Props,
 	SP extends Props = Props
-	/* eslint-disable functional/prefer-readonly-type */
 > = ClubsGetStaticPathsItem<
 	ClubsPropsPages<ClubsPropsAdminPages<P>, SP> & {
 		readonly component: AstroComponentFactory

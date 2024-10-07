@@ -1,5 +1,3 @@
-/* eslint-disable functional/immutable-data */
-/* eslint-disable functional/no-let */
 import { describe, it, expect } from 'vitest'
 import {
 	normalizePreferredColorScheme,

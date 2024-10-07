@@ -1,6 +1,8 @@
+/* eslint-disable functional/no-return-void */
+/* eslint-disable functional/no-expression-statements */
 import React from 'react'
 
-// eslint-disable-next-line functional/no-mixed-type
+// eslint-disable-next-line functional/no-mixed-types
 interface CLBRadioProps {
 	readonly name?: string
 	readonly id?: string
@@ -12,7 +14,7 @@ interface CLBRadioProps {
 	readonly mediaAlt?: string
 	readonly isChecked?: boolean
 	readonly isDisabled?: boolean
-	// eslint-disable-next-line functional/no-return-void
+
 	readonly onChange?: () => void
 }
 
@@ -30,11 +32,9 @@ const CLBRadio: React.FC<CLBRadioProps> = ({
 	onChange,
 }) => {
 	const _assertType = (type: string): string => {
-		// eslint-disable-next-line functional/prefer-readonly-type
 		const finalTypes: string[] = []
-		// eslint-disable-next-line functional/no-expression-statement, functional/no-return-void
 		type.split(' ').forEach((type) => {
-			// eslint-disable-next-line functional/no-expression-statement, functional/immutable-data
+			// eslint-disable-next-line functional/immutable-data
 			finalTypes.push('is-' + type)
 		})
 		return finalTypes.join(' ')

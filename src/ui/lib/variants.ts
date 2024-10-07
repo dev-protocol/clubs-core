@@ -1,5 +1,4 @@
 export function handleVariants(variants: string): string {
-	// eslint-disable-next-line
 	const finalVariants: string[] = []
 	// eslint-disable-next-line
 	variants.split(' ').forEach((variant: string): void => {

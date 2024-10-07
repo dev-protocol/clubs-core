@@ -53,7 +53,7 @@ const check = async ({
 				? new URL(_accessControl)
 				: new URL(_accessControl, base)
 
-			// eslint-disable-next-line functional/no-expression-statement
+			// eslint-disable-next-line functional/no-expression-statements
 			url.searchParams.set('account', account)
 
 			const result = await axios(url.toString()).catch((err: Error) => err)
@@ -65,7 +65,6 @@ const check = async ({
 				: body
 		})) ?? null
 
-	// eslint-disable-next-line functional/no-conditional-statement
 	if (
 		testForPayload === true &&
 		(testForAccessControl === true || testForAccessControl === null)
@@ -73,7 +72,6 @@ const check = async ({
 		return mem
 	}
 
-	// eslint-disable-next-line functional/no-promise-reject
 	return Promise.reject(
 		testForAccessControl instanceof Error
 			? testForAccessControl

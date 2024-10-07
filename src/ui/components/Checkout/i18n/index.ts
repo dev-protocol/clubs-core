@@ -47,7 +47,7 @@ export const Strings = {
 	},
 	PayWith: {
 		en: ([currency]) => `Pay with ${currency}`,
-		ja: ([currency]) => `次の貨幣で支払う：`,
+		ja: () => `次の貨幣で支払う：`,
 	},
 	Minted: {
 		en: 'Minted',

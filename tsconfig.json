@@ -18,10 +18,10 @@
 		"experimentalDecorators": true
 	},
 	"include": [
-		"src",
-		"example",
-		".preview",
-		"ui-preview",
+		"src/**/*",
+		"example/**/*",
+		".preview/**/*",
+		"ui-preview/**/*",
 		"rollup.*.mjs",
 		"tailwind.config.js",
 		"vitest.config.ts"
