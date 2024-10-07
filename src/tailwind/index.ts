@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-ignore
 import hashi from '@devprotocol/hashi/tailwind'
 // @ts-ignore

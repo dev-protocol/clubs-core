@@ -1,4 +1,3 @@
-/* eslint-disable functional/prefer-tacit */
 import dts from 'rollup-plugin-dts'
 import commonjs from '@rollup/plugin-commonjs'
 import { dirname, relative, resolve } from 'path'

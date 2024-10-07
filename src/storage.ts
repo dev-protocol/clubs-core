@@ -1,3 +1,5 @@
+/* eslint-disable functional/no-return-void */
+/* eslint-disable functional/no-expression-statements */
 import type { PutBlobResult } from '@vercel/blob'
 import { isNotError, whenDefinedAll } from '@devprotocol/util-ts'
 
@@ -11,16 +13,12 @@ export const uploadFile = async ({
 	readonly message?: string
 }) => {
 	const formData = new FormData()
-	// eslint-disable-next-line functional/no-expression-statement
 	formData.append('file', file)
 
 	const params = new URLSearchParams()
 
-	// eslint-disable-next-line functional/no-expression-statement, functional/no-return-void
 	whenDefinedAll([signature, message], ([sig, msg]) => {
-		// eslint-disable-next-line functional/no-expression-statement
 		params.append('signature', sig)
-		// eslint-disable-next-line functional/no-expression-statement
 		params.append('message', msg)
 	})
 

@@ -1,5 +1,3 @@
-/* eslint-disable functional/no-return-void */
-/* eslint-disable functional/no-expression-statement */
 import type {
 	ClubsConfiguration,
 	ClubsFunctionAdminFactory,
@@ -67,7 +65,6 @@ const _findCurrentTheme = (
 const _configFactory: (
 	configFetcher: ClubsFunctionConfigFetcher
 ) => () => Promise<ClubsConfiguration> =
-	// eslint-disable-next-line functional/functional-parameters
 	(configFetcher) => async (): Promise<ClubsConfiguration> => {
 		const [config] = await getClubsConfig(configFetcher)
 		return config
@@ -195,7 +192,6 @@ const _staticPagePathsFactory: (
 	pluginsMap: ClubsPlugins
 ) => () => Promise<ClubsGetStaticPathsResult> =
 	(configFetcher, pluginsMap) =>
-	// eslint-disable-next-line functional/functional-parameters
 	async (): Promise<ClubsGetStaticPathsResult> => {
 		const [config] = await getClubsConfig(configFetcher)
 		const plugins = await _listPlugins(config, pluginsMap)
@@ -234,7 +230,6 @@ const _staticAdminPathsFactory: (
 	pluginsMap: ClubsPlugins
 ) => () => Promise<ClubsGetStaticPathsAdminResult> =
 	(configFetcher, pluginsMap) =>
-	// eslint-disable-next-line functional/functional-parameters
 	async (): Promise<ClubsGetStaticPathsAdminResult> => {
 		const [config, encodedClubsConfiguration] = await getClubsConfig(
 			configFetcher

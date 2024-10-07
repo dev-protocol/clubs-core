@@ -1,3 +1,6 @@
+/* eslint-disable functional/no-return-void */
+/* eslint-disable functional/no-expression-statements */
+/* eslint-disable functional/no-mixed-types */
 import React from 'react'
 import './overrides.scss'
 
@@ -33,17 +36,14 @@ const CLBButton: React.FC<CLBButtonProps> = ({
 	)
 
 	const _assertType = (type: string): string => {
-		// eslint-disable-next-line functional/prefer-readonly-type
 		const finalTypes: string[] = []
-		// eslint-disable-next-line functional/no-expression-statement , functional/no-return-void
 		type.split(' ').forEach((type) => {
-			// eslint-disable-next-line functional/no-expression-statement, functional/immutable-data
+			// eslint-disable-next-line functional/immutable-data
 			finalTypes.push('is-' + type)
 		})
 		return finalTypes.join(' ')
 	}
 
-	// eslint-disable-next-line functional/no-conditional-statement
 	if (!link || onClick) {
 		return (
 			<button

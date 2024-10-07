@@ -1,6 +1,3 @@
-/* eslint-disable functional/no-let */
-/* eslint-disable functional/immutable-data */
-/* eslint-disable functional/no-loop-statement */
 import { describe, it, expect } from 'vitest'
 import { markdownToHtml } from './markdown'
 

@@ -32,7 +32,6 @@ export const authenticate = async ({
 		previousConfig.propertyAddress
 	)
 
-	// eslint-disable-next-line functional/no-conditional-statement
 	if (!propertyClient || propertyClient.length <= 0) {
 		return false
 	}
@@ -63,7 +62,6 @@ export const isAdmin = async ({
 		previousConfiguration.propertyAddress
 	)
 
-	// eslint-disable-next-line functional/no-conditional-statement
 	if (!propertyClient || propertyClient.length <= 0) {
 		return false
 	}
