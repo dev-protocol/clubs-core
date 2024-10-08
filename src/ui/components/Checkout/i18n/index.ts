@@ -75,8 +75,8 @@ export const Strings = {
 		en: 'Sign in',
 		ja: ' サインイン',
 	},
-	SigningInAs: {
-		en: ([name]) => `Signing in as ${name}`,
-		ja: ([name]) => `${name}としてサインイン中`,
+	SignedInAs: {
+		en: `Signed in as:`,
+		ja: `サインインしているユーザー:`,
 	},
 } satisfies ClubsI18nParts

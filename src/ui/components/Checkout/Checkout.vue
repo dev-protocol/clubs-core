@@ -592,36 +592,36 @@ onUnmounted(() => {
 			</section>
 
 			<section class="p-3">
+				<span v-if="account" class="mb-2 text-xs font-bold text-black/20">{{
+					i18n('SignedInAs')
+				}}</span>
 				<button
-					class="hs-button is-large relative flex w-full items-center gap-2 rounded-md"
-					:class="
-						clubsProfile
-							? 'is-outlined justify-start border-[1px]'
-							: 'is-filled'
-					"
-					:disabled="Boolean(clubsProfile)"
+					v-if="clubsProfile === undefined"
+					class="hs-button is-large is-filled relative flex w-full items-center gap-2 rounded-md"
 					@click="signIn"
 				>
-					<template v-if="clubsProfile === undefined">
-						<IconBouncingArrowRight
-							v-if="account === undefined"
-							:justify-left="true"
-						/>
-						<IconSpinner v-else class="absolute left-5 size-5" />
-						<span class="font-bold">{{ i18n('SignIn') }}</span>
-					</template>
-					<template v-else>
-						<div class="flex items-center justify-start gap-2">
-							<img
-								:src="clubsProfile.avatar"
-								class="aspect-square size-8 overflow-hidden rounded-full border border-black/20 object-cover"
-							/>
-							<span class="text-sm font-bold">{{
-								i18n('SigningInAs', [clubsProfile.username])
-							}}</span>
-						</div>
-					</template>
+					<IconBouncingArrowRight
+						v-if="account === undefined"
+						:justify-left="true"
+					/>
+					<IconSpinner v-else class="absolute left-5 size-5" />
+					<span class="font-bold">{{ i18n('SignIn') }}</span>
 				</button>
+				<a
+					v-else
+					class="hs-button is-outlined relative flex w-full items-center justify-start gap-2 rounded-md border-[1px] border-[var(--hs-theme-disabled)]"
+					:href="`https://clubs.place/passport/${account}`"
+					target="_blank"
+					rel="noreferer noopener"
+				>
+					<div class="flex items-center justify-start gap-2">
+						<img
+							:src="clubsProfile.avatar"
+							class="aspect-square size-8 overflow-hidden rounded-full border border-black/20 object-cover"
+						/>
+						<span class="text-sm font-bold">{{ clubsProfile.username }}</span>
+					</div>
+				</a>
 			</section>
 
 			<section
