@@ -3,9 +3,9 @@ import {
 	getPreferredColorScheme,
 	setPreferredColorScheme,
 } from '../../fixtures'
-import IconSun from './IconSun.vue'
-import IconMoon from './IconMoon.vue'
-import IconPhone from './IconPhone.vue'
+import IconSun from '../../ui/vue/IconSun.vue'
+import IconMoon from '../../ui/vue/IconMoon.vue'
+import IconPhone from '../../ui/vue/IconPhone.vue'
 import { ref } from 'vue'
 import { ClubsPreferredColorScheme } from '../../types'
 
@@ -53,13 +53,13 @@ const onChangeTheme = (t: ClubsPreferredColorScheme) => {
 					@click="onChangeTheme(tm)"
 				>
 					<span v-if="tm === ClubsPreferredColorScheme.System"
-						><IconPhone class-name="w-4 h-4"
+						><IconPhone class="h-4 w-4"
 					/></span>
 					<span v-if="tm === ClubsPreferredColorScheme.Dark"
-						><IconMoon class-name="w-4 h-4"
+						><IconMoon class="h-4 w-4"
 					/></span>
 					<span v-if="tm === ClubsPreferredColorScheme.Light"
-						><IconSun class-name="w-4 h-4"
+						><IconSun class="h-4 w-4"
 					/></span>
 					{{ tm }}
 				</button>

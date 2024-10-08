@@ -2,6 +2,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { BrowserProvider } from 'ethers'
 import type { connection as Connection } from '../../connection'
+import { ClubsConnectionSignal } from '../../constants'
 
 const connection = ref<typeof Connection>()
 const walletAddress = ref<string | undefined>('')
@@ -16,11 +17,17 @@ const handleConnection = async () => {
 	const connectedAddress = await signer.getAddress()
 	walletAddress.value = connectedAddress
 }
+const handleSignal = async (sig?: string) => {
+	if (sig === ClubsConnectionSignal.SignInRequest) {
+		onClick()
+	}
+}
 
 onMounted(async () => {
 	const connectionModule = await import('../../connection')
 	connection.value = connectionModule.connection
 	connection.value().signer.subscribe(handleConnection)
+	connection.value().signal.subscribe(handleSignal)
 })
 
 const truncateEthAddress = computed(() => {

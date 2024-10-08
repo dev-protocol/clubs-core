@@ -11,13 +11,30 @@ const payload = toUtf8Bytes('tier-1')
 // 0x6bb2c535a20b09c1272e9c28409c173522b1a659da8ecb7b8df3204dc00aa1e0
 ---
 
+<div class="mx-auto mb-12 max-w-md rounded-xl bg-white shadow">
+	<Checkout_
+		amount={0}
+		currency="usdc"
+		propertyAddress="0xF5fb43b4674Cc8D07FB45e53Dc77B651e17dC407"
+		rpcUrl="https://polygon-rpc.com"
+		payload={payload}
+		itemName="Example"
+		description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+		itemImageSrc="https://images.unsplash.com/photo-1634655377962-e6e7b446e7e9?q=80&w=1200&h=1200&fit=crop"
+		uiMode="embed"
+		{...props}
+	/>
+</div>
+
 <Checkout_
 	amount={100}
 	currency="usdc"
 	propertyAddress="0xF5fb43b4674Cc8D07FB45e53Dc77B651e17dC407"
 	rpcUrl="https://polygon-rpc.com"
 	payload={payload}
+	itemName="Example"
 	description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 	itemImageSrc="https://images.unsplash.com/photo-1634655377962-e6e7b446e7e9?q=80&w=1200&h=1200&fit=crop"
+	uiMode="standalone"
 	{...props}
 />

@@ -22,7 +22,7 @@ import {
 	parseUnits,
 } from 'ethers'
 import BigNumber from 'bignumber.js'
-import { type Subscription, combineLatest } from 'rxjs'
+import { type Subscription, combineLatest, distinctUntilChanged } from 'rxjs'
 import { CurrencyOption } from '../../../constants/currencyOption'
 import { fetchDevForEth, fetchSTokens } from '../../../fixtures/utility'
 import Skeleton from '../Skeleton/Skeleton.vue'
@@ -32,10 +32,16 @@ import {
 	getTokenAddress,
 } from '../../../fixtures/dev-kit'
 import Result from './Result.vue'
-import { ProseTextInherit } from '../../../constants'
+import { ClubsConnectionSignal, ProseTextInherit } from '../../../constants'
 import { i18nFactory } from '../../../i18n'
 import { Strings } from './i18n'
 import { markdownToHtml } from '../../../markdown'
+import type { ClubsProfile } from '../../../types'
+import { fetchProfile } from '../../../profile'
+import IconSpinner from '../../vue/IconSpinner.vue'
+import IconInformationCircleMicro from '../../vue/IconInformationCircleMicro.vue'
+import IconCheckCircleSolid from '../../vue/IconCheckCircleSolid.vue'
+import IconBouncingArrowRight from '../../vue/IconBouncingArrowRight.vue'
 
 let providerPool: UndefinedOr<ContractRunner>
 let subscriptions: Subscription[] = []
@@ -61,6 +67,7 @@ type Props = {
 	itemName?: string
 	accessControlUrl?: string
 	accessControlDescription?: string
+	uiMode?: 'standalone' | 'embed'
 }
 const props = defineProps<Props>()
 
@@ -84,6 +91,7 @@ const mintedId = ref<UndefinedOr<bigint>>(undefined)
 const insufficientFunds = ref<UndefinedOr<Error>>(undefined)
 const isFetchingFunds = ref<UndefinedOr<'progress' | Error>>(undefined)
 const stakingError = ref<UndefinedOr<Error>>(undefined)
+const clubsProfile = ref<UndefinedOr<ClubsProfile>>(undefined)
 
 const verifiedPropsCurrency: ComputedRef<CurrencyOption> = computed(() => {
 	return props.currency?.toUpperCase() === 'ETH'
@@ -408,6 +416,8 @@ const onCompleted = function (ev?: { detail?: { id?: bigint } }) {
 	stakeSuccessful.value = true
 	mintedId.value = ev?.detail?.id
 }
+const signIn = () =>
+	getConnection().signal.next(ClubsConnectionSignal.SignInRequest)
 
 onMounted(async () => {
 	const sub = combineLatest([
@@ -436,24 +446,29 @@ onMounted(async () => {
 			}
 		)
 	})
-	const subAccessControl = getConnection().account.subscribe(async () => {
-		whenDefined(accessControlUrl.value, async (_accessControl) => {
-			isCheckingAccessControl.value = true
-			const polling = setInterval(async () => {
-				const res = await fetchAccessControl(_accessControl).catch(
-					(err: Error) => err
-				)
-				accessControlError.value = res instanceof Error ? res : undefined
-				accessAllowed.value = typeof res === 'boolean' ? res : undefined
-				isCheckingAccessControl.value = false
-				if (accessAllowed.value) {
-					clearInterval(polling)
-				}
-			}, 3000)
+	const sub$2 = getConnection()
+		.account.pipe(distinctUntilChanged())
+		.subscribe(async (account) => {
+			whenDefined(accessControlUrl.value, async (_accessControl) => {
+				isCheckingAccessControl.value = true
+				const polling = setInterval(async () => {
+					const res = await fetchAccessControl(_accessControl).catch(
+						(err: Error) => err
+					)
+					accessControlError.value = res instanceof Error ? res : undefined
+					accessAllowed.value = typeof res === 'boolean' ? res : undefined
+					isCheckingAccessControl.value = false
+					if (accessAllowed.value) {
+						clearInterval(polling)
+					}
+				}, 3000)
+			})
+			const profile = await whenDefined(account, fetchProfile)
+			console.log({ profile })
+			clubsProfile.value = profile?.profile
 		})
-	})
 	subscriptions.push(sub)
-	subscriptions.push(subAccessControl)
+	subscriptions.push(sub$2)
 
 	const provider = new JsonRpcProvider(props.rpcUrl)
 	const chainId = Number((await provider.getNetwork()).chainId)
@@ -528,218 +543,313 @@ onUnmounted(() => {
 <template>
 	<div
 		v-if="!stakeSuccessful"
-		class="relative mx-auto mb-12 grid rounded-xl bg-white text-black shadow lg:container lg:mt-12 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-12"
+		class="relative mx-auto grid"
+		:class="
+			props.uiMode === 'embed'
+				? ''
+				: 'mb-12 rounded-xl bg-white text-black shadow '
+		"
 	>
-		<section class="flex flex-col gap-6 p-6 lg:row-span-2">
-			<div class="rounded-lg border border-black/20 bg-black/10 p-4">
-				<img
-					v-if="previewImageSrc"
-					:src="previewImageSrc"
-					class="h-auto w-full rounded object-cover object-center sm:h-full sm:w-full"
-				/>
-				<Skeleton
-					v-if="previewImageSrc === undefined"
-					class="mx-auto aspect-square h-full w-full"
-				/>
-			</div>
-			<span>
-				<h3 class="text-sm text-black/50">
-					<span>{{ previewName }}</span>
-				</h3>
-				<p v-if="isPriced" class="flex items-center gap-3 text-2xl font-bold">
-					{{
-						`${
-							Number(amount) > 1 ? Number(amount).toLocaleString() : amount
-						} ${(fiatCurrency ?? verifiedPropsCurrency).toUpperCase()}`
-					}}
-					<slot name="after:price"></slot>
-				</p>
-				<p v-if="stakingAmount" class="text-sm text-black/90">
-					{{ i18n('AutomaticStaking', [stakingAmount.toLocaleString()]) }}
-				</p>
-				<p v-if="directAmount" class="text-sm text-black/90">
-					{{
-						i18n('AutomaticEarned', [
-							directAmount.toLocaleString(),
-							verifiedPropsCurrency.toUpperCase(),
-						])
-					}}
-				</p>
-			</span>
-			<aside
-				v-if="htmlDescription"
-				v-html="htmlDescription"
-				class="prose-hr:my-5 opacity-80 lg:mt-6"
-				:class="ProseTextInherit"
-			></aside>
-		</section>
-
-		<section class="flex flex-col content-start gap-8 empty:hidden lg:gap-12">
-			<!-- Transaction form -->
-			<slot name="before:transaction-form"></slot>
-
-			<div v-if="props.accessControlUrl" class="grid gap-4 p-5 lg:gap-8">
-				<!-- Access control section -->
-				<span>
-					<p class="mb-2 flex items-center gap-2 font-bold text-dp-white-600">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="h-5 w-5"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"
-							/>
-						</svg>
-						{{ i18n('PermissionRequired') }}
-					</p>
-					<p
-						:data-is-loading="isCheckingAccessControl"
-						:data-is-valid="accessAllowed"
-						:data-is-error="Boolean(accessControlError)"
-						class="hs-button is-large is-fullwidth is-outlined pointer-events-none border text-center data-[is-loading=true]:animate-pulse data-[is-valid=false]:border data-[is-error=true]:border-red-600 data-[is-valid=false]:border-neutral-300 data-[is-valid=true]:border-[#43C451] data-[is-valid=false]:bg-white"
-					>
-						{{
-							!account
-								? i18n('ConnectWalletVerification')
-								: isCheckingAccessControl
-								? i18n('Verifying')
-								: accessAllowed
-								? i18n('Verified')
-								: accessControlError
-								? accessControlError.message
-								: i18n('Unverified')
-						}}
-					</p>
-				</span>
-
+		<div class="mx-auto max-w-md">
+			<section class="flex flex-col gap-4 p-3 lg:row-span-2">
 				<div
-					v-if="accessAllowed === false && htmlVerificationFlow"
-					v-html="htmlVerificationFlow"
-					class="prose-hr:my-5"
+					class="grid grid-cols-[auto_auto_1fr] items-center justify-between gap-4"
+				>
+					<span
+						class="size-24 rounded-lg border border-black/20 bg-black/10 p-1"
+					>
+						<img
+							v-if="previewImageSrc"
+							:src="previewImageSrc"
+							class="h-auto w-full rounded object-cover object-center sm:h-full sm:w-full"
+						/>
+						<Skeleton
+							v-if="previewImageSrc === undefined"
+							class="mx-auto aspect-square h-full w-full"
+						/>
+					</span>
+					<h3 class="text-balance break-all font-bold">{{ previewName }}</h3>
+					<span class="justify-self-end">
+						<span
+							v-if="isPriced"
+							class="inline-flex items-center gap-3 whitespace-nowrap rounded-full bg-purple-500 px-3 py-1.5 font-bold text-white"
+						>
+							{{
+								`${
+									Number(amount) > 1 ? Number(amount).toLocaleString() : amount
+								} ${(fiatCurrency ?? verifiedPropsCurrency).toUpperCase()}`
+							}}
+							<slot name="after:price"></slot>
+						</span>
+					</span>
+				</div>
+				<aside
+					v-if="htmlDescription"
+					v-html="htmlDescription"
+					class="prose-hr:my-5 opacity-50"
 					:class="ProseTextInherit"
-				></div>
-			</div>
+				></aside>
+			</section>
 
-			<hr v-if="props.accessControlUrl" class="bg-dp-blue-grey-200" />
-
-			<span
-				v-if="
-					useInjectedTransactionForm &&
-					(props.accessControlUrl
-						? props.accessControlUrl && accessAllowed
-						: true)
-				"
-				@checkout:completed="onCompleted"
-			>
-				<slot name="main:transaction-form"></slot>
-			</span>
-
-			<span
-				v-if="!useInjectedTransactionForm && useERC20"
-				class="flex flex-col justify-stretch p-5"
-			>
-				<!-- Approval -->
+			<section class="p-3">
 				<button
-					@click="approve"
-					:disabled="
-						!account ||
-						isApproving ||
-						approveNeeded === undefined ||
-						approveNeeded === false ||
-						Boolean(props.accessControlUrl && !accessAllowed) ||
-						!isNotError(isFetchingApproval)
+					class="hs-button is-large relative flex w-full items-center gap-2 rounded-md"
+					:class="
+						clubsProfile
+							? 'is-outlined justify-start border-[1px]'
+							: 'is-filled'
 					"
-					:data-is-approving="isApproving"
-					:data-is-fetching="isFetchingApproval === 'progress'"
-					class="hs-button is-large is-fullwidth is-filled data-[is-approving=true]:animate-pulse data-[is-fetching=true]:animate-pulse"
+					:disabled="Boolean(clubsProfile)"
+					@click="signIn"
 				>
-					{{ approveNeeded === false ? i18n('Approved') : i18n('Unapproved') }}
+					<template v-if="clubsProfile === undefined">
+						<IconBouncingArrowRight
+							v-if="account === undefined"
+							:justify-left="true"
+						/>
+						<IconSpinner v-else class="absolute left-5 size-5" />
+						<span class="font-bold">{{ i18n('SignIn') }}</span>
+					</template>
+					<template v-else>
+						<div class="flex items-center justify-start gap-2">
+							<img
+								:src="clubsProfile.avatar"
+								class="aspect-square size-8 overflow-hidden rounded-full border border-black/20 object-cover"
+							/>
+							<span class="text-sm font-bold">{{
+								i18n('SigningInAs', [clubsProfile.username])
+							}}</span>
+						</div>
+					</template>
 				</button>
-				<p
-					v-if="!isNotError(isFetchingApproval)"
-					class="text-bold mt-2 rounded-md bg-red-600 p-2 text-white"
+			</section>
+
+			<section
+				v-if="account"
+				class="flex animate-[fadeIn_.7s_ease-in-out_forwards] flex-col content-start gap-8 empty:hidden lg:gap-12"
+			>
+				<!-- Transaction form -->
+				<slot name="before:transaction-form"></slot>
+
+				<div v-if="props.accessControlUrl" class="grid gap-4 p-5 lg:gap-8">
+					<!-- Access control section -->
+					<span>
+						<p class="mb-2 flex items-center gap-2 font-bold text-dp-white-600">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="h-5 w-5"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"
+								/>
+							</svg>
+							{{ i18n('PermissionRequired') }}
+						</p>
+						<p
+							:data-is-loading="isCheckingAccessControl"
+							:data-is-valid="accessAllowed"
+							:data-is-error="Boolean(accessControlError)"
+							class="hs-button is-large is-fullwidth is-outlined pointer-events-none border text-center data-[is-loading=true]:animate-pulse data-[is-valid=false]:border data-[is-error=true]:border-red-600 data-[is-valid=false]:border-neutral-300 data-[is-valid=true]:border-[#43C451] data-[is-valid=false]:bg-white"
+						>
+							{{
+								!account
+									? i18n('ConnectWalletVerification')
+									: isCheckingAccessControl
+									? i18n('Verifying')
+									: accessAllowed
+									? i18n('Verified')
+									: accessControlError
+									? accessControlError.message
+									: i18n('Unverified')
+							}}
+						</p>
+					</span>
+
+					<div
+						v-if="accessAllowed === false && htmlVerificationFlow"
+						v-html="htmlVerificationFlow"
+						class="prose-hr:my-5"
+						:class="ProseTextInherit"
+					></div>
+				</div>
+
+				<hr v-if="props.accessControlUrl" class="bg-dp-blue-grey-200" />
+
+				<span
+					v-if="
+						useInjectedTransactionForm &&
+						(props.accessControlUrl
+							? props.accessControlUrl && accessAllowed
+							: true)
+					"
+					@checkout:completed="onCompleted"
 				>
-					{{ isFetchingApproval.message }}
-				</p>
-			</span>
-
-			<slot name="after:transaction-form"></slot>
-		</section>
-
-		<section
-			v-if="!useInjectedTransactionForm && isPriced"
-			class="sticky bottom-0 flex grow flex-col gap-5 rounded-b-xl border-t border-dp-white-300 bg-white p-5"
-			v-bind:class="
-				!props.accessControlUrl || (props.accessControlUrl && accessAllowed)
-					? 'lg:static lg:border-0 lg:bg-transparent'
-					: ''
-			"
-		>
-			<div class="grid gap-5">
-				<span class="flex flex-col justify-stretch">
-					<!-- Pay -->
-					<button
-						@click="submitStake"
-						:disabled="
-							!account ||
-							isStaking ||
-							approveNeeded !== false ||
-							Boolean(props.accessControlUrl && !accessAllowed) ||
-							Boolean(insufficientFunds) ||
-							!isNotError(isFetchingFunds)
-						"
-						:data-is-staking="isStaking"
-						:data-is-fetching="isFetchingFunds === 'progress'"
-						class="hs-button is-large is-filled data-[is-fetching=true]:animate-pulse data-[is-staking=true]:animate-pulse"
-						v-bind:class="insufficientFunds ? 'bg-red-600' : ''"
-					>
-						{{ i18n('PayWith', [verifiedPropsCurrency.toUpperCase()]) }}
-					</button>
-
-					<p
-						v-if="insufficientFunds"
-						class="text-bold mt-2 rounded-md bg-red-600 p-2 text-white"
-					>
-						{{ insufficientFunds.message }}
-					</p>
-					<p
-						v-if="stakingError"
-						class="text-bold mt-2 rounded-md bg-red-600 p-2 text-white"
-					>
-						{{ stakingError.message }}
-					</p>
-					<p
-						v-if="!isNotError(isFetchingFunds)"
-						class="text-bold mt-2 rounded-md bg-red-600 p-2 text-white"
-					>
-						{{ isFetchingFunds.message }}
-					</p>
+					<slot name="main:transaction-form"></slot>
 				</span>
 
 				<span
-					v-if="isApproving || isStaking || isWaitingForStaked"
-					class="grid justify-center gap-5"
+					v-if="!useInjectedTransactionForm && useERC20"
+					class="flex flex-col justify-stretch p-3"
 				>
-					<div
-						role="presentation"
-						class="mx-auto h-16 w-16 animate-spin rounded-full border-l border-r border-t border-native-blue-300"
-					/>
-					<p v-if="isApproving">{{ i18n('ApprovalPending') }}</p>
-					<p v-if="isStaking && !isWaitingForStaked">
-						{{ i18n('TxConfirmationPending') }}
-					</p>
-					<p v-if="isWaitingForStaked">
-						{{ i18n('StakePending') }}
+					<!-- Approval -->
+					<button
+						@click="approve"
+						:disabled="
+							!account ||
+							isApproving ||
+							approveNeeded === undefined ||
+							approveNeeded === false ||
+							Boolean(props.accessControlUrl && !accessAllowed) ||
+							!isNotError(isFetchingApproval) ||
+							isFetchingApproval === 'progress'
+						"
+						:data-is-approving="isApproving"
+						:data-is-fetching="isFetchingApproval === 'progress'"
+						class="hs-button is-large is-fullwidth group relative"
+						:class="
+							approveNeeded === false ? 'is-outlined border-[1px]' : 'is-filled'
+						"
+					>
+						<IconSpinner
+							v-if="
+								approveNeeded &&
+								(isApproving || isFetchingApproval === 'progress')
+							"
+							class="absolute left-5 size-5"
+						/>
+						<IconCheckCircleSolid
+							v-if="approveNeeded === false"
+							class="absolute left-5 size-5 text-dp-green-300"
+						/>
+						<IconBouncingArrowRight
+							class="group-disabled:hidden"
+							:justify-left="true"
+						/>
+
+						{{
+							approveNeeded === false ? i18n('Approved') : i18n('Unapproved')
+						}}
+					</button>
+					<p
+						v-if="!isNotError(isFetchingApproval)"
+						class="text-bold mt-2 rounded-md bg-red-600 p-2 text-white"
+					>
+						{{ isFetchingApproval.message }}
 					</p>
 				</span>
+
+				<slot name="after:transaction-form"></slot>
+			</section>
+
+			<section
+				v-if="account && !useInjectedTransactionForm && isPriced"
+				class="sticky bottom-0 flex grow animate-[fadeIn_.7s_ease-in-out_forwards] flex-col gap-5 rounded-b-xl border-t border-dp-white-300 bg-white p-3"
+				:class="
+					!props.accessControlUrl || (props.accessControlUrl && accessAllowed)
+						? 'lg:static lg:border-0 lg:bg-transparent'
+						: ''
+				"
+			>
+				<div class="grid gap-5">
+					<span class="flex flex-col justify-stretch">
+						<!-- Pay -->
+						<button
+							@click="submitStake"
+							:disabled="
+								!account ||
+								isStaking ||
+								approveNeeded !== false ||
+								Boolean(props.accessControlUrl && !accessAllowed) ||
+								Boolean(insufficientFunds) ||
+								!isNotError(isFetchingFunds) ||
+								isFetchingFunds === 'progress'
+							"
+							:data-is-staking="isStaking"
+							:data-is-fetching="isFetchingFunds === 'progress'"
+							class="hs-button is-large is-filled group relative"
+							:class="insufficientFunds ? 'bg-red-600' : ''"
+						>
+							<IconSpinner
+								v-if="isStaking || isFetchingFunds === 'progress'"
+								class="absolute left-5 size-5"
+							/>
+							<IconBouncingArrowRight
+								class="group-disabled:hidden"
+								:justify-left="true"
+							/>
+
+							{{ i18n('PayWith', [verifiedPropsCurrency.toUpperCase()]) }}
+						</button>
+
+						<p
+							v-if="insufficientFunds"
+							class="text-bold mt-2 rounded-md bg-red-600 p-2 text-white"
+						>
+							{{ insufficientFunds.message }}
+						</p>
+						<p
+							v-if="stakingError"
+							class="text-bold mt-2 rounded-md bg-red-600 p-2 text-white"
+						>
+							{{ stakingError.message }}
+						</p>
+						<p
+							v-if="!isNotError(isFetchingFunds)"
+							class="text-bold mt-2 rounded-md bg-red-600 p-2 text-white"
+						>
+							{{ isFetchingFunds.message }}
+						</p>
+					</span>
+
+					<span
+						v-if="isApproving || isStaking || isWaitingForStaked"
+						class="grid justify-center gap-5"
+					>
+						<div
+							role="presentation"
+							class="mx-auto h-16 w-16 animate-spin rounded-full border-l border-r border-t border-native-blue-300"
+						/>
+						<p v-if="isApproving">{{ i18n('ApprovalPending') }}</p>
+						<p v-if="isStaking && !isWaitingForStaked">
+							{{ i18n('TxConfirmationPending') }}
+						</p>
+						<p v-if="isWaitingForStaked">
+							{{ i18n('StakePending') }}
+						</p>
+					</span>
+				</div>
+			</section>
+
+			<div
+				v-if="stakingAmount || directAmount"
+				class="m-3 flex animate-[fadeIn_.5s_ease-in-out_forwards] justify-end"
+			>
+				<details class="group">
+					<summary
+						class="flex list-none justify-end opacity-50 group-open:opacity-100"
+					>
+						<IconInformationCircleMicro class="size-4" />
+					</summary>
+					<p v-if="stakingAmount" class="mt-2 text-sm text-black/90">
+						{{ i18n('AutomaticStaking', [stakingAmount.toLocaleString()]) }}
+					</p>
+					<p v-if="directAmount" class="mt-2 text-sm text-black/90">
+						{{
+							i18n('AutomaticEarned', [
+								directAmount.toLocaleString(),
+								verifiedPropsCurrency.toUpperCase(),
+							])
+						}}
+					</p>
+				</details>
 			</div>
-		</section>
+		</div>
 	</div>
 
 	<Result
@@ -757,3 +867,14 @@ onUnmounted(() => {
 		</template>
 	</Result>
 </template>
+
+<style>
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 100;
+	}
+}
+</style>
