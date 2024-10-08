@@ -39,8 +39,8 @@ import { markdownToHtml } from '../../../markdown'
 import type { ClubsProfile } from '../../../types'
 import { fetchProfile } from '../../../profile'
 import IconSpinner from '../../vue/IconSpinner.vue'
-import IconInformationCircleMicro from '../../vue/IconInformationCircleMicro.vue'
-import IconCheckCircleSolid from '../../vue/IconCheckCircleSolid.vue'
+import IconInfo from '../../vue/IconInfo.vue'
+import IconCheckCircle from '../../vue/IconCheckCircle.vue'
 import IconBouncingArrowRight from '../../vue/IconBouncingArrowRight.vue'
 
 let providerPool: UndefinedOr<ContractRunner>
@@ -723,9 +723,10 @@ onUnmounted(() => {
 							"
 							class="absolute left-5 size-5"
 						/>
-						<IconCheckCircleSolid
+						<IconCheckCircle
 							v-if="approveNeeded === false"
 							class="absolute left-5 size-5 text-dp-green-300"
+							type="solid"
 						/>
 						<IconBouncingArrowRight
 							class="group-disabled:hidden"
@@ -834,7 +835,7 @@ onUnmounted(() => {
 					<summary
 						class="flex list-none justify-end opacity-50 group-open:opacity-100"
 					>
-						<IconInformationCircleMicro class="size-4" />
+						<IconInfo class="size-4" type="micro" />
 					</summary>
 					<p v-if="stakingAmount" class="mt-2 text-sm text-black/90">
 						{{ i18n('AutomaticStaking', [stakingAmount.toLocaleString()]) }}

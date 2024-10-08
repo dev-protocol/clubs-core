@@ -10,8 +10,8 @@ import CLBTier from './CLBTier.vue'
 import CLBSkeleton from './CLBSkeleton.vue'
 import IconArrowRight from './IconArrowRight.vue'
 import IconBouncingArrowRight from './IconBouncingArrowRight.vue'
-import IconCheckCircleSolid from './IconCheckCircleSolid.vue'
-import IconInformationCircleMicro from './IconInformationCircleMicro.vue'
+import IconCheckCircle from './IconCheckCircle.vue'
+import IconInfo from './IconInfo.vue'
 import IconMoon from './IconMoon.vue'
 import IconPhone from './IconPhone.vue'
 import IconSpinner from './IconSpinner.vue'
@@ -30,8 +30,8 @@ export {
 	CLBSkeleton,
 	IconArrowRight,
 	IconBouncingArrowRight,
-	IconCheckCircleSolid,
-	IconInformationCircleMicro,
+	IconCheckCircle,
+	IconInfo,
 	IconMoon,
 	IconPhone,
 	IconSpinner,

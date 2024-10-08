@@ -9,8 +9,8 @@ export { default as CLBSelectField } from './CLBSelectField.svelte'
 export { default as CLBTier } from './CLBTier.svelte'
 import IconArrowRight from './IconArrowRight.svelte'
 import IconBouncingArrowRight from './IconBouncingArrowRight.svelte'
-import IconCheckCircleSolid from './IconCheckCircleSolid.svelte'
-import IconInformationCircleMicro from './IconInformationCircleMicro.svelte'
+import IconCheckCircle from './IconCheckCircle.svelte'
+import IconInfo from './IconInfo.svelte'
 import IconMoon from './IconMoon.svelte'
 import IconPhone from './IconPhone.svelte'
 import IconSpinner from './IconSpinner.svelte'
@@ -19,8 +19,8 @@ import IconSun from './IconSun.svelte'
 export {
 	IconArrowRight,
 	IconBouncingArrowRight,
-	IconCheckCircleSolid,
-	IconInformationCircleMicro,
+	IconCheckCircle,
+	IconInfo,
 	IconMoon,
 	IconPhone,
 	IconSpinner,
