@@ -120,7 +120,7 @@
 		"@rollup/plugin-commonjs": "26.0.3",
 		"@rollup/plugin-multi-entry": "6.0.1",
 		"@rollup/plugin-typescript": "11.1.6",
-		"@rollup/pluginutils": "5.1.0",
+		"@rollup/pluginutils": "5.1.2",
 		"@types/dompurify": "^3.0.4",
 		"@types/eslint-config-prettier": "^6.11.3",
 		"@types/eslint__js": "^8.42.3",
