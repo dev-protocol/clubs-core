@@ -7,3 +7,22 @@ export { default as CLBLink } from './CLBLink.svelte'
 export { default as CLBRadio } from './CLBRadio.svelte'
 export { default as CLBSelectField } from './CLBSelectField.svelte'
 export { default as CLBTier } from './CLBTier.svelte'
+import IconArrowRight from './IconArrowRight.svelte'
+import IconBouncingArrowRight from './IconBouncingArrowRight.svelte'
+import IconCheckCircleSolid from './IconCheckCircleSolid.svelte'
+import IconInformationCircleMicro from './IconInformationCircleMicro.svelte'
+import IconMoon from './IconMoon.svelte'
+import IconPhone from './IconPhone.svelte'
+import IconSpinner from './IconSpinner.svelte'
+import IconSun from './IconSun.svelte'
+
+export {
+	IconArrowRight,
+	IconBouncingArrowRight,
+	IconCheckCircleSolid,
+	IconInformationCircleMicro,
+	IconMoon,
+	IconPhone,
+	IconSpinner,
+	IconSun,
+}
