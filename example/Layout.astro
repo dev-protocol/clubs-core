@@ -1,4 +1,6 @@
 ---
+import { ClubsSlotName } from '../src'
+import ConnectButton from '../src/layouts/components/ConnectButton.vue'
 import '../src/styles'
 ---
 
@@ -10,6 +12,11 @@ import '../src/styles'
 	</head>
 
 	<body>
+		<span class="container mx-auto flex justify-end">
+			<span class="inline-block">
+				<ConnectButton client:only="vue" slot={ClubsSlotName.ConnectButton} />
+			</span>
+		</span>
 		<main class="bg container mx-auto my-28">
 			<slot />
 		</main>

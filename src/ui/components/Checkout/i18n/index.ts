@@ -71,4 +71,12 @@ export const Strings = {
 		en: 'Home',
 		ja: 'Home',
 	},
+	SignIn: {
+		en: 'Sign in',
+		ja: ' サインイン',
+	},
+	SigningInAs: {
+		en: ([name]) => `Signing in as ${name}`,
+		ja: ([name]) => `${name}としてサインイン中`,
+	},
 } satisfies ClubsI18nParts
