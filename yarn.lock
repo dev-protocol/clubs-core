@@ -643,7 +643,7 @@ __metadata:
     sass: "npm:1.77.8"
     svelte: "npm:4.2.19"
     svelte-check: "npm:^3.5.2"
-    tailwindcss: "npm:3.4.8"
+    tailwindcss: "npm:3.4.13"
     typedoc: "npm:^0.26.0"
     typescript: "npm:5.5.4"
     typescript-eslint: "npm:^8.8.0"
@@ -8940,9 +8940,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:3.4.8":
-  version: 3.4.8
-  resolution: "tailwindcss@npm:3.4.8"
+"tailwindcss@npm:3.4.13":
+  version: 3.4.13
+  resolution: "tailwindcss@npm:3.4.13"
   dependencies:
     "@alloc/quick-lru": "npm:^5.2.0"
     arg: "npm:^5.0.2"
@@ -8969,7 +8969,7 @@ __metadata:
   bin:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
-  checksum: 10c0/f4be9663f9ae3363e9de141541248c1455ef21a2fbdb84f7c44ae29cf535061b5380fadaa8d2bf6cdac42cb9dfa92ad9a4c50d1752d1db0ae8d26caace3a7216
+  checksum: 10c0/c6525be3dd26febc4ec5e45e80596bff8b48ade7de258c1ec8704297bf47c1ec7b2b186b13662ebaa6ab4795ad8879fb64064f796756bfc8b46558b542b01a6c
   languageName: node
   linkType: hard
 
