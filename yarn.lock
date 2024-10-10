@@ -632,7 +632,7 @@ __metadata:
     postcss: "npm:8.4.47"
     prettier: "npm:2.8.8"
     prettier-plugin-astro: "npm:0.10.0"
-    prettier-plugin-svelte: "npm:^2.9.0"
+    prettier-plugin-svelte: "npm:^3.0.0"
     prettier-plugin-tailwindcss: "npm:^0.4.0"
     ramda: "npm:^0.30.0"
     react: "npm:18.3.1"
@@ -7518,13 +7518,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-svelte@npm:^2.9.0":
-  version: 2.10.1
-  resolution: "prettier-plugin-svelte@npm:2.10.1"
+"prettier-plugin-svelte@npm:^3.0.0":
+  version: 3.2.7
+  resolution: "prettier-plugin-svelte@npm:3.2.7"
   peerDependencies:
-    prettier: ^1.16.4 || ^2.0.0
-    svelte: ^3.2.0 || ^4.0.0-next.0
-  checksum: 10c0/eb2e4ee49e703013f6b314186fc8de5e0e161c672261ba5e9344f00cde627c8ce08de0b750f42a72fcd6b5d541f83bc09e2891a1c17aede96b39a436d96bfa86
+    prettier: ^3.0.0
+    svelte: ^3.2.0 || ^4.0.0-next.0 || ^5.0.0-next.0
+  checksum: 10c0/0f3b7cbbedd17983eecea4006dbe3069cc138fc2dc985ccffde4914e86640586b5db896802c1cdb5764c99c8c30fca0377c5872edc1b5a9099544296c545e7bc
   languageName: node
   linkType: hard
 
