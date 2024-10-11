@@ -587,7 +587,7 @@ __metadata:
     "@astrojs/svelte": "npm:5.7.2"
     "@astrojs/tailwind": "npm:5.1.2"
     "@astrojs/vue": "npm:4.5.2"
-    "@devprotocol/dev-kit": "npm:8.6.2"
+    "@devprotocol/dev-kit": "npm:8.7.0"
     "@devprotocol/elements": "npm:1.5.3"
     "@devprotocol/hashi": "npm:2.3.4"
     "@devprotocol/util-ts": "npm:4.0.0"
@@ -677,9 +677,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@devprotocol/dev-kit@npm:8.6.2":
-  version: 8.6.2
-  resolution: "@devprotocol/dev-kit@npm:8.6.2"
+"@devprotocol/dev-kit@npm:8.7.0":
+  version: 8.7.0
+  resolution: "@devprotocol/dev-kit@npm:8.7.0"
   dependencies:
     "@devprotocol/util-ts": "npm:4.0.0"
     bignumber.js: "npm:9.1.2"
@@ -687,7 +687,7 @@ __metadata:
     ramda: "npm:^0.30.0"
   peerDependencies:
     ethers: ^6.0.0
-  checksum: 10c0/fc535258017a48401df41e08e16a87f54ddeac20be0bcba962ea3fbf24173589860c0ebdedd84f96be1e069e64426eeb3f75deef7b3bc1c461d2edfb5e5290b1
+  checksum: 10c0/e49ff9063854f5356b3c1db91e1674d99721b76cdfc13c998cfab6f49fe62ad6414e80b7c7c92902f79627ec5303e23dd1eafb19e76e82da3cc6ecc77cf1f32d
   languageName: node
   linkType: hard
 
