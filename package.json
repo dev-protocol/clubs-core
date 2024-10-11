@@ -98,7 +98,7 @@
 		"@devprotocol/util-ts": "4.0.0",
 		"@ethersproject/abstract-provider": "^5.7.0",
 		"@metamask/detect-provider": "^2.0.0",
-		"@vercel/blob": "^0.23.4",
+		"@vercel/blob": "^0.25.0",
 		"axios": "^1.6.7",
 		"bignumber.js": "^9.1.2",
 		"isomorphic-dompurify": "2.14.0",
