@@ -1,5 +1,6 @@
 import hashi from '@devprotocol/hashi/tailwind'
 import { hsExtendedColorTokens } from '@devprotocol/hashi/tailwind/extensions'
+import containerQueries from '@tailwindcss/container-queries'
 
 export const clubs = {
 	content: [
@@ -14,4 +15,5 @@ export const clubs = {
 			fontFamily: hashi.theme.fontFamily,
 		},
 	},
+	plugins: [containerQueries],
 }

@@ -97,25 +97,29 @@ const passportPageUrl = computed(() =>
 </style>
 
 <template>
-	<div>
+	<div class="@container/clb_result_modal">
 		<div
-			class="bg-color-navy relative mb-2 flex h-auto min-h-52 w-full flex-col items-center justify-center overflow-hidden rounded-md border border-black p-2 lg:mb-6 lg:h-96 lg:min-h-0 lg:p-8"
+			class="bg-color-navy relative mb-6 flex h-auto min-h-52 w-full flex-col items-center justify-center overflow-hidden rounded-md border border-black p-2 @xl/clb_result_modal:h-96 @xl/clb_result_modal:min-h-0 @xl/clb_result_modal:p-8"
 		>
 			<div
 				class="w-h-screen bg-focus-lines origin-zero animate-spin-slow mask absolute inset-2/4 -translate-x-1/2 -translate-y-1/2 bg-center bg-no-repeat"
 			></div>
 			<h3 class="mb-1 text-white">
-				<span v-if="name" class="text-xl italic lg:text-3xl">{{ name }}</span>
+				<span
+					v-if="name"
+					class="text-xl italic @xl/clb_result_modal:text-3xl"
+					>{{ name }}</span
+				>
 			</h3>
 			<!-- image -->
 			<img
 				:src="image?.src"
 				:width="image?.width"
 				:height="image?.height"
-				class="z-10 max-h-60 min-h-full max-w-60 object-contain lg:max-h-none lg:max-w-xl"
+				class="z-10 max-h-60 min-h-full max-w-60 object-contain @xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl"
 			/>
 		</div>
-		<div class="flex flex-col gap-4 px-0 lg:px-52">
+		<div class="flex flex-col gap-6 px-0 @4xl/clb_result_modal:px-52">
 			<!-- description -->
 			<aside
 				v-if="description"
@@ -132,24 +136,24 @@ const passportPageUrl = computed(() =>
 			<slot name="after:description" />
 
 			<div
-				class="flex w-full flex-col gap-4 lg:flex-row lg:justify-between lg:gap-0"
+				class="flex w-full flex-col gap-4 @4xl/clb_result_modal:flex-row @4xl/clb_result_modal:justify-between @4xl/clb_result_modal:gap-0"
 			>
 				<a
 					v-if="!!eoa"
 					:href="passportPageUrl"
-					class="hs-button is-filled rounded-lg border px-0 py-4 text-base lg:px-12 lg:py-6"
+					class="hs-button is-filled rounded-lg border px-0 py-4 text-base @4xl/clb_result_modal:px-12 @4xl/clb_result_modal:py-6"
 				>
 					{{ i18n('Passport') }}
 				</a>
 				<a
 					href="/"
-					class="hs-button is-filled rounded-lg border px-12 py-4 text-base lg:py-6"
+					class="hs-button is-filled rounded-lg border px-12 py-4 text-base @4xl/clb_result_modal:py-6"
 				>
 					{{ i18n('Home') }}
 				</a>
 				<button
 					@click="modalClose"
-					class="hs-button is-filled rounded-lg border px-12 py-4 text-base lg:py-6"
+					class="hs-button is-filled rounded-lg border px-12 py-4 text-base @4xl/clb_result_modal:py-6"
 				>
 					{{ i18n('Close') }}
 				</button>
