@@ -551,7 +551,7 @@ onUnmounted(() => {
 		"
 	>
 		<div class="mx-auto max-w-md">
-			<section class="flex flex-col gap-4 p-3 lg:row-span-2">
+			<section class="flex flex-col gap-4 p-3">
 				<div
 					class="grid grid-cols-[auto_auto_1fr] items-center justify-between gap-4"
 				>
@@ -561,7 +561,7 @@ onUnmounted(() => {
 						<img
 							v-if="previewImageSrc"
 							:src="previewImageSrc"
-							class="h-auto w-full rounded object-cover object-center sm:h-full sm:w-full"
+							class="h-auto w-full rounded object-cover object-center"
 						/>
 						<Skeleton
 							v-if="previewImageSrc === undefined"
@@ -597,12 +597,12 @@ onUnmounted(() => {
 				}}</span>
 				<button
 					v-if="clubsProfile === undefined"
-					class="hs-button is-large is-filled relative flex w-full items-center gap-2 rounded-md"
+					class="hs-button is-large is-filled relative flex w-full items-center gap-2 rounded-md @container/clb_checkout_signin_button"
 					@click="signIn"
 				>
 					<IconBouncingArrowRight
 						v-if="account === undefined"
-						:justify-left="true"
+						class="absolute -left-2 @xs/clb_checkout_signin_button:left-5"
 					/>
 					<IconSpinner v-else class="absolute left-5 size-5" />
 					<span class="font-bold">{{ i18n('SignIn') }}</span>
@@ -626,12 +626,12 @@ onUnmounted(() => {
 
 			<section
 				v-if="account"
-				class="flex animate-[fadeIn_.7s_ease-in-out_forwards] flex-col content-start gap-8 empty:hidden lg:gap-12"
+				class="flex animate-[fadeIn_.7s_ease-in-out_forwards] flex-col content-start gap-8 empty:hidden"
 			>
 				<!-- Transaction form -->
 				<slot name="before:transaction-form"></slot>
 
-				<div v-if="props.accessControlUrl" class="grid gap-4 p-5 lg:gap-8">
+				<div v-if="props.accessControlUrl" class="grid gap-4 p-5">
 					<!-- Access control section -->
 					<span>
 						<p class="mb-2 flex items-center gap-2 font-bold text-dp-white-600">
@@ -711,7 +711,7 @@ onUnmounted(() => {
 						"
 						:data-is-approving="isApproving"
 						:data-is-fetching="isFetchingApproval === 'progress'"
-						class="hs-button is-large is-fullwidth group relative"
+						class="hs-button is-large is-fullwidth group relative @container/clb_checkout_approval_button"
 						:class="
 							approveNeeded === false ? 'is-outlined border-[1px]' : 'is-filled'
 						"
@@ -729,8 +729,7 @@ onUnmounted(() => {
 							type="solid"
 						/>
 						<IconBouncingArrowRight
-							class="group-disabled:hidden"
-							:justify-left="true"
+							class="absolute -left-2 group-disabled:hidden @xs/clb_checkout_approval_button:left-5"
 						/>
 
 						{{
@@ -751,11 +750,6 @@ onUnmounted(() => {
 			<section
 				v-if="account && !useInjectedTransactionForm && isPriced"
 				class="sticky bottom-0 flex grow animate-[fadeIn_.7s_ease-in-out_forwards] flex-col gap-5 rounded-b-xl border-t border-dp-white-300 bg-white p-3"
-				:class="
-					!props.accessControlUrl || (props.accessControlUrl && accessAllowed)
-						? 'lg:static lg:border-0 lg:bg-transparent'
-						: ''
-				"
 			>
 				<div class="grid gap-5">
 					<span class="flex flex-col justify-stretch">
@@ -773,7 +767,7 @@ onUnmounted(() => {
 							"
 							:data-is-staking="isStaking"
 							:data-is-fetching="isFetchingFunds === 'progress'"
-							class="hs-button is-large is-filled group relative"
+							class="hs-button is-large is-filled group relative @container/clb_checkout_pay_button"
 							:class="insufficientFunds ? 'bg-red-600' : ''"
 						>
 							<IconSpinner
@@ -781,8 +775,7 @@ onUnmounted(() => {
 								class="absolute left-5 size-5"
 							/>
 							<IconBouncingArrowRight
-								class="group-disabled:hidden"
-								:justify-left="true"
+								class="absolute -left-2 group-disabled:hidden @xs/clb_checkout_pay_button:left-5"
 							/>
 
 							{{ i18n('PayWith', [verifiedPropsCurrency.toUpperCase()]) }}
