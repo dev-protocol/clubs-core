@@ -32,5 +32,5 @@ export default tseslint.config(
 			'@typescript-eslint/no-explicit-any': 'off',
 		},
 	},
-	{ ignores: ['dist', 'ui', 'example', '*.{ts,mjs,js}'] }
+	{ ignores: ['dist', 'ui', 'example', '.yarn', '*.{ts,mjs,js}'] }
 )
