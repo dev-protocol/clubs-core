@@ -543,11 +543,11 @@ onUnmounted(() => {
 <template>
 	<div
 		v-if="!stakeSuccessful"
-		class="relative mx-auto grid"
+		class="relative mx-auto"
 		:class="
 			props.uiMode === 'embed'
 				? ''
-				: 'mb-12 rounded-xl bg-white text-black shadow '
+				: 'mb-12 rounded-xl bg-white text-black shadow'
 		"
 	>
 		<div class="mx-auto max-w-md">
