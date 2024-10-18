@@ -105,7 +105,7 @@
 		"isomorphic-dompurify": "2.16.0",
 		"js-base64": "^3.7.2",
 		"lit": "^3.0.0",
-		"marked": "^10.0.0",
+		"marked": "^14.0.0",
 		"p-queue": "^8.0.1",
 		"ramda": "^0.30.0",
 		"rxjs": "^7.8.1",
