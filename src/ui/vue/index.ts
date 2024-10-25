@@ -17,6 +17,9 @@ import IconPhone from './IconPhone.vue'
 import IconSpinner from './IconSpinner.vue'
 import IconSun from './IconSun.vue'
 
+import Checkout from '../components/Checkout/Checkout.vue'
+import Result from '../components/Checkout/Result.vue'
+
 export {
 	CLBButton,
 	CLBButtonGroup,
@@ -36,4 +39,6 @@ export {
 	IconPhone,
 	IconSpinner,
 	IconSun,
+	Checkout,
+	Result,
 }
