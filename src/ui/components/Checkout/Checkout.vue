@@ -5,7 +5,7 @@ import {
 	positionsCreate,
 	positionsCreateWithEth,
 } from '@devprotocol/dev-kit/agent'
-import { connection as getConnection } from '../../../connection'
+import type { connection as Connection } from '../../../connection'
 import {
 	isNotError,
 	type UndefinedOr,
@@ -92,6 +92,7 @@ const insufficientFunds = ref<UndefinedOr<Error>>(undefined)
 const isFetchingFunds = ref<UndefinedOr<'progress' | Error>>(undefined)
 const stakingError = ref<UndefinedOr<Error>>(undefined)
 const clubsProfile = ref<UndefinedOr<ClubsProfile>>(undefined)
+const connection = ref<UndefinedOr<typeof Connection>>(undefined)
 
 const verifiedPropsCurrency: ComputedRef<CurrencyOption> = computed(() => {
 	return props.currency?.toUpperCase() === 'ETH'
@@ -417,14 +418,17 @@ const onCompleted = function (ev?: { detail?: { id?: bigint } }) {
 	mintedId.value = ev?.detail?.id
 }
 const signIn = () =>
-	getConnection().signal.next(ClubsConnectionSignal.SignInRequest)
+	connection.value?.().signal.next(ClubsConnectionSignal.SignInRequest)
 
 onMounted(async () => {
+	const { connection: _connection } = await import('../../../connection')
+	connection.value = _connection
+
 	const sub = combineLatest([
-		getConnection().provider,
-		getConnection().account,
-		getConnection().chain,
-		getConnection().identifiers,
+		_connection().provider,
+		_connection().account,
+		_connection().chain,
+		_connection().identifiers,
 	]).subscribe(async ([_provider, _account, _chain, _identifiers]) => {
 		providerPool = _provider
 		account.value = _account
@@ -446,7 +450,7 @@ onMounted(async () => {
 			}
 		)
 	})
-	const sub$2 = getConnection()
+	const sub$2 = _connection()
 		.account.pipe(distinctUntilChanged())
 		.subscribe(async (account) => {
 			whenDefined(accessControlUrl.value, async (_accessControl) => {
