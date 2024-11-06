@@ -803,7 +803,7 @@ __metadata:
     "@types/ramda": "npm:0.30.2"
     "@types/react": "npm:18.3.12"
     "@types/react-dom": "npm:18.3.1"
-    "@vercel/blob": "npm:^0.25.0"
+    "@vercel/blob": "npm:^0.26.0"
     "@webcomponents/template-shadowroot": "npm:0.2.1"
     astro: "npm:4.16.10"
     autoprefixer: "npm:10.4.20"
@@ -2885,15 +2885,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/blob@npm:^0.25.0":
-  version: 0.25.1
-  resolution: "@vercel/blob@npm:0.25.1"
+"@vercel/blob@npm:^0.26.0":
+  version: 0.26.0
+  resolution: "@vercel/blob@npm:0.26.0"
   dependencies:
     async-retry: "npm:^1.3.3"
     bytes: "npm:^3.1.2"
     is-buffer: "npm:^2.0.5"
+    is-node-process: "npm:^1.2.0"
+    throttleit: "npm:^2.1.0"
     undici: "npm:^5.28.4"
-  checksum: 10c0/3fd8767ed56ba3cfda3d4559bed09f6004c9a933ab43f7b35b9389b1d5a14fe86d721a9013c358bff8067d5b9cde6f825565ddb1b95a965e36c8c387833a300f
+  checksum: 10c0/14cf72801548169f58b23e1abda6849b6f5e98b588f64b8863b06b4b44f8515aaa6727cbe1cf97d7fb5a8ba434fad23f2698dddb39e3ebfc78d6f044283a1a50
   languageName: node
   linkType: hard
 
@@ -5776,6 +5778,13 @@ __metadata:
   version: 1.0.1
   resolution: "is-lambda@npm:1.0.1"
   checksum: 10c0/85fee098ae62ba6f1e24cf22678805473c7afd0fb3978a3aa260e354cb7bcb3a5806cf0a98403188465efedec41ab4348e8e4e79305d409601323855b3839d4d
+  languageName: node
+  linkType: hard
+
+"is-node-process@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "is-node-process@npm:1.2.0"
+  checksum: 10c0/5b24fda6776d00e42431d7bcd86bce81cb0b6cabeb944142fe7b077a54ada2e155066ad06dbe790abdb397884bdc3151e04a9707b8cd185099efbc79780573ed
   languageName: node
   linkType: hard
 
@@ -9283,6 +9292,13 @@ __metadata:
   dependencies:
     any-promise: "npm:^1.0.0"
   checksum: 10c0/f375aeb2b05c100a456a30bc3ed07ef03a39cbdefe02e0403fb714b8c7e57eeaad1a2f5c4ecfb9ce554ce3db9c2b024eba144843cd9e344566d9fcee73b04767
+  languageName: node
+  linkType: hard
+
+"throttleit@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "throttleit@npm:2.1.0"
+  checksum: 10c0/1696ae849522cea6ba4f4f3beac1f6655d335e51b42d99215e196a718adced0069e48deaaf77f7e89f526ab31de5b5c91016027da182438e6f9280be2f3d5265
   languageName: node
   linkType: hard
 
