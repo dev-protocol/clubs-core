@@ -135,17 +135,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/svelte@npm:5.7.2":
-  version: 5.7.2
-  resolution: "@astrojs/svelte@npm:5.7.2"
+"@astrojs/svelte@npm:5.7.3":
+  version: 5.7.3
+  resolution: "@astrojs/svelte@npm:5.7.3"
   dependencies:
     "@sveltejs/vite-plugin-svelte": "npm:^3.1.2"
-    svelte2tsx: "npm:^0.7.21"
+    svelte2tsx: "npm:^0.7.22"
   peerDependencies:
     astro: ^4.0.0
     svelte: ^4.0.0 || ^5.0.0-next.190
     typescript: ^5.3.3
-  checksum: 10c0/446f382922769e33faedc6915345b5fcc2146e8ef1fd58dcc0277de32506015e13ebea05678a0592afd163180278c14de648e3d1d109bc31da10a2b57765ef12
+  checksum: 10c0/2b9cf2f6da2d74f4bd5378c8652f160623997ea1d319638a15d3b1dd80991eda25ae5276d131fa2f203393652dba868523e600804a452fa507964e152c32fd3d
   languageName: node
   linkType: hard
 
@@ -779,7 +779,7 @@ __metadata:
   dependencies:
     "@astrojs/lit": "npm:4.3.0"
     "@astrojs/react": "npm:3.6.2"
-    "@astrojs/svelte": "npm:5.7.2"
+    "@astrojs/svelte": "npm:5.7.3"
     "@astrojs/tailwind": "npm:5.1.2"
     "@astrojs/vue": "npm:4.5.2"
     "@devprotocol/dev-kit": "npm:8.7.0"
@@ -805,7 +805,7 @@ __metadata:
     "@types/react-dom": "npm:18.3.1"
     "@vercel/blob": "npm:^0.25.0"
     "@webcomponents/template-shadowroot": "npm:0.2.1"
-    astro: "npm:4.16.9"
+    astro: "npm:4.16.10"
     autoprefixer: "npm:10.4.20"
     axios: "npm:^1.6.7"
     bignumber.js: "npm:^9.1.2"
@@ -3510,9 +3510,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:4.16.9":
-  version: 4.16.9
-  resolution: "astro@npm:4.16.9"
+"astro@npm:4.16.10":
+  version: 4.16.10
+  resolution: "astro@npm:4.16.10"
   dependencies:
     "@astrojs/compiler": "npm:^2.10.3"
     "@astrojs/internal-helpers": "npm:0.4.1"
@@ -3556,7 +3556,7 @@ __metadata:
     micromatch: "npm:^4.0.8"
     mrmime: "npm:^2.0.0"
     neotraverse: "npm:^0.6.18"
-    ora: "npm:^8.1.0"
+    ora: "npm:^8.1.1"
     p-limit: "npm:^6.1.0"
     p-queue: "npm:^8.0.1"
     preferred-pm: "npm:^4.0.0"
@@ -3582,7 +3582,7 @@ __metadata:
       optional: true
   bin:
     astro: astro.js
-  checksum: 10c0/921318a7e3b087ae46c7327239b1a58dd6556c16ca474d802c4382cf33166eba35392be7ba00959139d9fc038586c2f5ae42e6858c3da6068ed80457e68fc906
+  checksum: 10c0/41c47d7080ba86fa8690b16089efab22d8b4d9de59dccb4fc349abf2c62398f0bfd034992a42ef421ebec308f2682ed6aadd038ab714512117786d1d3965855f
   languageName: node
   linkType: hard
 
@@ -7452,9 +7452,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ora@npm:^8.1.0":
-  version: 8.1.0
-  resolution: "ora@npm:8.1.0"
+"ora@npm:^8.1.1":
+  version: 8.1.1
+  resolution: "ora@npm:8.1.1"
   dependencies:
     chalk: "npm:^5.3.0"
     cli-cursor: "npm:^5.0.0"
@@ -7465,7 +7465,7 @@ __metadata:
     stdin-discarder: "npm:^0.2.2"
     string-width: "npm:^7.2.0"
     strip-ansi: "npm:^7.1.0"
-  checksum: 10c0/4ac9a6dd7fe915a354680f33ced21ee96d13d3c5ab0dc00b3c3ba9e3695ed141b1d045222990f5a71a9a91f801042a0b0d32e58dfc5509ff9b81efdd3fcf6339
+  checksum: 10c0/996a81a9e997481339de3a7996c56131ea292c0a0e9e42d1cd454e2390f1ce7015ec925dcdd29e3d74dc5d037a4aa1877e575b491555507bcd9f219df760a63f
   languageName: node
   linkType: hard
 
@@ -9140,16 +9140,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte2tsx@npm:^0.7.21":
-  version: 0.7.21
-  resolution: "svelte2tsx@npm:0.7.21"
+"svelte2tsx@npm:^0.7.22":
+  version: 0.7.22
+  resolution: "svelte2tsx@npm:0.7.22"
   dependencies:
     dedent-js: "npm:^1.0.1"
     pascal-case: "npm:^3.1.1"
   peerDependencies:
     svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
     typescript: ^4.9.4 || ^5.0.0
-  checksum: 10c0/979678960c8dab2ede4589fe38fa710f86a7f27a2625faf6c57111ac4456c77f051d5a4d47fe27dd5caf15cc99ac0b96f11d60521dac1faa086bc0ab33fe6b3d
+  checksum: 10c0/a39b151e64cd67d3237db0dbfed567d567320a618ef3e3d7598730a51853b9e55640441473cc7478fb606d2252f1c18a55b7480b128ae3195256fcdb7ff58577
   languageName: node
   linkType: hard
 
