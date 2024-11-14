@@ -3,7 +3,9 @@ import { i18nFactory } from '../../../i18n'
 import { Strings } from './i18n'
 import Skeleton from '../Skeleton/Skeleton.vue'
 import { ProseTextInherit } from '../../../constants'
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { UndefinedOr } from '@devprotocol/util-ts'
+import Spinner from '../../../layouts/components/Spinner.vue'
 
 const props = defineProps<{
 	eoa?: string
@@ -12,6 +14,10 @@ const props = defineProps<{
 	description: string | undefined
 	image: HTMLImageElement | undefined
 }>()
+
+const cronCalling = ref<UndefinedOr<Promise<UndefinedOr<Response>>>>()
+const clicked = ref(false)
+const cronFinished = ref(false)
 
 const i18nBase = i18nFactory(Strings)
 let i18n = i18nBase(['en'])
@@ -23,6 +29,24 @@ const passportPageUrl = computed(() =>
 		? `https://clubs.place/passport/${props.eoa ?? ''}`
 		: `http://localhost:${window.location.port}/passport/${props.eoa ?? ''}`
 )
+
+const onClickPassport = async () => {
+	clicked.value = true
+	await cronCalling.value
+	window.location.href = passportPageUrl.value
+}
+
+onMounted(async () => {
+	if (cronCalling.value === undefined) {
+		cronCalling.value = ((fb) =>
+			fetch('/api/cron/assets')
+				.then(({ ok }) => (ok === false ? fb() : undefined))
+				.catch(fb))(() => fetch('https://clubs.place/api/cron/assets'))
+	}
+	cronCalling.value.finally(() => {
+		cronFinished.value = true
+	})
+})
 </script>
 
 <style>
@@ -139,12 +163,21 @@ const passportPageUrl = computed(() =>
 				class="flex w-full flex-col gap-4 @4xl/clb_result_modal:flex-row @4xl/clb_result_modal:justify-between @4xl/clb_result_modal:gap-0"
 			>
 				<a
-					v-if="!!eoa"
+					v-if="cronFinished"
 					:href="passportPageUrl"
 					class="hs-button is-filled rounded-lg border px-0 py-4 text-base @4xl/clb_result_modal:px-12 @4xl/clb_result_modal:py-6"
 				>
 					{{ i18n('Passport') }}
 				</a>
+				<button
+					v-if="!cronFinished"
+					@click="onClickPassport"
+					:disabled="clicked"
+					class="hs-button is-filled items-center justify-center gap-2 rounded-lg border px-0 py-4 text-base disabled:animate-pulse disabled:bg-blue-600 @4xl/clb_result_modal:px-12 @4xl/clb_result_modal:py-6"
+				>
+					{{ i18n('Passport') }}
+					<Spinner v-if="clicked" />
+				</button>
 				<a
 					href="/"
 					class="hs-button is-filled rounded-lg border px-12 py-4 text-base @4xl/clb_result_modal:py-6"

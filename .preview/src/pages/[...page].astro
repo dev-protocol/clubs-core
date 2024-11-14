@@ -4,17 +4,16 @@ import {
 	encode,
 	type ClubsFunctionPageFactoryResult,
 	type ClubsFunctionFactoryOptions,
+	routerFactory,
+	ClubsGetStaticPathsItem,
 } from '../../../src/'
 import example from '../../../example/index'
 import theme from '../../../example/theme'
 import type { InferGetStaticPropsType } from 'astro'
+import { UndefinedOr } from '@devprotocol/util-ts'
 
-type Options = {
-	config: () => string
-	plugins: [typeof theme, typeof example]
-}
-
-export const { getStaticPaths } = pageFactory({
+const { page } = Astro.params
+const options = {
 	config: () =>
 		encode({
 			name: 'Debug',
@@ -32,14 +31,25 @@ export const { getStaticPaths } = pageFactory({
 			],
 		}),
 	plugins: [theme, example],
-} satisfies Options) as ClubsFunctionPageFactoryResult<Options>
+} satisfies ClubsFunctionFactoryOptions
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>
+const { getStaticPaths } = pageFactory(
+	options
+) as ClubsFunctionPageFactoryResult<typeof options>
 
-const Layout = Astro.props.layout
-const Content = Astro.props.component
+const router = routerFactory(await getStaticPaths(), (p) => p.params.page)
+const path = router(page) as UndefinedOr<
+	ClubsGetStaticPathsItem<InferGetStaticPropsType<typeof getStaticPaths>>
+>
+
+const Content = path?.props.component
+const Layout = path?.props.layout
 ---
 
-<Layout>
-	<Content {...Astro.props} />
-</Layout>
+{
+	Layout && Content && (
+		<Layout {...path.props}>
+			<Content {...path.props} />
+		</Layout>
+	)
+}
