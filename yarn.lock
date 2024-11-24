@@ -820,7 +820,7 @@ __metadata:
     glob: "npm:11.0.0"
     globals: "npm:^15.10.0"
     husky: "npm:9.1.7"
-    isomorphic-dompurify: "npm:2.16.0"
+    isomorphic-dompurify: "npm:2.17.0"
     js-base64: "npm:^3.7.2"
     jsdom: "npm:^25.0.0"
     lit: "npm:^3.0.0"
@@ -2506,7 +2506,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/dompurify@npm:^3.0.4, @types/dompurify@npm:^3.0.5":
+"@types/dompurify@npm:^3.0.4":
   version: 3.0.5
   resolution: "@types/dompurify@npm:3.0.5"
   dependencies:
@@ -2675,7 +2675,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/trusted-types@npm:*, @types/trusted-types@npm:^2.0.2":
+"@types/trusted-types@npm:*, @types/trusted-types@npm:^2.0.2, @types/trusted-types@npm:^2.0.7":
   version: 2.0.7
   resolution: "@types/trusted-types@npm:2.0.7"
   checksum: 10c0/4c4855f10de7c6c135e0d32ce462419d8abbbc33713b31d294596c0cc34ae1fa6112a2f9da729c8f7a20707782b0d69da3b1f8df6645b0366d08825ca1522e0c
@@ -4433,10 +4433,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dompurify@npm:^3.1.7":
-  version: 3.1.7
-  resolution: "dompurify@npm:3.1.7"
-  checksum: 10c0/fcceef2e9f824d712a056fa699b0538f3337f5cf00ccb7227bdc7eba5463823e15d9aecc00a2fd81c726b28a71e7b09f0eb8a2fde1021c40e35f12dc67b66394
+"dompurify@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "dompurify@npm:3.2.1"
+  dependencies:
+    "@types/trusted-types": "npm:^2.0.7"
+  dependenciesMeta:
+    "@types/trusted-types":
+      optional: true
+  checksum: 10c0/c40c441813071ebdc06f843dce6f22109d30f14525e710c8b117ef54430358617d4e7910a26fc09b387aa5890d1f510b242b605b0282ed1fb7a4d5104c75e223
   languageName: node
   linkType: hard
 
@@ -5939,14 +5944,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"isomorphic-dompurify@npm:2.16.0":
-  version: 2.16.0
-  resolution: "isomorphic-dompurify@npm:2.16.0"
+"isomorphic-dompurify@npm:2.17.0":
+  version: 2.17.0
+  resolution: "isomorphic-dompurify@npm:2.17.0"
   dependencies:
-    "@types/dompurify": "npm:^3.0.5"
-    dompurify: "npm:^3.1.7"
+    dompurify: "npm:^3.2.1"
     jsdom: "npm:^25.0.1"
-  checksum: 10c0/fe667c4e418a3c4cb4e44804db6d93cc087952039b51e2e21ea82ee536d3e3e20f96677d0edfeb7e927cccb4cd02d8c00c52adf52a9e289d514369e0f1d7f51d
+  checksum: 10c0/20f6e77a615585ce77d1b2830ca04b0da6c19a82ddad92eceb24beee6217b929aad1b62452ff617c4733b9fc049dd1cc3412562d20d590fe427e7737f628e3d4
   languageName: node
   linkType: hard
 
