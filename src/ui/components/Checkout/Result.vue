@@ -26,6 +26,7 @@ type Props = {
 	name: string | undefined
 	description: string | undefined
 	imageSrc: string | undefined
+	videoSrc: string | undefined
 }
 const props = defineProps<Props>()
 
@@ -100,7 +101,7 @@ onMounted(async () => {
 		<div class="mx-auto grid gap-8 md:max-w-lg">
 			<slot name="before:preview" />
 			<div
-				class="-mx-8 grid gap-8 bg-dp-white-300 p-6 md:mx-auto md:w-full md:rounded-md"
+				class="bg-dp-white-300 -mx-8 grid gap-8 p-6 md:mx-auto md:w-full md:rounded-md"
 			>
 				<div class="flex flex-col gap-6">
 					<p class="font-mono font-bold">
@@ -117,6 +118,8 @@ onMounted(async () => {
 							name: tokenURI?.name,
 							description: htmlDescription,
 							image: image,
+							imageSrc,
+							videoSrc,
 						}"
 					>
 						<template #after:description>
@@ -126,12 +129,27 @@ onMounted(async () => {
 
 					<div class="rounded-lg border border-black/20 bg-black/10 p-4">
 						<img
+							v-if="!image && imageSrc"
+							:src="imageSrc"
+							class="h-auto w-full rounded object-cover object-center sm:h-full sm:w-full"
+						/>
+						<img
 							v-if="image"
 							:src="image.src"
 							:width="image.width"
 							:height="image.height"
 							class="h-auto w-full rounded object-cover object-center sm:h-full sm:w-full"
 						/>
+						<!-- video -->
+						<video
+							v-if="!image && !imageSrc && videoSrc"
+							class="w-full rounded"
+							autoplay
+							muted
+						>
+							<source :src="videoSrc" type="video/mp4" />
+							Your browser does not support the video tag.
+						</video>
 						<Skeleton
 							v-if="image === undefined"
 							class="mx-auto aspect-square h-full w-full"
