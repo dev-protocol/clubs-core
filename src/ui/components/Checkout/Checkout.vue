@@ -872,6 +872,7 @@ onUnmounted(() => {
 		:name="previewName"
 		:description="props.description"
 		:image-src="previewImageSrc"
+		:video-src="previewVideoSrc"
 	>
 		<template #before:preview>
 			<slot name="result:before:preview" />
