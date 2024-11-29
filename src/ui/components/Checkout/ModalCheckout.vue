@@ -150,11 +150,15 @@ onMounted(async () => {
 				class="@xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl z-10 max-h-60 min-h-full max-w-60 object-contain"
 			/>
 			<!-- video -->
-			<video v-if="!image && !imageSrc && videoSrc" class="max-w-60 rounded" autoplay muted>
+			<video
+				v-if="!image && !imageSrc && videoSrc"
+				class="max-w-60 rounded"
+				autoplay
+				muted
+			>
 				<source :src="videoSrc" type="video/mp4" />
 				Your browser does not support the video tag.
 			</video>
-
 		</div>
 		<div class="@4xl/clb_result_modal:px-52 flex flex-col gap-6 px-0">
 			<!-- description -->

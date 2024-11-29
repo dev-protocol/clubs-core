@@ -141,7 +141,12 @@ onMounted(async () => {
 							class="h-auto w-full rounded object-cover object-center sm:h-full sm:w-full"
 						/>
 						<!-- video -->
-						<video v-if="!image && !imageSrc && videoSrc" class="w-full rounded" autoplay muted>
+						<video
+							v-if="!image && !imageSrc && videoSrc"
+							class="w-full rounded"
+							autoplay
+							muted
+						>
 							<source :src="videoSrc" type="video/mp4" />
 							Your browser does not support the video tag.
 						</video>
