@@ -17,6 +17,7 @@ export type CheckoutOptions = {
 	readonly useDiscretePaymentFlow?: boolean
 	readonly useInjectedTransactionForm?: boolean
 	readonly itemImageSrc?: string
+	readonly itemVideoSrc?: string
 	readonly itemName?: string
 	readonly accessControlUrl?: string
 	readonly accessControlDescription?: string

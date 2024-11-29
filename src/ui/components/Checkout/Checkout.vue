@@ -64,6 +64,7 @@ type Props = {
 	useInjectedTransactionForm?: boolean
 	fiatCurrency?: string
 	itemImageSrc?: string
+	itemVideoSrc?: string
 	itemName?: string
 	accessControlUrl?: string
 	accessControlDescription?: string
@@ -81,6 +82,7 @@ const isWaitingForStaked = ref<boolean>(false)
 const feeAmount = ref<UndefinedOr<number>>(undefined)
 const chain = ref<UndefinedOr<number>>(undefined)
 const previewImageSrc = ref<UndefinedOr<string>>(props.itemImageSrc)
+const previewVideoSrc = ref<UndefinedOr<string>>(props.itemVideoSrc)
 const previewName = ref<UndefinedOr<string>>(props.itemName)
 const stakingAmount = ref<UndefinedOr<number>>(undefined)
 const directAmount = ref<UndefinedOr<number>>(undefined)
@@ -560,12 +562,23 @@ onUnmounted(() => {
 					class="grid grid-cols-[auto_auto_1fr] items-center justify-between gap-4"
 				>
 					<span
-						class="size-24 rounded-lg border border-black/20 bg-black/10 p-1"
+						v-if="!previewImageSrc && previewVideoSrc"
+						class="p-1 w-36 rounded-lg border border-black/20 bg-black/10"
+					>
+						<video class="w-full rounded-lg" autoplay muted>
+							<source :src="previewVideoSrc" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+					</span>
+
+					<span
+						v-if="!previewVideoSrc"
+						class="p-1 size-24 rounded-lg border border-black/20 bg-black/10"
 					>
 						<img
 							v-if="previewImageSrc"
 							:src="previewImageSrc"
-							class="h-auto w-full rounded object-cover object-center"
+							class="h-auto w-full rounded-lg object-cover object-center"
 						/>
 						<Skeleton
 							v-if="previewImageSrc === undefined"
