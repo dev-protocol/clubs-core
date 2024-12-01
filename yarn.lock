@@ -820,7 +820,7 @@ __metadata:
     glob: "npm:11.0.0"
     globals: "npm:^15.10.0"
     husky: "npm:9.1.7"
-    isomorphic-dompurify: "npm:2.17.0"
+    isomorphic-dompurify: "npm:2.18.0"
     js-base64: "npm:^3.7.2"
     jsdom: "npm:^25.0.0"
     lit: "npm:^3.0.0"
@@ -4419,15 +4419,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dompurify@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "dompurify@npm:3.2.1"
+"dompurify@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "dompurify@npm:3.2.2"
   dependencies:
     "@types/trusted-types": "npm:^2.0.7"
   dependenciesMeta:
     "@types/trusted-types":
       optional: true
-  checksum: 10c0/c40c441813071ebdc06f843dce6f22109d30f14525e710c8b117ef54430358617d4e7910a26fc09b387aa5890d1f510b242b605b0282ed1fb7a4d5104c75e223
+  checksum: 10c0/04fa1509a75c6c1dfc1f00c579253bd4781e291836176578927f5cb683dc904175c4fb71f9c40438b0b4b13fc306f79922d220200f3bd01eabe12727588afd1f
   languageName: node
   linkType: hard
 
@@ -5930,13 +5930,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"isomorphic-dompurify@npm:2.17.0":
-  version: 2.17.0
-  resolution: "isomorphic-dompurify@npm:2.17.0"
+"isomorphic-dompurify@npm:2.18.0":
+  version: 2.18.0
+  resolution: "isomorphic-dompurify@npm:2.18.0"
   dependencies:
-    dompurify: "npm:^3.2.1"
+    dompurify: "npm:^3.2.2"
     jsdom: "npm:^25.0.1"
-  checksum: 10c0/20f6e77a615585ce77d1b2830ca04b0da6c19a82ddad92eceb24beee6217b929aad1b62452ff617c4733b9fc049dd1cc3412562d20d590fe427e7737f628e3d4
+  checksum: 10c0/8befe0ffb64b21e20c0ee1bc27321f9d3db5d952318e93532a151c353ec282987a773a8230938c172b3033cfc9e792118b978e7936c025b641ad67bf5124819c
   languageName: node
   linkType: hard
 
