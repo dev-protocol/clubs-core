@@ -606,6 +606,8 @@ onUnmounted(() => {
 					class="prose-hr:my-5 opacity-50"
 					:class="ProseTextInherit"
 				></aside>
+
+				<slot name="disclaimer"></slot>
 			</section>
 
 			<section class="p-3">
