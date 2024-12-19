@@ -101,7 +101,7 @@ onMounted(async () => {
 		<div class="mx-auto grid gap-8 md:max-w-lg">
 			<slot name="before:preview" />
 			<div
-				class="bg-dp-white-300 -mx-8 grid gap-8 p-6 md:mx-auto md:w-full md:rounded-md"
+				class="-mx-8 grid gap-8 bg-dp-white-300 p-6 md:mx-auto md:w-full md:rounded-md"
 			>
 				<div class="flex flex-col gap-6">
 					<p class="font-mono font-bold">
