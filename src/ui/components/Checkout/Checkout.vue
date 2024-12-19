@@ -313,7 +313,7 @@ const submitStake = async function () {
 								gatewayAddress: props.feeBeneficiary ?? undefined,
 								gatewayBasisPoints:
 									typeof props.feePercentage === 'number'
-										? props.feePercentage * 10_000
+										? parseInt((props.feePercentage * 10_000).toString())
 										: undefined,
 								payload: props.payload,
 							}).catch((err: Error) => {
@@ -346,7 +346,7 @@ const submitStake = async function () {
 								gatewayAddress: props.feeBeneficiary ?? undefined,
 								gatewayBasisPoints:
 									typeof props.feePercentage === 'number'
-										? props.feePercentage * 10_000
+										? parseInt((props.feePercentage * 10_000).toString())
 										: undefined,
 								payload: props.payload,
 								from: _account,
