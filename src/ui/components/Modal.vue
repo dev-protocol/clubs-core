@@ -46,10 +46,9 @@ html:has(dialog[open]) {
 	<div>
 		<dialog
 			ref="dialog"
-			class="fixed inset-0 flex items-center justify-center overflow-y-auto"
+			class="fixed inset-0 flex items-center justify-center overflow-y-auto backdrop:bg-black/60"
 			:class="{ hidden: !isVisible }"
 		>
-			<div class="fixed inset-0 bg-black/60"></div>
 			<Transition>
 				<div class="relative m-auto w-full py-4">
 					<component

@@ -23,6 +23,7 @@ export default tseslint.config(
 		rules: {
 			'functional/prefer-immutable-types': 'warn',
 			'no-unused-vars': 'off',
+			'@typescript-eslint/triple-slash-reference': 'warn',
 		},
 	},
 	{
