@@ -1,6 +1,6 @@
 {
 	"name": "@devprotocol/clubs-core",
-	"version": "3.22.6",
+	"version": "3.22.7",
 	"description": "Core library for Clubs",
 	"main": "dist/index.mjs",
 	"exports": {
@@ -94,7 +94,7 @@
 	"dependencies": {
 		"@devprotocol/dev-kit": "8.7.0",
 		"@devprotocol/elements": "1.5.3",
-		"@devprotocol/hashi": "2.3.4",
+		"@devprotocol/hashi": "2.4.0-beta.0",
 		"@devprotocol/util-ts": "4.0.0",
 		"@ethersproject/abstract-provider": "^5.7.0",
 		"@metamask/detect-provider": "^2.0.0",

@@ -787,7 +787,7 @@ __metadata:
     "@astrojs/vue": "npm:4.5.3"
     "@devprotocol/dev-kit": "npm:8.7.0"
     "@devprotocol/elements": "npm:1.5.3"
-    "@devprotocol/hashi": "npm:2.3.4"
+    "@devprotocol/hashi": "npm:2.4.0-beta.0"
     "@devprotocol/util-ts": "npm:4.0.0"
     "@eslint/js": "npm:^9.12.0"
     "@ethersproject/abstract-provider": "npm:^5.7.0"
@@ -900,12 +900,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@devprotocol/hashi@npm:2.3.4":
-  version: 2.3.4
-  resolution: "@devprotocol/hashi@npm:2.3.4"
+"@devprotocol/hashi@npm:2.4.0-beta.0":
+  version: 2.4.0-beta.0
+  resolution: "@devprotocol/hashi@npm:2.4.0-beta.0"
   dependencies:
     "@matteusan/sentro": "npm:0.1.25"
-  checksum: 10c0/d3b6aed1b770e487a7afe83e38f0835ed19f827333dba75f7bcb535ac1f736f545cb68ebd7548fb1358e67c2d2bba1cd55fad58dae486ee25c1b710d95b3cef8
+  checksum: 10c0/3b7b99b0c010b27d734f2cfb2553c7e790b2e500032f4659fb8313a8d1fd5190d4e20f4db5d890286cc564deb4e5964f7c096044d3885f69267901e7acd95d17
   languageName: node
   linkType: hard
 
