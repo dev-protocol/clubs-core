@@ -43,27 +43,25 @@ html:has(dialog[open]) {
 </style>
 
 <template>
-	<div>
-		<dialog
-			ref="dialog"
-			class="fixed inset-0 flex items-center justify-center overflow-y-auto backdrop:bg-black/60"
-			:class="{ hidden: !isVisible }"
-		>
-			<Transition>
-				<div class="relative m-auto w-full py-4">
-					<component
-						:eoa="eoa"
-						:modalClose="modalClose"
-						v-show="isVisible"
-						:is="modalContent"
-						v-bind="attrs"
-					>
-						<template #after:description>
-							<slot name="after:description" />
-						</template>
-					</component>
-				</div>
-			</Transition>
-		</dialog>
-	</div>
+	<dialog
+		ref="dialog"
+		class="fixed inset-0 flex items-center justify-center overflow-y-auto backdrop:bg-black/60"
+		:class="{ hidden: !isVisible }"
+	>
+		<Transition>
+			<div class="relative m-auto w-full py-4">
+				<component
+					:eoa="eoa"
+					:modalClose="modalClose"
+					v-show="isVisible"
+					:is="modalContent"
+					v-bind="attrs"
+				>
+					<template #after:description>
+						<slot name="after:description" />
+					</template>
+				</component>
+			</div>
+		</Transition>
+	</dialog>
 </template>

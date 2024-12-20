@@ -1,10 +1,6 @@
 <script lang="ts" setup>
 import { onMounted, ref, type ComputedRef, computed } from 'vue'
-import {
-	type UndefinedOr,
-	whenDefined,
-	whenDefinedAll,
-} from '@devprotocol/util-ts'
+import { type UndefinedOr, whenDefinedAll } from '@devprotocol/util-ts'
 import { JsonRpcProvider } from 'ethers'
 import Skeleton from '../Skeleton/Skeleton.vue'
 import { clientsSTokens } from '@devprotocol/dev-kit'
@@ -52,7 +48,6 @@ const tokenURI = ref<
 		]
 	}>
 >()
-const image = ref<HTMLImageElement>()
 const htmlDescription: ComputedRef<UndefinedOr<string>> = computed(() => {
 	return (
 		tokenURI.value?.description && markdownToHtml(tokenURI.value.description)
@@ -82,13 +77,6 @@ onMounted(async () => {
 		client.tokenURI(Number(id))
 	)
 	tokenURI.value = metadata
-	whenDefined(metadata?.image, (src) => {
-		const img = new Image()
-		img.onload = () => {
-			image.value = img
-		}
-		img.src = src
-	})
 	console.log({ metadata })
 
 	// Modal Open
@@ -104,10 +92,6 @@ onMounted(async () => {
 				class="-mx-8 grid gap-8 bg-dp-white-300 p-6 md:mx-auto md:w-full md:rounded-md"
 			>
 				<div class="flex flex-col gap-6">
-					<p class="font-mono font-bold">
-						{{ i18n('Minted') }} <span class="text-black/50">#{{ id }}</span>
-					</p>
-
 					<!-- me -->
 					<Modal
 						:eoa="eoa"
@@ -117,7 +101,6 @@ onMounted(async () => {
 						:attrs="{
 							name: tokenURI?.name,
 							description: htmlDescription,
-							image: image,
 							imageSrc,
 							videoSrc,
 						}"
@@ -129,20 +112,13 @@ onMounted(async () => {
 
 					<div class="rounded-lg border border-black/20 bg-black/10 p-4">
 						<img
-							v-if="!image && imageSrc"
+							v-if="imageSrc"
 							:src="imageSrc"
-							class="h-auto w-full rounded object-cover object-center sm:h-full sm:w-full"
-						/>
-						<img
-							v-if="image"
-							:src="image.src"
-							:width="image.width"
-							:height="image.height"
 							class="h-auto w-full rounded object-cover object-center sm:h-full sm:w-full"
 						/>
 						<!-- video -->
 						<video
-							v-if="!image && !imageSrc && videoSrc"
+							v-if="!imageSrc && videoSrc"
 							class="w-full rounded"
 							autoplay
 							muted
@@ -150,10 +126,6 @@ onMounted(async () => {
 							<source :src="videoSrc" type="video/mp4" />
 							Your browser does not support the video tag.
 						</video>
-						<Skeleton
-							v-if="image === undefined"
-							class="mx-auto aspect-square h-full w-full"
-						/>
 					</div>
 					<span>
 						<h3 class="break-all text-sm text-black/50">

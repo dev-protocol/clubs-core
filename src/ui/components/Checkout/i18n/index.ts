@@ -49,10 +49,6 @@ export const Strings = {
 		en: ([currency]) => `Pay with ${currency}`,
 		ja: ([currency]) => `次の貨幣で支払う：${currency}`,
 	},
-	Minted: {
-		en: 'Minted',
-		ja: '発行されました',
-	},
 	AutomaticStaking: {
 		en: ([amount]) => `${amount} DEV will be staked automatically.`,
 		ja: ([amount]) => `${amount} DEVは自動的にステーキングされます。`,

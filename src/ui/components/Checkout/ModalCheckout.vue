@@ -12,7 +12,6 @@ const props = defineProps<{
 	modalClose?: () => void
 	name: string | undefined
 	description: string | undefined
-	image: HTMLImageElement | undefined
 	imageSrc: string | undefined
 	videoSrc: string | undefined
 }>()
@@ -141,13 +140,13 @@ onMounted(async () => {
 			</h3>
 			<!-- image -->
 			<img
-				v-if="!image && imageSrc"
+				v-if="imageSrc"
 				:src="imageSrc"
 				class="z-10 max-h-60 min-h-full max-w-60 object-contain @xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl"
 			/>
 			<!-- video -->
 			<video
-				v-if="!image && !imageSrc && videoSrc"
+				v-if="!imageSrc && videoSrc"
 				class="max-w-60 rounded"
 				autoplay
 				muted
@@ -198,6 +197,7 @@ onMounted(async () => {
 					{{ i18n('Home') }}
 				</a>
 				<button
+					v-if="false /* HIDDEN FOR NOW */"
 					@click="modalClose"
 					class="hs-button is-filled rounded-lg border px-12 py-4 text-base @4xl/clb_result_modal:py-6"
 				>
