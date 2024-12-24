@@ -41,6 +41,7 @@ import { fetchProfile } from '../../../profile'
 import IconSpinner from '../../vue/IconSpinner.vue'
 import IconInfo from '../../vue/IconInfo.vue'
 import IconCheckCircle from '../../vue/IconCheckCircle.vue'
+import VideoFetch from '../../vue/VideoFetch.vue'
 import IconBouncingArrowRight from '../../vue/IconBouncingArrowRight.vue'
 
 let providerPool: UndefinedOr<ContractRunner>
@@ -566,10 +567,10 @@ onUnmounted(() => {
 						v-if="!previewImageSrc && previewVideoSrc"
 						class="w-36 rounded-lg border border-black/20 bg-black/10 p-1"
 					>
-						<video class="w-full rounded-lg" autoplay muted>
-							<source :src="previewVideoSrc" type="video/mp4" />
-							Your browser does not support the video tag.
-						</video>
+						<VideoFetch
+						:url="previewVideoSrc"
+						:videoClass="`w-full rounded-lg`"
+						/>
 					</span>
 
 					<span

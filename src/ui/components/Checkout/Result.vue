@@ -10,6 +10,7 @@ import { i18nFactory } from '../../../i18n'
 import { markdownToHtml } from '../../../markdown'
 import Modal from '../Modal.vue'
 import ModalCheckout from './ModalCheckout.vue'
+import VideoFetch from '../../vue/VideoFetch.vue'
 
 const i18nBase = i18nFactory(Strings)
 let i18n = i18nBase(['en'])
@@ -117,15 +118,11 @@ onMounted(async () => {
 							class="h-auto w-full rounded object-cover object-center sm:h-full sm:w-full"
 						/>
 						<!-- video -->
-						<video
+						<VideoFetch
 							v-if="!imageSrc && videoSrc"
-							class="w-full rounded"
-							autoplay
-							muted
-						>
-							<source :src="videoSrc" type="video/mp4" />
-							Your browser does not support the video tag.
-						</video>
+							:url="videoSrc"
+							:videoClass="`w-full rounded`"
+						/>
 					</div>
 					<span>
 						<h3 class="break-all text-sm text-black/50">

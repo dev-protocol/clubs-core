@@ -825,6 +825,7 @@ __metadata:
     jsdom: "npm:^25.0.0"
     lit: "npm:^3.0.0"
     marked: "npm:^10.0.0"
+    mp4box: "npm:^0.5.3"
     npm-run-all2: "npm:7.0.1"
     open-cli: "npm:^8.0.0"
     p-queue: "npm:^8.0.1"
@@ -7193,6 +7194,13 @@ __metadata:
     pkg-types: "npm:^1.2.0"
     ufo: "npm:^1.5.4"
   checksum: 10c0/e5a990b9d895477f3d3dfceec9797e41d6f029ce3b1b2dcf787d4b7500b4caff4b3cdc0ae5cb82c14b469b85209fe3d7368286415c0ca5415b163219fc6b5f21
+  languageName: node
+  linkType: hard
+
+"mp4box@npm:^0.5.3":
+  version: 0.5.3
+  resolution: "mp4box@npm:0.5.3"
+  checksum: 10c0/901d39813b3ea792bce34b7c111013304de4ea14376d4e42f70a96659e94a4eb00f22923619d045c96c6d27336f107456f00b2bfb05db015b872c7db0aecf53f
   languageName: node
   linkType: hard
 
