@@ -41,6 +41,7 @@ import { fetchProfile } from '../../../profile'
 import IconSpinner from '../../vue/IconSpinner.vue'
 import IconInfo from '../../vue/IconInfo.vue'
 import IconCheckCircle from '../../vue/IconCheckCircle.vue'
+// @ts-ignore
 import VideoFetch from '../../vue/VideoFetch.vue'
 import IconBouncingArrowRight from '../../vue/IconBouncingArrowRight.vue'
 

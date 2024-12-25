@@ -10,6 +10,7 @@ import { i18nFactory } from '../../../i18n'
 import { markdownToHtml } from '../../../markdown'
 import Modal from '../Modal.vue'
 import ModalCheckout from './ModalCheckout.vue'
+// @ts-ignore
 import VideoFetch from '../../vue/VideoFetch.vue'
 
 const i18nBase = i18nFactory(Strings)
