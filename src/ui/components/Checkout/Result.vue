@@ -16,6 +16,8 @@ import VideoFetch from '../../vue/VideoFetch.vue'
 const i18nBase = i18nFactory(Strings)
 let i18n = i18nBase(['en'])
 
+const imageRef = ref<HTMLImageElement | null>(null)
+
 type Props = {
 	eoa?: string
 	id?: number | string
@@ -83,6 +85,17 @@ onMounted(async () => {
 
 	// Modal Open
 	modalOpen()
+
+	try {
+		if (props?.imageSrc && imageRef.value) {
+			const response = await fetch(props?.imageSrc)
+			const blob = await response.blob()
+			const blobDataUrl = URL.createObjectURL(blob)
+			imageRef.value.src = blobDataUrl
+		}
+	} catch (error) {
+		console.error('Error loading image:', error)
+	}
 })
 </script>
 
@@ -115,7 +128,7 @@ onMounted(async () => {
 					<div class="rounded-lg border border-black/20 bg-black/10 p-4">
 						<img
 							v-if="imageSrc"
-							:src="imageSrc"
+							ref="imageRef"
 							class="h-auto w-full rounded object-cover object-center sm:h-full sm:w-full"
 						/>
 						<!-- video -->

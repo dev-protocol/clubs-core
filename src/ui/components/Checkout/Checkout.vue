@@ -53,6 +53,8 @@ const REGEX_DESC_EMAIL = /{EMAIL}/g
 const i18nBase = i18nFactory(Strings)
 let i18n = ref<ReturnType<typeof i18nBase>>(i18nBase(['en']))
 
+const imageRef = ref<HTMLImageElement | null>(null)
+
 type Props = {
 	amount?: number
 	destination?: string
@@ -539,6 +541,16 @@ onMounted(async () => {
 			previewName.value = sTokens?.name
 		}
 	)
+	try {
+		if (previewImageSrc.value && imageRef.value) {
+			const response = await fetch(previewImageSrc.value)
+			const blob = await response.blob()
+			const blobDataUrl = URL.createObjectURL(blob)
+			imageRef.value.src = blobDataUrl
+		}
+	} catch (error) {
+		console.error('Error loading image:', error)
+	}
 })
 
 onUnmounted(() => {
@@ -580,7 +592,7 @@ onUnmounted(() => {
 					>
 						<img
 							v-if="previewImageSrc"
-							:src="previewImageSrc"
+							ref="imageRef"
 							class="h-auto w-full rounded-lg object-cover object-center"
 						/>
 						<Skeleton
