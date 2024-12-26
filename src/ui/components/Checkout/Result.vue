@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, ref, type ComputedRef, computed } from 'vue'
+import { onMounted, ref, useTemplateRef, type ComputedRef, computed } from 'vue'
 import { type UndefinedOr, whenDefinedAll } from '@devprotocol/util-ts'
 import { JsonRpcProvider } from 'ethers'
 import Skeleton from '../Skeleton/Skeleton.vue'
@@ -16,7 +16,7 @@ import VideoFetch from '../../vue/VideoFetch.vue'
 const i18nBase = i18nFactory(Strings)
 let i18n = i18nBase(['en'])
 
-const imageRef = ref<HTMLImageElement | null>(null)
+const imageRef = useTemplateRef(`imageRef`)
 
 type Props = {
 	eoa?: string

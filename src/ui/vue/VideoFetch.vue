@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, useTemplateRef } from 'vue'
 import MP4Box from 'mp4box'
 
 const props = defineProps({
@@ -18,7 +18,7 @@ const props = defineProps({
 })
 
 // Refs and variables
-const videoElement = ref(null)
+const videoElement = useTemplateRef(`videoElement`)
 let mediaSource = null
 let sourceBuffers = {}
 let mp4boxfile = null

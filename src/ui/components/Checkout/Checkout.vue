@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref, type ComputedRef, computed } from 'vue'
+import { onMounted, onUnmounted, ref, useTemplateRef, type ComputedRef, computed } from 'vue'
 import { createErc20Contract } from '@devprotocol/dev-kit'
 import {
 	positionsCreate,
@@ -53,7 +53,7 @@ const REGEX_DESC_EMAIL = /{EMAIL}/g
 const i18nBase = i18nFactory(Strings)
 let i18n = ref<ReturnType<typeof i18nBase>>(i18nBase(['en']))
 
-const imageRef = ref<HTMLImageElement | null>(null)
+const imageRef = useTemplateRef(`imageRef`)
 
 type Props = {
 	amount?: number
