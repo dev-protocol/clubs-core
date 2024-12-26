@@ -1,5 +1,12 @@
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref, useTemplateRef, type ComputedRef, computed } from 'vue'
+import {
+	onMounted,
+	onUnmounted,
+	ref,
+	useTemplateRef,
+	type ComputedRef,
+	computed,
+} from 'vue'
 import { createErc20Contract } from '@devprotocol/dev-kit'
 import {
 	positionsCreate,
