@@ -15,6 +15,7 @@ import IconMoon from './IconMoon.svelte'
 import IconPhone from './IconPhone.svelte'
 import IconSpinner from './IconSpinner.svelte'
 import IconSun from './IconSun.svelte'
+import VideoFetch from './VideoFetch.svelte'
 
 export {
 	IconArrowRight,
@@ -25,4 +26,5 @@ export {
 	IconPhone,
 	IconSpinner,
 	IconSun,
+	VideoFetch,
 }
