@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, ref, type ComputedRef, computed } from 'vue'
+import { onMounted, ref, useTemplateRef, type ComputedRef, computed } from 'vue'
 import { type UndefinedOr, whenDefinedAll } from '@devprotocol/util-ts'
 import { JsonRpcProvider } from 'ethers'
 import Skeleton from '../Skeleton/Skeleton.vue'
@@ -10,9 +10,13 @@ import { i18nFactory } from '../../../i18n'
 import { markdownToHtml } from '../../../markdown'
 import Modal from '../Modal.vue'
 import ModalCheckout from './ModalCheckout.vue'
+// @ts-ignore
+import VideoFetch from '../../vue/VideoFetch.vue'
 
 const i18nBase = i18nFactory(Strings)
 let i18n = i18nBase(['en'])
+
+const imageRef = useTemplateRef(`imageRef`)
 
 type Props = {
 	eoa?: string
@@ -81,6 +85,17 @@ onMounted(async () => {
 
 	// Modal Open
 	modalOpen()
+
+	try {
+		if (props?.imageSrc && imageRef.value) {
+			const response = await fetch(props?.imageSrc)
+			const blob = await response.blob()
+			const blobDataUrl = URL.createObjectURL(blob)
+			imageRef.value.src = blobDataUrl
+		}
+	} catch (error) {
+		console.error('Error loading image:', error)
+	}
 })
 </script>
 
@@ -113,19 +128,15 @@ onMounted(async () => {
 					<div class="rounded-lg border border-black/20 bg-black/10 p-4">
 						<img
 							v-if="imageSrc"
-							:src="imageSrc"
+							ref="imageRef"
 							class="h-auto w-full rounded object-cover object-center sm:h-full sm:w-full"
 						/>
 						<!-- video -->
-						<video
+						<VideoFetch
 							v-if="!imageSrc && videoSrc"
-							class="w-full rounded"
-							autoplay
-							muted
-						>
-							<source :src="videoSrc" type="video/mp4" />
-							Your browser does not support the video tag.
-						</video>
+							:url="videoSrc"
+							:videoClass="`w-full rounded`"
+						/>
 					</div>
 					<span>
 						<h3 class="break-all text-sm text-black/50">

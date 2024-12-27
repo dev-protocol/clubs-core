@@ -1,6 +1,6 @@
 {
 	"name": "@devprotocol/clubs-core",
-	"version": "3.22.9",
+	"version": "3.22.15",
 	"description": "Core library for Clubs",
 	"main": "dist/index.mjs",
 	"exports": {
@@ -106,6 +106,7 @@
 		"js-base64": "^3.7.2",
 		"lit": "^3.0.0",
 		"marked": "^10.0.0",
+		"mp4box": "^0.5.3",
 		"p-queue": "^8.0.1",
 		"ramda": "^0.30.0",
 		"rxjs": "^7.8.1",

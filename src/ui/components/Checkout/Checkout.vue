@@ -1,5 +1,12 @@
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref, type ComputedRef, computed } from 'vue'
+import {
+	onMounted,
+	onUnmounted,
+	ref,
+	useTemplateRef,
+	type ComputedRef,
+	computed,
+} from 'vue'
 import { createErc20Contract } from '@devprotocol/dev-kit'
 import {
 	positionsCreate,
@@ -41,6 +48,8 @@ import { fetchProfile } from '../../../profile'
 import IconSpinner from '../../vue/IconSpinner.vue'
 import IconInfo from '../../vue/IconInfo.vue'
 import IconCheckCircle from '../../vue/IconCheckCircle.vue'
+// @ts-ignore
+import VideoFetch from '../../vue/VideoFetch.vue'
 import IconBouncingArrowRight from '../../vue/IconBouncingArrowRight.vue'
 
 let providerPool: UndefinedOr<ContractRunner>
@@ -50,6 +59,8 @@ const REGEX_DESC_EMAIL = /{EMAIL}/g
 
 const i18nBase = i18nFactory(Strings)
 let i18n = ref<ReturnType<typeof i18nBase>>(i18nBase(['en']))
+
+const imageRef = useTemplateRef(`imageRef`)
 
 type Props = {
 	amount?: number
@@ -537,6 +548,16 @@ onMounted(async () => {
 			previewName.value = sTokens?.name
 		}
 	)
+	try {
+		if (previewImageSrc.value && imageRef.value) {
+			const response = await fetch(previewImageSrc.value)
+			const blob = await response.blob()
+			const blobDataUrl = URL.createObjectURL(blob)
+			imageRef.value.src = blobDataUrl
+		}
+	} catch (error) {
+		console.error('Error loading image:', error)
+	}
 })
 
 onUnmounted(() => {
@@ -566,10 +587,10 @@ onUnmounted(() => {
 						v-if="!previewImageSrc && previewVideoSrc"
 						class="w-36 rounded-lg border border-black/20 bg-black/10 p-1"
 					>
-						<video class="w-full rounded-lg" autoplay muted>
-							<source :src="previewVideoSrc" type="video/mp4" />
-							Your browser does not support the video tag.
-						</video>
+						<VideoFetch
+							:url="previewVideoSrc"
+							:videoClass="`w-full rounded-lg`"
+						/>
 					</span>
 
 					<span
@@ -578,7 +599,7 @@ onUnmounted(() => {
 					>
 						<img
 							v-if="previewImageSrc"
-							:src="previewImageSrc"
+							ref="imageRef"
 							class="h-auto w-full rounded-lg object-cover object-center"
 						/>
 						<Skeleton

@@ -16,6 +16,7 @@ import IconMoon from './IconMoon.vue'
 import IconPhone from './IconPhone.vue'
 import IconSpinner from './IconSpinner.vue'
 import IconSun from './IconSun.vue'
+import VideoFetch from './VideoFetch.vue'
 
 import Checkout from '../components/Checkout/Checkout.vue'
 import Result from '../components/Checkout/Result.vue'
@@ -39,6 +40,7 @@ export {
 	IconPhone,
 	IconSpinner,
 	IconSun,
+	VideoFetch,
 	Checkout,
 	Result,
 }
