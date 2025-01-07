@@ -1,19 +1,24 @@
 <script setup>
-import { onMounted, useTemplateRef } from 'vue'
 import MP4Box from 'mp4box'
+import { onMounted, useTemplateRef, computed } from 'vue'
 
 const props = defineProps({
+	isControlled: {
+		type: Boolean,
+		default: true,
+		required: true,
+	},
 	url: {
 		type: String,
 		required: true,
 	},
 	posterUrl: {
-		type: String,
 		default: '',
+		type: String,
 	},
 	videoClass: {
-		type: String,
 		default: '',
+		type: String,
 	},
 })
 
@@ -39,6 +44,14 @@ onMounted(() => {
 
 	setupMp4Box()
 	startDownload()
+})
+
+const showSVG = computed(() => {
+	if (videoElement.value) {
+		return props.isControlled && (videoElement.value?.paused ?? true)
+	}
+
+	return props.isControlled
 })
 
 function onSourceOpen() {
@@ -87,7 +100,11 @@ function setupMp4Box() {
 
 		// Start MP4Box file processing
 		mp4boxfile.start()
-		videoElement.value?.play().catch((e) => console.error('Play error:', e))
+
+		if (!props.isControlled) {
+			// If controlled, then it will play when clicked.
+			togglePlay()
+		}
 	}
 
 	// Fired when a media segment is ready
@@ -211,18 +228,46 @@ function maybeEndOfStream() {
 		}
 	}
 }
+
+function togglePlay() {
+	if (videoElement.value?.paused) {
+		videoElement.value?.play().catch((e) => console.error('Play error:', e))
+	} else {
+		videoElement.value?.pause().catch((e) => console.error('Play error:', e))
+	}
+}
 </script>
 
 <template>
-	<video
-		ref="videoElement"
-		controlsList="nodownload"
-		autoplay
-		muted
-		loop
-		:poster="posterUrl"
-		:class="videoClass"
-	>
-		<track kind="captions" />
-	</video>
+	<div class="relative m-0 h-full w-full cursor-pointer p-0">
+		<video
+			ref="videoElement"
+			controlsList="nodownload"
+			:autoplay="!isControlled"
+			muted
+			loop
+			:poster="posterUrl"
+			:class="videoClass"
+		>
+			<track kind="captions" />
+		</video>
+		<div
+			v-if="showSVG"
+			class="absolute inset-0 m-auto flex size-1/2 items-center justify-center text-white opacity-60"
+			@click.stop.prevent="togglePlay"
+		>
+			<svg
+				className="w-full h-full"
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="currentColor"
+			>
+				<path
+					fill-rule="evenodd"
+					d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+					clip-rule="evenodd"
+				/>
+			</svg>
+		</div>
+	</div>
 </template>
