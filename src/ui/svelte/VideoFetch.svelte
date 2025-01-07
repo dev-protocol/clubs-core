@@ -6,12 +6,17 @@
 	export let url
 	export let posterUrl
 	export let videoClass
+	export let isControlled = false
 
 	let videoElement
 	let mediaSource
 	let sourceBuffers = {}
 	let mp4boxfile
 	let pendingSegments = {}
+
+	$: showSVG = videoElement.value
+		? props.isControlled && (videoElement.value?.paused ?? true)
+		: props.isControlled
 
 	// Configure chunk size (1MB). Adjust if needed for performance or latency.
 	const CHUNK_SIZE = 1_000_000
@@ -76,7 +81,11 @@
 
 			// Start MP4Box file processing
 			mp4boxfile.start()
-			videoElement.value?.play().catch((e) => console.error('Play error:', e))
+
+			if (!isControlled) {
+				// If controlled, then it will play when clicked.
+				togglePlay()
+			}
 		}
 
 		// Fired when a media segment is ready
@@ -208,16 +217,49 @@
 			}
 		}
 	}
+
+	function togglePlay() {
+		if (videoElement.value?.paused) {
+			videoElement.value?.play().catch((e) => console.error('Play error:', e))
+		} else {
+			videoElement.value?.pause().catch((e) => console.error('Play error:', e))
+		}
+	}
 </script>
 
-<video
-	bind:this={videoElement}
-	controlsList="nodownload"
-	loop
-	autoplay
-	muted
-	poster={posterUrl}
-	class={videoClass}
->
-	<track kind="captions" />
-</video>
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div class="relative m-0 h-full w-full cursor-pointer p-0">
+	<video
+		bind:this={videoElement}
+		controlsList="nodownload"
+		autoplay={!isControlled}
+		muted
+		loop
+		poster={posterUrl}
+		class={videoClass}
+	>
+		<track kind="captions" />
+	</video>
+	<!-- svelte-ignore a11y_consider_explicit_label -->
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
+	{#if showSVG}
+		<button
+			type="button"
+			class="absolute inset-0 m-auto flex size-1/2 items-center justify-center text-white opacity-60"
+			on:click|preventDefault={togglePlay}
+		>
+			<svg
+				class="h-full w-full"
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="currentColor"
+			>
+				<path
+					fill-rule="evenodd"
+					d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+					clip-rule="evenodd"
+				/>
+			</svg>
+		</button>
+	{/if}
+</div>

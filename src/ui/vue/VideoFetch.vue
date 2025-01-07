@@ -257,7 +257,7 @@ function togglePlay() {
 			@click.stop.prevent="togglePlay"
 		>
 			<svg
-				className="w-full h-full"
+				class="h-full w-full"
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 24 24"
 				fill="currentColor"
