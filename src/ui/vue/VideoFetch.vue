@@ -24,7 +24,7 @@ const props = defineProps({
 
 // Refs and variables
 let isPaused = ref(true)
-const videoElement = useTemplateRef(null)
+const videoElement = useTemplateRef(`videoElement`)
 let mediaSource = null
 let sourceBuffers = {}
 let mp4boxfile = null
