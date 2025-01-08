@@ -15,10 +15,6 @@
 	let mp4boxfile
 	let pendingSegments = {}
 
-	$: showSVG = videoElement.value
-		? props.isControlled && (videoElement.value?.paused ?? true)
-		: props.isControlled
-
 	// Configure chunk size (1MB). Adjust if needed for performance or latency.
 	const CHUNK_SIZE = 1_000_000
 	let nextRangeStart = 0
