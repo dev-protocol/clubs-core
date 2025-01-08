@@ -1,6 +1,6 @@
 <script setup>
 import MP4Box from 'mp4box'
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, useTemplateRef } from 'vue'
 
 const props = defineProps({
 	isControlled: {
@@ -24,7 +24,7 @@ const props = defineProps({
 
 // Refs and variables
 let isPaused = ref(true)
-const videoElement = ref(null)
+const videoElement = useTemplateRef(null)
 let mediaSource = null
 let sourceBuffers = {}
 let mp4boxfile = null
