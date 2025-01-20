@@ -1,13 +1,23 @@
 <script setup lang="ts">
-import { Component as VueComponent } from 'vue'
+import { useTemplateRef, Component as VueComponent, watch } from 'vue'
 
-defineProps<{
+const props = defineProps<{
 	eoa?: string
 	modalClose?: () => void
 	isVisible: boolean
 	modalContent: VueComponent
 	attrs: { [key: string]: any }
 }>()
+
+const dialog = useTemplateRef('dialog')
+
+watch(props, () => {
+	if (props.isVisible) {
+		dialog.value?.showModal()
+	} else {
+		dialog.value?.close()
+	}
+})
 </script>
 
 <style>
@@ -33,28 +43,25 @@ html:has(dialog[open]) {
 </style>
 
 <template>
-	<Teleport to="body">
-		<dialog
-			class="fixed inset-0 flex items-center justify-center overflow-y-auto"
-			v-show="isVisible"
-			:open="isVisible"
-		>
-			<div class="fixed inset-0 bg-black/60"></div>
-			<Transition>
-				<div class="relative m-auto w-full py-4">
-					<component
-						:eoa="eoa"
-						:modalClose="modalClose"
-						v-show="isVisible"
-						:is="modalContent"
-						v-bind="attrs"
-					>
-						<template #after:description>
-							<slot name="after:description" />
-						</template>
-					</component>
-				</div>
-			</Transition>
-		</dialog>
-	</Teleport>
+	<dialog
+		ref="dialog"
+		class="fixed inset-0 flex items-center justify-center overflow-y-auto backdrop:bg-black/60"
+		:class="{ hidden: !isVisible }"
+	>
+		<Transition>
+			<div class="relative m-auto w-full py-4">
+				<component
+					:eoa="eoa"
+					:modalClose="modalClose"
+					v-show="isVisible"
+					:is="modalContent"
+					v-bind="attrs"
+				>
+					<template #after:description>
+						<slot name="after:description" />
+					</template>
+				</component>
+			</div>
+		</Transition>
+	</dialog>
 </template>
