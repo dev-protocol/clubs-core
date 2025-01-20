@@ -402,7 +402,11 @@ export type ClubsFunctionPlugin =
 	| ClubsFunctionStandardPlugin
 	| ClubsFunctionThemePlugin
 
-export type ClubsFunctionConfigFetcher = () => string | Promise<string>
+export type ClubsFunctionConfigFetcher = () =>
+	| string
+	| ClubsConfiguration
+	| Promise<string>
+	| Promise<ClubsConfiguration>
 
 export type ClubsFunctionPluginOptionSetter = <T extends ClubsPluginOptions>(
 	nextOptions: T
