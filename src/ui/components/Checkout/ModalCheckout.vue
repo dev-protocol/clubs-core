@@ -25,10 +25,12 @@ let i18n = i18nBase(['en'])
 
 const passportPageUrl = computed(() =>
 	window.location.hostname.includes('.prerelease.clubs.place')
-		? `https://prerelease.clubs.place/passport/${props.eoa ?? ''}`
+		? `https://prerelease.clubs.place/passport/${props.eoa ?? ''}/edit`
 		: window.location.hostname.includes('.clubs.place')
-		? `https://clubs.place/passport/${props.eoa ?? ''}`
-		: `http://localhost:${window.location.port}/passport/${props.eoa ?? ''}`
+		? `https://clubs.place/passport/${props.eoa ?? ''}/edit`
+		: `http://localhost:${window.location.port}/passport/${
+				props.eoa ?? ''
+		  }/edit`
 )
 
 const onClickPassport = async () => {
