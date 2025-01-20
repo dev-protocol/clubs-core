@@ -80,6 +80,7 @@ type Props = {
 	accessControlUrl?: string
 	accessControlDescription?: string
 	uiMode?: 'standalone' | 'embed'
+	base?: string
 }
 const props = defineProps<Props>()
 
@@ -896,6 +897,7 @@ onUnmounted(() => {
 		:description="props.description"
 		:image-src="previewImageSrc"
 		:video-src="previewVideoSrc"
+		:base="props.base"
 	>
 		<template #before:preview>
 			<slot name="result:before:preview" />

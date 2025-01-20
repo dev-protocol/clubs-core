@@ -14,6 +14,7 @@ const props = defineProps<{
 	description: string | undefined
 	imageSrc: string | undefined
 	videoSrc: string | undefined
+	base: string | undefined
 }>()
 
 const cronCalling = ref<UndefinedOr<Promise<UndefinedOr<Response>>>>()
@@ -193,7 +194,7 @@ onMounted(async () => {
 					<Spinner v-if="clicked" />
 				</button>
 				<a
-					href="/"
+					:href="props.base ?? '/'"
 					class="hs-button is-filled rounded-lg border px-12 py-4 text-base @4xl/clb_result_modal:py-6"
 				>
 					{{ i18n('Home') }}

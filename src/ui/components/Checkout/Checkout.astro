@@ -22,6 +22,7 @@ const {
 	accessControlUrl,
 	accessControlDescription,
 	uiMode,
+	base,
 	clubs,
 } = Astro.props
 
@@ -42,6 +43,7 @@ const checkoutOptions: CheckoutOptions = {
 	accessControlUrl,
 	accessControlDescription,
 	uiMode,
+	base,
 }
 
 const SlotsCheckoutBeforeTransactionForm = clubs.slots.filter(
@@ -80,6 +82,7 @@ const SlotsCheckoutResultBeforePreview = clubs.slots.filter(
 	accessControlUrl={accessControlUrl}
 	accessControlDescription={accessControlDescription}
 	uiMode={uiMode}
+	base={base}
 >
 	<slot
 		name="checkout:before:transaction-form"

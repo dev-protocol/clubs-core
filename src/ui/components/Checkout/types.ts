@@ -22,6 +22,7 @@ export type CheckoutOptions = {
 	readonly accessControlUrl?: string
 	readonly accessControlDescription?: string
 	readonly uiMode?: 'standalone' | 'embed'
+	readonly base?: string
 }
 
 export type ResultOptions = {

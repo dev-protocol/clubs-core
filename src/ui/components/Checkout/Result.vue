@@ -27,6 +27,7 @@ type Props = {
 	description: string | undefined
 	imageSrc: string | undefined
 	videoSrc: string | undefined
+	base: string | undefined
 }
 const props = defineProps<Props>()
 
@@ -118,6 +119,7 @@ onMounted(async () => {
 							description: htmlDescription,
 							imageSrc,
 							videoSrc,
+							base,
 						}"
 					>
 						<template #after:description>
