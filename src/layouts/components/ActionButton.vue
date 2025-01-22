@@ -67,19 +67,19 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@use 'node_modules/@devprotocol/hashi/hs-button';
+// @use 'node_modules/@devprotocol/hashi/hs-button';
 
-.action-button-loading {
-	@apply border-2 border-gray-900 bg-gray-800;
-}
+// .action-button-loading {
+// 	@apply border-2 border-gray-900 bg-gray-800;
+// }
 
-@include hs-button.extend('success') {
-	@include hs-button.color(
-		(
-			fill: 'dp-green.400',
-			ink: 'dp-green.ink',
-			border: 'dp-green.400',
-		)
-	);
-}
+// @include hs-button.extend('success') {
+// 	@include hs-button.color(
+// 		(
+// 			fill: 'dp-green.400',
+// 			ink: 'dp-green.ink',
+// 			border: 'dp-green.400',
+// 		)
+// 	);
+// }
 </style>

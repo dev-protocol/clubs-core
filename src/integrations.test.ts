@@ -69,8 +69,6 @@ describe('astro', () => {
 				'qrcode',
 				'query-string',
 				'react-fast-compare',
-				'rpc-websockets/dist/lib/client',
-				'rpc-websockets/dist/lib/client/websocket.browser',
 				'toposort',
 				'void-elements',
 			]
