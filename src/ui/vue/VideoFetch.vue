@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted, defineProps } from 'vue'
-import videojs from 'video.js'
 import 'video.js/dist/video-js.css' // Import Video.js default styles
 
 // Define props similar to your old code
@@ -71,6 +70,7 @@ const props = defineProps({
 // State & Refs
 const isPaused = ref(true)
 const videoEl = ref(null)
+let videoJs // video.js object
 let player = null
 
 // Called when user clicks our custom play/pause overlay
@@ -85,8 +85,10 @@ function togglePlay() {
 }
 
 // Once the component mounts, initialize Video.js
-onMounted(() => {
-	player = videojs(videoEl.value, {
+onMounted(async () => {
+	const { default: videoJs_ } = await import('video.js')
+	videoJs = videoJs_
+	player = videoJs(videoEl.value, {
 		...props.options,
 		// Provide an HLS URL (m3u8) or fallback
 		sources: [

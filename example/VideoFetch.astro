@@ -1,0 +1,13 @@
+---
+import { ClubsPropsPages } from '../src'
+import VideoFetch_ from '../src/ui/svelte/VideoFetch.svelte'
+
+type Props = ClubsPropsPages
+
+const props = Astro.props
+---
+
+<VideoFetch_
+	client:load
+	url="https://flipfit-cdn.akamaized.net/flip_hls/6656423247ffe600199e8363-15125d/video_h1.m3u8"
+/>

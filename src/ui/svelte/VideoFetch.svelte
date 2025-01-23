@@ -1,6 +1,5 @@
 <script>
 	import { onMount } from 'svelte'
-	import videojs from 'video.js'
 	import 'video.js/dist/video-js.css'
 
 	// Props
@@ -43,6 +42,7 @@
 	let isPaused = true
 	let videoEl // This will reference <video> in the DOM
 	let player // video.js player instance
+	let videoJs // video.js object
 
 	function togglePlay() {
 		if (!player) return
@@ -53,8 +53,10 @@
 		}
 	}
 
-	onMount(() => {
-		player = videojs(videoEl, {
+	onMount(async () => {
+		const { default: videoJs_ } = await import('video.js')
+		videoJs = videoJs_
+		player = videoJs(videoEl, {
 			...options,
 			sources: [
 				{ src: url, type: 'video/mp4' },

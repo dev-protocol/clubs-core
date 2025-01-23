@@ -2,6 +2,7 @@ import Example from './Example.astro'
 import Admin from './Admin.astro'
 import Modal from './Modal.astro'
 import Checkout from './Checkout.astro'
+import VideoFetch from './VideoFetch.astro'
 import {
 	ClubsFunctionGetPagePaths,
 	ClubsFunctionGetAdminPaths,
@@ -24,6 +25,10 @@ export const getPagePaths = (async () => [
 	{
 		paths: ['checkout'],
 		component: Checkout,
+	},
+	{
+		paths: ['videofetch'],
+		component: VideoFetch,
 	},
 ]) satisfies ClubsFunctionGetPagePaths
 
