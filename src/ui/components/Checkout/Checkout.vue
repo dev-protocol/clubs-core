@@ -639,7 +639,7 @@ onUnmounted(() => {
 				}}</span>
 				<button
 					v-if="clubsProfile === undefined"
-					class="hs-button is-large is-filled relative flex w-full items-center gap-2 rounded-md @container/clb_checkout_signin_button"
+					class="hs-button is-large is-filled is-fullwidth relative flex items-center gap-2 rounded-md @container/clb_checkout_signin_button"
 					@click="signIn"
 				>
 					<IconBouncingArrowRight
@@ -651,7 +651,7 @@ onUnmounted(() => {
 				</button>
 				<a
 					v-else
-					class="hs-button is-outlined relative flex w-full items-center justify-start gap-2 rounded-md border-[1px] border-[var(--hs-theme-disabled)]"
+					class="hs-button is-small relative flex w-full items-center justify-start gap-2 rounded-md"
 					:href="`https://clubs.place/passport/${account}`"
 					target="_blank"
 					rel="noreferer noopener"

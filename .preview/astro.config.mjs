@@ -9,10 +9,5 @@ export default defineConfig({
 		port: 3000,
 	},
 	output: 'server',
-	integrations: [
-		vue(),
-		react(),
-		svelte(),
-		tailwind({ applyBaseStyles: false }),
-	],
+	integrations: [vue(), react(), svelte(), tailwind()],
 })
