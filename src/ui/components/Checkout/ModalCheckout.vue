@@ -166,6 +166,9 @@ onMounted(async () => {
 				class="max-w-60 rounded"
 				:url="videoSrc"
 			/>
+			<span class="text-base italic text-white">
+				{{ i18n('PurchaseGreeting') }}
+			</span>
 		</div>
 		<div class="flex flex-col gap-6 px-0 @4xl/clb_result_modal:px-52">
 			<!-- description -->
