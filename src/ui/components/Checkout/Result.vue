@@ -137,7 +137,7 @@ onMounted(async () => {
 						<VideoFetch
 							v-if="!imageSrc && videoSrc"
 							:url="videoSrc"
-							:videoClass="`w-full rounded`"
+							:videoClass="`w-full rounded aspect-square`"
 						/>
 					</div>
 					<span>
