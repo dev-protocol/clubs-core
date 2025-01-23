@@ -55,7 +55,7 @@ onMounted(async () => {
 	})
 	try {
 		if (props.imageSrc && imageRef.value) {
-			const response = await fetch(props.imageSrc.value)
+			const response = await fetch(props.imageSrc)
 			const blob = await response.blob()
 			const blobDataUrl = URL.createObjectURL(blob)
 			imageRef.value.src = blobDataUrl
