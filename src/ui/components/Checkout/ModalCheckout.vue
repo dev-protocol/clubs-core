@@ -157,6 +157,9 @@ onMounted(async () => {
 				<source :src="videoSrc" type="video/mp4" />
 				Your browser does not support the video tag.
 			</video>
+			<span>
+				{{ i18n('PurchaseGreeting') }}
+			</span>
 		</div>
 		<div class="flex flex-col gap-6 px-0 @4xl/clb_result_modal:px-52">
 			<!-- description -->
