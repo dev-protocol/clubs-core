@@ -817,6 +817,7 @@ __metadata:
     "@types/ramda": "npm:0.30.2"
     "@types/react": "npm:18.3.12"
     "@types/react-dom": "npm:18.3.1"
+    "@types/videojs": "npm:^5.16.2"
     "@vercel/blob": "npm:^0.26.0"
     "@webcomponents/template-shadowroot": "npm:0.2.1"
     astro: "npm:4.16.15"
@@ -2794,6 +2795,13 @@ __metadata:
   version: 3.0.3
   resolution: "@types/unist@npm:3.0.3"
   checksum: 10c0/2b1e4adcab78388e088fcc3c0ae8700f76619dbcb4741d7d201f87e2cb346bfc29a89003cfea2d76c996e1061452e14fcd737e8b25aacf949c1f2d6b2bc3dd60
+  languageName: node
+  linkType: hard
+
+"@types/videojs@npm:^5.16.2":
+  version: 5.16.2
+  resolution: "@types/videojs@npm:5.16.2"
+  checksum: 10c0/4ef411f90cd033eaf6421021de8bded7bd7d99185272291a131d5533ee0bf135a6bb53495ef6a50c0cf5aecea90247846e9d0b36461bf29dd6fdb79d50da9d76
   languageName: node
   linkType: hard
 

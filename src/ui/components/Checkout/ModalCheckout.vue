@@ -6,6 +6,7 @@ import { ProseTextInherit } from '../../../constants'
 import { computed, onMounted, ref, useTemplateRef } from 'vue'
 import { UndefinedOr } from '@devprotocol/util-ts'
 import Spinner from '../../../layouts/components/Spinner.vue'
+// @ts-ignore
 import VideoFetch from '../../vue/VideoFetch.vue'
 
 const props = defineProps<{
