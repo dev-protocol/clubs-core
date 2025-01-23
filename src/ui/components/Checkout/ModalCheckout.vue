@@ -157,7 +157,7 @@ onMounted(async () => {
 				<source :src="videoSrc" type="video/mp4" />
 				Your browser does not support the video tag.
 			</video>
-			<span>
+			<span class="text-base italic text-white">
 				{{ i18n('PurchaseGreeting') }}
 			</span>
 		</div>
