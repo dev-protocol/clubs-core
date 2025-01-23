@@ -630,7 +630,7 @@ onUnmounted(() => {
 					:class="ProseTextInherit"
 				></aside>
 
-				<slot name="disclaimer"></slot>
+				<slot name="after:description"></slot>
 			</section>
 
 			<section class="p-3">
@@ -664,6 +664,9 @@ onUnmounted(() => {
 						<span class="text-sm font-bold">{{ clubsProfile.username }}</span>
 					</div>
 				</a>
+				<template v-if="clubsProfile === undefined">
+					<slot name="after:sign-in-form"></slot>
+				</template>
 			</section>
 
 			<section
