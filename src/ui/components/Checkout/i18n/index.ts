@@ -37,13 +37,17 @@ export const Strings = {
 		en: 'Waiting for approving to complete...',
 		ja: '承認プロセスの完了までお待ちください...',
 	},
+	PurchaseGreeting: {
+		en: 'Thank you for your purchase!',
+		ja: 'ご購入いただき、ありがとうございました！',
+	},
 	TxConfirmationPending: {
 		en: 'Awaiting transaction confirmation on wallet...',
 		ja: 'ウォレットのトランザクションを確認しています...',
 	},
 	StakePending: {
 		en: 'Just a few minutes until your item is minted...',
-		ja: '購入したアイテムの発行までもう少々お待ちください...',
+		ja: '購入手続き中です。しばらくお待ちください。',
 	},
 	PayWith: {
 		en: ([currency]) => `Pay with ${currency}`,
