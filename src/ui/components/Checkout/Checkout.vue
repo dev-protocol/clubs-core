@@ -590,7 +590,7 @@ onUnmounted(() => {
 					>
 						<VideoFetch
 							:url="previewVideoSrc"
-							:videoClass="`w-full rounded-lg`"
+							:videoClass="`w-full rounded aspect-square`"
 						/>
 					</span>
 
