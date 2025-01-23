@@ -54,7 +54,7 @@
 	}
 
 	onMount(async () => {
-		const { default: videoJs_ } = await import('video.js')
+		const { default: videoJs_ } = await import('https://esm.sh/video.js@8.21.1')
 		videoJs = videoJs_
 		player = videoJs(videoEl, {
 			...options,
