@@ -68,8 +68,8 @@ export const Strings = {
 		ja: 'Home',
 	},
 	SignIn: {
-		en: 'Sign in',
-		ja: ' サインイン',
+		en: 'Sign in / Register',
+		ja: ' ログイン/会員登録',
 	},
 	SignedInAs: {
 		en: `Signed in as:`,
