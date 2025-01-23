@@ -25,11 +25,12 @@ const payload = toUtf8Bytes('tier-1')
 		uiMode="embed"
 		{...props}
 	>
-		<div class="opacity-50" slot="checkout:disclaimer">
+		<div class="opacity-50" slot="checkout:after:description">
 			We strictly prohibit any unauthorized reproduction, reprinting, reuse, or
 			modification of any part or all of the content (images, text, etc.)
 			published on this site
 		</div>
+		<div slot="checkout:after:sign-in-form">xxx</div>
 	</Checkout_>
 </div>
 
