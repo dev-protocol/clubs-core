@@ -45,7 +45,7 @@ html:has(dialog[open]) {
 <template>
 	<dialog
 		ref="dialog"
-		class="fixed inset-0 flex items-center justify-center overflow-y-auto backdrop:bg-black/60"
+		class="box-border fixed inset-0 flex items-center justify-center overflow-y-auto backdrop:bg-black/60"
 		:class="{ hidden: !isVisible }"
 	>
 		<Transition>
