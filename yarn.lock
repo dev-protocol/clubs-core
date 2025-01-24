@@ -837,7 +837,7 @@ __metadata:
     js-base64: "npm:^3.7.2"
     jsdom: "npm:^25.0.0"
     lit: "npm:^3.0.0"
-    marked: "npm:^10.0.0"
+    marked: "npm:^15.0.0"
     npm-run-all2: "npm:7.0.1"
     open-cli: "npm:^8.0.0"
     p-queue: "npm:^8.0.1"
@@ -7264,12 +7264,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "marked@npm:10.0.0"
+"marked@npm:^15.0.0":
+  version: 15.0.6
+  resolution: "marked@npm:15.0.6"
   bin:
     marked: bin/marked.js
-  checksum: 10c0/5882b04a5f0d619757b281f09a67eb8f9e966299083748b51b144b482c56527161cc4dee3ef8e334926c84b7c6ad2bb5c48af5855a52c6ae460131175e3fb93f
+  checksum: 10c0/8f30972ac5fdf879353484bdd7717409c241d15031a58bbc483070dedb58e4b314c41c0b59b78e536658907c02ee149eaf4b9be221f198df97beae703f529d40
   languageName: node
   linkType: hard
 
