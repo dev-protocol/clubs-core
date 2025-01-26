@@ -3,9 +3,11 @@ import { i18nFactory } from '../../../i18n'
 import { Strings } from './i18n'
 import Skeleton from '../Skeleton/Skeleton.vue'
 import { ProseTextInherit } from '../../../constants'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, useTemplateRef } from 'vue'
 import { UndefinedOr } from '@devprotocol/util-ts'
 import Spinner from '../../../layouts/components/Spinner.vue'
+// @ts-ignore
+import VideoFetch from '../../vue/VideoFetch.vue'
 
 const props = defineProps<{
 	eoa?: string
@@ -20,6 +22,8 @@ const props = defineProps<{
 const cronCalling = ref<UndefinedOr<Promise<UndefinedOr<Response>>>>()
 const clicked = ref(false)
 const cronFinished = ref(false)
+
+const imageRef = useTemplateRef(`imageRef`)
 
 const i18nBase = i18nFactory(Strings)
 let i18n = i18nBase(['en'])
@@ -50,6 +54,16 @@ onMounted(async () => {
 	cronCalling.value.finally(() => {
 		cronFinished.value = true
 	})
+	try {
+		if (props.imageSrc && imageRef.value) {
+			const response = await fetch(props.imageSrc)
+			const blob = await response.blob()
+			const blobDataUrl = URL.createObjectURL(blob)
+			imageRef.value.src = blobDataUrl
+		}
+	} catch (error) {
+		console.error('Error loading image:', error)
+	}
 })
 </script>
 
@@ -144,20 +158,16 @@ onMounted(async () => {
 			<!-- image -->
 			<img
 				v-if="imageSrc"
-				:src="imageSrc"
+				ref="imageRef"
 				class="z-10 max-h-60 min-h-full max-w-60 object-contain @xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl"
 			/>
 			<!-- video -->
-			<video
+			<VideoFetch
 				v-if="!imageSrc && videoSrc"
 				class="max-w-60 rounded"
-				autoplay
-				muted
-			>
-				<source :src="videoSrc" type="video/mp4" />
-				Your browser does not support the video tag.
-			</video>
-			<span>
+				:url="videoSrc"
+			/>
+			<span class="text-base italic text-white">
 				{{ i18n('PurchaseGreeting') }}
 			</span>
 		</div>
