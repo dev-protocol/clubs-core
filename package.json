@@ -32,7 +32,7 @@
 		"./connection": {
 			"import": "./dist/src/connection/index.mjs",
 			"require": "./dist/src/connection/index.cjs",
-			"types": "./dist/src/connection/index.d.ts"
+			"types": "./connection.d.ts"
 		},
 		"./layouts": {
 			"import": "./dist/src/layouts/index.mjs",
