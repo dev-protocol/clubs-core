@@ -1,6 +1,6 @@
 {
 	"name": "@devprotocol/clubs-core",
-	"version": "3.24.2-beta.3",
+	"version": "3.24.2",
 	"description": "Core library for Clubs",
 	"main": "dist/index.mjs",
 	"exports": {
@@ -32,7 +32,7 @@
 		"./connection": {
 			"import": "./dist/src/connection/index.mjs",
 			"require": "./dist/src/connection/index.cjs",
-			"types": "./dist/src/connection/index.d.ts"
+			"types": "./connection.d.ts"
 		},
 		"./layouts": {
 			"import": "./dist/src/layouts/index.mjs",
