@@ -795,7 +795,7 @@ __metadata:
     "@astrojs/tailwind": "npm:5.1.2"
     "@astrojs/vue": "npm:4.5.3"
     "@devprotocol/dev-kit": "npm:8.7.0"
-    "@devprotocol/elements": "npm:1.5.3"
+    "@devprotocol/elements": "npm:1.6.0"
     "@devprotocol/hashi": "npm:2.4.0-beta.0"
     "@devprotocol/util-ts": "npm:4.0.0"
     "@eslint/js": "npm:^9.12.0"
@@ -904,13 +904,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@devprotocol/elements@npm:1.5.3":
-  version: 1.5.3
-  resolution: "@devprotocol/elements@npm:1.5.3"
+"@devprotocol/elements@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@devprotocol/elements@npm:1.6.0"
   dependencies:
     "@aggre/ullr": "npm:^3.2.0"
     lit: "npm:^3.0.0"
-  checksum: 10c0/345fea3ccff12638c3b14463bb12d2a6f704565af20c1dd0c88d678c9409515e4b4cb117086c35d1597c4d3549ac32649d8b4ddb1fbfeb76ee25eabcbfa1ccae
+  checksum: 10c0/58a7dcecc8d4e61d06b66b49468f591ddf569421f246c8078c4f437911347ca0c771e57670c0bce8a2336f55d609754c53f08b8f676a02c244098f46c95e280d
   languageName: node
   linkType: hard
 
