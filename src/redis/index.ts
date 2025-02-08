@@ -1,3 +1,6 @@
+/* eslint-disable functional/no-loop-statements */
+/* eslint-disable functional/no-expression-statements */
+/* eslint-disable functional/no-conditional-statements */
 import { createClient } from 'redis'
 
 type Options = typeof createClient extends (...args: infer Params) => unknown
@@ -5,19 +8,20 @@ type Options = typeof createClient extends (...args: infer Params) => unknown
 	: never
 export const defaultClient = (options?: Options) =>
 	createClient({
-		url: import.meta.env.REDIS_URL,
-		username: import.meta.env.REDIS_USERNAME ?? '',
-		password: import.meta.env.REDIS_PASSWORD ?? '',
+		url: process.env.REDIS_URL ?? import.meta.env.REDIS_URL,
+		username:
+			process.env.REDIS_USERNAME ?? import.meta.env.REDIS_USERNAME ?? '',
+		password:
+			process.env.REDIS_PASSWORD ?? import.meta.env.REDIS_PASSWORD ?? '',
 		...options,
 	})
 
 type Redis = ReturnType<typeof defaultClient>
 
 export const Redis = (() => {
-	const instances: Map<string, Redis> = new Map()
+	const instances: Map<string, Set<Redis>> = new Map()
 
 	const createInstance = (options?: Options) => {
-		// eslint-disable-next-line functional/no-expression-statements
 		console.log('$$$$$', 'new redis connection will be created')
 		return defaultClient(options)
 	}
@@ -25,18 +29,57 @@ export const Redis = (() => {
 	return {
 		client: async (params?: { key?: string; options: Options }) => {
 			const key = params?.key ?? ''
-			const fromCache = instances.get(key)
+			const caches = instances.get(key)
+			const fromCache = caches?.values().next().value
 			const instance = fromCache
 				? fromCache
-				: (instances
-						.set(key, createInstance(params?.options))
-						.get(key) as Redis)
-			// eslint-disable-next-line functional/no-conditional-statements
+				: ((redis) => {
+						if (caches) {
+							caches.add(redis)
+						} else {
+							instances.set(key, new Set([redis]))
+						}
+						return redis
+				  })(createInstance(params?.options))
+
 			if (instance.isOpen === false) {
-				// eslint-disable-next-line functional/no-expression-statements
 				await instance.connect()
+			}
+
+			if (caches && caches.size > 1) {
+				console.log('$$$$$', 'cache size is larger than 1')
+				for (const cache of caches.values()) {
+					if (cache === instance) {
+						continue
+					}
+					caches.delete(cache)
+					cache.quit()
+				}
 			}
 			return instance
 		},
 	}
 })()
+
+/**
+ * While debugging this with the following, I've not seen printing `cache size is larger than 1`.
+```debug.mjs
+import { Redis } from './dist/src/redis/index.mjs'
+;(async () => {
+	await Promise.all([
+		Redis.client(),
+		Redis.client(),
+		Redis.client(),
+		Redis.client(),
+		Redis.client(),
+		Redis.client(),
+		Redis.client(),
+		Redis.client(),
+		Redis.client(),
+		Redis.client(),
+	])
+	return console.log('done')
+})()
+```
+ * node --env-file=.env debug.mjs
+ */
