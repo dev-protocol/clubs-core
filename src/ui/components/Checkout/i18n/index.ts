@@ -1,4 +1,4 @@
-import { ClubsI18nParts } from '../../../../i18n'
+import type { ClubsI18nParts } from '../../../../i18n'
 
 export const Strings = {
 	Close: {

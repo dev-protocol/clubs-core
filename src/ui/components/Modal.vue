@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTemplateRef, Component as VueComponent, watch } from 'vue'
+import { useTemplateRef, type Component as VueComponent, watch } from 'vue'
 
 const props = defineProps<{
 	eoa?: string
