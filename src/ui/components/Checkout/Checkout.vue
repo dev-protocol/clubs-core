@@ -596,7 +596,7 @@ onUnmounted(() => {
 
 					<span
 						v-if="!previewVideoSrc"
-						class="size-24 rounded-lg border border-black/20 bg-black/10 p-1"
+						class="w-24 h-auto min-h-24 rounded-lg border border-black/20 bg-black/10 p-1"
 					>
 						<img
 							v-if="previewImageSrc"
