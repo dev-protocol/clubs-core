@@ -140,10 +140,30 @@ onMounted(async () => {
 
 <template>
 	<div
-		class="m-auto w-full max-w-screen-lg rounded-xl bg-white p-4 text-black shadow @container/clb_result_modal"
+		class="@container/clb_result_modal relative w-full max-w-screen-lg rounded-xl bg-white p-4 text-black shadow"
 	>
+		<a
+			:href="props.base ?? '/'"
+			class="absolute -right-10 -top-10 flex h-8 w-8 items-center justify-center hover:bg-none"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="h-6 w-6"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="white"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M6 18L18 6M6 6l12 12"
+				/>
+			</svg>
+		</a>
+
 		<div
-			class="bg-color-navy relative mb-6 flex h-auto min-h-52 w-full flex-col items-center justify-center overflow-hidden rounded-md border border-black p-2 @xl/clb_result_modal:h-96 @xl/clb_result_modal:min-h-0 @xl/clb_result_modal:p-8"
+			class="bg-color-navy @xl/clb_result_modal:h-96 @xl/clb_result_modal:min-h-0 @xl/clb_result_modal:p-8 relative mb-6 flex h-auto min-h-52 w-full flex-col items-center justify-center overflow-hidden rounded-md border border-black p-2"
 		>
 			<div
 				class="w-h-screen bg-focus-lines origin-zero animate-spin-slow mask absolute inset-2/4 -translate-x-1/2 -translate-y-1/2 bg-center bg-no-repeat"
@@ -151,7 +171,7 @@ onMounted(async () => {
 			<h3 class="mb-1 text-white">
 				<span
 					v-if="name"
-					class="text-xl italic @xl/clb_result_modal:text-3xl"
+					class="@xl/clb_result_modal:text-3xl text-xl italic"
 					>{{ name }}</span
 				>
 			</h3>
@@ -159,7 +179,7 @@ onMounted(async () => {
 			<img
 				v-if="imageSrc"
 				ref="imageRef"
-				class="z-10 max-h-60 min-h-full max-w-60 object-contain @xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl"
+				class="@xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl z-10 max-h-60 min-h-full max-w-60 object-contain"
 			/>
 			<!-- video -->
 			<VideoFetch
@@ -171,7 +191,7 @@ onMounted(async () => {
 				{{ i18n('PurchaseGreeting') }}
 			</span>
 		</div>
-		<div class="flex flex-col gap-6 px-0 @4xl/clb_result_modal:px-52">
+		<div class="@4xl/clb_result_modal:px-52 flex flex-col gap-6 px-0">
 			<!-- description -->
 			<aside
 				v-if="description"
@@ -188,12 +208,12 @@ onMounted(async () => {
 			<slot name="after:description" />
 
 			<div
-				class="flex w-full flex-col gap-4 @4xl/clb_result_modal:flex-row @4xl/clb_result_modal:justify-between @4xl/clb_result_modal:gap-0"
+				class="@4xl/clb_result_modal:flex-row @4xl/clb_result_modal:justify-between @4xl/clb_result_modal:gap-0 flex w-full flex-col gap-4"
 			>
 				<a
 					v-if="cronFinished"
 					:href="passportPageUrl"
-					class="hs-button is-filled rounded-lg border px-0 py-4 text-base @4xl/clb_result_modal:px-12 @4xl/clb_result_modal:py-6"
+					class="hs-button is-filled @4xl/clb_result_modal:px-12 @4xl/clb_result_modal:py-6 rounded-lg border px-0 py-4 text-base"
 				>
 					{{ i18n('Passport') }}
 				</a>
@@ -201,21 +221,21 @@ onMounted(async () => {
 					v-if="!cronFinished"
 					@click="onClickPassport"
 					:disabled="clicked"
-					class="hs-button is-filled items-center justify-center gap-2 rounded-lg border px-0 py-4 text-base disabled:animate-pulse disabled:bg-blue-600 @4xl/clb_result_modal:px-12 @4xl/clb_result_modal:py-6"
+					class="hs-button is-filled @4xl/clb_result_modal:px-12 @4xl/clb_result_modal:py-6 items-center justify-center gap-2 rounded-lg border px-0 py-4 text-base disabled:animate-pulse disabled:bg-blue-600"
 				>
 					{{ i18n('Passport') }}
 					<Spinner v-if="clicked" />
 				</button>
 				<a
 					:href="props.base ?? '/'"
-					class="hs-button is-filled rounded-lg border px-12 py-4 text-base @4xl/clb_result_modal:py-6"
+					class="hs-button is-filled @4xl/clb_result_modal:py-6 rounded-lg border px-12 py-4 text-base"
 				>
-					{{ i18n('Home') }}
+					{{ i18n('ContinueShopping') }}
 				</a>
 				<button
 					v-if="false /* HIDDEN FOR NOW */"
 					@click="modalClose"
-					class="hs-button is-filled rounded-lg border px-12 py-4 text-base @4xl/clb_result_modal:py-6"
+					class="hs-button is-filled @4xl/clb_result_modal:py-6 rounded-lg border px-12 py-4 text-base"
 				>
 					{{ i18n('Close') }}
 				</button>
