@@ -596,7 +596,7 @@ onUnmounted(() => {
 
 					<span
 						v-if="!previewVideoSrc"
-						class="size-24 rounded-lg border border-black/20 bg-black/10 p-1"
+						class="h-auto min-h-24 w-24 rounded-lg border border-black/20 bg-black/10 p-1"
 					>
 						<img
 							v-if="previewImageSrc"
@@ -639,12 +639,12 @@ onUnmounted(() => {
 				}}</span>
 				<button
 					v-if="clubsProfile === undefined"
-					class="hs-button is-large is-filled is-fullwidth relative flex items-center gap-2 rounded-md @container/clb_checkout_signin_button"
+					class="hs-button is-large is-filled is-fullwidth @container/clb_checkout_signin_button relative flex items-center gap-2 rounded-md"
 					@click="signIn"
 				>
 					<IconBouncingArrowRight
 						v-if="account === undefined"
-						class="absolute -left-2 @xs/clb_checkout_signin_button:left-5"
+						class="@xs/clb_checkout_signin_button:left-5 absolute -left-2"
 					/>
 					<IconSpinner v-else class="absolute left-5 size-5" />
 					<span class="font-bold">{{ i18n('SignIn') }}</span>
@@ -679,7 +679,7 @@ onUnmounted(() => {
 				<div v-if="props.accessControlUrl" class="grid gap-4 p-5">
 					<!-- Access control section -->
 					<span>
-						<p class="mb-2 flex items-center gap-2 font-bold text-dp-white-600">
+						<p class="text-dp-white-600 mb-2 flex items-center gap-2 font-bold">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								fill="none"
@@ -755,7 +755,7 @@ onUnmounted(() => {
 						"
 						:data-is-approving="isApproving"
 						:data-is-fetching="isFetchingApproval === 'progress'"
-						class="hs-button is-large is-fullwidth group relative @container/clb_checkout_approval_button"
+						class="hs-button is-large is-fullwidth @container/clb_checkout_approval_button group relative"
 						:class="
 							approveNeeded === false ? 'is-outlined border-[1px]' : 'is-filled'
 						"
@@ -769,11 +769,11 @@ onUnmounted(() => {
 						/>
 						<IconCheckCircle
 							v-if="approveNeeded === false"
-							class="absolute left-5 size-5 text-dp-green-300"
+							class="text-dp-green-300 absolute left-5 size-5"
 							type="solid"
 						/>
 						<IconBouncingArrowRight
-							class="absolute -left-2 group-disabled:hidden @xs/clb_checkout_approval_button:left-5"
+							class="@xs/clb_checkout_approval_button:left-5 absolute -left-2 group-disabled:hidden"
 						/>
 
 						{{
@@ -793,7 +793,7 @@ onUnmounted(() => {
 
 			<section
 				v-if="account && !useInjectedTransactionForm && isPriced"
-				class="sticky bottom-0 flex grow animate-[fadeIn_.7s_ease-in-out_forwards] flex-col gap-5 rounded-b-xl border-t border-dp-white-300 bg-white p-3"
+				class="border-dp-white-300 sticky bottom-0 flex grow animate-[fadeIn_.7s_ease-in-out_forwards] flex-col gap-5 rounded-b-xl border-t bg-white p-3"
 			>
 				<div class="grid gap-5">
 					<span class="flex flex-col justify-stretch">
@@ -811,7 +811,7 @@ onUnmounted(() => {
 							"
 							:data-is-staking="isStaking"
 							:data-is-fetching="isFetchingFunds === 'progress'"
-							class="hs-button is-large is-filled group relative @container/clb_checkout_pay_button"
+							class="hs-button is-large is-filled @container/clb_checkout_pay_button group relative"
 							:class="insufficientFunds ? 'bg-red-600' : ''"
 						>
 							<IconSpinner
@@ -819,7 +819,7 @@ onUnmounted(() => {
 								class="absolute left-5 size-5"
 							/>
 							<IconBouncingArrowRight
-								class="absolute -left-2 group-disabled:hidden @xs/clb_checkout_pay_button:left-5"
+								class="@xs/clb_checkout_pay_button:left-5 absolute -left-2 group-disabled:hidden"
 							/>
 
 							{{ i18n('PayWith', [verifiedPropsCurrency.toUpperCase()]) }}
@@ -851,7 +851,7 @@ onUnmounted(() => {
 					>
 						<div
 							role="presentation"
-							class="mx-auto h-16 w-16 animate-spin rounded-full border-l border-r border-t border-native-blue-300"
+							class="border-native-blue-300 mx-auto h-16 w-16 animate-spin rounded-full border-l border-r border-t"
 						/>
 						<p v-if="isApproving">{{ i18n('ApprovalPending') }}</p>
 						<p v-if="isStaking && !isWaitingForStaked">
