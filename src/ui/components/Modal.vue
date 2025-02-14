@@ -49,19 +49,17 @@ html:has(dialog[open]) {
 		:class="{ hidden: !isVisible }"
 	>
 		<Transition>
-			<div class="relative m-auto w-full py-4">
-				<component
-					:eoa="eoa"
-					:modalClose="modalClose"
-					v-show="isVisible"
-					:is="modalContent"
-					v-bind="attrs"
-				>
-					<template #after:description>
-						<slot name="after:description" />
-					</template>
-				</component>
-			</div>
+			<component
+				:eoa="eoa"
+				:modalClose="modalClose"
+				v-show="isVisible"
+				:is="modalContent"
+				v-bind="attrs"
+			>
+				<template #after:description>
+					<slot name="after:description" />
+				</template>
+			</component>
 		</Transition>
 	</dialog>
 </template>

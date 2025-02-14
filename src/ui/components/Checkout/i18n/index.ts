@@ -79,4 +79,8 @@ export const Strings = {
 		en: `Signed in as:`,
 		ja: `サインインしているユーザー:`,
 	},
+	ContinueShopping: {
+		en: 'Continue Shopping',
+		ja: 'Continue Shopping',
+	}
 } satisfies ClubsI18nParts

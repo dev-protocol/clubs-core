@@ -140,8 +140,28 @@ onMounted(async () => {
 
 <template>
 	<div
-		class="m-auto w-full max-w-screen-lg rounded-xl bg-white p-4 text-black shadow @container/clb_result_modal"
+		class="relative w-full max-w-screen-lg rounded-xl bg-white p-4 text-black shadow @container/clb_result_modal"
 	>
+		<a
+			:href="props.base ?? '/'"
+			class="absolute -top-10 -right-10 w-8 h-8 flex items-center justify-center hover:bg-none"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="h-6 w-6"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="white"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M6 18L18 6M6 6l12 12"
+				/>
+			</svg>
+		</a>
+
 		<div
 			class="bg-color-navy relative mb-6 flex h-auto min-h-52 w-full flex-col items-center justify-center overflow-hidden rounded-md border border-black p-2 @xl/clb_result_modal:h-96 @xl/clb_result_modal:min-h-0 @xl/clb_result_modal:p-8"
 		>
@@ -210,7 +230,7 @@ onMounted(async () => {
 					:href="props.base ?? '/'"
 					class="hs-button is-filled rounded-lg border px-12 py-4 text-base @4xl/clb_result_modal:py-6"
 				>
-					{{ i18n('Home') }}
+					{{ i18n('ContinueShopping') }}
 				</a>
 				<button
 					v-if="false /* HIDDEN FOR NOW */"
