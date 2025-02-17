@@ -179,12 +179,13 @@ onMounted(async () => {
 			<img
 				v-if="imageSrc"
 				ref="imageRef"
-				class="z-10 max-h-60 min-h-full max-w-60 object-contain @xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl"
+				class="z-10 max-h-60 min-h-full max-w-60 rounded-md object-contain @xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl"
 			/>
 			<!-- video -->
 			<VideoFetch
 				v-if="!imageSrc && videoSrc"
-				class="max-w-60 rounded"
+				class="aspect-[1/1] max-w-60 rounded-md"
+				video-class="rounded-md [&>video]:rounded-md"
 				:url="videoSrc"
 			/>
 			<span class="text-base italic text-white">
