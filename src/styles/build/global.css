@@ -142,10 +142,6 @@ code * {
   line-height: var(--hs-theme-mono-line-height);
 }
 
-dialog {
-  all: unset;
-}
-
 html {
   width: 100%;
   height: 100%;
