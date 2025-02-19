@@ -98,15 +98,6 @@
   --hs-shadow-color: rgba(0, 0, 0, 0.15);
 }
 
-*,
-:before,
-:after {
-  margin: 0;
-  padding: 0;
-  color: inherit;
-  box-sizing: inherit;
-}
-
 h1,
 h2,
 h3,
