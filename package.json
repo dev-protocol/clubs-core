@@ -105,7 +105,7 @@
 	"dependencies": {
 		"@devprotocol/dev-kit": "8.7.0",
 		"@devprotocol/elements": "1.6.0",
-		"@devprotocol/hashi": "2.4.0-beta.2",
+		"@devprotocol/hashi": "2.4.0-beta.3",
 		"@devprotocol/util-ts": "4.0.0",
 		"@ethersproject/abstract-provider": "^5.7.0",
 		"@metamask/detect-provider": "^2.0.0",
