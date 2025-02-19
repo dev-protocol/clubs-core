@@ -59,6 +59,11 @@
 			"import": "./dist/src/redis/index.mjs",
 			"require": "./dist/src/redis/index.cjs",
 			"types": "./redis.d.ts"
+		},
+		"./tailwind": {
+			"import": "./dist/src/tailwind/index.mjs",
+			"require": "./dist/src/tailwind/index.cjs",
+			"types": "./tailwind.d.ts"
 		}
 	},
 	"types": "./dist/clubs-core.d.ts",
