@@ -626,7 +626,7 @@ onUnmounted(() => {
 				<aside
 					v-if="htmlDescription"
 					v-html="htmlDescription"
-					class="prose-hr:my-5 opacity-50"
+					class="prose-hr:my-5"
 					:class="ProseTextInherit"
 				></aside>
 
