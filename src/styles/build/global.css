@@ -110,15 +110,16 @@ h6 {
   line-height: inherit;
 }
 
+/*
 p,
 span,
 a {
-  font-family: var(--hs-theme-body-family);
-  font-size: var(--hs-theme-body-size);
-  font-weight: var(--hs-theme-body-weight);
-  line-height: var(--hs-theme-body-line-height);
+  font-family: hs-core.token-get('body-family');
+  font-size: hs-core.token-get('body-size');
+  font-weight: hs-core.token-get('body-weight');
+  line-height: hs-core.token-get('body-line-height');
 }
-
+*/
 a {
   text-decoration: none;
 }

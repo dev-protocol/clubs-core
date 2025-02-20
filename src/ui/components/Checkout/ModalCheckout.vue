@@ -22,6 +22,7 @@ const props = defineProps<{
 const cronCalling = ref<UndefinedOr<Promise<UndefinedOr<Response>>>>()
 const clicked = ref(false)
 const cronFinished = ref(false)
+const eoa = ref(props.eoa)
 
 const imageRef = useTemplateRef(`imageRef`)
 
@@ -30,11 +31,11 @@ let i18n = i18nBase(['en'])
 
 const passportPageUrl = computed(() =>
 	window.location.hostname.includes('prerelease.clubs.place')
-		? `https://prerelease.clubs.place/passport/${props.eoa ?? ''}/edit`
+		? `https://prerelease.clubs.place/passport/${eoa.value ?? ''}/edit`
 		: window.location.hostname.includes('clubs.place')
-		? `https://clubs.place/passport/${props.eoa ?? ''}/edit`
+		? `https://clubs.place/passport/${eoa.value ?? ''}/edit`
 		: `http://localhost:${window.location.port}/passport/${
-				props.eoa ?? ''
+				eoa.value ?? ''
 		  }/edit`
 )
 
@@ -63,6 +64,12 @@ onMounted(async () => {
 		}
 	} catch (error) {
 		console.error('Error loading image:', error)
+	}
+	if (eoa.value === undefined) {
+		const C = await import('../../../connection/connection')
+		C.connection().account.subscribe((acc) => {
+			eoa.value = acc
+		})
 	}
 })
 </script>
