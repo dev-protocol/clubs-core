@@ -115,7 +115,7 @@ onMounted(async () => {
 </script>
 
 <template>
-	<div class="relative m-0 h-full w-full cursor-pointer p-0">
+	<div class="relative contents">
 		<!-- Video.js player element -->
 		<video ref="videoEl" class="video-js" :class="videoClass"></video>
 
