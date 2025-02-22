@@ -17,3 +17,5 @@ export const clubs = {
 	},
 	plugins: [containerQueries],
 }
+
+export default clubs

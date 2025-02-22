@@ -599,7 +599,7 @@ onUnmounted(() => {
 
 					<span
 						v-if="!previewVideoSrc"
-						class="size-24 rounded-lg border border-black/20 bg-black/10 p-1"
+						class="h-auto min-h-24 w-24 rounded-lg border border-black/20 bg-black/10 p-1"
 					>
 						<img
 							v-if="previewImageSrc"
@@ -629,7 +629,7 @@ onUnmounted(() => {
 				<aside
 					v-if="htmlDescription"
 					v-html="htmlDescription"
-					class="prose-hr:my-5 opacity-50"
+					class="prose-hr:my-5"
 					:class="ProseTextInherit"
 				></aside>
 

@@ -1,4 +1,4 @@
-import { ClubsI18nParts } from '../../../../i18n'
+import type { ClubsI18nParts } from '../../../../i18n'
 
 export const Strings = {
 	Close: {
@@ -78,5 +78,9 @@ export const Strings = {
 	SignedInAs: {
 		en: `Signed in as:`,
 		ja: `サインインしているユーザー:`,
+	},
+	ContinueShopping: {
+		en: 'Continue Shopping',
+		ja: 'Continue Shopping',
 	},
 } satisfies ClubsI18nParts

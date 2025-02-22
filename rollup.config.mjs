@@ -8,6 +8,8 @@ const majorCoreAPIs = [
 	'dist/src/images/index.js',
 	'dist/src/connection/index.js',
 	'dist/src/styles/index.js',
+	'dist/src/redis/index.js',
+	'dist/src/tailwind/index.js',
 ]
 
 export const useSrc = ({ out, ext } = {}) => ({

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTemplateRef, Component as VueComponent, watch } from 'vue'
+import { useTemplateRef, type Component as VueComponent, watch } from 'vue'
 
 const props = defineProps<{
 	eoa?: string
@@ -45,23 +45,21 @@ html:has(dialog[open]) {
 <template>
 	<dialog
 		ref="dialog"
-		class="fixed inset-0 box-border flex items-center justify-center overflow-y-auto backdrop:bg-black/60"
+		class="fixed inset-0 m-auto box-border flex h-full max-h-full w-auto w-full max-w-full items-center justify-center overflow-y-auto bg-transparent backdrop:bg-black/60"
 		:class="{ hidden: !isVisible }"
 	>
 		<Transition>
-			<div class="relative m-auto w-full py-4">
-				<component
-					:eoa="eoa"
-					:modalClose="modalClose"
-					v-show="isVisible"
-					:is="modalContent"
-					v-bind="attrs"
-				>
-					<template #after:description>
-						<slot name="after:description" />
-					</template>
-				</component>
-			</div>
+			<component
+				:eoa="eoa"
+				:modalClose="modalClose"
+				v-show="isVisible"
+				:is="modalContent"
+				v-bind="attrs"
+			>
+				<template #after:description>
+					<slot name="after:description" />
+				</template>
+			</component>
 		</Transition>
 	</dialog>
 </template>

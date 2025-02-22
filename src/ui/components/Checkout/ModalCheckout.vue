@@ -4,7 +4,7 @@ import { Strings } from './i18n'
 import Skeleton from '../Skeleton/Skeleton.vue'
 import { ProseTextInherit } from '../../../constants'
 import { computed, onMounted, ref, useTemplateRef } from 'vue'
-import { UndefinedOr } from '@devprotocol/util-ts'
+import type { UndefinedOr } from '@devprotocol/util-ts'
 import Spinner from '../../../layouts/components/Spinner.vue'
 // @ts-ignore
 import VideoFetch from '../../vue/VideoFetch.vue'
@@ -22,6 +22,7 @@ const props = defineProps<{
 const cronCalling = ref<UndefinedOr<Promise<UndefinedOr<Response>>>>()
 const clicked = ref(false)
 const cronFinished = ref(false)
+const eoa = ref(props.eoa)
 
 const imageRef = useTemplateRef(`imageRef`)
 
@@ -30,11 +31,11 @@ let i18n = i18nBase(['en'])
 
 const passportPageUrl = computed(() =>
 	window.location.hostname.includes('prerelease.clubs.place')
-		? `https://prerelease.clubs.place/passport/${props.eoa ?? ''}/edit`
+		? `https://prerelease.clubs.place/passport/${eoa.value ?? ''}/edit`
 		: window.location.hostname.includes('clubs.place')
-		? `https://clubs.place/passport/${props.eoa ?? ''}/edit`
+		? `https://clubs.place/passport/${eoa.value ?? ''}/edit`
 		: `http://localhost:${window.location.port}/passport/${
-				props.eoa ?? ''
+				eoa.value ?? ''
 		  }/edit`
 )
 
@@ -63,6 +64,12 @@ onMounted(async () => {
 		}
 	} catch (error) {
 		console.error('Error loading image:', error)
+	}
+	if (eoa.value === undefined) {
+		const C = await import('../../../connection/connection')
+		C.connection().account.subscribe((acc) => {
+			eoa.value = acc
+		})
 	}
 })
 </script>
@@ -140,8 +147,28 @@ onMounted(async () => {
 
 <template>
 	<div
-		class="m-auto w-full max-w-screen-lg rounded-xl bg-white p-4 text-black shadow @container/clb_result_modal"
+		class="relative w-full max-w-screen-lg rounded-xl bg-white p-4 text-black shadow @container/clb_result_modal"
 	>
+		<a
+			:href="props.base ?? '/'"
+			class="absolute -right-10 -top-10 flex h-8 w-8 items-center justify-center hover:bg-none"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="h-6 w-6"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="white"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M6 18L18 6M6 6l12 12"
+				/>
+			</svg>
+		</a>
+
 		<div
 			class="bg-color-navy relative mb-6 flex h-auto min-h-52 w-full flex-col items-center justify-center overflow-hidden rounded-md border border-black p-2 @xl/clb_result_modal:h-96 @xl/clb_result_modal:min-h-0 @xl/clb_result_modal:p-8"
 		>
@@ -159,12 +186,13 @@ onMounted(async () => {
 			<img
 				v-if="imageSrc"
 				ref="imageRef"
-				class="z-10 max-h-60 min-h-full max-w-60 object-contain @xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl"
+				class="z-10 max-h-60 min-h-full max-w-60 rounded-md object-contain @xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl"
 			/>
 			<!-- video -->
 			<VideoFetch
 				v-if="!imageSrc && videoSrc"
-				class="max-w-60 rounded"
+				class="aspect-[1/1] max-w-60 rounded-md"
+				video-class="rounded-md [&>video]:rounded-md"
 				:url="videoSrc"
 			/>
 			<span class="text-base italic text-white">
@@ -210,7 +238,7 @@ onMounted(async () => {
 					:href="props.base ?? '/'"
 					class="hs-button is-filled rounded-lg border px-12 py-4 text-base @4xl/clb_result_modal:py-6"
 				>
-					{{ i18n('Home') }}
+					{{ i18n('ContinueShopping') }}
 				</a>
 				<button
 					v-if="false /* HIDDEN FOR NOW */"
