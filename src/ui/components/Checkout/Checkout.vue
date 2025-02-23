@@ -95,7 +95,7 @@ const feeAmount = ref<UndefinedOr<number>>(undefined)
 const chain = ref<UndefinedOr<number>>(undefined)
 const previewImageSrc = ref<UndefinedOr<string>>(props.itemImageSrc)
 const previewVideoSrc = ref<UndefinedOr<string>>(props.itemVideoSrc)
-const previewName = ref<UndefinedOr<string>>(props.itemName)
+const onChainPreviewName = ref<UndefinedOr<string>>(props.itemName)
 const stakingAmount = ref<UndefinedOr<number>>(undefined)
 const directAmount = ref<UndefinedOr<number>>(undefined)
 const isCheckingAccessControl = ref<boolean>(false)
@@ -142,6 +142,9 @@ const useERC20: ComputedRef<boolean> = computed(() => {
 const approveNeeded = ref<UndefinedOr<boolean>>(useERC20.value)
 const htmlDescription: ComputedRef<UndefinedOr<string>> = computed(() => {
 	return props.description && markdownToHtml(props.description)
+})
+const previewName: ComputedRef<UndefinedOr<string>> = computed(() => {
+	return props.itemName ?? onChainPreviewName.value
 })
 const htmlVerificationFlow: ComputedRef<UndefinedOr<string>> = computed(() => {
 	const accountAddress = account.value ?? ''
@@ -546,7 +549,7 @@ onMounted(async () => {
 				return undefined
 			})
 			previewImageSrc.value = sTokens?.image
-			previewName.value = sTokens?.name
+			onChainPreviewName.value = sTokens?.name
 		}
 	)
 	try {
