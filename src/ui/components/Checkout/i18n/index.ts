@@ -65,7 +65,7 @@ export const Strings = {
 	},
 	Passport: {
 		en: 'Passport',
-		ja: 'Passport',
+		ja: 'パスポート',
 	},
 	Home: {
 		en: 'Home',
@@ -81,6 +81,6 @@ export const Strings = {
 	},
 	ContinueShopping: {
 		en: 'Continue Shopping',
-		ja: 'Continue Shopping',
+		ja: 'ストアに戻る',
 	},
 } satisfies ClubsI18nParts
