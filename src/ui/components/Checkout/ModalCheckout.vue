@@ -27,7 +27,7 @@ const eoa = ref(props.eoa)
 const imageRef = useTemplateRef(`imageRef`)
 
 const i18nBase = i18nFactory(Strings)
-let i18n = i18nBase(['en'])
+let i18n = ref<ReturnType<typeof i18nBase>>(i18nBase(['en']))
 
 const passportPageUrl = computed(() =>
 	window.location.hostname.includes('prerelease.clubs.place')
@@ -46,6 +46,7 @@ const onClickPassport = async () => {
 }
 
 onMounted(async () => {
+	i18n.value = i18nBase(navigator.languages)
 	if (cronCalling.value === undefined) {
 		cronCalling.value = ((fb) =>
 			fetch('/api/cron/assets')
