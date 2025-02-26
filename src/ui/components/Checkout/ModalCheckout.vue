@@ -184,18 +184,26 @@ onMounted(async () => {
 				>
 			</h3>
 			<!-- image -->
-			<img
-				v-if="imageSrc"
-				ref="imageRef"
-				class="z-10 max-h-60 min-h-full max-w-60 rounded-md object-contain @xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl"
-			/>
-			<!-- video -->
-			<VideoFetch
-				v-if="!imageSrc && videoSrc"
-				class="aspect-[1/1] max-w-60 rounded-md"
-				video-class="rounded-md [&>video]:rounded-md"
-				:url="videoSrc"
-			/>
+			<span class="contents">
+				<!-- This uses CSS instead of Vue's slot fallback content because Astro always inserts an empty element into the slot. -->
+				<span class="peer contents">
+					<slot name="preview" />
+				</span>
+				<span class="contents peer-has-[:not(:empty)]:hidden">
+					<img
+						v-if="imageSrc"
+						ref="imageRef"
+						class="z-10 max-h-60 min-h-full max-w-60 rounded-md object-contain @xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl"
+					/>
+					<!-- video -->
+					<VideoFetch
+						v-if="!imageSrc && videoSrc"
+						class="aspect-[1/1] max-w-60 rounded-md"
+						video-class="rounded-md [&>video]:rounded-md"
+						:url="videoSrc"
+					/>
+				</span>
+			</span>
 			<span class="text-base italic text-white">
 				{{ i18n('PurchaseGreeting') }}
 			</span>

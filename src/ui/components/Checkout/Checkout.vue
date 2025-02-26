@@ -438,6 +438,10 @@ const signIn = () =>
 	connection.value?.().signal.next(ClubsConnectionSignal.SignInRequest)
 
 onMounted(async () => {
+	// setTimeout(() => {
+	// 	stakeSuccessful.value = true
+	// }, 2000)
+
 	const { connection: _connection } = await import('../../../connection')
 	connection.value = _connection
 
@@ -587,29 +591,36 @@ onUnmounted(() => {
 				<div
 					class="grid grid-cols-[auto_auto_1fr] items-center justify-between gap-4"
 				>
-					<span
-						v-if="!previewImageSrc && previewVideoSrc"
-						class="w-36 rounded-lg border border-black/20 bg-black/10 p-1"
-					>
-						<VideoFetch
-							:url="previewVideoSrc"
-							:videoClass="`w-full rounded aspect-square`"
-						/>
-					</span>
+					<span class="contents">
+						<!-- This uses CSS instead of Vue's slot fallback content because Astro always inserts an empty element into the slot. -->
+						<span class="peer contents">
+							<slot name="preview" />
+						</span>
+						<span class="contents peer-has-[:not(:empty)]:hidden">
+							<span
+								v-if="!previewImageSrc && previewVideoSrc"
+								class="w-36 rounded-lg border border-black/20 bg-black/10 p-1"
+							>
+								<VideoFetch
+									:url="previewVideoSrc"
+									:videoClass="`w-full rounded aspect-square`"
+								/>
+							</span>
 
-					<span
-						v-if="!previewVideoSrc"
-						class="h-auto min-h-24 w-24 rounded-lg border border-black/20 bg-black/10 p-1"
-					>
-						<img
-							v-if="previewImageSrc"
-							ref="imageRef"
-							class="h-auto w-full rounded-lg object-cover object-center"
-						/>
-						<Skeleton
-							v-if="previewImageSrc === undefined"
-							class="mx-auto aspect-square h-full w-full"
-						/>
+							<span
+								v-if="!previewVideoSrc"
+								class="h-auto min-h-24 w-24 rounded-lg border border-black/20 bg-black/10 p-1"
+							>
+								<img
+									v-if="previewImageSrc"
+									ref="imageRef"
+									class="h-auto w-full rounded-lg object-cover object-center"
+								/>
+								<Skeleton
+									v-if="previewImageSrc === undefined"
+									class="mx-auto aspect-square h-full w-full"
+								/> </span
+						></span>
 					</span>
 					<h3 class="text-balance break-all font-bold">{{ previewName }}</h3>
 					<span class="justify-self-end">
@@ -905,6 +916,9 @@ onUnmounted(() => {
 		:video-src="previewVideoSrc"
 		:base="props.base"
 	>
+		<template #preview>
+			<slot name="result:preview" />
+		</template>
 		<template #before:preview>
 			<slot name="result:before:preview" />
 		</template>
