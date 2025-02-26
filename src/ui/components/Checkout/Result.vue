@@ -55,6 +55,9 @@ onMounted(async () => {
 			base,
 		}"
 	>
+		<template #preview>
+			<slot name="preview" />
+		</template>
 		<template #after:description>
 			<slot name="before:preview" />
 		</template>

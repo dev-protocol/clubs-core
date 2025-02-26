@@ -25,6 +25,21 @@ const payload = toUtf8Bytes('tier-1')
 		uiMode="embed"
 		{...props}
 	>
+		<span
+			slot="checkout:preview"
+			class="h-auto min-h-24 w-24 rounded-lg border border-black/20 bg-black/10 p-1"
+		>
+			<img
+				v-if="previewImageSrc"
+				class="h-auto w-full rounded-lg object-cover object-center"
+				src="https://images.unsplash.com/photo-1652489997190-f492cfbbdf7e?q=80&w=1200&h=1200&fit=crop"
+			/>
+		</span>
+		<img
+			slot="checkout:result:preview"
+			class="z-10 max-h-60 min-h-full max-w-60 rounded-md object-contain @xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl"
+			src="https://images.unsplash.com/photo-1688168293343-e1c824a4ace5?q=80&w=1200&h=1200&fit=crop"
+		/>
 		<div class="opacity-50" slot="checkout:after:description">
 			We strictly prohibit any unauthorized reproduction, reprinting, reuse, or
 			modification of any part or all of the content (images, text, etc.)

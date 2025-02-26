@@ -56,6 +56,9 @@ html:has(dialog[open]) {
 				:is="modalContent"
 				v-bind="attrs"
 			>
+				<template #preview>
+					<slot name="preview" />
+				</template>
 				<template #after:description>
 					<slot name="after:description" />
 				</template>
