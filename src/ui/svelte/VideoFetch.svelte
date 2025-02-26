@@ -88,7 +88,7 @@
 </script>
 
 <!-- TEMPLATE -->
-<div class="relative m-0 h-full w-full cursor-pointer p-0">
+<div class="relative contents">
 	<!-- Video.js player element -->
 	<!-- svelte-ignore a11y-media-has-caption -->
 	<video bind:this={videoEl} class="video-js {videoClass}" />
