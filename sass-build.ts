@@ -5,9 +5,10 @@ import sass from 'sass'
 const sassCompiler = gulpSass(sass)
 
 export function sassTaskDev() {
-	return gulp.src(['src/styles/global.scss'], {
-		sourcemaps: true,
-	})
+	return gulp
+		.src(['src/styles/global.scss'], {
+			sourcemaps: true,
+		})
 		.pipe(
 			sassCompiler({
 				includePaths: ['node_modules'],
@@ -17,4 +18,3 @@ export function sassTaskDev() {
 }
 
 export default gulp.series(sassTaskDev)
-
