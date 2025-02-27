@@ -148,7 +148,7 @@ onMounted(async () => {
 
 <template>
 	<div
-		class="relative w-full max-w-screen-lg rounded-xl bg-white p-4 text-black shadow @container/clb_result_modal"
+		class="relative w-full max-w-screen-lg rounded-xl bg-white p-4 text-black shadow"
 	>
 		<a
 			:href="props.base ?? '/'"
@@ -174,7 +174,8 @@ onMounted(async () => {
 			class="bg-color-navy relative mb-6 flex h-auto min-h-52 w-full flex-col items-center justify-center overflow-hidden rounded-md border border-black p-2 @xl/clb_result_modal:h-96 @xl/clb_result_modal:min-h-0 @xl/clb_result_modal:p-8"
 		>
 			<div
-				class="w-h-screen bg-focus-lines origin-zero animate-spin-slow mask absolute inset-2/4 -translate-x-1/2 -translate-y-1/2 bg-center bg-no-repeat"
+				class="w-h-screen bg-focus-lines origin-zero animate-spin-slow mask absolute inset-2/4 bg-center bg-no-repeat"
+				style="transform: translate(50%, 50%)"
 			></div>
 			<h3 class="mb-1 text-white">
 				<span
