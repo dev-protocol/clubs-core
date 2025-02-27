@@ -1,19 +1,20 @@
-import { src, dest, series } from 'gulp'
-import glss from 'gulp-sass/legacy'
-import sas from 'sass'
+import gulp from 'gulp'
+import gulpSass from 'gulp-sass/legacy'
+import sass from 'sass'
 
-const sass = glss(sas)
+const sassCompiler = gulpSass(sass)
 
-function sassTaskDev() {
-	return src(['src/styles/global.scss'], {
+export function sassTaskDev() {
+	return gulp.src(['src/styles/global.scss'], {
 		sourcemaps: true,
 	})
 		.pipe(
-			sass({
+			sassCompiler({
 				includePaths: ['node_modules'],
-			}).on('error', sass.logError)
+			}).on('error', sassCompiler.logError)
 		)
-		.pipe(dest('./src/styles/build', { sourcemaps: '.' }))
+		.pipe(gulp.dest('./src/styles/build', { sourcemaps: '.' }))
 }
 
-exports.default = series(sassTaskDev)
+export default gulp.series(sassTaskDev)
+
