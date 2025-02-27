@@ -1,6 +1,6 @@
 import gulp from 'gulp'
-import gulpSass from 'gulp-sass/legacy'
-import sass from 'sass'
+import gulpSass from 'gulp-sass/legacy.js'
+import * as sass from 'sass'
 
 const sassCompiler = gulpSass(sass)
 
