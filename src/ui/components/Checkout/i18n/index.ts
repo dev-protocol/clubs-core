@@ -38,8 +38,8 @@ export const Strings = {
 		ja: '承認プロセスの完了までお待ちください...',
 	},
 	PurchaseGreeting: {
-		en: 'Thank you for your purchase!',
-		ja: 'ご購入いただき、ありがとうございました！',
+		en: 'Thank you! The item has been successfully claimed.',
+		ja: 'ありがとうございます！アイテムを受け取りました。',
 	},
 	TxConfirmationPending: {
 		en: 'Awaiting transaction confirmation on wallet...',
