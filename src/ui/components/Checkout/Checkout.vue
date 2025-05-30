@@ -596,7 +596,7 @@ onUnmounted(() => {
 						<span class="peer contents">
 							<slot name="preview" />
 						</span>
-						<span class="contents peer-has-[:not(:empty)]:hidden">
+						<span class="peer-has-[:not(:empty)]:hidden contents">
 							<span
 								v-if="!previewImageSrc && previewVideoSrc"
 								class="w-36 rounded-lg border border-black/20 bg-black/10 p-1"
@@ -609,7 +609,7 @@ onUnmounted(() => {
 
 							<span
 								v-if="!previewVideoSrc"
-								class="h-auto min-h-24 w-24 rounded-lg border border-black/20 bg-black/10 p-1"
+								class="min-h-24 h-auto w-24 rounded-lg border border-black/20 bg-black/10 p-1"
 							>
 								<img
 									v-if="previewImageSrc"
@@ -660,7 +660,7 @@ onUnmounted(() => {
 						v-if="account === undefined"
 						class="absolute -left-2 @xs/clb_checkout_signin_button:left-5"
 					/>
-					<IconSpinner v-else class="absolute left-5 size-5" />
+					<IconSpinner v-else class="size-5 absolute left-5" />
 					<span class="font-bold">{{ i18n('SignIn') }}</span>
 				</button>
 				<a
@@ -673,7 +673,7 @@ onUnmounted(() => {
 					<div class="flex items-center justify-start gap-2">
 						<img
 							:src="clubsProfile.avatar"
-							class="aspect-square size-8 overflow-hidden rounded-full border border-black/20 object-cover"
+							class="size-8 aspect-square overflow-hidden rounded-full border border-black/20 object-cover"
 						/>
 						<span class="text-sm font-bold">{{ clubsProfile.username }}</span>
 					</div>
@@ -779,11 +779,11 @@ onUnmounted(() => {
 								approveNeeded &&
 								(isApproving || isFetchingApproval === 'progress')
 							"
-							class="absolute left-5 size-5"
+							class="size-5 absolute left-5"
 						/>
 						<IconCheckCircle
 							v-if="approveNeeded === false"
-							class="absolute left-5 size-5 text-dp-green-300"
+							class="size-5 absolute left-5 text-dp-green-300"
 							type="solid"
 						/>
 						<IconBouncingArrowRight
@@ -830,7 +830,7 @@ onUnmounted(() => {
 						>
 							<IconSpinner
 								v-if="isStaking || isFetchingFunds === 'progress'"
-								class="absolute left-5 size-5"
+								class="size-5 absolute left-5"
 							/>
 							<IconBouncingArrowRight
 								class="absolute -left-2 group-disabled:hidden @xs/clb_checkout_pay_button:left-5"

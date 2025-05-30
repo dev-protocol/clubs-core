@@ -171,7 +171,7 @@ onMounted(async () => {
 		</a>
 
 		<div
-			class="bg-color-navy relative mb-6 flex h-auto min-h-52 w-full flex-col items-center justify-center overflow-hidden rounded-md border border-black p-2 @xl/clb_result_modal:h-96 @xl/clb_result_modal:min-h-0 @xl/clb_result_modal:p-8"
+			class="bg-color-navy min-h-52 relative mb-6 flex h-auto w-full flex-col items-center justify-center overflow-hidden rounded-md border border-black p-2 @xl/clb_result_modal:h-96 @xl/clb_result_modal:min-h-0 @xl/clb_result_modal:p-8"
 		>
 			<div
 				class="w-h-screen bg-focus-lines origin-zero animate-spin-slow mask absolute inset-2/4 bg-center bg-no-repeat"
@@ -190,16 +190,16 @@ onMounted(async () => {
 				<span class="peer contents">
 					<slot name="preview" />
 				</span>
-				<span class="contents peer-has-[:not(:empty)]:hidden">
+				<span class="peer-has-[:not(:empty)]:hidden contents">
 					<img
 						v-if="imageSrc"
 						ref="imageRef"
-						class="z-10 max-h-60 min-h-full max-w-60 rounded-md object-contain @xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl"
+						class="max-w-60 z-10 max-h-60 min-h-full rounded-md object-contain @xl/clb_result_modal:max-h-none @xl/clb_result_modal:max-w-xl"
 					/>
 					<!-- video -->
 					<VideoFetch
 						v-if="!imageSrc && videoSrc"
-						class="aspect-[1/1] max-w-60 rounded-md"
+						class="max-w-60 aspect-[1/1] rounded-md"
 						video-class="rounded-md [&>video]:rounded-md"
 						:url="videoSrc"
 					/>

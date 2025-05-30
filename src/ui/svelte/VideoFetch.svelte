@@ -98,7 +98,7 @@
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div
-			class="absolute inset-0 m-auto flex size-1/2 items-center justify-center text-white opacity-60"
+			class="size-1/2 absolute inset-0 m-auto flex items-center justify-center text-white opacity-60"
 			on:click|stopPropagation|preventDefault={togglePlay}
 		>
 			<!-- Play icon -->

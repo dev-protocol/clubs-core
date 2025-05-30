@@ -122,7 +122,7 @@ onMounted(async () => {
 		<!-- Custom play/pause overlay (only if isControlled=true) -->
 		<div
 			v-if="isControlled"
-			class="absolute inset-0 m-auto flex size-1/2 items-center justify-center text-white opacity-60"
+			class="size-1/2 absolute inset-0 m-auto flex items-center justify-center text-white opacity-60"
 			@click.stop.prevent="togglePlay"
 		>
 			<!-- Play icon -->

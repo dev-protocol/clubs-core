@@ -28,7 +28,7 @@ const props = defineProps<{
 				: undefined),
 		}"
 	>
-		<IconArrowRight class="aspect-square size-full text-white" />
+		<IconArrowRight class="size-full aspect-square text-white" />
 	</span>
 </template>
 
