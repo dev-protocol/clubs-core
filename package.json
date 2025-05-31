@@ -132,7 +132,7 @@
 		"@rollup/plugin-commonjs": "28.0.3",
 		"@rollup/plugin-multi-entry": "6.0.1",
 		"@rollup/plugin-typescript": "12.1.2",
-		"@rollup/pluginutils": "5.1.3",
+		"@rollup/pluginutils": "5.1.4",
 		"@tailwindcss/vite": "^4.0.7",
 		"@types/dompurify": "^3.0.4",
 		"@types/eslint-config-prettier": "^6.11.3",
