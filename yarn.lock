@@ -878,7 +878,7 @@ __metadata:
     rollup: "npm:4.41.1"
     rollup-plugin-dts: "npm:6.2.1"
     rxjs: "npm:^7.8.1"
-    sass: "npm:1.81.1"
+    sass: "npm:1.89.1"
     svelte: "npm:5.4.0"
     svelte-check: "npm:^4.0.0"
     tailwindcss: "npm:^4.0.7"
@@ -10093,9 +10093,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:1.81.1":
-  version: 1.81.1
-  resolution: "sass@npm:1.81.1"
+"sass@npm:1.89.1":
+  version: 1.89.1
+  resolution: "sass@npm:1.89.1"
   dependencies:
     "@parcel/watcher": "npm:^2.4.1"
     chokidar: "npm:^4.0.0"
@@ -10106,7 +10106,7 @@ __metadata:
       optional: true
   bin:
     sass: sass.js
-  checksum: 10c0/be30371b1706ae84ca39fc724368deae5fd9cf94f4737fb0120f166e81545d113d1aa9abd3d797cf66f1d48625ab20ec838509f157d23e3e1e57c6a7e5e78cda
+  checksum: 10c0/4406c441f71f5e0ec056345e6091cef51fd1786dac6e5b3eb1e87df464c40b3278219cc51df98309c36794503787ab0fe88fd45f2b0464f22000b68e755883ee
   languageName: node
   linkType: hard
 
