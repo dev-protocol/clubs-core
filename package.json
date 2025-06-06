@@ -110,7 +110,7 @@
 		"@ethersproject/abstract-provider": "^5.7.0",
 		"@metamask/detect-provider": "^2.0.0",
 		"@tailwindcss/container-queries": "^0.1.1",
-		"@vercel/blob": "^0.26.0",
+		"@vercel/blob": "^0.27.0",
 		"axios": "^1.6.7",
 		"bignumber.js": "^9.1.2",
 		"isomorphic-dompurify": "2.18.0",

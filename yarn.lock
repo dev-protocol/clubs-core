@@ -842,7 +842,7 @@ __metadata:
     "@types/ramda": "npm:0.30.2"
     "@types/react": "npm:18.3.23"
     "@types/react-dom": "npm:18.3.7"
-    "@vercel/blob": "npm:^0.26.0"
+    "@vercel/blob": "npm:^0.27.0"
     "@webcomponents/template-shadowroot": "npm:0.2.1"
     astro: "npm:4.16.15"
     autoprefixer: "npm:10.4.21"
@@ -3425,17 +3425,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/blob@npm:^0.26.0":
-  version: 0.26.0
-  resolution: "@vercel/blob@npm:0.26.0"
+"@vercel/blob@npm:^0.27.0":
+  version: 0.27.3
+  resolution: "@vercel/blob@npm:0.27.3"
   dependencies:
     async-retry: "npm:^1.3.3"
-    bytes: "npm:^3.1.2"
     is-buffer: "npm:^2.0.5"
     is-node-process: "npm:^1.2.0"
     throttleit: "npm:^2.1.0"
     undici: "npm:^5.28.4"
-  checksum: 10c0/14cf72801548169f58b23e1abda6849b6f5e98b588f64b8863b06b4b44f8515aaa6727cbe1cf97d7fb5a8ba434fad23f2698dddb39e3ebfc78d6f044283a1a50
+  checksum: 10c0/2bacd3fa67e6386c9fcf4b61dbaee08a5439bfd1bafcbbf17b1b4a1556b39c974ee7f7453a27ede5d32e8b645dfac4eaba831173da3331f118daf8ac579c3993
   languageName: node
   linkType: hard
 
@@ -4579,13 +4578,6 @@ __metadata:
   dependencies:
     run-applescript: "npm:^7.0.0"
   checksum: 10c0/8e575981e79c2bcf14d8b1c027a3775c095d362d1382312f444a7c861b0e21513c0bd8db5bd2b16e50ba0709fa622d4eab6b53192d222120305e68359daece29
-  languageName: node
-  linkType: hard
-
-"bytes@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "bytes@npm:3.1.2"
-  checksum: 10c0/76d1c43cbd602794ad8ad2ae94095cddeb1de78c5dddaa7005c51af10b0176c69971a6d88e805a90c2b6550d76636e43c40d8427a808b8645ede885de4a0358e
   languageName: node
   linkType: hard
 
