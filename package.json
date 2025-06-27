@@ -129,7 +129,7 @@
 		"@astrojs/svelte": "6.0.2",
 		"@astrojs/vue": "4.5.3",
 		"@eslint/js": "^9.12.0",
-		"@rollup/plugin-commonjs": "28.0.3",
+		"@rollup/plugin-commonjs": "28.0.6",
 		"@rollup/plugin-multi-entry": "6.0.1",
 		"@rollup/plugin-typescript": "12.1.2",
 		"@rollup/pluginutils": "5.1.4",
