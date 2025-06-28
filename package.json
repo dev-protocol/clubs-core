@@ -161,7 +161,7 @@
 		"jsdom": "^25.0.0",
 		"npm-run-all2": "7.0.2",
 		"open-cli": "^8.0.0",
-		"postcss": "8.5.4",
+		"postcss": "8.5.6",
 		"prettier": "2.8.8",
 		"prettier-plugin-astro": "0.14.1",
 		"prettier-plugin-svelte": "^2.9.0",
