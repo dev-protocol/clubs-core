@@ -172,7 +172,7 @@
 		"rollup": "4.44.1",
 		"rollup-plugin-dts": "6.2.1",
 		"sass": "1.89.2",
-		"svelte": "5.34.9",
+		"svelte": "5.35.2",
 		"svelte-check": "^4.0.0",
 		"tailwindcss": "^4.0.7",
 		"typedoc": "^0.28.0",
