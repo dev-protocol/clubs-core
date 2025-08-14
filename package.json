@@ -113,7 +113,7 @@
 		"@vercel/blob": "^0.27.0",
 		"axios": "^1.6.7",
 		"bignumber.js": "^9.1.2",
-		"isomorphic-dompurify": "2.18.0",
+		"isomorphic-dompurify": "2.26.0",
 		"js-base64": "^3.7.2",
 		"lit": "^3.0.0",
 		"marked": "^10.0.0",
