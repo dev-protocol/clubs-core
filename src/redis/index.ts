@@ -43,4 +43,4 @@ export const Redis = (() => {
 
 // reference: https://redis.io/docs/latest/develop/interact/search-and-query/advanced-concepts/escaping/
 export const escapeTag = (tag?: string) =>
-	tag?.replace(/[,.<>{}[]"':;!@#$%^&*()-+=~]/g, '\\$&')
+	tag?.replace(/([,.<>:{}"'/\\|?!@#$%^&*()\-+=[\]`~])/g, '\\$1')
