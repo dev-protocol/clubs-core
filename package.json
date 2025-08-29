@@ -136,7 +136,7 @@
 		"@tailwindcss/vite": "^4.0.7",
 		"@types/dompurify": "^3.0.4",
 		"@types/eslint-config-prettier": "^6.11.3",
-		"@types/eslint__js": "^8.42.3",
+		"@types/eslint__js": "^9.0.0",
 		"@types/get-installed-path": "4.0.3",
 		"@types/gulp": "^4.0.17",
 		"@types/gulp-sass": "^5.0.4",
