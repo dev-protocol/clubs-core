@@ -555,6 +555,7 @@ export type Membership = {
 		readonly beneficiary: string
 	}
 	readonly deprecated?: boolean
+	readonly hidden?: boolean
 	readonly paymentType?: 'instant' | 'stake' | 'custom'
 	readonly accessControl?: {
 		readonly url: string
