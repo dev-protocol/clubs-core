@@ -886,7 +886,7 @@ __metadata:
     rollup-plugin-dts: "npm:6.4.1"
     rxjs: "npm:^7.8.1"
     sass: "npm:1.100.0"
-    svelte: "npm:5.35.2"
+    svelte: "npm:5.55.9"
     svelte-check: "npm:^4.0.0"
     tailwindcss: "npm:^4.0.7"
     typedoc: "npm:^0.28.0"
@@ -1725,7 +1725,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jridgewell/remapping@npm:^2.3.5":
+"@jridgewell/remapping@npm:^2.3.4, @jridgewell/remapping@npm:^2.3.5":
   version: 2.3.5
   resolution: "@jridgewell/remapping@npm:2.3.5"
   dependencies:
@@ -2695,12 +2695,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sveltejs/acorn-typescript@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "@sveltejs/acorn-typescript@npm:1.0.5"
+"@sveltejs/acorn-typescript@npm:^1.0.10":
+  version: 1.0.10
+  resolution: "@sveltejs/acorn-typescript@npm:1.0.10"
   peerDependencies:
     acorn: ^8.9.0
-  checksum: 10c0/5f5393ca3afc3d532baa3d418b51972ad26966ff352e13a46c6baa6d7099655acf2668be1d693e9daba2d3994a40b4c9a6b3157340e9cdfe2ffb52e4334630fd
+  checksum: 10c0/eb7e16789f16a6a183ef7c541f99885afbf4daf6f773b2b21fe978619be8b05763ba0705357639b671aa7604783d056ba0d317f806839f5b7ea87a7b9bc1d18e
   languageName: node
   linkType: hard
 
@@ -4272,7 +4272,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aria-query@npm:^5.3.1, aria-query@npm:^5.3.2":
+"aria-query@npm:5.3.1":
+  version: 5.3.1
+  resolution: "aria-query@npm:5.3.1"
+  checksum: 10c0/2e9aca7d92d20b8539ee58fa1d29ba07e2269a68da8d27e9830d3cb816d49bb01648610ac3f2e365a8dedbf00168ac18c017ea49c512fbe2537a0b17184a458b
+  languageName: node
+  linkType: hard
+
+"aria-query@npm:^5.3.2":
   version: 5.3.2
   resolution: "aria-query@npm:5.3.2"
   checksum: 10c0/003c7e3e2cff5540bf7a7893775fc614de82b0c5dde8ae823d47b7a28a9d4da1f7ed85f340bdb93d5649caa927755f0e31ecc7ab63edfdfc00c8ef07e505e03e
@@ -5389,6 +5396,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"devalue@npm:^5.8.1":
+  version: 5.8.1
+  resolution: "devalue@npm:5.8.1"
+  checksum: 10c0/fad0c5aeb615e0ddea3385923389991652b285cd2adcd84e10f07a930f735127d94621751f7ef5249a7fe2c7c666ec7c02bb95c3901da337c91f45ef4da18dea
+  languageName: node
+  linkType: hard
+
 "devlop@npm:^1.0.0, devlop@npm:^1.1.0":
   version: 1.1.0
   resolution: "devlop@npm:1.1.0"
@@ -5906,12 +5920,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esrap@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "esrap@npm:2.1.0"
+"esrap@npm:^2.2.9":
+  version: 2.2.9
+  resolution: "esrap@npm:2.2.9"
   dependencies:
     "@jridgewell/sourcemap-codec": "npm:^1.4.15"
-  checksum: 10c0/42f9f8b49972989a58082dda58c3862689c9c45f3245fd9bfa7e84a00de9cdc422d73621fad1c5d4872c12875869bd770cda80be20ffb1244e6c27b192a3f7b0
+  peerDependencies:
+    "@typescript-eslint/types": ^8.2.0
+  peerDependenciesMeta:
+    "@typescript-eslint/types":
+      optional: true
+  checksum: 10c0/d1ea8dc29468cbbb8e8c855f9c1b807a51fcb827b7412350753709736dda43ea27097f83e5b86b31abd7669edb5e36a23209817ddca5434b1718561153b6a1b1
   languageName: node
   linkType: hard
 
@@ -11233,25 +11252,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:5.35.2":
-  version: 5.35.2
-  resolution: "svelte@npm:5.35.2"
+"svelte@npm:5.55.9":
+  version: 5.55.9
+  resolution: "svelte@npm:5.55.9"
   dependencies:
-    "@ampproject/remapping": "npm:^2.3.0"
+    "@jridgewell/remapping": "npm:^2.3.4"
     "@jridgewell/sourcemap-codec": "npm:^1.5.0"
-    "@sveltejs/acorn-typescript": "npm:^1.0.5"
+    "@sveltejs/acorn-typescript": "npm:^1.0.10"
     "@types/estree": "npm:^1.0.5"
+    "@types/trusted-types": "npm:^2.0.7"
     acorn: "npm:^8.12.1"
-    aria-query: "npm:^5.3.1"
+    aria-query: "npm:5.3.1"
     axobject-query: "npm:^4.1.0"
     clsx: "npm:^2.1.1"
+    devalue: "npm:^5.8.1"
     esm-env: "npm:^1.2.1"
-    esrap: "npm:^2.1.0"
+    esrap: "npm:^2.2.9"
     is-reference: "npm:^3.0.3"
     locate-character: "npm:^3.0.0"
     magic-string: "npm:^0.30.11"
     zimmerframe: "npm:^1.1.2"
-  checksum: 10c0/4b6ce33c911fff062137b59f77db0b01a9c00f3ee93aa931e8219d65dffa0e933a60739af56a2165cc869d8892d05f91aaff7a09cd908547d9be2ceacb33e092
+  checksum: 10c0/dbfbfed9e10b13365f36039887188faaf940bb5c796bc634f8218d907a0405742d20564b48224afd06c547e6905cdbcdf8446710cf17df3faa8d525c295eda2b
   languageName: node
   linkType: hard
 
