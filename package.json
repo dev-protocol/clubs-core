@@ -170,7 +170,7 @@
 		"react-dom": "18.3.1",
 		"redis": "^4.7.0",
 		"rollup": "4.60.4",
-		"rollup-plugin-dts": "6.2.1",
+		"rollup-plugin-dts": "6.4.1",
 		"sass": "1.89.2",
 		"svelte": "5.35.2",
 		"svelte-check": "^4.0.0",
