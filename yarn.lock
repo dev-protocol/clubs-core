@@ -893,7 +893,7 @@ __metadata:
     rollup-plugin-dts: "npm:6.4.1"
     rxjs: "npm:^7.8.1"
     sass: "npm:1.100.0"
-    svelte: "npm:5.55.9"
+    svelte: "npm:5.56.3"
     svelte-check: "npm:^4.0.0"
     tailwindcss: "npm:^4.0.7"
     typedoc: "npm:^0.28.0"
@@ -5922,9 +5922,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esrap@npm:^2.2.9":
-  version: 2.2.9
-  resolution: "esrap@npm:2.2.9"
+"esrap@npm:^2.2.11":
+  version: 2.2.11
+  resolution: "esrap@npm:2.2.11"
   dependencies:
     "@jridgewell/sourcemap-codec": "npm:^1.4.15"
   peerDependencies:
@@ -5932,7 +5932,7 @@ __metadata:
   peerDependenciesMeta:
     "@typescript-eslint/types":
       optional: true
-  checksum: 10c0/d1ea8dc29468cbbb8e8c855f9c1b807a51fcb827b7412350753709736dda43ea27097f83e5b86b31abd7669edb5e36a23209817ddca5434b1718561153b6a1b1
+  checksum: 10c0/4e599158c294ac95ebe7e4df49d512e880544e8100cf6c01f9055ccff111d74da78f4005bb5cded5ffbae9fd9a4e4ffc382f1a4404060de14187502d8dc42b0c
   languageName: node
   linkType: hard
 
@@ -11278,9 +11278,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:5.55.9":
-  version: 5.55.9
-  resolution: "svelte@npm:5.55.9"
+"svelte@npm:5.56.3":
+  version: 5.56.3
+  resolution: "svelte@npm:5.56.3"
   dependencies:
     "@jridgewell/remapping": "npm:^2.3.4"
     "@jridgewell/sourcemap-codec": "npm:^1.5.0"
@@ -11293,12 +11293,12 @@ __metadata:
     clsx: "npm:^2.1.1"
     devalue: "npm:^5.8.1"
     esm-env: "npm:^1.2.1"
-    esrap: "npm:^2.2.9"
+    esrap: "npm:^2.2.11"
     is-reference: "npm:^3.0.3"
     locate-character: "npm:^3.0.0"
     magic-string: "npm:^0.30.11"
     zimmerframe: "npm:^1.1.2"
-  checksum: 10c0/dbfbfed9e10b13365f36039887188faaf940bb5c796bc634f8218d907a0405742d20564b48224afd06c547e6905cdbcdf8446710cf17df3faa8d525c295eda2b
+  checksum: 10c0/04300af7549e9288c5679aaedad34f4117c95e6068d3078a168c43b6ed97ca7989a3baac966dd91d7867a480042aa4ff08654c379d2252a35cb145dfaa0f5afe
   languageName: node
   linkType: hard
 
