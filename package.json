@@ -139,7 +139,7 @@
 		"@types/eslint__js": "^8.42.3",
 		"@types/get-installed-path": "4.0.3",
 		"@types/gulp": "^4.0.17",
-		"@types/gulp-sass": "^5.0.4",
+		"@types/gulp-sass": "^6.0.0",
 		"@types/marked": "^6.0.0",
 		"@types/node": "22.19.21",
 		"@types/ramda": "0.31.1",
