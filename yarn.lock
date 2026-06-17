@@ -868,7 +868,7 @@ __metadata:
     eslint-plugin-functional: "npm:^7.0.2"
     ethers: "npm:6.16.0"
     glob: "npm:13.0.6"
-    globals: "npm:^15.10.0"
+    globals: "npm:^17.0.0"
     gulp: "npm:^5.0.0"
     gulp-sass: "npm:^6.0.0"
     husky: "npm:9.1.7"
@@ -6648,10 +6648,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^15.10.0":
-  version: 15.15.0
-  resolution: "globals@npm:15.15.0"
-  checksum: 10c0/f9ae80996392ca71316495a39bec88ac43ae3525a438b5626cd9d5ce9d5500d0a98a266409605f8cd7241c7acf57c354a48111ea02a767ba4f374b806d6861fe
+"globals@npm:^17.0.0":
+  version: 17.6.0
+  resolution: "globals@npm:17.6.0"
+  checksum: 10c0/cf94fb4329cc5c68cf81018fd68324f413181ee169f0235b0b33b82bc93fe7825a21beea951f83a80e8e4bbdad9c0c80515a145b5fd4b5cb52f2a80db899a93f
   languageName: node
   linkType: hard
 

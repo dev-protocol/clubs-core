@@ -154,7 +154,7 @@
 		"eslint-plugin-functional": "^7.0.2",
 		"ethers": "6.16.0",
 		"glob": "13.0.6",
-		"globals": "^15.10.0",
+		"globals": "^17.0.0",
 		"gulp": "^5.0.0",
 		"gulp-sass": "^6.0.0",
 		"husky": "9.1.7",
