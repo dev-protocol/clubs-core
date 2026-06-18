@@ -160,7 +160,7 @@
 		"husky": "9.1.7",
 		"jsdom": "^29.0.0",
 		"npm-run-all2": "9.0.2",
-		"open-cli": "^8.0.0",
+		"open-cli": "^9.0.0",
 		"postcss": "8.5.15",
 		"prettier": "2.8.8",
 		"prettier-plugin-astro": "0.14.1",
