@@ -1,12 +1,22 @@
 ---
 import '../../styles/global.css'
 import { Admin } from '../../../../src/layouts'
-import { adminFactory, encode } from '../../../../src/'
+import {
+	adminFactory,
+	encode,
+	type ClubsFunctionAdminFactoryResult,
+	type ClubsFunctionFactoryOptions,
+	routerFactory,
+	ClubsGetStaticPathsItem,
+} from '../../../../src/'
 import example from '../../../../example/index'
 import theme from '../../../../example/theme'
 import theme2 from '../../../../example/theme2'
+import type { InferGetStaticPropsType } from 'astro'
+import { UndefinedOr } from '@devprotocol/util-ts'
 
-export const { getStaticPaths } = adminFactory({
+const { page } = Astro.params
+const options = {
 	config: () =>
 		encode({
 			name: 'Debug',
@@ -26,61 +36,70 @@ export const { getStaticPaths } = adminFactory({
 			],
 		}),
 	plugins: [theme, theme2, example],
-})
+} satisfies ClubsFunctionFactoryOptions
 
-const Content = Astro.props.component
+const { getStaticPaths } = adminFactory(
+	options
+) as ClubsFunctionAdminFactoryResult<typeof options>
 
-console.log(Astro.props)
+const router = routerFactory(await getStaticPaths(), (p) => p.params.page)
+const path = router(page) as UndefinedOr<
+	ClubsGetStaticPathsItem<InferGetStaticPropsType<typeof getStaticPaths>>
+>
 
-console.log('props.slots', Astro.props.clubs.slots)
+const Content = path?.props.component
 ---
 
-<Admin {...Astro.props}>
-	<div slot="admin:sidebar:before-title">
-		<p>
-			Injected contents<br /><span class="text-xs"
-				>admin:sidebar:before-title</span
-			>
-		</p>
-	</div>
-	<div slot="admin:sidebar:before-overview-link">
-		<p>
-			Injected contents<br /><span class="text-xs"
-				>admin:sidebar:before-overview-link</span
-			>
-		</p>
-	</div>
-	<div slot="admin:sidebar:before-theme-link">
-		<p>
-			Injected contents<br /><span class="text-xs"
-				>admin:sidebar:before-theme-link</span
-			>
-		</p>
-	</div>
-	<div slot="admin:sidebar:after-built-in-primary-links">
-		<p>
-			Injected contents<br /><span class="text-xs"
-				>admin:sidebar:after-built-in-primary-links</span
-			>
-		</p>
-	</div>
-	<div slot="admin:sidebar:before-footer">
-		<p>
-			Injected contents<br /><span class="text-xs"
-				>admin:sidebar:before-footer</span
-			>
-		</p>
-	</div>
-	<div slot="admin:sidebar:after-footer">
-		<p>
-			Injected contents<br /><span class="text-xs"
-				>admin:sidebar:after-footer</span
-			>
-		</p>
-	</div>
+{
+	path && (
+		<Admin {...path.props}>
+			<div slot="admin:sidebar:before-title">
+				<p>
+					Injected contents<br /><span class="text-xs"
+						>admin:sidebar:before-title</span
+					>
+				</p>
+			</div>
+			<div slot="admin:sidebar:before-overview-link">
+				<p>
+					Injected contents<br /><span class="text-xs"
+						>admin:sidebar:before-overview-link</span
+					>
+				</p>
+			</div>
+			<div slot="admin:sidebar:before-theme-link">
+				<p>
+					Injected contents<br /><span class="text-xs"
+						>admin:sidebar:before-theme-link</span
+					>
+				</p>
+			</div>
+			<div slot="admin:sidebar:after-built-in-primary-links">
+				<p>
+					Injected contents<br /><span class="text-xs"
+						>admin:sidebar:after-built-in-primary-links</span
+					>
+				</p>
+			</div>
+			<div slot="admin:sidebar:before-footer">
+				<p>
+					Injected contents<br /><span class="text-xs"
+						>admin:sidebar:before-footer</span
+					>
+				</p>
+			</div>
+			<div slot="admin:sidebar:after-footer">
+				<p>
+					Injected contents<br /><span class="text-xs"
+						>admin:sidebar:after-footer</span
+					>
+				</p>
+			</div>
 
-	<Content {...Astro.props} />
-</Admin>
+			{Content && <Content {...path.props} />}
+		</Admin>
+	)
+}
 
 <script>
 	import { onSubmitConfig } from '../../../../src'
