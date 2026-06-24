@@ -109,7 +109,6 @@
 		"@devprotocol/util-ts": "4.0.0",
 		"@ethersproject/abstract-provider": "^5.7.0",
 		"@metamask/detect-provider": "^2.0.0",
-		"@tailwindcss/container-queries": "^0.1.1",
 		"@vercel/blob": "^0.27.0",
 		"axios": "^1.6.7",
 		"bignumber.js": "^9.1.2",
@@ -194,7 +193,7 @@
 		"react-dom": "^18.0.0",
 		"redis": "^4.7.0",
 		"svelte": "^3.49.0 || ^4.0.0 || ^5.0.0",
-		"tailwindcss": "^3.2.4",
+		"tailwindcss": "^4.0.7",
 		"vue": "^3.2.0"
 	},
 	"optionalDependencies": {
